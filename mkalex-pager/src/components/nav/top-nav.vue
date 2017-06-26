@@ -1,71 +1,59 @@
 <template>
   <div style="width:100%;position:fixed;">
-    <div class="mk-container" style="margin:auto">
-      <nav class="mk-nav-main">
+      <container-mid>
+      <nav class="mk-nav-main" :class="{ floatTopNav: !isTop }">
         <section>
-          <!--<embed src="{{ static('/image/commen/logo.svg') }}" class="nav-min-logo">
-            <embed src="{{ static('/image/commen/slogon.svg') }}" class="nav-min-slogon">-->
+          <img src="../../assets/logo.svg" class="nav-min-logo"></img>
+          <img src="../../assets/slogon.svg" class="nav-min-slogon"></img>
           <div class="nav-toggle" @click="toggleTopNav()" >
             <div></div>
             <div></div>
             <div></div>
           </div>
         </section>
-        <ul>
-          <li>
-            <a>Home</a>
-          </li>
-          <li>
-            <a>Blog</a>
-          </li>
-          <li>
-            <a>Portfolio</a>
-          </li>
-          <li>
-            <a class="outer-link" target="view_window">Cheet-sheet</a>
-          </li>
-          <li>
-            <a class="under-construction">Collection</a>
-          </li>
-          <li>
-            <a>About</a>
-          </li>
+        <ul :style="{ height: mobilePanelHeight + 'rem' }">
+          <nav-block v-for="navinfo in navList" :key="navinfo.name"
+           :name="navinfo.name" :isUnderconstruction="navinfo.isUnderconstruction"></nav-block>
         </ul>
         <div>
           <h2 style="display:none">格藝尋道 術設溯淵</h2>
           <div>
-            <!--<embed src="{{ static('/image/commen/slogon.svg') }}">-->
+          <img src="../../assets/slogon.svg" ></img>
           </div>
         </div>
-        <!--<script type="text/javascript">
-          $(".nav-toggle").on("click", function() {
-            var height = $(".mk-nav-main>ul").css("height");
-            if (height !== "0px") {
-              $(".mk-nav-main>ul").css("height", "0px");
-            } else {
-              $(".mk-nav-main>ul").css("height", "360px");
-            }
-            // $(".mk-nav-main>ul").css("height","300px")
-          })
-          </script>-->
       </nav>
-    </div>
+      </container-mid>
   </div>
 </template>
 
 <script>
+import topNavBlock from './top-nav-block.vue'
 export default {
+  components:{
+    'nav-block':topNavBlock,
+  },
   data() {
     return {
       isTop: true,
+      isCollpased:false,
       downHeight: 100,
       upHeight: 70,
       navList: [
         { name: 'Home', link: 'sss', isUnderconstruction: false, isNewWindow: false },
-        { name: 'Home', link: 'sss', isUnderconstruction: false, isNewWindow: false },
-        { name: 'Home', link: 'sss', isUnderconstruction: false, isNewWindow: false },
-        { name: 'Home', link: 'sss', isUnderconstruction: false, isNewWindow: false },
+        { name: 'Article', link: 'sss', isUnderconstruction: false, isNewWindow: false },
+        { name: 'Portfolio', link: 'sss', isUnderconstruction: false, isNewWindow: false },
+        { name: 'Collection', link: 'sss', isUnderconstruction: true, isNewWindow: false },
+        { name: 'About', link: 'sss', isUnderconstruction: false, isNewWindow: false },
       ]
+    }
+  },
+  computed:{
+    mobilePanelHeight:function(){
+      if(this.isCollpased){
+        return 4*this.navList.length
+      }else{
+        return 0
+      }
     }
   },
   methods: {
@@ -77,7 +65,7 @@ export default {
       }
     },
     toggleTopNav(){
-
+      this.isCollpased=!this.isCollpased
     }
   },
   mounted() {
@@ -90,6 +78,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import '~globalSass';
 $line: #e8e8e8;
 $line-dark: #cdcdcd;
 $line-light: #f1f0f0;
@@ -146,53 +135,7 @@ $page-background: #fafafa;
       height: 0px;
       z-index: 999;
     }
-    >li {
-      display: flex;
-      align-items: center;
-      height: rem(60px); // background-color: #777;
-      list-style: none;
-      @media (max-width: 700px) {
-        // width:100%;
-      }
-      &:first-child {
-        >a {
-          border-left: 0px;
-        }
-      }
-      >a {
-        padding-left: rem(15px);
-        padding-right: rem(15px);
-        text-decoration: none;
-        height: rem(45px);
-        width: 100%;
-        line-height: rem(45px);
-        border-left: $line-border;
-        font-weight: 300;
-        color: #303030;
-        transition: 0.3s ease-in;
-        &:hover {
-          background-color: #2d2d2d;
-          color: #fff;
-        }
-      }
-      >.under-construction {
-        color: rgb(182, 182, 182) !important;
-      }
-      >.outer-link {
-        &::after {
-          width: 0;
-          height: 0;
-          border-style: solid;
-          border-width: 0 10px 10px 0;
-          border-color: transparent #b0b0b0 transparent transparent;
-          display: block;
-          float: right;
-          content: ' ';
-          position: relative;
-          left: rem(15px);
-        }
-      }
-    }
+
   }
   >div {
     display: flex;
@@ -200,7 +143,7 @@ $page-background: #fafafa;
     >div {
       margin-top: 5px;
       margin-bottom: 15px;
-      >embed {
+      >img {
         margin: 0px;
         font-size: rem(32px);
         border-bottom: $line-border;
@@ -261,5 +204,10 @@ $page-background: #fafafa;
       }
     }
   }
+}
+
+.floatTopNav{
+  background: rgba(255, 255, 255, .95);
+  box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.09)
 }
 </style>
