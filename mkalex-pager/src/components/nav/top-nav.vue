@@ -3,8 +3,8 @@
     <div class="mk-container" style="margin:auto">
       <nav class="mk-nav-main">
         <section>
-          <embed src="{{ static('/image/commen/logo.svg') }}" class="nav-min-logo">
-          <embed src="{{ static('/image/commen/slogon.svg') }}" class="nav-min-slogon">
+          <!--<embed src="{{ static('/image/commen/logo.svg') }}" class="nav-min-logo">
+          <embed src="{{ static('/image/commen/slogon.svg') }}" class="nav-min-slogon">-->
           <div class="nav-toggle">
             <div></div>
             <div></div>
@@ -13,31 +13,31 @@
         </section>
         <ul>
           <li>
-            <a href="{{ url('webPage:index') }}">Home</a>
+            <a >Home</a>
           </li>
           <li>
-            <a href="{{  url('webPage:blog') }}">Blog</a>
+            <a >Blog</a>
           </li>
           <li>
-            <a href="{{ url('webPage:portfolio') }}">Portfolio</a>
+            <a >Portfolio</a>
           </li>
           <li>
-            <a class="outer-link" target="view_window" href="{{ url('webPage:cheetSheet') }}">Cheet-sheet</a>
+            <a class="outer-link" target="view_window" >Cheet-sheet</a>
           </li>
           <li>
-            <a class="under-construction" href="{{ url('webPage:collection') }}">Collection</a>
+            <a class="under-construction">Collection</a>
           </li>
           <li>
-            <a href="{{ url('webPage:about') }}">About</a>
+            <a>About</a>
           </li>
         </ul>
         <div>
           <h2 style="display:none">格藝尋道 術設溯淵</h2>
           <div>
-            <embed src="{{ static('/image/commen/slogon.svg') }}">
+            <!--<embed src="{{ static('/image/commen/slogon.svg') }}">-->
           </div>
         </div>
-        <script type="text/javascript">
+        <!--<script type="text/javascript">
         $(".nav-toggle").on("click", function() {
           var height = $(".mk-nav-main>ul").css("height");
           if (height !== "0px") {
@@ -56,7 +56,7 @@
             $(".mk-nav-main").css('box-shadow', "none")
           }
         }
-        </script>
+        </script>-->
       </nav>
     </div>
   </div>
@@ -64,7 +64,34 @@
 
 <script>
 export default {
-  
+  data(){
+    return{
+      isTop:true,
+      downHeight:100,
+      upHeight:70,
+      navList:[
+        {name:'Home',link:'sss',isUnderconstruction:false,isNewWindow:false},
+        {name:'Home',link:'sss',isUnderconstruction:false,isNewWindow:false},
+        {name:'Home',link:'sss',isUnderconstruction:false,isNewWindow:false},
+        {name:'Home',link:'sss',isUnderconstruction:false,isNewWindow:false},
+      ]
+    }
+  },
+  methods:{
+    handleScroll(){
+      if(document.body.scrollTop > this.downHeight){
+        this.isTop=false
+      }else if(document.body.scrollTop < this.upHeight){
+        this.isTop=true
+      }
+    }
+  },
+  mounted(){
+    window.addEventListener('scroll', this.handleScroll);
+  }
 }
 </script>
 
+<style lang="scss">
+
+</style>
