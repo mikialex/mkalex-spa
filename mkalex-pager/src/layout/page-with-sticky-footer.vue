@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  name:'page-sticky-footer'
+  name:'page-with-sticky-footer'
 }
 </script>
 

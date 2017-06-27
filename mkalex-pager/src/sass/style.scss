@@ -24,11 +24,41 @@ $page-background: #fafafa;
 }
 
 
+
 $browser-default-font-size: 16px !default;
 $media-unit:100px;
 $desktop-min-width:1000px;
 
 @function rem($px){
     @return $px / $browser-default-font-size * 1rem;
+}
+
+@for $i from 1 through 12{
+	.sep-#{$i}{
+    box-sizing:border-box;
+	width:100% / 12 * $i;
+	min-height:1px;
+    }
+}
+
+@for $i from 1 through 16{
+    .cd-#{$i}{
+        @media (max-width:$i*$media-unit ) {
+          flex-direction: column;
+          box-sizing:border-box;
+          >div{
+              width:100%;
+          }
+          width:100%;
+        }
+    }
+}
+
+@for $i from 1 through 16{
+    .inv-#{$i}{
+        @media (max-width:$i*$media-unit ) {
+            display: none !important;
+        }
+    }
 }
 

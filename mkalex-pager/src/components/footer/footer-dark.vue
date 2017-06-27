@@ -17,7 +17,7 @@
           <div></div>
           <div></div>
         </div>
-        <embed src="{{ static('/image/commen/logowhite.svg') }}" width="65" height="65">
+        <img src="../../assets/logowhite.svg" width="65" height="65">
         <span class="mk-footer-copyright">©
           <span>2017</span> miki alex. All rights reserved. </span>
         <span class="mk-footer-beian" onclick="window.open('http://www.miibeian.gov.cn/state/outPortal/loginPortal.action','_blank')">沪ICP备16038028号</span>
@@ -43,8 +43,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~globalSass';
 .mk-footer {
-
   width: 100%;
   height: 225px;
   background-color: #000;
@@ -124,7 +124,7 @@ export default {
           float: right;
         }
       }
-      >embed {
+      >img {
         margin-top: 10px;
       }
       >.mk-footer-copyright {

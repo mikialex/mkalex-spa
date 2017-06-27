@@ -1,57 +1,62 @@
 <template>
-  <div style="width:100%;position:fixed;">
+  <div>
+    <div style="position:fixed;width:100%">
       <container-mid>
-      <nav class="mk-nav-main" :class="{ floatTopNav: !isTop }">
-        <section>
-          <img src="../../assets/logo.svg" class="nav-min-logo"></img>
-          <img src="../../assets/slogon.svg" class="nav-min-slogon"></img>
-          <div class="nav-toggle" @click="toggleTopNav()" >
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
-        </section>
-        <ul :style="{ height: mobilePanelHeight + 'rem' }">
-          <nav-block v-for="navinfo in navList" :key="navinfo.name"
-           :name="navinfo.name" :isUnderconstruction="navinfo.isUnderconstruction"></nav-block>
-        </ul>
-        <div>
-          <h2 style="display:none">格藝尋道 術設溯淵</h2>
+        <nav class="mk-nav-main" :class="{ floatTopNav: !isTop }">
+          <section>
+            <img src="../../assets/logo.svg" class="nav-min-logo"></img>
+            <img src="../../assets/slogon.svg" class="nav-min-slogon"></img>
+            <div class="nav-toggle" @click="toggleTopNav()">
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          </section>
+          <ul :style="{ height: mobilePanelHeight + 'rem' }">
+            <nav-block v-for="navinfo in navList" 
+            :key="navinfo.name" :name="navinfo.name" 
+            :isUnderconstruction="navinfo.isUnderconstruction"
+            :link="navinfo.link"></nav-block>
+          </ul>
           <div>
-          <img src="../../assets/slogon.svg" ></img>
+            <h2 style="display:none">格藝尋道 術設溯淵</h2>
+            <div>
+              <img src="../../assets/slogon.svg"></img>
+            </div>
           </div>
-        </div>
-      </nav>
+        </nav>
       </container-mid>
+    </div>
+    <!--<div style="height:100px"></div>-->
   </div>
 </template>
 
 <script>
 import topNavBlock from './top-nav-block.vue'
 export default {
-  components:{
-    'nav-block':topNavBlock,
+  components: {
+    'nav-block': topNavBlock,
   },
   data() {
     return {
       isTop: true,
-      isCollpased:false,
+      isCollpased: false,
       downHeight: 100,
       upHeight: 70,
       navList: [
-        { name: 'Home', link: 'sss', isUnderconstruction: false, isNewWindow: false },
-        { name: 'Article', link: 'sss', isUnderconstruction: false, isNewWindow: false },
-        { name: 'Portfolio', link: 'sss', isUnderconstruction: false, isNewWindow: false },
-        { name: 'Collection', link: 'sss', isUnderconstruction: true, isNewWindow: false },
-        { name: 'About', link: 'sss', isUnderconstruction: false, isNewWindow: false },
+        { name: 'Home', link: 'home', isUnderconstruction: false, isNewWindow: false },
+        { name: 'Article', link: 'article', isUnderconstruction: false, isNewWindow: false },
+        { name: 'Portfolio', link: 'portfolio', isUnderconstruction: false, isNewWindow: false },
+        { name: 'Collection', link: 'caicai', isUnderconstruction: true, isNewWindow: false },
+        { name: 'About', link: 'meta', isUnderconstruction: false, isNewWindow: false },
       ]
     }
   },
-  computed:{
-    mobilePanelHeight:function(){
-      if(this.isCollpased){
-        return 4*this.navList.length
-      }else{
+  computed: {
+    mobilePanelHeight: function () {
+      if (this.isCollpased) {
+        return 4 * this.navList.length
+      } else {
         return 0
       }
     }
@@ -64,20 +69,20 @@ export default {
         this.isTop = true
       }
     },
-    toggleTopNav(){
-      this.isCollpased=!this.isCollpased
+    toggleTopNav() {
+      this.isCollpased = !this.isCollpased
     }
   },
   mounted() {
     window.addEventListener('scroll', this.handleScroll);
   },
-  destoryed(){
+  destoryed() {
     window.removeEventListener('scroll', this.handleScroll);
   }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scope>
 @import '~globalSass';
 $line: #e8e8e8;
 $line-dark: #cdcdcd;
@@ -105,6 +110,7 @@ $page-background: #fafafa;
 }
 
 .mk-nav-main {
+  width: 100%;
   height: rem(60px);
   width: 100%;
   transition: 0.8s ease-in-out;
@@ -135,7 +141,6 @@ $page-background: #fafafa;
       height: 0px;
       z-index: 999;
     }
-
   }
   >div {
     display: flex;
@@ -155,7 +160,7 @@ $page-background: #fafafa;
           width:200px;
           vertical-align: middle;
         }
-        @media (max-width:800px) {
+        @media (max-width:730px) {
           display: none;
         }
       }
@@ -206,7 +211,7 @@ $page-background: #fafafa;
   }
 }
 
-.floatTopNav{
+.floatTopNav {
   background: rgba(255, 255, 255, .95);
   box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.09)
 }

@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Home from '@/pages/home'
 import Article from '@/pages/article/article'
 import ArticleStream from '@/pages/article/stream'
-import ArticleArchice from '@/pages/article/archive'
+import ArticleArchive from '@/pages/article/archive'
 import Portifolio from '@/pages/portfolio'
 import Collection from '@/pages/collection'
 import Meta from '@/pages/meta'
@@ -21,22 +21,22 @@ export default new Router({
     },
     {
       path: '/article',
-      name: 'article',
       component: Article,
       children: [
         {
-          path: 'stream',
-          component: ArticleStream
+          path: '',
+          component: ArticleStream,
+           name: 'article',
         },
         {
           path: 'archive',
-          component: ArticleArchice
+          component: ArticleArchive
         }
       ]
     },
     {
       path: '/portfolio',
-      name: 'portifolio',
+      name: 'portfolio',
       component: Portifolio
     },{
       path: '/collection',

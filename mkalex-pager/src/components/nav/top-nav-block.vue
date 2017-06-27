@@ -1,6 +1,12 @@
 <template>
   <li>
-    <a :class="{ underConstruction: isUnderconstruction }">{{name}}</a>
+    <!--<a :class="{ underConstruction: isUnderconstruction }"
+    
+    >{{name}}</a>-->
+    <router-link :to="{ name:link }" :class="{ underConstruction: isUnderconstruction }">
+      {{name}}
+      </router-link>
+
   </li>
 </template>
 
@@ -15,12 +21,16 @@ export default {
     name: {
       type: String,
       default: 'nameisrequired'
+    },
+    link:{
+      type: String,
+      default: '/',
     }
   }
 }
 </script>
 
-<style lang="scss" scope>
+<style lang="scss" scoped>
 @import '~globalSass';
 li {
   display: flex;
@@ -46,9 +56,15 @@ li {
     font-weight: 300;
     color: #303030;
     transition: 0.3s ease-in;
+    cursor: pointer;
     &:hover {
       background-color: #2d2d2d;
       color: #fff;
+    }   
+    &:active {
+      background-color: #ff1010;
+      color: #fff;
+      transition: 0s ;
     }
   }
   >.underConstruction {
