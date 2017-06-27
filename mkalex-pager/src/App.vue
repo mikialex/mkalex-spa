@@ -2,8 +2,9 @@
   <div id="app">
     <top-nav></top-nav>
     <page-with-sticky-footer>
-        <router-view ></router-view>
-        <footer-dark slot="footer"></footer-dark>
+          <div style="height:100px"></div>
+      <router-view></router-view>
+      <footer-dark slot="footer"></footer-dark>
     </page-with-sticky-footer>
   </div>
 </template>
@@ -15,7 +16,7 @@ export default {
   name: 'app',
   components: {
     'top-nav': topNav,
-    'footer-dark':footerDark,
+    'footer-dark': footerDark,
   }
 }
 </script>
@@ -29,14 +30,14 @@ html {
   // margin-top: 60px;
 }
 
-body{
-  margin:0px;
+body {
+  margin: 0px;
 }
 
-@font-face{
-font-family: bigCaslon;
-src: url('./assets/font/BigCaslon.ttf'); 
-font-weight:normal;
+@font-face {
+  font-family: bigCaslon;
+  src: url('./assets/font/BigCaslon.ttf');
+  font-weight: normal;
 }
 
 ::selection {
@@ -55,6 +56,7 @@ font-weight:normal;
   background-color: #efefef;
   box-shadow: inset 0px -1px 2px 3px rgba(0, 0, 0, 0.1);
 }
+
 
 
 /* 滚动条的滑轨背景颜色 */

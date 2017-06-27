@@ -20,7 +20,7 @@
         <img src="../../assets/logowhite.svg" width="65" height="65">
         <span class="mk-footer-copyright">©
           <span>2017</span> miki alex. All rights reserved. </span>
-        <span class="mk-footer-beian" onclick="window.open('http://www.miibeian.gov.cn/state/outPortal/loginPortal.action','_blank')">沪ICP备16038028号</span>
+        <span class="mk-footer-beian" onclick="window.open('http://http://www.miibeian.gov.cn/','_blank')">沪ICP备16038028号</span>
       </div>
       <div class="mk-footer-right">
         <ul>

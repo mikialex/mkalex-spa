@@ -27,7 +27,6 @@
         </nav>
       </container-mid>
     </div>
-    <!--<div style="height:100px"></div>-->
   </div>
 </template>
 
