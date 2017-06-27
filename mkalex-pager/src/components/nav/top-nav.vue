@@ -36,19 +36,19 @@ export default {
   components: {
     'nav-block': topNavBlock,
   },
-  data() {
+  data(){
     return {
-      isTop: true,
-      isCollpased: false,
-      downHeight: 100,
-      upHeight: 70,
-      navList: [
-        { name: 'Home', link: 'home', isUnderconstruction: false, isNewWindow: false },
-        { name: 'Article', link: 'article', isUnderconstruction: false, isNewWindow: false },
-        { name: 'Portfolio', link: 'portfolio', isUnderconstruction: false, isNewWindow: false },
-        { name: 'Collection', link: 'caicai', isUnderconstruction: true, isNewWindow: false },
-        { name: 'About', link: 'meta', isUnderconstruction: false, isNewWindow: false },
-      ]
+    isTop: true,
+    isCollpased: false,
+    downHeight: 100,
+    upHeight: 70,
+    navList: [
+      { name: 'Home', link: 'home', isUnderconstruction: false, isNewWindow: false },
+      { name: 'Article', link: 'article', isUnderconstruction: false, isNewWindow: false },
+      { name: 'Portfolio', link: 'portfolio', isUnderconstruction: false, isNewWindow: false },
+      { name: 'Collection', link: 'caicai', isUnderconstruction: true, isNewWindow: false },
+      { name: 'About', link: 'meta', isUnderconstruction: false, isNewWindow: false },
+    ]
     }
   },
   computed: {
@@ -75,7 +75,7 @@ export default {
   mounted() {
     window.addEventListener('scroll', this.handleScroll);
   },
-  destoryed() {
+  destroyed() {
     window.removeEventListener('scroll', this.handleScroll);
   }
 }

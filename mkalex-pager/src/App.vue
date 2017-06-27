@@ -1,11 +1,13 @@
 <template>
   <div id="app">
     <top-nav></top-nav>
-    <page-with-sticky-footer>
-          <div style="height:100px"></div>
+    <page-with-sticky-footer v-if="!useClean">
+      <div style="height:100px"></div>
       <router-view></router-view>
       <footer-dark slot="footer"></footer-dark>
     </page-with-sticky-footer>
+  
+    <router-view name="clean"></router-view>
   </div>
 </template>
 
@@ -14,6 +16,38 @@ import topNav from '@/components/nav/top-nav.vue'
 import footerDark from '@/components/footer/footer-dark.vue'
 export default {
   name: 'app',
+  computed: {
+    useClean() {
+      return this.$route.name === "caicai"
+    }
+  },
+  methods: {
+    changeSize:function(size){
+      document.querySelector('html').style.fontSize=size+'px';
+    },
+    setRem: function(){
+      let width = document.body.clientWidth;
+      if (width <= 400) {
+        this.changeSize(12);
+      } else if (400 <= width && width <= 600) {
+        let ratio = (width - 0.25 * (width - 600)) / 37.5;
+        this.changeSize(ratio);
+      } else if (width <= 1280) {
+        this.changeSize(16);
+      } else if (width <= 1920) {
+        let ratio = (width - 0.5 * (width - 1280)) / 88
+        this.changeSize(ratio);
+      } else {
+        this.changeSize(18);
+      }
+    },
+  },
+  mounted(){
+    window.onresize =(function() {
+        this.setRem();
+    }).bind(this);
+    this.setRem();
+  },
   components: {
     'top-nav': topNav,
     'footer-dark': footerDark,
@@ -32,12 +66,18 @@ html {
 
 body {
   margin: 0px;
+  background: #fafafa;
 }
 
 @font-face {
   font-family: bigCaslon;
   src: url('./assets/font/BigCaslon.ttf');
   font-weight: normal;
+}
+@font-face {
+  font-family: JosefinSans;
+  src: url('./assets/font/JosefinSans-SemiBold.ttf');
+  font-weight: semibold;
 }
 
 ::selection {
@@ -56,6 +96,7 @@ body {
   background-color: #efefef;
   box-shadow: inset 0px -1px 2px 3px rgba(0, 0, 0, 0.1);
 }
+
 
 
 

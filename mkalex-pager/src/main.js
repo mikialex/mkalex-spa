@@ -6,6 +6,7 @@ import store from './vuex'
 import App from './App'
 import router from './router'
 
+
 Vue.use(Vuex)
 
 import MKLayout from './layout/include'

@@ -49,7 +49,9 @@ export default new Router({
     },{
       path: '/caicai',
       name: 'caicai',
-      component: Caicai
+      components: {
+        clean:Caicai
+      }
     },
   ]
 })
