@@ -7,4 +7,14 @@ export const mutations = {
     state.goingAjax--;
   },
 
+  openTopNav(state) {
+    state.topNavOpen=true
+  },
+  closeTopNav(state) {
+    state.topNavOpen=false
+  },
+  toggleTopNav(state) {
+    state.topNavOpen=!state.topNavOpen
+  },
+    
 };

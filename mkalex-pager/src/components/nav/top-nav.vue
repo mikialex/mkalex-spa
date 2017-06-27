@@ -3,15 +3,7 @@
     <div style="position:fixed;width:100%">
       <container-mid>
         <nav class="mk-nav-main" :class="{ floatTopNav: !isTop }">
-          <section>
-            <img src="../../assets/logo.svg" class="nav-min-logo"></img>
-            <img src="../../assets/slogon.svg" class="nav-min-slogon"></img>
-            <div class="nav-toggle" @click="toggleTopNav()">
-              <div></div>
-              <div></div>
-              <div></div>
-            </div>
-          </section>
+          <mobile-top></mobile-top>
           <ul :style="{ height: mobilePanelHeight + 'rem' }">
             <nav-block v-for="navinfo in navList" 
             :key="navinfo.name" :name="navinfo.name" 
@@ -32,14 +24,15 @@
 
 <script>
 import topNavBlock from './top-nav-block.vue'
+import mobileTop from './top-nav-mobile-top.vue'
 export default {
   components: {
     'nav-block': topNavBlock,
+    'mobile-top':mobileTop,
   },
   data(){
     return {
     isTop: true,
-    isCollpased: false,
     downHeight: 100,
     upHeight: 70,
     navList: [
@@ -53,7 +46,7 @@ export default {
   },
   computed: {
     mobilePanelHeight: function () {
-      if (this.isCollpased) {
+      if (this.$store.state.topNavOpen) {
         return 4 * this.navList.length
       } else {
         return 0
@@ -68,9 +61,6 @@ export default {
         this.isTop = true
       }
     },
-    toggleTopNav() {
-      this.isCollpased = !this.isCollpased
-    }
   },
   mounted() {
     window.addEventListener('scroll', this.handleScroll);
@@ -81,32 +71,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scope>
+<style lang="scss" scoped>
 @import '~globalSass';
-$line: #e8e8e8;
-$line-dark: #cdcdcd;
-$line-light: #f1f0f0;
-$line-border: solid 1px $line;
-$line-border-dark: solid 1px $line-dark;
-$line-border-light: solid 1px $line-light;
-$page-background: #fafafa;
-
-.mk-small-dot {
-  width: rem(7px);
-  height: rem(7px);
-  border-radius: 20px;
-  background-color: $line;
-}
-
-.mk-small-dot-tail {
-  &::after {
-    position: relative;
-    display: block;
-    float: right;
-    content: ' ';
-    @extend .mk-small-dot;
-  }
-}
 
 .mk-nav-main {
   width: 100%;
@@ -173,38 +139,6 @@ $page-background: #fafafa;
         @media (max-width: 700px) {
           display: none;
         }
-      }
-    }
-  }
-
-  >section {
-    display: none;
-    width: 100%;
-    border-bottom: solid 2px rgb(235, 235, 235);
-
-    @media (max-width: 700px) {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: rem(45px);
-    }
-    >.nav-min-logo {
-      width: 30px;
-      margin-left: rem(5px);
-    }
-    >.nav-min-slogon {
-      width: 150px;
-    }
-    >div {
-      width: 30px;
-      height: 25px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around; // border: 1px solid rgb(83, 83, 83);
-      >div {
-        background-color: rgb(108, 108, 108);
-        height: 3px;
-        width: 25px; // border-radius: 5px;
       }
     }
   }

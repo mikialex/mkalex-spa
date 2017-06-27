@@ -14,8 +14,13 @@ import Copyright from '@/pages/copyright'
 Vue.use(Router)
 
 export default new Router({
-  routes: [{
+  routes: [
+    {
       path: '/',
+      redirect: { name: 'home' }
+    },
+    {
+      path: '/home',
       name: 'home',
       component: Home
     },

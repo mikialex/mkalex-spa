@@ -1,9 +1,8 @@
 <template>
   <li>
-    <!--<a :class="{ underConstruction: isUnderconstruction }"
-    
-    >{{name}}</a>-->
-    <router-link :to="{ name:link }" :class="{ underConstruction: isUnderconstruction }">
+    <router-link :to="{ name:link }" 
+    :class="{ underConstruction: isUnderconstruction }"
+    :active-class="'activeLi'">
       {{name}}
       </router-link>
 
@@ -32,6 +31,12 @@ export default {
 
 <style lang="scss" scoped>
 @import '~globalSass';
+
+.activeLi{
+  background-color: #2d2d2d;
+  color: #fff;
+}
+
 li {
   display: flex;
   align-items: center;
@@ -58,8 +63,7 @@ li {
     transition: 0.3s ease-in;
     cursor: pointer;
     &:hover {
-      background-color: #2d2d2d;
-      color: #fff;
+      @extend .activeLi
     }   
     &:active {
       background-color: #ff1010;

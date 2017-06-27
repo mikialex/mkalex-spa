@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <top-nav></top-nav>
+    <scroll-to-top></scroll-to-top>
     <page-with-sticky-footer v-if="!useClean">
       <div style="height:100px"></div>
       <router-view></router-view>
@@ -14,6 +15,7 @@
 <script>
 import topNav from '@/components/nav/top-nav.vue'
 import footerDark from '@/components/footer/footer-dark.vue'
+import scrollToTop from '@/components/scroll-to-top.vue'
 export default {
   name: 'app',
   computed: {
@@ -51,6 +53,7 @@ export default {
   components: {
     'top-nav': topNav,
     'footer-dark': footerDark,
+    'scroll-to-top':scrollToTop,
   }
 }
 </script>
