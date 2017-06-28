@@ -32,7 +32,7 @@ section {
   width: 0;
   height: 0;
   border-style: solid;
-  border-width: 10vw 100vw 8vw 0;
+  border-width: 10vw 99vw 8vw 0;
   border-color: transparent rgba(0, 0, 0, 0.5) transparent transparent;
 }
 </style>
