@@ -6,6 +6,8 @@ import store from './vuex'
 import App from './App'
 import router from './router'
 
+import THREE from 'three-js'
+
 
 Vue.use(Vuex)
 
