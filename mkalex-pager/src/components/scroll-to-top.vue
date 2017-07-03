@@ -1,9 +1,9 @@
 <template>
-  <section>
-    <div class="scroll-to-top" v-if="!isShow">
-      <span>go</span>
+  <transition name="slide-fade">
+    <div class="scroll-to-top" v-if="!isShow" @click="toTop()">
+      <i class="fa fa-arrow-up" aria-hidden="true"></i>
     </div>
-  </section>
+  </transition>
 </template>
 
 <script>
@@ -11,6 +11,7 @@ export default {
   data() {
     return {
       currentScroll: 0,//window.pageYOffset
+      timer:undefined,
     }
   },
   computed: {
@@ -26,11 +27,19 @@ export default {
     },
   },
   methods:{
-    handleResize(){//so easy that needn't debounce
-    },
-    handleScroll(){//so easy that needn't debounce
+    handleScroll(){  //so easy that needn't debounce
       this.currentScroll=window.pageYOffset
     },
+    toTop(){ //back to top
+      this.timer = setInterval(()=>{
+        let speed = Math.floor(-this.currentScroll / 6);
+        scroll(0,this.currentScroll + speed);
+        if(this.currentScroll === 0){
+          clearInterval(this.timer); 
+        }
+      },30)
+    },
+
   },
   props: {
     showHeight: {
@@ -57,6 +66,21 @@ export default {
 
 <style lang="scss" scoped>
 @import '~globalSass';
+
+////transition
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-active {
+  transform: translateX(10px);
+  opacity: 0;
+}
+/////
+
+
 .hide-it{
   display: none;
 }
@@ -73,7 +97,6 @@ export default {
   cursor: pointer;
   box-shadow: 0 4px 2px 0 rgba(0, 0, 0, 0.27),
   0 0 4px 0 rgba(0, 0, 0, 0.08);
-  transition:1s ease-in-out;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -81,6 +104,9 @@ export default {
   &:hover {
     box-shadow: 0 6px 3px 0 rgba(0, 0, 0, 0.27),
     0 0 4px 0 rgba(0, 0, 0, 0.08);
+  }
+  &:active {
+    box-shadow: 0 2px 0px 0 rgba(0, 0, 0, 0.27),
   }
 }
 </style>

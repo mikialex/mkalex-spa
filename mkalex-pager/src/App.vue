@@ -4,7 +4,9 @@
     <scroll-to-top></scroll-to-top>
     <page-with-sticky-footer v-if="!useClean">
       <!--<div style="height:100px"></div>-->
-      <router-view></router-view>
+      <transition name="fade">
+        <router-view></router-view>
+      </transition>
       <footer-dark slot="footer"></footer-dark>
     </page-with-sticky-footer>
   
@@ -59,6 +61,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import 'assets/css/font-awesome.min.css' ;
+
 html {
   font-family: "PingFang SC", "microsoft yahei", sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -94,16 +98,10 @@ body {
   height: 15px;
 }
 
-//track
 ::-webkit-scrollbar-track {
   background-color: #efefef;
   box-shadow: inset 0px -1px 2px 3px rgba(0, 0, 0, 0.1);
 }
-
-
-
-
-/* 滚动条的滑轨背景颜色 */
 
 ::-webkit-scrollbar-thumb {
   background-color: #fff;
@@ -111,4 +109,13 @@ body {
   box-shadow: 0px 4px 1px 0px rgba(0, 0, 0, 0.1),
   inset 0px 0px 0px 3px rgba(0, 0, 0, 0.1);
 }
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
+  opacity: 0
+}
+
+
 </style>
