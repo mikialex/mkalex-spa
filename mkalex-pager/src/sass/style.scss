@@ -6,24 +6,6 @@ $line-border-dark: solid 1px $line-dark;
 $line-border-light: solid 1px $line-light;
 $page-background: #fafafa;
 
-.mk-small-dot {
-  width: rem(7px);
-  height: rem(7px);
-  border-radius: 20px;
-  background-color: $line;
-}
-
-.mk-small-dot-tail {
-  &::after {
-    position: relative;
-    display: block;
-    float: right;
-    content: ' ';
-    @extend .mk-small-dot;
-  }
-}
-
-
 
 $browser-default-font-size: 16px !default;
 $media-unit:100px;
@@ -62,3 +44,19 @@ $desktop-min-width:1000px;
     }
 }
 
+.mk-small-dot {
+  width: rem(7px);
+  height: rem(7px);
+  border-radius: 20px;
+  background-color: $line;
+}
+
+.mk-small-dot-tail {
+  &::after {
+    position: relative;
+    display: block;
+    float: right;
+    content: ' ';
+    @extend .mk-small-dot;
+  }
+}

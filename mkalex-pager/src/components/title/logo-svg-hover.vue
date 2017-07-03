@@ -1,0 +1,42 @@
+<template>
+  <svg width="330px" height="330px" viewBox="0 0 330 330">
+    <g>
+      <g transform="translate(35.000000, 40.000000)" fill="#eee">
+        <polygon id="Page-1-Copy-2" points="140.425271 1 69.135803 154.30328
+               17.4849549 34.0279006 0 224.326937 27.7062731 
+              114.307236 75.4662308 207.974477 127.760292 75.8628748 162.444329 258.402121 
+              172.161248 139.176773 202.411511 100.818999 259.609387 226.538326 221.690042
+               76.3727725 263 23.9893759 162.804419 103.947104"></polygon>
+      </g>
+      <g class="main-logo-svg-mask" fill="#aaa">
+        <polygon id="Path-3" fill="#FF4D4D" points="52.429791 74 62.7006606 154.354411 35 264.234365"></polygon>
+        <polygon id="Path-4" fill="#E12B2B" points="52 74 103.729248 194.504158 62.2259501 154.289164"></polygon>
+        <polygon id="Path-5" fill="#C32C2C" points="63 154 104.442357 194.233975 110.805466 247.870491"></polygon>
+        <polygon id="Path-6" fill="#930F0F" points="104 194.097383 110.385684 247.676883 162.848115 116"></polygon>
+        <polygon id="Path-7" fill="#E13838" points="175.562163 41 162.999191 116.690597 104 194.90132"></polygon>
+        <polygon id="Path-8" fill="#FF7373" points="198.331542 143.541549 163 115.957646 175.832365 40"></polygon>
+        <polygon id="Path-9" fill="#C33434" points="198.032422 143.715168 196.99314 296.177127 162 116"></polygon>
+        <polygon id="Path-10" fill="#D63232" points="298.786847 64 198 143.492053 257.29045 116.468243"></polygon>
+        <polygon id="Path-11" fill="#F24747" points="231 127.647073 294.964538 266.096284 256.527658 115"></polygon>
+        <polygon id="Path-12" fill="#A92D2D" points="198 143.092375 207.376905 179.281574 237.703285 141.112998 231.226142 128"></polygon>
+        <polygon id="Path-13" fill="#F74141" points="197.405558 143 207.107474 179.242357 197 297.670134"></polygon>
+      </g>
+    </g>
+  
+  </svg>
+</template>
+
+<style lang="scss">
+.main-logo-svg-mask {
+  >polygon {
+    transition: 3s cubic-bezier(0.74, 0.09, 0.87, 0.57);
+    fill-opacity: 0;
+    &:hover {
+      // fill:#fff;
+      transition: 0s;
+      fill-opacity: 1;
+    }
+  }
+}
+</style>
+

@@ -16,7 +16,6 @@ export default {
     }
   },
   mounted() {
-
     this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     this.renderer = new THREE.WebGLRenderer();
@@ -52,7 +51,7 @@ export default {
     windowResize(){
       this.camera.aspect=window.innerWidth / window.innerHeight;
       this.camera.updateProjectionMatrix();
-      this.renderer.setSize(window.innerWidth, window.innerHeight);
+      this.renderer.setSize(window.innerWidth-30, window.innerHeight);//fixme
 
     }
   },
