@@ -10,6 +10,15 @@ import router from './router'
 
 Vue.use(Vuex)
 
+router.afterEach((function (routerTo,routerFrom) {
+    console.info("changeRoute",routerFrom)
+    this.app.$store.commit('closeTopNav');
+    // this.app.$store.commit('reset_GoingAjax');
+    // this.app.$store.commit('showErrorInfo', { info: '' });
+    // this.app.$store.commit('setLastPath', { pathName: routerFrom.name });
+    scroll(0,0);
+}).bind(router))
+
 import MKLayout from './layout/include'
 MKLayout.map(component => {
    Vue.component(component.name, component);

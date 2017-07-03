@@ -11,10 +11,22 @@ import Meta from '@/pages/meta'
 import Caicai from '@/pages/caicai'
 import Copyright from '@/pages/copyright'
 
+import ErrorPage404 from '@/pages/404'
+
 Vue.use(Router)
+
 
 export default new Router({
   routes: [
+    {
+      path: '*',
+      redirect: { name: '404' }
+    },
+    {
+      path: '/404',
+      name: '404',
+      component: ErrorPage404
+    },
     {
       path: '/',
       redirect: { name: 'home' }
@@ -58,5 +70,5 @@ export default new Router({
         clean:Caicai
       }
     },
-  ]
+  ],
 })

@@ -1,6 +1,7 @@
 <template>
   <transition name="slide-fade">
-    <div class="scroll-to-top" v-if="!isShow" @click="toTop()">
+    <div class="scroll-to-top" v-if="!isShow" @click="toTop()"
+    :style="{ bottom: toBottom + 'px' }">
       <i class="fa fa-arrow-up" aria-hidden="true"></i>
     </div>
   </transition>
@@ -16,10 +17,11 @@ export default {
   },
   computed: {
     toBottom() {
-      if (document.body.clientHeight-this.currentScroll < this.botttomLimit){//should change
-
+      let h=document.body.clientHeight-this.currentScroll-window.innerHeight
+      if ( h < this.botttomLimit){//should change
+        return this.botttomLimit-h
       }else{
-       return 20 + 'px'
+       return 20 
       }
     },
     isShow(){
@@ -47,15 +49,17 @@ export default {
       default: 100,
       required: false,
     },
-    botttomLimit: {
+    botttomLimit: { 
       type: Number,
-      default: 300,
+      default: 250,
       required: false,
     },
   },
   mounted(){
     window.addEventListener('resize',this.handleResize)
     window.addEventListener('scroll',this.handleScroll)
+    let event = new Event('scroll');
+    window.dispatchEvent(event)
   },
   destoryed(){
     window.removeEventListener('resize', this.handleResize);
