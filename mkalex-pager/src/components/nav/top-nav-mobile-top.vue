@@ -31,7 +31,7 @@ section {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: rem(45px);
+    height: rem(55px);
   }
   >.nav-min-logo {
     width: 30px;

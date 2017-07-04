@@ -1,8 +1,10 @@
 <template>
   <container-mid>
     <nav>
-      <div>stream</div>
-      <div>archive</div>
+      <router-link :to="{ name:'articleStream' }"  tag="div"
+       :active-class="'activePart'">stream</router-link>
+      <router-link :to="{ name:'articleArchive' }"  tag="div"
+        :active-class="'activePart'">archive</router-link>
     </nav>
   </container-mid>
 </template>
@@ -15,6 +17,12 @@ export default {
 
 <style lang="scss" scoped>
 @import '~globalSass';
+
+.activePart{
+  background: #444444;
+  color:#fff;
+  box-shadow: 0 2px 0 0 rgba(0,0,0,0.08);
+}
   nav{
     width:100%;
     height:24px;
@@ -32,9 +40,7 @@ export default {
       cursor:pointer;
       transition:200ms ease-in-out;
       &:hover{
-        background: #444444;
-        color:#fff;
-        box-shadow: 0 2px 0 0 rgba(0,0,0,0.08);
+        @extend .activePart
       }      
       &:active{
         transition:0ms;

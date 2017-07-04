@@ -48,9 +48,6 @@ li {
   align-items: center;
   height: rem(60px); // background-color: #777;
   list-style: none;
-  @media (max-width: 700px) {
-    // width:100%;
-  }
   &:first-child {
     >a {
       border-left: 0px;
@@ -65,9 +62,16 @@ li {
     line-height: rem(45px);
     border-left: $line-border;
     font-weight: 300;
+    // font-size: rem(18px);
     color: #303030;
     transition: 0.3s ease-in;
     cursor: pointer;
+      @media (max-width: 700px) {
+    // width:100%;
+    height: rem(60px);
+    line-height: rem(60px);
+    font-size: rem(20px);
+  }
     &:hover {
       @extend .activeLi
     }   

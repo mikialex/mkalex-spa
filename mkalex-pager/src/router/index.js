@@ -41,15 +41,18 @@ export default new Router({
     {
       path: '/article',
       component: Article,
+      name: 'article',
+      redirect: { name: 'articleStream' },
       children: [
         {
-          path: '',
+          path: 'stream',
           component: ArticleStream,
-           name: 'article',
+           name: 'articleStream',
         },
         {
           path: 'archive',
-          component: ArticleArchive
+          component: ArticleArchive,
+          name:'articleArchive',
         }
       ]
     },
