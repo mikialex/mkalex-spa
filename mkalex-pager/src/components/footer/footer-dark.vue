@@ -4,10 +4,10 @@
       <div class="mk-footer-left">
         <ul>
           <li>
-            <a href="#">技术支持</a>
+            <a href="#">浏览设置</a>
           </li>
           <li>
-            <a href="#">推荐站点</a>
+            <a href="#">FRIENDS</a>
           </li>
         </ul>
       </div>
@@ -25,7 +25,7 @@
       <div class="mk-footer-right">
         <ul>
           <li>
-            <a href="#">合作伙伴</a>
+            <a href="#">版权声明</a>
           </li>
           <li>
             <a href="#">联系方式</a>

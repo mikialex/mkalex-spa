@@ -8,6 +8,7 @@
             <nav-block v-for="navinfo in navList" 
             :key="navinfo.name" :name="navinfo.name" 
             :isUnderconstruction="navinfo.isUnderconstruction"
+            :love="navinfo.love"
             :link="navinfo.link"></nav-block>
           </ul>
           <div>
@@ -39,8 +40,9 @@ export default {
       { name: 'Home', link: 'home', isUnderconstruction: false, isNewWindow: false },
       { name: 'Article', link: 'article', isUnderconstruction: false, isNewWindow: false },
       { name: 'Portfolio', link: 'portfolio', isUnderconstruction: false, isNewWindow: false },
-      { name: 'Collection', link: 'caicai', isUnderconstruction: true, isNewWindow: false },
+      { name: 'Collection', link: 'collection', isUnderconstruction: true, isNewWindow: false },
       { name: 'About', link: 'meta', isUnderconstruction: false, isNewWindow: false },
+      { name: ' ', link: 'caicai', isUnderconstruction: false, isNewWindow: false , love: true},
     ]
     }
   },
@@ -94,7 +96,7 @@ export default {
     align-items: center;
     padding-left: 0px;
     margin: 0px;
-    transition: 1s cubic-bezier(0, 0, 0.1, 0.93);
+    transition: 0.5s cubic-bezier(0, 0, 0.1, 0.93);
     @media (max-width: 700px) {
       position: relative;
       left: 0px;
@@ -125,7 +127,7 @@ export default {
           width:200px;
           vertical-align: middle;
         }
-        @media (max-width:730px) {
+        @media (max-width:777px) {
           display: none;
         }
       }

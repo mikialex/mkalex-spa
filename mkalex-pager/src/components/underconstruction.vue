@@ -1,6 +1,6 @@
 <template>
   <div class="">
     <h2>此页面相关功能正在建设中</h2>
-    <img src="" alt="" draggable="false" style="width:100%;max-width:700px">
+    <img src="../assets/underConstruction.jpg" alt="" draggable="false" style="width:100%;max-width:700px">
   </div>
 </template>

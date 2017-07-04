@@ -4,6 +4,7 @@
     :class="{ underConstruction: isUnderconstruction }"
     :active-class="'activeLi'">
       {{name}}
+      <i class="fa fa-heart" aria-hidden="true" v-if="love"></i>
       </router-link>
 
   </li>
@@ -13,6 +14,11 @@
 export default {
   props: {
     isUnderconstruction: {
+      type: Boolean,
+      default: false,
+      required: false,
+    },
+    love: {
       type: Boolean,
       default: false,
       required: false,

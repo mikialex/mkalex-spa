@@ -25,7 +25,9 @@ export default new Router({
     {
       path: '/404',
       name: '404',
-      component: ErrorPage404
+      components: {
+        clean:ErrorPage404
+      }
     },
     {
       path: '/',
