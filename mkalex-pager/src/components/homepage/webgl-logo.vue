@@ -1,11 +1,12 @@
 <template>
-  <section id="gl-logo-canvas">
+  <section id="gl-logo-canvas" @mousemove="handleMousemoveOnCanvas">
   </section>
 </template>
 
 <script>
 // import { Scene,PerspectiveCamera ,WebGLRenderer,BoxGeometry,MeshBasicMaterial,Mesh,AmbientLight} from 'three'
 import * as THREE from 'three'
+import {vec, face} from './logo-geometry'
 export default {
   data(){
     return{
@@ -13,11 +14,16 @@ export default {
       scene:undefined,
       camera:undefined,
       reA:undefined,
+      mouseX:0,
+      mouseY:0,
     }
   },
   mounted() {
     this.scene = new THREE.Scene();
-    this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    this.camera = new THREE.PerspectiveCamera(34, window.innerWidth / window.innerHeight, 0.1, 1000);
+    this.camera.position.set(0,0,0);
+    this.camera.up = new THREE.Vector3(0,1,0);
+    this.camera.lookAt(new THREE.Vector3( 0, 0, -50 ))
     this.renderer = new THREE.WebGLRenderer();
 
     this.renderer.setSize(window.innerWidth, window.innerHeight);
@@ -25,19 +31,44 @@ export default {
     this.renderer.setClearColor(0xfafafa, 1);
     document.getElementById('gl-logo-canvas').appendChild(this.renderer.domElement);
 
-    var geometry = new THREE.BoxGeometry(1, 1, 1);
-    var material = new THREE.MeshBasicMaterial({ color: 0x455667 });
-    var cube = new THREE.Mesh(geometry, material);
-    this.scene.add(cube);
+    let geometry = new THREE.Geometry();
 
-    this.camera.position.z = 5;
+    vec.forEach((element) =>{
+      geometry.vertices.push(new THREE.Vector3(element[0],element[1],element[2]))
+    });
+    face.forEach((element) =>{
+      geometry.faces.push(new THREE.Face3(element[0]-1,element[1]-1,element[2]-1))
+    })
+
+    geometry.computeBoundingSphere();
+    geometry.computeFaceNormals();
+
+    var material = new THREE.MeshBasicMaterial({ color: 0x000000 });
+    material.side = THREE.DoubleSide;
+    var logoG = new THREE.Mesh(geometry, material);
+
+    // controls = new THREE.OrbitControls( this.camera, this.renderer.domElement );
+    // // controls.addEventListener('change', render);
+    // controls.enableZoom = true;
+
+    // var axisHelper = new THREE.AxisHelper( 50 );
+    // this.scene.add( axisHelper );
+    this.scene.add(logoG);
     var animate =()=>{
       this.reA=window.requestAnimationFrame(animate);
-      cube.rotation.x += 0.01;
-      cube.rotation.y += 0.01;
+      let halfWidth=window.innerWidth/2
+      let halfHeight=window.innerHeight/2
+      let xOffset=(this.mouseX-halfWidth)/halfWidth;
+      let yOffset=(this.mouseY-halfHeight)/halfHeight;
+      // console.log(this.renderer.domElement.width)
+      this.camera.position.x = xOffset*yOffset*xOffset*500;
+      this.camera.position.y = yOffset*xOffset*yOffset*500;
+      // this.camera.position.x = xOffset*100;
+      // this.camera.position.y = yOffset*100;
+      this.camera.lookAt(new THREE.Vector3( 0, 0, -50 ))
+      // logoG.rotation.y = this.mouseY*0.01;
 
       this.renderer.render(this.scene, this.camera);
-      // console.log(this.camera.aspect)
     };
 
     animate();
@@ -51,8 +82,12 @@ export default {
     windowResize(){
       this.camera.aspect=window.innerWidth / window.innerHeight;
       this.camera.updateProjectionMatrix();
-      this.renderer.setSize(window.innerWidth-30, window.innerHeight);//fixme
+      this.renderer.setSize(window.innerWidth, window.innerHeight);//fixme
 
+    },
+    handleMousemoveOnCanvas(e){
+      this.mouseX=e.clientX
+      this.mouseY=e.clientY
     }
   },
 
@@ -64,7 +99,6 @@ section {
   width: 100%;
   height: 110vh;
   background: rgba(0, 0, 0, 0.1);
-  margin-top: -100px;
 }
 </style>
 
