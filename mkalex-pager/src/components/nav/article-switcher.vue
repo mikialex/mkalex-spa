@@ -30,6 +30,7 @@ export default {
     background: #FFFFFF;
     box-shadow: 0 2px 0 0 rgba(0,0,0,0.1);
     margin-top:20px;
+    margin-bottom: 10px;
     >div{
       height:100%;
       flex-grow: 1;

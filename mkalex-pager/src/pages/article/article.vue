@@ -2,9 +2,9 @@
   <section>
     <page-title :title="'Article'"></page-title>
     <article-switcher></article-switcher>
-    <container-mid>
+    <!--<container-mid>
       <div style="height:100px;width:100px;background:#777">aricle</div>
-    </container-mid>
+    </container-mid>-->
     <container-mid>
       <router-view></router-view>
     </container-mid>
