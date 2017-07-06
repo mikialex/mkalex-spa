@@ -55,6 +55,14 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
+      },
+      // {
+      //   test: /\.(glsl|vert|frag)$/,
+      //   loader: 'glsl-template-loader'
+      // }
+      {
+        test: /\.glsl$/,
+        loader: 'webpack-glsl-loader'
       }
     ]
   }

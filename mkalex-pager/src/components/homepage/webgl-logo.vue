@@ -4,9 +4,9 @@
 </template>
 
 <script>
-// import { Scene,PerspectiveCamera ,WebGLRenderer,BoxGeometry,MeshBasicMaterial,Mesh,AmbientLight} from 'three'
-import * as THREE from 'three'
+import * as THREE from 'three' 
 import {vec, face} from './logo-geometry'
+// import THREE from './three-js-select'
 export default {
   data(){
     return{
