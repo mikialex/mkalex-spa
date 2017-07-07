@@ -3,8 +3,18 @@ export const mutations = {
   add_GoingAjax(state) { // this.$store.commit('add_GoingAjax')
     state.goingAjax++;
   },
-  minus_GoingAjax(state) { // this.$store.commit('minus_GoingAjax')
+  minus_GoingAjax(state) { 
     state.goingAjax--;
+  },
+  reset_GoingAjax(state) { 
+    state.goingAjax=0;
+  },
+
+  setErrMessage(state, payload) {// this.$store.commit('setErrMessage',{message:'dddd'})
+    state.errorMessage=payload.message
+  },
+  clearErr(state) {
+    state.errorMessage=''
   },
 
   openTopNav(state) {

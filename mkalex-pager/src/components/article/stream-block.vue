@@ -1,6 +1,6 @@
 <template>
   <div class="stream-block">
-
+    articlsdfhjihl
   </div>
 </template>
 

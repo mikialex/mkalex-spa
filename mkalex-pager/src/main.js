@@ -6,6 +6,8 @@ import store from './vuex'
 import App from './App'
 import router from './router'
 
+import * as vueAjax from './api/ajax-global'
+
 // import THREE from 'three-js'
 
 Vue.use(Vuex)
@@ -13,6 +15,7 @@ Vue.use(Vuex)
 router.afterEach((function (routerTo,routerFrom) {
     // console.info("changeRoute",routerFrom)
     this.app.$store.commit('closeTopNav');
+    this.app.$store.commit('reset_GoingAjax');
     // this.app.$store.commit('reset_GoingAjax');
     // this.app.$store.commit('showErrorInfo', { info: '' });
     // this.app.$store.commit('setLastPath', { pathName: routerFrom.name });
@@ -27,6 +30,7 @@ MKLayout.map(component => {
 
 Vue.config.productionTip = false
 
+Vue.prototype.$ajax = vueAjax
 
 /* eslint-disable no-new */
 new Vue({
