@@ -18,6 +18,9 @@ export default {
 <style lang="scss" scoped>
 @import '~globalSass';
 
+section{
+  width:100%;
+}
 </style>
 
 

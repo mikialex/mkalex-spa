@@ -1,12 +1,12 @@
 <template>
   <div class="time-plate">
-    <div>
+    <div class="time-plate-month">
       January
     </div>
-    <div>
+    <div class="time-plate-day">
       16
     </div>
-    <div>
+    <div class="time-plate-year">
       2017
     </div>
   </div>
@@ -28,6 +28,33 @@ export default {
   background: #FFFFFF;
   border: 1px solid #E5E5E5;
   box-shadow: 0 3px 4px 0 rgba(0,0,0,0.07);
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items:center;
+  >div{
+    text-align: center;
+    // width:20px;
+  }
+}
+
+.time-plate-month{
+  font-size: rem(25px);
+  font-weight:100;
+  color:#555;
+}
+
+.time-plate-day{
+  font-size: rem(72px);
+  line-height: rem(45px);
+  font-weight:100;
+  color:#555;
+}
+
+.time-plate-year{
+  font-size: rem(25px);
+  font-weight:300;
+  color:#555;
 }
 </style>
 

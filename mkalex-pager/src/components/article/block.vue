@@ -3,10 +3,10 @@
   <div>
     <time-plate></time-plate>
   </div>
-  <div>
-    <h2>Implementations of grid layout system</h2>
-    <h3>Implementations of grid layout system</h3>
-    <div></div>
+  <div class="title-section">
+    <h2>Implementations of grid layout system imptions of grid layout system</h2>
+    <h3>Implementations of grid layout system Implementations of grid layout system Implementations of grid layout system</h3>
+    <div style="width:100%;height:20px">d</div>
   </div>
   <img src="../../assets/defaultBlogCover.png">
   </div>
@@ -39,6 +39,23 @@ export default {
     height:130px;
     border-radius:5px;
     margin:10px;
+    flex:1;
+  }
+}
+
+.title-section{
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  >h2{
+    margin:0px;
+    font-size:rem(24px);
+  }
+
+  >h1{
+    margin:0px;
+    font-size:rem(16px);
   }
 }
 
