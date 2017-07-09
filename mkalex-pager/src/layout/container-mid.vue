@@ -1,8 +1,8 @@
 <template lang="html">
   <div class="mlayout-container-mid">
-      <slot>
+    <slot>
 
-      </slot>
+    </slot>
   </div>
 </template>
 

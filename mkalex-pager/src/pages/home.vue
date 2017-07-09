@@ -1,10 +1,10 @@
 <template>
   <section>
-    <container-mid>
+    <!--<container-mid>
       <div style="height:100px;width:100px;background:#777">homepage</div>
-    </container-mid>
-    <!--<webgl-logo></webgl-logo>-->
-    <!--<red-triangular></red-triangular>-->
+    </container-mid>-->
+    <webgl-logo></webgl-logo>
+    <red-triangular></red-triangular>
     <intro-part></intro-part>
   </section>
 </template>

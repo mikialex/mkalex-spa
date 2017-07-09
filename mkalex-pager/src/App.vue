@@ -83,9 +83,22 @@ body {
 }
 @font-face {
   font-family: JosefinSans;
-  src: url('./assets/font/JosefinSans-SemiBold.ttf');
+  src: url('./assets/font/Josefin_Sans/JosefinSans-SemiBold.ttf');
   font-weight: semibold;
 }
+
+@font-face {
+  font-family: JosefinSans;
+  src: url('./assets/font/Josefin_Sans/JosefinSans-Bold.ttf');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: futura;
+  src: url('./assets/font/futura/futura-medium.ttf');
+  font-weight: bold;
+}
+
 
 ::selection {
   color: #FFFFFF;
@@ -110,12 +123,29 @@ body {
   inset 0px 0px 0px 3px rgba(0, 0, 0, 0.1);
 }
 
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s
+.fade-enter-active,  {
+  transition: all .5s
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
+.fade-enter, .fade-leave-active {
   opacity: 0
 }
+// .fade-enter-to, .fade-leave {
+//   opacity: 1
+// }
+
+// .fade-enter-active {
+//   transition: all 3s ease;
+// }
+// /*.slide-fade-leave-active {
+//   transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+// }*/
+// .fade-enter{
+//   /*padding-top: 50px;*/
+//   opacity: 0;
+// }
+// .fade-leave-active {
+// opacity: 0;
+// }
 
 
 </style>

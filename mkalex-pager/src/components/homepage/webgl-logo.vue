@@ -98,7 +98,8 @@ export default {
 section {
   width: 100%;
   height: 110vh;
-  background: rgba(0, 0, 0, 0.1);
+  // z-index: -1;
+  // position: relative;
 }
 </style>
 
