@@ -20,6 +20,13 @@ export default {
     'webgl-logo': webglLogo,
     'page-title':PageTitle,
     'article-switcher':switcher,
-  }
+  },
+  mounted(){
+    this.$ajax.get(this,'articles')
+    .then(data=>{
+      console.log(data)
+      this.$store.state.articles.articleList=data
+    }).catch(this.$ajax.handleErr(this))
+  },
 }
 </script>

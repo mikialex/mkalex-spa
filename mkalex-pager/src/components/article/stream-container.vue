@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="stream-container"> 
     <stream-article-block></stream-article-block>
     <stream-article-block></stream-article-block>
     <stream-article-block></stream-article-block>

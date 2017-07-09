@@ -14,15 +14,10 @@
 <script>
 import block from '@/components/article/archive-block'
 export default {
-    components:{
+  components:{
     'archive-article-block':block,
   },
   mounted(){
-    this.$ajax.get(this,'articles')
-    .then(data=>{
-      console.log(data)
-      this.$store.state.articles.articleList=data
-    }).catch(this.$ajax.handleErr(this))
   },
 }
 </script>

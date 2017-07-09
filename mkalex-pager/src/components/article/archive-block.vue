@@ -1,7 +1,7 @@
 <template>
   <div class="archive-block">
-  <div class="a-b-archive-block inv-10">
-    <time-plate></time-plate>
+  <div class="a-b-archive-block">
+    <!--<time-plate></time-plate>-->
   </div>
   <div class="title-section">
     <h2>{{title}}</h2>
@@ -15,9 +15,9 @@
 <script>
 import timePlate from './time-plate'
 export default {
-  components:{
-    'time-plate':timePlate
-  },
+  // components:{
+  //   'time-plate':timePlate
+  // },
   props:{
     title:{
       default:'Implementations of grid layout system imptions of grid layout system'
