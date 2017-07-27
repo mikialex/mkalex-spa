@@ -6,7 +6,9 @@
       <div style="height:100px;width:100px;background:#777">aricle</div>
     </container-mid>-->
     <container-mid>
-      <router-view></router-view>
+      <trans-fade>
+        <router-view></router-view>
+      </trans-fade>
     </container-mid>
   </section>
 </template>

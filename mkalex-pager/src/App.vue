@@ -1,12 +1,14 @@
 <template>
   <div id="app">
     <top-nav></top-nav>
+    
     <scroll-to-top></scroll-to-top>
+
     <page-with-sticky-footer v-if="!useClean">
       <!--<div style="height:100px"></div>-->
-      <transition name="fade">
+      <trans-fade>
         <router-view></router-view>
-      </transition>
+      </trans-fade>
       <footer-dark slot="footer"></footer-dark>
     </page-with-sticky-footer>
   
@@ -66,7 +68,8 @@ export default {
 html {
   font-family: "PingFang SC", "microsoft yahei", sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; // text-align: center;
+  -moz-osx-font-smoothing: grayscale; 
+  width: 100vw;
   // color: #2c3e50;
   // margin-top: 60px;
 }
@@ -122,30 +125,6 @@ body {
   box-shadow: 0px 4px 1px 0px rgba(0, 0, 0, 0.1),
   inset 0px 0px 0px 3px rgba(0, 0, 0, 0.1);
 }
-
-.fade-enter-active,  {
-  transition: all .5s
-}
-.fade-enter, .fade-leave-active {
-  opacity: 0
-}
-// .fade-enter-to, .fade-leave {
-//   opacity: 1
-// }
-
-// .fade-enter-active {
-//   transition: all 3s ease;
-// }
-// /*.slide-fade-leave-active {
-//   transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-// }*/
-// .fade-enter{
-//   /*padding-top: 50px;*/
-//   opacity: 0;
-// }
-// .fade-leave-active {
-// opacity: 0;
-// }
 
 
 </style>

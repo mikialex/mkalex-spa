@@ -8,8 +8,6 @@ import router from './router'
 
 import * as vueAjax from './api/ajax-global'
 
-// import THREE from 'three-js'
-
 Vue.use(Vuex)
 
 router.afterEach((function (routerTo,routerFrom) {
@@ -23,9 +21,13 @@ router.afterEach((function (routerTo,routerFrom) {
 }).bind(router))
 
 import MKLayout from './layout/include'
+import MKTransition from './transitions/include'
 MKLayout.map(component => {
    Vue.component(component.name, component);
- });
+});
+MKTransition.map(component => {
+  Vue.component(component.name, component);
+});
 
 
 Vue.config.productionTip = false

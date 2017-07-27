@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "dev-static":"node build/dev-with-staic-back.js"
   },
   "dependencies": {
     "@tweenjs/tween.js": "^16.7.0",

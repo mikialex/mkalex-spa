@@ -12,7 +12,7 @@ export default {
   data() {
     return {
       currentScroll: 0,//window.pageYOffset
-      timer:undefined,
+      timer:null,
     }
   },
   computed: {

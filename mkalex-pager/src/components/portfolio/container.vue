@@ -16,3 +16,12 @@ export default {
 }
 </script>
 
+<style lang="scss" scoped>
+@import '~globalSass';
+
+section{
+  background: #444;
+}
+
+</style>
+

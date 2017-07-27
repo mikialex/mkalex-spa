@@ -10,7 +10,7 @@
             <div style="margin-top:-500px;z-index:1;">
             <part-title></part-title>
             <div class="slogan">
-              <p>
+              <!-- <p>
                 Political standpoint: Liberalists, agnosticists,
                 classical liberals <br> Support laissez-faire, free trade and globalization.
               </p>
@@ -23,7 +23,11 @@
                 Against government expansion, welfarism, and populism.<br>
                 Against organic agriculture, extreme environmentalism and <br>
                   “human activities lead to global warming hypothesis.”
-              </p>
+              </p> -->
+              <p>
+                .<br>.<br>.<br>.<br>.<br>.<br>
+                .<br>.<br>.<br>.<br>.<br>
+              </p> 
             </div>
             <div class="whoiam">
               <p>
@@ -96,6 +100,8 @@ border-color: transparent transparent transparent #000;
 
 section {
   color: #fff;
+  position: relative;
+  z-index: 10;
 }
 
 .slogan{

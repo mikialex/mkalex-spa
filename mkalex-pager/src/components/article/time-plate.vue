@@ -39,20 +39,20 @@ export default {
 }
 
 .time-plate-month{
-  font-size: rem(25px);
+  font-size: 23px;
   font-weight:100;
   color:#555;
 }
 
 .time-plate-day{
-  font-size: rem(72px);
+  font-size: 72px;
   line-height: rem(45px);
   font-weight:100;
   color:#555;
 }
 
 .time-plate-year{
-  font-size: rem(25px);
+  font-size: 23px;
   font-weight:300;
   color:#555;
 }
