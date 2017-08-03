@@ -14,7 +14,31 @@
 
 <script>
 export default {
-  
+  props:{
+    date:{
+      default:null
+    }
+  },
+  computed:{
+    month(){
+      if(this.date){
+        return 'dd'
+      }
+        return '???????'
+    },
+    day(){
+      if(this.date){
+        return 'dd'
+      }
+        return '??'
+    },
+    year(){
+      if(this.date){
+        return 'dd'
+      }
+        return '????'
+    }
+  },
 }
 </script>
 

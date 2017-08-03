@@ -19,6 +19,7 @@ export default {
   height: 200px;
   display: inline-block;
   border:1px solid #000;
+  background: #fff;
 }
 
 </style>

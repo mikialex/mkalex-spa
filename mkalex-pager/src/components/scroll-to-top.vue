@@ -61,7 +61,7 @@ export default {
     let event = new Event('scroll');
     window.dispatchEvent(event)
   },
-  destoryed(){
+  destroyed(){
     window.removeEventListener('resize', this.handleResize);
     window.removeEventListener('scroll', this.handleScroll);
   },

@@ -1,5 +1,9 @@
 import axios from 'axios'
-import {baseURL} from '@/api/config'
+import { baseURL } from '@/api/config'
+import qs from 'qs'
+
+axios.defaults.timeout = 5000;
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
   
 export function ajax(method, url, payload) {
   if (method === 'get' || method === 'post') {
@@ -15,11 +19,12 @@ export function ajax(method, url, payload) {
 
 export function get(env, url, payload) {
   env.$store.commit('add_GoingAjax')
-  return ajax('get', baseURL + url, payload)
-  .catch(err => {
-    console.log(err)
-    throw err
-  })
+  return axios.get(baseURL + url, {params: payload})
+  //return ajax('get', baseURL + url, payload)
+  // .catch(err => {
+  //   console.log(err)
+  //   throw err
+  // })
   .then(data => {
     env.$store.commit('minus_GoingAjax')
     console.info('get original data',data)
@@ -38,4 +43,8 @@ export function handleErr(env) {
   return (function (err) {
     env.$store.commit('setErrMessage', { message: 'network request error'+err })
   }).bind(env)
+}
+
+export const apis = {
+  articleList:'articles'
 }

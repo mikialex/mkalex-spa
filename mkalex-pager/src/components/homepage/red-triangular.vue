@@ -23,7 +23,7 @@
       </div> -->
   
     <container-mid>
-      <para-scroll :velocityFactor="-0.1">
+      <para-scroll :velocityFactor="0.15">
         <h1>PURSUE THE ‘UTMOST
           <br> FUSION OF ART & TECH</h1>
       </para-scroll>

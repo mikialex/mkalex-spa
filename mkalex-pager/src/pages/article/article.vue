@@ -24,10 +24,13 @@ export default {
     'article-switcher':switcher,
   },
   mounted(){
-    this.$ajax.get(this,'articles')
+    this.$store.commit('reset_hasArticleListLoaded');
+    // this.$store.dispatch('getArticleList')
+    this.$ajax.get(this,this.$ajax.apis.articleList)
     .then(data=>{
       console.log(data)
       this.$store.state.articles.articleList=data
+      this.$store.commit('ArticleListLoaded');
     }).catch(this.$ajax.handleErr(this))
   },
 }

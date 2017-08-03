@@ -3,11 +3,11 @@
     <stream-block-label></stream-block-label>
     <div class="stream-block-text">
       <div class="stream-block-title">
-        <h2>kudshfjsdfhkjfhs</h2>
-        <h3>kudshfjsdfhkjfhs</h3>
+        <h2>{{title}}</h2>
+        <h3>{{subTitle}}</h3>
       </div>
       <div class="stream-block-content">
-        <markdown-render></markdown-render>
+        <markdown-render :content="content"></markdown-render>
         <div>
           <span>阅读全文</span>
         </div>
@@ -20,6 +20,17 @@
 import label from './stream-block-label'
 import markdown from '@/components/markdown-render'
 export default {
+  props:{
+    title:{
+      default:'Need title'
+    },
+    subTitle:{
+      default:'Need sub title'
+    },
+    content:{
+      default:'Need content'
+    }
+  },
   components: {
     'stream-block-label': label,
     'markdown-render':markdown
@@ -47,4 +58,24 @@ export default {
   text-align: right;
   width:100%;
 }
+
+.stream-block-content{
+  margin-right: rem(30px);
+  margin-left: rem(20px);
+}
+
+h2,h3{
+  margin-right: rem(15px);
+}
+
+h2{
+  font-size: rem(30px);
+  font-weight: bold;
+  margin-bottom: 0px;
+}
+h3{
+  font-size: rem(20px);
+  margin-top: 5px;
+}
+
 </style>

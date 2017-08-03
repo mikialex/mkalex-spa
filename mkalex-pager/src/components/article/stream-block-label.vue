@@ -31,9 +31,9 @@ export default {
 @import '~globalSass';
 
 section {
+  min-width: 120px;
   width: 120px;
   min-height: 300px;
-  height: 100%;
   >div {
     width: 80px;
     height: 100%;

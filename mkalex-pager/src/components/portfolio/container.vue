@@ -20,7 +20,7 @@ export default {
 @import '~globalSass';
 
 section{
-  background: #444;
+  background: #000;
 }
 
 </style>
