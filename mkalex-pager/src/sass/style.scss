@@ -15,6 +15,13 @@ $desktop-min-width:1000px;
     @return $px / $browser-default-font-size * 1rem;
 }
 
+@function textoutline($size,$color){
+    @return -$size  (-$size) 0 $color,  
+          $size  (-$size) 0 $color,  
+          -$size  $size 0 $color,  
+          $size  $size 0 $color  ;
+}
+
 @for $i from 1 through 12{
 	.sep-#{$i}{
     box-sizing:border-box;

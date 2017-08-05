@@ -1,6 +1,6 @@
 <template>
   <section>
-    <page-title :title="'Article'"></page-title>
+    <page-title :title="'Article'" :subTitle="'Think Different, Make Believe'"></page-title>
     <article-switcher></article-switcher>
     <!--<container-mid>
       <div style="height:100px;width:100px;background:#777">aricle</div>

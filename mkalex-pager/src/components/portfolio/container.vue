@@ -20,7 +20,8 @@ export default {
 @import '~globalSass';
 
 section{
-  background: #000;
+  // background: #;
+  padding-top: 20px;
 }
 
 </style>

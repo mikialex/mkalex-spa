@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import block from '@/components/article/archive-block'
+import block from './archive-block'
 export default {
   components:{
     'archive-article-block':block,

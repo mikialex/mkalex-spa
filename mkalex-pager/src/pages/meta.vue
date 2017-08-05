@@ -2,7 +2,7 @@
   <container-mid>
     
     <block-flex :end="true">
-    <page-title :title="'Meta'"></page-title>
+    <page-title :title="'Meta'" :subTitle="'???'"></page-title>
     <div class="mk-resume-block">
       <h2>Work exprience</h2>
       <ul>
@@ -46,6 +46,48 @@
             </li>
           </ul>
         </li>
+         <li class="m-r-b-titles">
+          <div>
+            <div>
+              <h3>格致中学</h3>
+              <h4>GEZHI</h4>
+            </div>
+            <span>（September 2011 － June 2014）</span>
+          </div>
+          <!-- <ul>
+            <li>
+              product design
+            </li>
+          </ul> -->
+        </li>
+      </ul>
+    </div>
+
+        <div class="mk-resume-block">
+      <h2>Skills</h2>
+      <ul>
+        <li class="m-r-b-details">
+          <div>
+            <div>
+              <h3>Designs</h3>
+              <h4>online education system</h4>
+            </div>
+          </div>
+          <p>
+            mmmmmm
+          </p>
+        </li>
+        <li class="m-r-b-details">
+          <div>
+            <div>
+              <h3>Dev</h3>
+              <h4>online math homework system</h4>
+            </div>、
+          </div>
+          <p>
+            mmmmmm
+          </p>
+        </li>
       </ul>
     </div>
   
@@ -61,7 +103,9 @@
             <a href="http://www.piclass.cn">www.piclass.cn</a>
           </div>
           <p>
-            前端的入门项目，曾作为学校大创参加上海市计算机竞赛获得一等奖，参加全国计算机大赛获得二等奖。 在该项目中，首次使用自研UI框架，首次进行前端工程化实践，首次作为产品上线
+            前端的入门项目，曾作为学校大创参加上海市计算机竞赛获得一等奖，
+            参加全国计算机大赛获得二等奖。 在该项目中，首次使用自研UI框架，
+            首次进行前端工程化实践，首次作为产品上线
           </p>
         </li>
         <li class="m-r-b-details">
@@ -73,11 +117,15 @@
             <a href="http://demo-s.bqteam.com">demo-s.bqteam.com</a>
           </div>
           <p>
-            开发的首个SPA应用，是我所在创业公司产品的web前端版本。使用Vue2 vue-router2 vuex2 ，通过这个项目， 对前端组件化的趋势 方法 和实践 有了深入认识，对es2015等下一代语言标准有了深入接触。收获了丰富的前端开发经验
+            开发的首个SPA应用，是我所在创业公司产品的web前端版本。
+            使用Vue2 vue-router2 vuex2 ，通过这个项目，
+             对前端组件化的趋势 方法 和实践 有了深入认识，
+             对es2015等下一代语言标准有了深入接触。收获了丰富的前端开发经验
           </p>
         </li>
       </ul>
     </div>
+
     </block-flex>
   </container-mid>
 </template>

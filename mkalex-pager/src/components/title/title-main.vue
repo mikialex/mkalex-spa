@@ -5,6 +5,7 @@
                 <div class="mk-title-main-s"></div>
                 <div class="mk-title-main-h">
                     <h1>{{title}}</h1>
+                    <h2>{{subTitle}}</h2>
                 </div>
             </div>
             <div class="mk-title-main-logo">
@@ -22,10 +23,14 @@ export default {
     components: {
         'svg-logo': Logo
     },
-    props:{
+    props: {
         title: {
-        type: String,
-        default: 'title required'
+            type: String,
+            default: 'title required'
+        },
+        subTitle: {
+            type: String,
+            default: '.'
         },
     }
 }
@@ -87,12 +92,24 @@ export default {
                 max-width: rem(500px);
                 background-color: $page-background;
                 white-space: nowrap;
+                font-family: 'futura';
                 @media (max-width: 700px) {
                     margin-right: 20px;
                     white-space: nowrap;
                     font-size: rem(46px);
                     z-index: -1;
                 }
+            }
+            >h2 {
+                margin: 0px;
+                margin-top: -30px;
+                margin-left: 10px;
+                position:relative;
+                top:-10px;
+                font-weight: 200;
+                font-size: rem(20px);
+                color:#888;;
+                 font-family: 'futura';
             }
             &::after {
                 content: '';

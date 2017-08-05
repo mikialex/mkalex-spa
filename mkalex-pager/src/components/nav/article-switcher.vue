@@ -38,6 +38,7 @@ export default {
       justify-content: center;
       align-items: center;
       font-size:rem(16px);
+      font-family: 'futura';
       cursor:pointer;
       transition:200ms ease-in-out;
       &:hover{

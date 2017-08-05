@@ -37,11 +37,11 @@ export default {
     downHeight: 100,
     upHeight: 70,
     navList: [
-      { name: 'Home', link: 'home', isUnderconstruction: false, isNewWindow: false },
-      { name: 'Article', link: 'article', isUnderconstruction: false, isNewWindow: false },
-      { name: 'Portfolio', link: 'portfolio', isUnderconstruction: false, isNewWindow: false },
-      { name: 'Collection', link: 'collection', isUnderconstruction: true, isNewWindow: false },
-      { name: 'About', link: 'meta', isUnderconstruction: false, isNewWindow: false },
+      { name: 'HOME', link: 'home', isUnderconstruction: false, isNewWindow: false },
+      { name: 'ARTICLE', link: 'article', isUnderconstruction: false, isNewWindow: false },
+      { name: 'PORTFOLIO', link: 'portfolio', isUnderconstruction: false, isNewWindow: false },
+      { name: 'COLLECTION', link: 'collection', isUnderconstruction: true, isNewWindow: false },
+      { name: 'META', link: 'meta', isUnderconstruction: false, isNewWindow: false },
       { name: ' ', link: 'caicai', isUnderconstruction: false, isNewWindow: false , love: true},
     ]
     }
@@ -97,6 +97,7 @@ export default {
     padding-left: 0px;
     margin: 0px;
     transition: 0.5s cubic-bezier(0, 0, 0.1, 0.93);
+    font-family: 'futura';
     @media (max-width: 700px) {
       position: relative;
       left: 0px;

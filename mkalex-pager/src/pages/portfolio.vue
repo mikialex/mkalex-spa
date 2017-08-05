@@ -1,6 +1,6 @@
 <template>
   <section>
-    <page-title :title="'Portfolio'"></page-title>
+    <page-title :title="'Portfolio'" :subTitle="'Showcase For My Creative Work'"></page-title>
     <container-mid>
       <portfolio-container></portfolio-container> 
     </container-mid>
