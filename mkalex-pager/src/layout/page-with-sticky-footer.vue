@@ -18,6 +18,8 @@ export default {
 <style lang="scss" scoped>
 .mlayout-page-sticky-footer{
   display: flex;
+  max-width:100vw;
+  overflow: hidden;
   min-height: 100vh;//sticky footer
   flex-direction: column;
   margin:0px;

@@ -31,7 +31,6 @@ export default {
     console.log(testV)
     this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera(34, window.innerWidth / window.innerHeight, 0.1, 1000);
-    this.camera.position.set(0,0,1);
     // this.camera.up = new THREE.Vector3(0,1,0);
     // this.camera.lookAt(new THREE.Vector3( 0, 0, -50 ))
     this.renderer = new THREE.WebGLRenderer();
@@ -58,15 +57,18 @@ export default {
       this.scene.add(new THREE.Mesh(geometry, material));
     })
 
+    this.camera.position.set(0,0,1);
+    this.camera.lookAt(new THREE.Vector3( 0, 0, -50 ))
+
      
-      let materialS = new THREE.ShaderMaterial( {
-        uniforms: this.shaderUniform,
-        vertexShader: testV,
-        fragmentShader:testF
-      } );
-      let geometryS = new THREE.PlaneBufferGeometry( 1,1,1,1 );
-      let meshS = new THREE.Mesh( geometryS, materialS );
-      this.scene.add( meshS );
+      // let materialS = new THREE.ShaderMaterial( {
+      //   uniforms: this.shaderUniform,
+      //   vertexShader: testV,
+      //   fragmentShader:testF
+      // } );
+      // let geometryS = new THREE.PlaneBufferGeometry( 1,1,1,1 );
+      // let meshS = new THREE.Mesh( geometryS, materialS );
+      // this.scene.add( meshS );
 
     // let geometry = new THREE.Geometry();
     // vec.forEach((element) =>{
@@ -88,30 +90,34 @@ export default {
 
     var animate =()=>{
       this.reA=window.requestAnimationFrame(animate);
-      let halfWidth=window.innerWidth/2
-      let halfHeight=window.innerHeight/2
-      let xOffset=(this.mouseX-halfWidth)/halfWidth;
-      let yOffset=(this.mouseY-halfHeight)/halfHeight;
-      let deltaCenter=xOffset*xOffset+yOffset*yOffset
-      // console.log(this.renderer.domElement.width)
-      // this.camera.position.x = -xOffset*deltaCenter*10;
-      // this.camera.position.y = yOffset*deltaCenter*10;
-      // this.camera.position.x = xOffset*100;
-      // this.camera.position.y = yOffset*100;
-      this.camera.lookAt(new THREE.Vector3( 0, 0, -50 ))
-      // logoG.rotation.y = this.mouseY*0.01;
+
+      //mouse perpective change effect
+      if(this.mouseX!==0&& this.mouseY!==0){ //prevent mobile inital screen misposition
+        let halfWidth=window.innerWidth/2
+        let halfHeight=window.innerHeight/2
+        let xOffset=(this.mouseX-halfWidth)/halfWidth;
+        let yOffset=(this.mouseY-halfHeight)/halfHeight;
+        let deltaCenter=xOffset*xOffset+yOffset*yOffset
+        // console.log(this.renderer.domElement.width)
+        this.camera.position.x = -xOffset*deltaCenter*20;
+        this.camera.position.y = yOffset*deltaCenter*20;
+        // this.camera.position.x = xOffset*100;
+        // this.camera.position.y = yOffset*100;
+        this.camera.lookAt(new THREE.Vector3( 0, 0, -50 ))
+        // logoG.rotation.y = this.mouseY*0.01;
+      }
 
       //hover change
-      // this.raycaster.setFromCamera( this.mouse, this.camera );
-      // let intersects = this.raycaster.intersectObjects( this.scene.children );
-      // if( this.intersected){
-      //   this.intersected.object.material.color.set( 0x000000 );
-      //   this.intersected=null;
-      // }
-      // if(intersects.length>0){
-      //   this.intersected=intersects[ 0 ];
-      //   this.intersected.object.material.color.set( 0xff0000 );
-      // }
+      this.raycaster.setFromCamera( this.mouse, this.camera );
+      let intersects = this.raycaster.intersectObjects( this.scene.children );
+      if( this.intersected){
+        this.intersected.object.material.color.set( 0x000000 );
+        this.intersected=null;
+      }
+      if(intersects.length>0){
+        this.intersected=intersects[ 0 ];
+        this.intersected.object.material.color.set( 0xff0000 );
+      }
 
       this.shaderUniform.time.value += 0.05;
 

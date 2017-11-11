@@ -12,7 +12,6 @@
             :link="navinfo.link"></nav-block>
           </ul>
           <div>
-            <h2 style="display:none">格藝尋道 術設溯淵</h2>
             <div>
               <img src="../../assets/slogon.svg"></img>
             </div>
@@ -41,7 +40,7 @@ export default {
       { name: 'ARTICLE', link: 'article', isUnderconstruction: false, isNewWindow: false },
       { name: 'PORTFOLIO', link: 'portfolio', isUnderconstruction: false, isNewWindow: false },
       { name: 'COLLECTION', link: 'collection', isUnderconstruction: true, isNewWindow: false },
-      { name: 'META', link: 'meta', isUnderconstruction: false, isNewWindow: false },
+      // { name: 'META', link: 'meta', isUnderconstruction: false, isNewWindow: false },
       { name: ' ', link: 'caicai', isUnderconstruction: false, isNewWindow: false , love: true},
     ]
     }
@@ -57,9 +56,9 @@ export default {
   },
   methods: {
     handleScroll() {
-      if (document.body.scrollTop > this.downHeight) {
+      if (window.pageYOffset > this.downHeight) {
         this.isTop = false
-      } else if (document.body.scrollTop < this.upHeight) {
+      } else if (window.pageYOffset < this.upHeight) {
         this.isTop = true
       }
     },
@@ -89,7 +88,7 @@ export default {
     padding: 0px;
     margin: 0px;
     display: block;
-    height: rem(45px);
+    // height: rem(45px);
   }
   >ul {
     display: flex;
@@ -128,7 +127,7 @@ export default {
           width:200px;
           vertical-align: middle;
         }
-        @media (max-width:777px) {
+        @media (max-width:760px) {
           display: none;
         }
       }

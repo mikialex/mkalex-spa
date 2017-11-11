@@ -44,7 +44,7 @@ export default {
 section {
   // display: flex;
   width: 100%; // justify-content: space-between
-  // margin-top: -200px;
+  margin-top: -200px;
   // position: relative;
   // z-index:1;
 }
@@ -80,7 +80,9 @@ section {
    :nth-child(2) {
     width: 100vw;
     height: 100px;
-    background: #ff1223
+    background: #ff1223;
+    margin-top:-1px;
+    margin-bottom:-1px;
   }
    :last-child {
     width: 0;

@@ -82,6 +82,8 @@ export default {
             @media (max-width: 700px) {
                 display: flex;
                 flex-direction: row-reverse;
+                justify-content: space-between;
+                align-items: center;
             }
             >h1 {
                 display: inline-block;
@@ -110,6 +112,10 @@ export default {
                 font-size: rem(20px);
                 color:#888;;
                  font-family: 'futura';
+                @media (max-width: 700px) {
+                    margin-top: 30px;
+                    
+                }
             }
             &::after {
                 content: '';

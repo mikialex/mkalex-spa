@@ -25,8 +25,8 @@
                   “human activities lead to global warming hypothesis.”
               </p> -->
               <p>
-                .<br>.<br>.<br>.<br>.<br>.<br>
-                .<br>.<br>.<br>.<br>.<br>
+                .<br>..<br>......<br>...<br>............<br>.....<br>
+                .<br>..<br>.....<br>...<br>.<br>
               </p> 
             </div>
             <div class="whoiam">
@@ -37,7 +37,7 @@
                 I am a student in ECUST, major in product design.
               </p>
               <p>
-                I focus on Design, Web technology, and Computer Science.
+                I focus on Design, Interface technology, and Computer Science.
               </p>
               
             </div>
@@ -102,6 +102,7 @@ section {
   color: #fff;
   position: relative;
   z-index: 10;
+  margin-bottom: rem(-110px);
 }
 
 .slogan{

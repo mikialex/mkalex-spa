@@ -4,10 +4,10 @@
       <div class="mk-footer-left">
         <ul>
           <li>
-            <a href="#">浏览设置</a>
+            <a href="#"></a>
           </li>
           <li>
-            <a href="#">FRIENDS</a>
+            <a href="#"></a>
           </li>
         </ul>
       </div>
@@ -25,10 +25,10 @@
       <div class="mk-footer-right">
         <ul>
           <li>
-            <a href="#">版权声明</a>
+            <a href="#"></a>
           </li>
           <li>
-            <a href="#">联系方式</a>
+            <a href="#"></a>
           </li>
         </ul>
       </div>
