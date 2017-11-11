@@ -1,5 +1,5 @@
 <template>
-  <archive-container></archive-container>
+  <archive-container :articleList="this.$store.state.articles.articleList"></archive-container>
 </template>
 
 <script>

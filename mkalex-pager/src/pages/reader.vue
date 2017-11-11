@@ -7,8 +7,8 @@
 <script>
 export default {
   components:{
-    'under-construction':undercons,
-    'page-title':PageTitle,
+    // 'under-construction':undercons,
+    // 'page-title':PageTitle,
   }
 }
 </script>

@@ -1,6 +1,5 @@
 <template>
-  <!--<section style="height:2000px;background:#eee">sdfssdfsdsdfsdfsfsdfsdfsdf</section>-->
-  <stream-container></stream-container>
+  <stream-container :detailList="this.$store.state.articles.detailList"></stream-container>
 </template>
 
 <script>

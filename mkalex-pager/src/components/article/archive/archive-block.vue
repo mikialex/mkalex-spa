@@ -1,9 +1,9 @@
 <template>
   <div class="archive-block">
     <div class="title-section">
-      <div class="enter-wrap">
-        <span class="main-t">{{title}}</span>
-        <h3>{{subTitle}}</h3>
+      <div class="enter-wrap" @click="gotoReader">
+        <span class="main-t">{{articleInfo.title}}</span>
+        <h3>{{articleInfo.subTitle}}</h3>
       </div>
       <archive-info></archive-info>
     </div>
@@ -19,12 +19,12 @@ export default {
     'archive-info':archiveInfo
   },
   props: {
-    title: {
-      default: 'Implementations of grid layout system imptions of grid layout system'
+    articleInfo:{required:true},
+  },
+  methods:{
+    gotoReader(){
+      this.$router.push({name:'reader',params:{type:'article',u_name:this.articleInfo.u_name}})
     },
-    subTitle: {
-      default: 'Implementations of grid layout system Implementations of grid layout system Implementations of grid layout system'
-    }
   }
 }
 </script>

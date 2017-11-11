@@ -1,12 +1,8 @@
 <template>
   <section>
-    <archive-article-block v-for="article in this.$store.state.articles.articleList"
+    <archive-article-block v-for="article in articleList"
     :key="article.urlname"
-    :title="article.title"
-    :subTitle="article.sub_title"
-    ></archive-article-block>
-     <archive-article-block
-    :key="'323244334'"
+    :articleInfo="article"
     ></archive-article-block>
   </section>
 </template>
@@ -16,6 +12,9 @@ import block from './archive-block'
 export default {
   components:{
     'archive-article-block':block,
+  },
+  props:{
+    articleList:{required:true}
   },
   mounted(){
   },

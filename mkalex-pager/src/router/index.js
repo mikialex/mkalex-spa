@@ -7,6 +7,7 @@ import ArticleArchive from '@/pages/article/archive'
 import Portifolio from '@/pages/portfolio'
 import Collection from '@/pages/collection'
 import Meta from '@/pages/meta'
+import Reader from '@/pages/reader'
 
 import Caicai from '@/pages/caicai'
 import Copyright from '@/pages/copyright'
@@ -74,6 +75,13 @@ export default new Router({
       components: {
         clean:Caicai
       }
+    },{
+      path: '/reader/:type/:u_name',
+      name: 'reader',
+      components: {
+        clean:Reader
+      }
     },
+    
   ],
 })

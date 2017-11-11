@@ -24,7 +24,7 @@ export default {
   name: 'app',
   computed: {
     useClean() {
-      return this.$route.name === "caicai"||this.$route.name === "404"
+      return this.$route.name === "caicai"||this.$route.name === "404"||this.$route.name === "reader"
     }
   },
   methods: {

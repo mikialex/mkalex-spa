@@ -1,7 +1,8 @@
 <template>
   <section class="stream-container">
     <stream-article-block v-for="article in this.detailList" :key="article.urlname" 
-    :title="article.title" :subTitle="article.sub_title" :content="article.content"></stream-article-block>
+    :articleInfo="article"
+    ></stream-article-block>
   </section>
 </template>
 
@@ -11,59 +12,31 @@ export default {
   components: {
     'stream-article-block': Block,
   },
+  props:{
+    detailList:{required:true}
+  },
   data() {
     return {
-      detailList: [],
+      listSmall:[]
     }
   },
   methods:{
-    getDetailListDetail(){
-      let s=[];
-      this.listSmall.forEach(article => {
-        s.push(article);
-      })
-      s.forEach(article=>{
-        article.content='xxxx';
-      })
-      this.detailList=this.detailList.concat(s);
-      this.detailList.forEach(article=>{
-        console.log(article)
-        this.$ajax.get(this,'articles/content',{urlname:article.urlname}).then(data=>{
-          article.content=data.content;
-          this.detailList=this.detailList.concat();// stimulate view refresh
-          return data
-        })
-      })
-    },
   },
   mounted() {
-    if(this.hasGetList){
-      this.getDetailListDetail();
-    }
+    // for (let i = 0; i < 2; i++) {
+    //   if (this.articleList[i]) {
+    //     this.listSmall.push(this.articleList[i])
+    //   }
+    // }
+    // this.listSmall.forEach(article => {
+    //   console.log(article.urlname)
+    //   this.$ajax.get(this,this.$ajax.apis.articleContent,{urlname:article.urlname})
+    //   .then(data=>{
+    //     console.log('get article detail :' + data);
+    //     article.content=data;
+    //   }).catch(this.$ajax.handleErr(this))
+    // });
   },
-  watch: {
-    hasGetList: function (b) {
-      if(b){
-        console.log('has get new list');
-        this.getDetailListDetail();
-      }
-    }
-  },
-
-  computed: {
-    hasGetList() {
-      return this.$store.state.articles.hasArticleListLoaded
-    },
-    listSmall() {
-      let s = [];
-      for (let i = 0; i < 3; i++) {
-        if (this.$store.state.articles.articleList[i]) {
-          s.push(this.$store.state.articles.articleList[i])
-        }
-      }
-      return s;
-    }
-  }
 }
 </script>
 

@@ -46,5 +46,6 @@ export function handleErr(env) {
 }
 
 export const apis = {
-  articleList:'articles'
+  articleList: 'articles',
+  articleContent:'articles/content'
 }
