@@ -34,15 +34,18 @@ export default {
         let listSmall=[];
         for (let i = 0; i < 2; i++) {
           if (this.$store.state.articles.articleList[i]) {
-            listSmall.push(this.$store.state.articles.articleList[i])
+            let temp=this.$store.state.articles.articleList[i];
+            temp.content='loading.....';
+            listSmall.push(temp)
           }
         }
         listSmall.forEach(article => {
           console.log(article.urlname)
           this.$ajax.get(this,this.$ajax.apis.articleContent,{urlname:article.urlname})
           .then(data=>{
-            console.log('get article detail :' + data);
+            console.info('get article detail :' , data);
             article.content=data.content;
+            // this.$store.commit('updateContent',{urlname:article.urlname,content:data.content})
           }).catch(this.$ajax.handleErr(this))
         });
       this.$store.state.articles.detailList=listSmall

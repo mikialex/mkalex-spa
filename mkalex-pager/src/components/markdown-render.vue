@@ -1,5 +1,11 @@
 <template>
-  <section v-html="parsedContent">
+  <section >
+    <div v-html="parsedContent">
+      
+    </div>
+    <div>
+      {{content}}
+    </div>
   </section>
 </template>
 
@@ -8,7 +14,7 @@ import {markdown} from 'markdown';
 export default {
   props:{
     content:{
-      default:'default markdown content',
+      default:'default markdown content', 
     },
     renderType:{
       default:'normal'//

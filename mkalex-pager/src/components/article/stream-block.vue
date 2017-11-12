@@ -1,6 +1,6 @@
 <template>
   <div class="stream-block">
-    <stream-block-label></stream-block-label>
+    <stream-block-label :articleInfo="articleInfo"></stream-block-label>
     <div class="stream-block-text">
       <div class="stream-block-title">
         <h2>{{articleInfo.title}}</h2>
@@ -8,9 +8,9 @@
       </div>
       <div class="stream-block-content">
         <markdown-render :content="articleInfo.content"></markdown-render>
-        <div>
+        <!-- <div>
           <span>阅读全文</span>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -28,7 +28,7 @@ export default {
   components: {
     'stream-block-label': label,
     'markdown-render':markdown
-  }
+  },
 }
 </script>
 

@@ -3,7 +3,7 @@
     <div class="title-section">
       <div class="enter-wrap" @click="gotoReader">
         <span class="main-t">{{articleInfo.title}}</span>
-        <h3>{{articleInfo.subTitle}}</h3>
+        <h3>{{articleInfo.sub_title}}</h3>
       </div>
       <archive-info></archive-info>
     </div>

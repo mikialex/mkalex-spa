@@ -1,6 +1,6 @@
 <template>
   <section class="stream-container">
-    <stream-article-block v-for="article in this.detailList" :key="article.urlname" 
+    <stream-article-block v-for="article in detailList" :key="article.urlname" 
     :articleInfo="article"
     ></stream-article-block>
   </section>
@@ -13,30 +13,19 @@ export default {
     'stream-article-block': Block,
   },
   props:{
-    detailList:{required:true}
+    // detailList:{required:true}
   },
   data() {
     return {
-      listSmall:[]
+      // detailList:[]
     }
   },
-  methods:{
-  },
-  mounted() {
-    // for (let i = 0; i < 2; i++) {
-    //   if (this.articleList[i]) {
-    //     this.listSmall.push(this.articleList[i])
-    //   }
-    // }
-    // this.listSmall.forEach(article => {
-    //   console.log(article.urlname)
-    //   this.$ajax.get(this,this.$ajax.apis.articleContent,{urlname:article.urlname})
-    //   .then(data=>{
-    //     console.log('get article detail :' + data);
-    //     article.content=data;
-    //   }).catch(this.$ajax.handleErr(this))
-    // });
-  },
+  computed:{
+    detailList(){
+      console.log('update')
+      return this.$store.state.articles.detailList;
+    }
+  }
 }
 </script>
 
