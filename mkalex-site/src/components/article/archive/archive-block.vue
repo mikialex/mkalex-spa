@@ -23,7 +23,7 @@ export default {
   },
   methods:{
     gotoReader(){
-      this.$router.push({name:'reader',params:{type:'article',u_name:this.articleInfo.u_name}})
+      this.$router.push({name:'reader',params:{type:'article',u_name:this.articleInfo.urlname}})
     },
   }
 }
