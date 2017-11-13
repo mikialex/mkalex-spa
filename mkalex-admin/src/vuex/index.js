@@ -10,6 +10,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     goingAjax: 0, //
+    token:'',
   },
   mutations: {
     add_GoingAjax(state) { // this.$store.commit('add_GoingAjax')
@@ -18,6 +19,9 @@ export default new Vuex.Store({
     minus_GoingAjax(state) {
       state.goingAjax--;
     },
+    setClientToken(state, { token }) {
+      state.token = token;
+    }
   }
   // actions,
   //   getters,

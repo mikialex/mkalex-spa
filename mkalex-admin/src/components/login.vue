@@ -2,8 +2,8 @@
   <div class="hello">
     <input type="text" v-model="username" placeholder="name">
     <input type="password" v-model="password"  placeholder="password">
-    <span >invalid</span>
     <button @click="login" v-if="canLogin">login</button>
+    <span>{{errorMessage}}</span>
   </div>
 </template>
 
@@ -12,8 +12,9 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      username:'',
-      password:'',
+      username:'mkalex',
+      password:'mkmkmkmk',
+      errorMessage:'',
     }
   },
   computed:{
@@ -21,12 +22,17 @@ export default {
       return this.username!==''&&this.password!==''
     }
   },
-  method:{
+  methods:{
     login(){
-      this.$ajax.post(this,this.$ajax.apis.login)
+      this.$ajax.post(this,this.$ajax.apis.login,{username:this.username,password:this.password})
       .then(data=>{
         console.log(data);
-        
+        if(data.result==='success'){
+          this.$store.commit('setClientToken',{token:data.token})
+          this.$router.push({name:'home'})
+        }else{
+          this.errorMessage=data.message;
+        }
       })
       .catch(this.$ajax.handleErr(this))
     }

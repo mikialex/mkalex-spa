@@ -45,13 +45,15 @@ export function post(env, url, payload) {
 
 export function handleErr(env) {
   return (function (err) {
-    env.$store.commit('setErrMessage', { message: 'network request error'+err })
+    console.error(err)
+    // env.$store.commit('setErrMessage', { message: 'network request error'+err })
   }).bind(env)
 }
 
 export const apis = {
   articleList: 'articles',
   articleContent: 'articles/content',
+  articleDetial:'articles/article',
   
   login:'login'
 }
