@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import LoginPage from '@/components/login'
 import HomePage from '@/components/home'
-import EditorPage from '@/components/editor'
+import EditorPage from '@/components/editor/editor'
 
 Vue.use(Router)
 

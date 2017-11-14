@@ -1,7 +1,11 @@
 <template>
-  <div class="hello">
-    <input type="text" v-model="username" placeholder="name">
-    <input type="password" v-model="password"  placeholder="password">
+  <div class="login">
+    <div class="up-part">
+      <input type="text" v-model="username" spellcheck="false" >
+    </div>
+    <div class="down-part">
+      <input type="password" v-model="password" >
+    </div>
     <button @click="login" v-if="canLogin">login</button>
     <span>{{errorMessage}}</span>
   </div>
@@ -40,23 +44,50 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1, h2 {
-  font-weight: normal;
+<style lang="scss" scoped>
+
+.up-part{
+  width:100vw;
+  height: 50vh;
+  background: #fff;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  >input{
+    margin-bottom:10px;
+    background: #000;
+    color:#fff;
+    &:hover{
+      // transform: translateY(-10px);
+    }
+  }
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
+.down-part{
+  width:100vw;
+  height: 50vh;
+  background-image: linear-gradient(0deg, rgba(0,0,0,0.00) 0%, #000000 100%);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  >input{
+    margin-top:10px;
+    &:hover{
+      // transform: translateY(10px);
+    }
+  }
 }
 
-li {
-  display: inline-block;
-  margin: 0 10px;
+input{
+  border:0px;
+  height: 40px;
+  width:240px;
+  padding: 10px;
+  box-sizing: border-box;
+  outline: none;
+  font-size:24px;
+  text-align: center;
+  transition: 1s;
 }
 
-a {
-  color: #42b983;
-}
 </style>
