@@ -19,7 +19,7 @@ export default new Router({
       component: HomePage,
     },
     {
-      path: '/editor/:u_name',
+      path: '/editor/:type/:u_name',
       name: 'editor',
       component: EditorPage,
     },

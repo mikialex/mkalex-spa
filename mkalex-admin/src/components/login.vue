@@ -1,13 +1,12 @@
 <template>
-  <div class="login">
+  <div class="login" :class="{'login-error':showError}"> 
     <div class="up-part">
       <input type="text" v-model="username" spellcheck="false" >
     </div>
     <div class="down-part">
       <input type="password" v-model="password" >
+      <div class="login-button" @click="login" v-if="canLogin"></div>
     </div>
-    <button @click="login" v-if="canLogin">login</button>
-    <span>{{errorMessage}}</span>
   </div>
 </template>
 
@@ -16,14 +15,17 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      username:'mkalex',
-      password:'mkmkmkmk',
+      username:'',
+      password:'',
       errorMessage:'',
     }
   },
   computed:{
     canLogin(){
       return this.username!==''&&this.password!==''
+    },
+    showError(){
+      return this.errorMessage!==''
     }
   },
   methods:{
@@ -36,6 +38,9 @@ export default {
           this.$router.push({name:'home'})
         }else{
           this.errorMessage=data.message;
+          setTimeout(()=>{
+          this.errorMessage='';
+          },1000)
         }
       })
       .catch(this.$ajax.handleErr(this))
@@ -45,6 +50,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.login{
+  background: #fff;
+  transition: 1s;
+}
+
+.login-error{
+  background: #f00;
+}
 
 .up-part{
   width:100vw;
@@ -68,13 +82,27 @@ export default {
   height: 50vh;
   background-image: linear-gradient(0deg, rgba(0,0,0,0.00) 0%, #000000 100%);
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
+  align-items: center;
+  flex-direction: column ;
+  // justify-content: space-between;
   >input{
     margin-top:10px;
     &:hover{
       // transform: translateY(10px);
     }
+  }
+}
+
+.login-button{
+  width:240px;
+  height: 40px;
+  /* Rectangle 13: */
+background-image: linear-gradient(0deg, rgba(104,104,104,0.00) 0%, rgba(103,103,103,0.08) 38%, rgba(102,102,102,0.45) 73%, #646464 100%);
+  margin-top:10px;
+  transition: 0.2s;
+  cursor: pointer;
+  &:hover{
+    height: 80px;    
   }
 }
 

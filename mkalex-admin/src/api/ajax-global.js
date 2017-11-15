@@ -47,6 +47,21 @@ export function patch(env, url, payload) {
   })
 }
 
+export function del(env, url, payload) {
+  env.$store.commit('add_GoingAjax')
+  return axios.delete(baseURL + url, {params: payload})
+  //return ajax('get', baseURL + url, payload)
+  // .catch(err => {
+  //   console.log(err)
+  //   throw err
+  // })
+  .then(data => {
+    env.$store.commit('minus_GoingAjax')
+    console.info('get original data',data)
+    return data.data
+  })
+}
+
 
 export function post(env, url, payload) {
   env.$store.commit('add_GoingAjax')

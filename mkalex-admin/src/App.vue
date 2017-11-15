@@ -1,16 +1,27 @@
 <template>
   <div id="app">
-    <router-view/>
+    <div :class="{'absolut-base':needBase}">
+      <router-view/>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'app'
+  name: 'app',
+  computed:{
+    needBase(){
+      if(this.$route.name === "login"){
+        return false
+      }else{
+        return true
+      }
+    }
+  }
 }
 </script>
 
-<style>
+<style lang="scss">
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -18,6 +29,12 @@ export default {
   /* text-align: center; */
   /* color: #2c3e50; */
   /* margin-top: 60px; */
+}
+
+.absolut-base{
+  position: relative;
+  width: 80vw;
+  margin: auto;
 }
 
 body{
