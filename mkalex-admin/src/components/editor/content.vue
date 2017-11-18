@@ -1,5 +1,5 @@
 <template>
-  <div  id="md-content" spellcheck="false" contenteditable="true" @input="updateData">{{content}}</div>
+  <div  id="md-content" spellcheck="false" contenteditable="true" @input="updateData"></div>
 </template>
 
 <script>
@@ -11,6 +11,27 @@ export default {
   },
   props:{
     content:{required:true}
+  },
+  watch:{
+    content:function (newContent){
+
+      let editor=document.getElementById('md-content')
+      let offset=0;
+      try{
+        offset=window.getSelection().getRangeAt(0).startOffset;
+      }catch(e){}
+      editor.innerText=newContent;
+
+
+      let range=document.createRange();
+      let maxLength=editor.innerText.length;
+      range.setStart(editor.firstChild,Math.min(offset,maxLength));
+
+      let sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+
+    } 
   },
   methods:{
     updateData(){

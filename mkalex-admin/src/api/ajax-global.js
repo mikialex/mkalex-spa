@@ -42,7 +42,8 @@ export function patch(env, url, payload) {
   // })
   .then(data => {
     env.$store.commit('minus_GoingAjax')
-    console.info('get original data',data)
+    console.info('get original data', data);
+    if(data.data.result)
     return data.data
   })
 }
