@@ -11,6 +11,7 @@
         </div>
         <!-- <span>{{urlname}}</span> -->
         <input type="text" spellcheck="false" v-model="urlname" placeholder="id required">
+
       </div>
 
       <div class="title-part">
@@ -20,9 +21,20 @@
       <span v-if="isSubTitleChange">副标题已修改！</span>
       </div>
 
+        <span>创建时间</span><span v-if="isCreateTimeChange">已修改</span>
+        <input type="date" v-model="createTime">
+        <hr>
+
+         <!-- <span>更新时间</span>
+        <input type="date"> -->
+
+
       <!-- <title-part :title="title" :subTitle="subTitle" ></title-part> -->
       <span v-if="isContentChange">内容已修改！</span>
       <content-editor :content="content" @contentUpdate="contentUpdate"></content-editor>
+
+      <tag-editor :urlname="this.$route.params.u_name" v-if="!isNew"></tag-editor>
+      
 
 
       <div class="operation-part" >
@@ -39,12 +51,14 @@
 <script>
 import contentEditor from "./content.vue";
 import title from "./title.vue";
+import tagEditor from "./tag-editor.vue";
 
 export default {
   name: "editor",
   components: {
     "content-editor": contentEditor,
-    "title-part":title,
+    'tag-editor':tagEditor,
+    "title-part": title
   },
   data: function() {
     return {
@@ -53,65 +67,52 @@ export default {
       subTitle: "loading",
       urlname: "loading",
       content: "loading",
+      createTime:"",
 
+      tags:[],
 
       old_urlname: "",
       old_title: "",
       old_subTitle: "",
       old_urlname: "",
       old_content: "",
+      old_createTime:'',
     };
   },
   computed: {
     isNew() {
       return this.$route.params.type === "new";
     },
-    isTitleChange(){
+    isTitleChange() {
       return this.old_title !== this.title;
     },
-    isSubTitleChange(){
+    isSubTitleChange() {
       return this.old_subTitle !== this.subTitle;
     },
-    isContentChange(){
+    isContentChange() {
       return this.content !== this.old_content;
     },
-    canPost(){
-      return this.urlname!=='';
+    isCreateTimeChange(){
+      return this.createTime!==this.old_createTime
     },
-    canUpdate(){
-      if(this.isTitleChange||this.isSubTitleChange||this.isContentChange){
+    canPost() {
+      return this.urlname !== "";
+    },
+    canUpdate() {
+      if (this.isTitleChange || this.isSubTitleChange || this.isContentChange|| this.isCreateTimeChange) {
         return true;
-      }else{return false}
+      } else {
+        return false;
+      }
     }
   },
   mounted() {
-    if (this.$route.params.type === "update") {
-      this.$ajax
-        .get(this, this.$ajax.apis.articleDetial, {
-          urlname: this.$route.params.u_name
-        })
-        .then(data => {
-          console.log(data);
-          this.urlname = data.urlname;
-          this.title = data.title;
-          this.subTitle = data.sub_title;
-          this.content = data.content;
-          this.old_urlname = data.urlname;
-          this.old_title = data.title;
-          this.old_subTitle = data.sub_title;
-          this.old_content = data.content;
-        });
-    } else if (this.$route.params.type === "new") {
-      this.urlname = "";
-      this.title = "";
-      this.subTitle = "";
-      this.content = "";
-    }
+    this.load();
   },
   methods: {
     gatherValue() {
       return {
-        token:this.$store.state.token,
+        token: this.$store.state.token,
         origin_url: this.$route.params.u_name,
         urlname: this.urlname,
         title: this.title,
@@ -119,23 +120,49 @@ export default {
         content: this.content,
         visit: 100,
         has_cover: false,
-        create_time: "2017-1-2",
+        create_time: this.createTime,
         is_recommended: false
       };
+    },
+
+    load() {
+      if (this.$route.params.type === "update") {
+        this.$ajax
+          .get(this, this.$ajax.apis.articleDetial, {
+            urlname: this.$route.params.u_name
+          })
+          .then(data => {
+            console.log(data);
+            this.urlname = data.urlname;
+            this.title = data.title;
+            this.subTitle = data.sub_title;
+            this.content = data.content;
+            this.createTime = data.publish_time.substring(0,10);
+            this.old_urlname = data.urlname;
+            this.old_title = data.title;
+            this.old_subTitle = data.sub_title;
+            this.old_content = data.content;
+            this.old_createTime= this.createTime
+
+            this.tags=data.tags;
+          });
+      } else if (this.$route.params.type === "new") {
+        this.urlname = "";
+        this.title = "";
+        this.subTitle = "";
+        this.content = "";
+      }
     },
 
     updateData() {
       this.$ajax
         .patch(this, this.$ajax.apis.articleDetial, this.gatherValue())
         .then(data => {
-          if(data.result==='success'){
-            this.old_urlname=this.urlname;
-            this.old_title=this.title;
-            this.old_subTitle=this.subTitle;
-            this.old_content=this.content;
+          if (data.result === "success") {
+            this.load();
           }
         })
-      .catch(this.$ajax.handleErr(this))
+        .catch(this.$ajax.handleErr(this));
     },
 
     contentUpdate(content) {
@@ -146,37 +173,42 @@ export default {
       this.$ajax
         .del(this, this.$ajax.apis.articleDetial, {
           urlname: this.$route.params.u_name,
-          token:this.$store.state.token,
+          token: this.$store.state.token
         })
         .then(data => {
           console.log(data);
-          if(data.result==='success'){
-            this.$router.push({name:'home'})
+          if (data.result === "success") {
+            this.$router.push({ name: "home" });
           }
         })
-      .catch(this.$ajax.handleErr(this))
+        .catch(this.$ajax.handleErr(this));
     },
 
     newData() {
-      let oldurl=this.urlname
+      let oldurl = this.urlname;
       this.$ajax
         .post(this, this.$ajax.apis.articleDetial, this.gatherValue())
         .then(data => {
           console.log(data);
-          if(data.result==='success'){
-            console.log('goto')
-            this.$router.push({name:'editor',params:{u_name:oldurl,type:'update'}})
+          if (data.result === "success") {
+            console.log("goto");
+            this.$router.push({
+              name: "editor",
+              params: { u_name: oldurl, type: "update" }
+            });
+             this.load();
           }
         })
-      .catch(this.$ajax.handleErr(this))
+        .catch(this.$ajax.handleErr(this));
     },
     drop() {
       this.$router.push({ name: "home" });
     },
-    dropChange(){
-      this.title=this.old_title;
-      this.subTitle=this.old_subTitle;
-      this.content=this.old_content;
+    dropChange() {
+      this.title = this.old_title;
+      this.subTitle = this.old_subTitle;
+      this.content = this.old_content;
+      this.createTime = this.old_createTime;
     }
   }
 };
@@ -250,26 +282,22 @@ export default {
   }
 }
 
-.form-changed{
+.form-changed {
   // background: rgba(255,150,100,0.1);
-  transition:1s ;
-  border-right:10px solid #000 !important;
+  transition: 1s;
+  border-right: 10px solid #000 !important;
 }
-
-
 
 .bounce-enter-active {
-  transition: all 0.3s ease-in-out
+  transition: all 0.3s ease-in-out;
 }
 .bounce-leave-active {
-  transition: all 0.3s ease-in-out
+  transition: all 0.3s ease-in-out;
 }
-.bounce-enter, .bounce-leave-to
-/* .slide-fade-leave-active for below version 2.1.8 */ {
+.bounce-enter,
+.bounce-leave-to {
   transform: translateX(200px);
   opacity: 0;
 }
-
-
 </style>
 

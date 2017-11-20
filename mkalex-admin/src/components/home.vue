@@ -23,10 +23,11 @@
       <div class="tags">
         <h3>TAGS GROUP</h3>
         <div class="tags-container">
-          <span>sdf</span>
-          <span>sdddf</span>
-          <span>sd2123f</span>
+          <span v-for="tag in tagList" :key="tag.tag_name">{{tag.tag_name}}
+            <strong @click="deleteTag(tag.tag_name)">X</strong> 
+          </span>
         </div>
+        <input type="text" v-model="newTagName"> <button v-if="canAddNew" @click="addNewtag">add</button>
       </div>
     </div>
   </transition>
@@ -37,7 +38,9 @@ export default {
   name: "home",
   data: function() {
     return {
-      list: []
+      list: [],
+      tagList:[],
+      newTagName:'',
     };
   },
   mounted() {
@@ -45,11 +48,55 @@ export default {
       console.info("get article list :", data);
       this.list = data;
     });
+
+    this.loadTagList();
+  },
+  computed:{
+    canAddNew(){
+      let find=false;
+      this.tagList.forEach(tag => {
+        if(tag.tag_name===this.newTagName){
+          find=true;
+        }
+      });
+      return this.newTagName!==''&&!find;
+    }
   },
   methods:{
     logout(){
       this.$router.push({name:'login'})
+      this.$store.commit('setClientToken',{token:''})
+    },
+    loadTagList(){
+      this.$ajax.get(this, this.$ajax.apis.tagList).then(data => {
+        console.info("get tags list :", data);
+        this.tagList = data;
+      });
+    },
+    addNewtag(){
+      this.$ajax
+        .post(this, this.$ajax.apis.tag, {token:this.$store.state.token,tagName:this.newTagName})
+        .then(data => {
+          console.log(data);
+          if (data.result === "success") {
+            this.newTagName='';
+            this.loadTagList();
+          }
+        })
+        .catch(this.$ajax.handleErr(this));
+    },
+    deleteTag(tagName){
+      this.$ajax
+        .del(this, this.$ajax.apis.tag, {token:this.$store.state.token,tagName:tagName})
+        .then(data => {
+          console.log(data);
+          if (data.result === "success") {
+            this.loadTagList()
+          }
+        })
+        .catch(this.$ajax.handleErr(this));
     }
+
   }
 };
 </script>
@@ -92,6 +139,11 @@ export default {
       background: rgba(0,0,0,0.1);
       border-radius:10px;
       padding: 5px;
+      margin:5px;
+      >strong{
+        color:#f45;
+        cursor: pointer;
+      }
     }
   }
 }

@@ -98,7 +98,11 @@ export function handleErr(env) {
 export const apis = {
   articleList: 'articles',
   articleContent: 'articles/content',
-  articleDetial:'articles/article',
+  articleTagList:'articles/tags',
+  articleTag:'articles/tag',
+  articleDetial: 'articles/article',
+  
+  tagList:'tags',
   
   login:'login'
 }
