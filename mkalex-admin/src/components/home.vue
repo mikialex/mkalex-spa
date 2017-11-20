@@ -20,6 +20,14 @@
           <h4>ADD NEW</h4>
         </router-link>
       </ul>
+      <div class="tags">
+        <h3>TAGS GROUP</h3>
+        <div class="tags-container">
+          <span>sdf</span>
+          <span>sdddf</span>
+          <span>sd2123f</span>
+        </div>
+      </div>
     </div>
   </transition>
 </template>
@@ -73,6 +81,19 @@ export default {
 
 .article-ui{
   padding:30px;
+}
+
+.tags{
+  padding:30px;
+  >.tags-container{
+    border: 1px dotted rgba(0,0,0,0.1);
+    padding:10px;
+    >span{
+      background: rgba(0,0,0,0.1);
+      border-radius:10px;
+      padding: 5px;
+    }
+  }
 }
 
 .add-article-li{

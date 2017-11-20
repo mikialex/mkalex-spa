@@ -43,8 +43,12 @@ export function patch(env, url, payload) {
   .then(data => {
     env.$store.commit('minus_GoingAjax')
     console.info('get original data', data);
-    if(data.data.result)
-    return data.data
+    if (data.data.result === 'success') {
+      return data.data
+    } else if(data.data.result === 'authfail') {
+      env.$router.push({name:'login'})
+      throw 'authfail'
+    }
   })
 }
 
@@ -58,8 +62,13 @@ export function del(env, url, payload) {
   // })
   .then(data => {
     env.$store.commit('minus_GoingAjax')
-    console.info('get original data',data)
-    return data.data
+    console.info('get original data', data)
+    if (data.data.result === 'success') {
+      return data.data
+    } else if(data.data.result === 'authfail') {
+      env.$router.push({name:'login'})
+      throw 'authfail'
+    }
   })
 }
 
@@ -69,7 +78,12 @@ export function post(env, url, payload) {
   return axios.post(baseURL + url, payload)
     .then(data => {
       env.$store.commit('minus_GoingAjax')
-      return data.data
+      if (data.data.result === 'success') {
+        return data.data
+      } else if(data.data.result === 'authfail') {
+        env.$router.push({name:'login'})
+        throw 'authfail'
+      }
     })
 }
 

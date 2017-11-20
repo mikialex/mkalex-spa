@@ -15,11 +15,13 @@
 
       <div class="title-part">
         <input type="text" class="title-editor" :class="{'form-changed':isTitleChange}" spellcheck="false" placeholder="请输入标题"  v-model="title">
+        <span v-if="isTitleChange">标题已修改！</span>
         <input type="text" class="sub-title-editor" :class="{'form-changed':isSubTitleChange}"  spellcheck="false"  placeholder="请输入副标题"    v-model="subTitle">
+      <span v-if="isSubTitleChange">副标题已修改！</span>
       </div>
 
       <!-- <title-part :title="title" :subTitle="subTitle" ></title-part> -->
-
+      <span v-if="isContentChange">内容已修改！</span>
       <content-editor :content="content" @contentUpdate="contentUpdate"></content-editor>
 
 
@@ -27,7 +29,7 @@
         <button @click="dropChange" class="click-able" v-if="!isNew&&canUpdate" style="color:#f00">DROP CHANGE</button>
         <button @click="updateData" class="click-able" v-if="!isNew&&canUpdate">UPDATE</button>
         <button @click="deleteData" class="click-able" v-if="!isNew" style="color:#f00">DELETE</button>
-        <button @click="newData" class="click-able" v-if="isNew" >POST</button>
+        <button @click="newData" class="click-able" v-if="isNew&&canPost" >POST</button>
         <button @click="drop" class="click-able" v-if="isNew" style="color:#f00">DROP</button>
       </div>
     </div>
@@ -53,11 +55,11 @@ export default {
       content: "loading",
 
 
-      old_urlname: "loading",
-      old_title: "loading",
-      old_subTitle: "loading",
-      old_urlname: "loading",
-      old_content: "loading",
+      old_urlname: "",
+      old_title: "",
+      old_subTitle: "",
+      old_urlname: "",
+      old_content: "",
     };
   },
   computed: {
@@ -72,6 +74,9 @@ export default {
     },
     isContentChange(){
       return this.content !== this.old_content;
+    },
+    canPost(){
+      return this.urlname!=='';
     },
     canUpdate(){
       if(this.isTitleChange||this.isSubTitleChange||this.isContentChange){
@@ -106,6 +111,7 @@ export default {
   methods: {
     gatherValue() {
       return {
+        token:this.$store.state.token,
         origin_url: this.$route.params.u_name,
         urlname: this.urlname,
         title: this.title,
@@ -128,7 +134,8 @@ export default {
             this.old_subTitle=this.subTitle;
             this.old_content=this.content;
           }
-        });
+        })
+      .catch(this.$ajax.handleErr(this))
     },
 
     contentUpdate(content) {
@@ -138,27 +145,30 @@ export default {
     deleteData() {
       this.$ajax
         .del(this, this.$ajax.apis.articleDetial, {
-          urlname: this.$route.params.u_name
+          urlname: this.$route.params.u_name,
+          token:this.$store.state.token,
         })
         .then(data => {
           console.log(data);
           if(data.result==='success'){
             this.$router.push({name:'home'})
           }
-        });
+        })
+      .catch(this.$ajax.handleErr(this))
     },
 
     newData() {
-      console.log(this.gatherValue())
       let oldurl=this.urlname
       this.$ajax
         .post(this, this.$ajax.apis.articleDetial, this.gatherValue())
         .then(data => {
+          console.log(data);
           if(data.result==='success'){
             console.log('goto')
             this.$router.push({name:'editor',params:{u_name:oldurl,type:'update'}})
           }
-        });
+        })
+      .catch(this.$ajax.handleErr(this))
     },
     drop() {
       this.$router.push({ name: "home" });

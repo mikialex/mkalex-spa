@@ -1,5 +1,6 @@
 <template>
-  <div  id="md-content" spellcheck="false" contenteditable="true" @input="updateData"></div>
+  <!-- <div  id="md-content" spellcheck="false" contenteditable="true" @input="updateData"></div> -->
+  <textarea id="md-content" spellcheck="false" v-model="inputValue"></textarea>
 </template>
 
 <script>
@@ -7,6 +8,7 @@ export default {
   name: 'content-editor',
   data:function(){
     return {
+      inputValue:''
     }
   },
   props:{
@@ -15,23 +17,27 @@ export default {
   watch:{
     content:function (newContent){
 
-      let editor=document.getElementById('md-content')
-      let offset=0;
-      try{
-        offset=window.getSelection().getRangeAt(0).startOffset;
-      }catch(e){}
-      editor.innerText=newContent;
+      // let editor=document.getElementById('md-content')
+      // let offset=0;
+      // try{
+      //   offset=window.getSelection().getRangeAt(0).startOffset;
+      // }catch(e){}
+      // editor.innerText=newContent;
 
 
-      let range=document.createRange();
-      let maxLength=editor.innerText.length;
-      range.setStart(editor.firstChild,Math.min(offset,maxLength));
+      // let range=document.createRange();
+      // let maxLength=editor.innerText.length;
+      // range.setStart(editor.firstChild,Math.min(offset,maxLength));
 
-      let sel = window.getSelection();
-      sel.removeAllRanges();
-      sel.addRange(range);
+      // let sel = window.getSelection();
+      // sel.removeAllRanges();
+      // sel.addRange(range);
+      this.inputValue=newContent
 
-    } 
+    } ,
+    inputValue:function(newinput){
+      this.$emit('contentUpdate',this.inputValue);
+    }
   },
   methods:{
     updateData(){

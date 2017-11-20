@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import { baseURL } from '@/api/config'
+import axios from 'axios'
 export default {
   name: 'HelloWorld',
   data () {
@@ -30,19 +32,23 @@ export default {
   },
   methods:{
     login(){
-      this.$ajax.post(this,this.$ajax.apis.login,{username:this.username,password:this.password})
-      .then(data=>{
-        console.log(data);
-        if(data.result==='success'){
-          this.$store.commit('setClientToken',{token:data.token})
-          this.$router.push({name:'home'})
-        }else{
-          this.errorMessage=data.message;
-          setTimeout(()=>{
-          this.errorMessage='';
-          },1000)
-        }
-      })
+
+      this.$store.commit('add_GoingAjax')
+      axios.post(baseURL + this.$ajax.apis.login, {username:this.username,password:this.password})
+          .then(d => {
+            let data=d.data;
+            this.$store.commit('minus_GoingAjax')
+             console.log(data);
+            if(data.result==='success'){
+              this.$store.commit('setClientToken',{token:data.token})
+              this.$router.push({name:'home'})
+            }else{
+              this.errorMessage=data.message;
+              setTimeout(()=>{
+              this.errorMessage='';
+              },1000)
+            }
+          })
       .catch(this.$ajax.handleErr(this))
     }
   }

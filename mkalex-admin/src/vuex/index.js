@@ -21,6 +21,7 @@ export default new Vuex.Store({
     },
     setClientToken(state, { token }) {
       state.token = token;
+      
     }
   }
   // actions,
