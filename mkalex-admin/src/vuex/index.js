@@ -21,7 +21,11 @@ export default new Vuex.Store({
     },
     setClientToken(state, { token }) {
       state.token = token;
-      
+      localStorage.setItem('token', token);
+    },
+    clearToken(state) {
+      state.token = '';
+      localStorage.clear()
     }
   }
   // actions,

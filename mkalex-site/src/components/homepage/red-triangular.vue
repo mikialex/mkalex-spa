@@ -25,7 +25,7 @@
     <container-mid>
       <para-scroll :velocityFactor="0.15">
         <h1>PURSUE THE ‘UTMOST
-          <br> FUSION OF ART & TECH</h1>
+          <br> FUSION OF ART & MAGIC</h1>
       </para-scroll>
     </container-mid>
   

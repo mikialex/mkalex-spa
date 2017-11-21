@@ -32,20 +32,78 @@ export function get(env, url, payload) {
   })
 }
 
+export function patch(env, url, payload) {
+  env.$store.commit('add_GoingAjax')
+  return axios.patch(baseURL + url, {params: payload})
+  //return ajax('get', baseURL + url, payload)
+  // .catch(err => {
+  //   console.log(err)
+  //   throw err
+  // })
+  .then(data => {
+    env.$store.commit('minus_GoingAjax')
+    console.info('get original data', data);
+    if (data.data.result === 'success') {
+      return data.data
+    } else if(data.data.result === 'authfail') {
+      env.$router.push({name:'login'})
+      throw 'authfail'
+    }
+  })
+}
+
+export function del(env, url, payload) {
+  env.$store.commit('add_GoingAjax')
+  return axios.delete(baseURL + url, {params: payload})
+  //return ajax('get', baseURL + url, payload)
+  // .catch(err => {
+  //   console.log(err)
+  //   throw err
+  // })
+  .then(data => {
+    env.$store.commit('minus_GoingAjax')
+    console.info('get original data', data)
+    if (data.data.result === 'success') {
+      return data.data
+    } else if(data.data.result === 'authfail') {
+      env.$router.push({name:'login'})
+      throw 'authfail'
+    }
+  })
+}
+
 
 export function post(env, url, payload) {
   env.$store.commit('add_GoingAjax')
-  return ajax('post', url, payload)
+  return axios.post(baseURL + url, payload)
+    .then(data => {
+      env.$store.commit('minus_GoingAjax')
+      if (data.data.result === 'success') {
+        return data.data
+      } else if(data.data.result === 'authfail') {
+        env.$router.push({name:'login'})
+        throw 'authfail'
+      }
+    })
 }
 
 
 export function handleErr(env) {
   return (function (err) {
-    env.$store.commit('setErrMessage', { message: 'network request error'+err })
+    console.error(err)
+    // env.$store.commit('setErrMessage', { message: 'network request error'+err })
   }).bind(env)
 }
 
 export const apis = {
   articleList: 'articles',
-  articleContent:'articles/content'
+  articleContent: 'articles/content',
+  articleTagList:'articles/tags',
+  articleTag:'articles/tag',
+  articleDetial: 'articles/article',
+  
+  tagList: 'tags',
+  tag:'tags/tag',
+  
+  login:'login'
 }

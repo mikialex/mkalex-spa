@@ -4,6 +4,7 @@ export const state = {
 
     errorMessage:'',
 
-    topNavOpen:false,
+    topNavOpen: false,
+    portfolioList:[],
 
 };

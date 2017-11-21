@@ -1,9 +1,7 @@
 <template>
   <section>
-    <portfolio-cover></portfolio-cover>
-    <portfolio-cover></portfolio-cover>
-    <portfolio-cover></portfolio-cover>
-    <portfolio-cover></portfolio-cover>
+    <portfolio-cover v-for="p in portfolioList" :key="p.urlname"
+    :portfolioInfo="p"></portfolio-cover>
   </section>
 </template>
 
@@ -12,7 +10,8 @@ import block from './block'
 export default {
   components:{
     'portfolio-cover':block,
-  }
+  },
+  props:['portfolioList'],
 }
 </script>
 

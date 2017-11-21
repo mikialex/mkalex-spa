@@ -1,7 +1,7 @@
 <template>
   <section class="stream-block-label">
     <div class="stream-block-label-container">
-      <time-plate :dateTime="articleInfo.publish_time"></time-plate>
+      <time-plate :date="articleInfo.publish_time"></time-plate>
       <div>
         <span class="s-b-tag-label">TAGS</span>
         <div class="s-b-tags">

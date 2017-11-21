@@ -5,9 +5,10 @@
         <span class="main-t">{{articleInfo.title}}</span>
         <h3>{{articleInfo.sub_title}}</h3>
       </div>
-      <archive-info></archive-info>
+      <archive-info :articleInfo="articleInfo"></archive-info>
     </div>
-    <img src="../../../assets/defaultBlogCover.png" class="inv-7">
+    <img src="../../../assets/defaultBlogCover.png" class="inv-7" v-if="!articleInfo.has_cover">
+    <img src="" alt="" v-if="articleInfo.has_cover">
   </div>
 </template>
 

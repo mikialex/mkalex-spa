@@ -1,33 +1,19 @@
 <template>
   <div class="ar-info">
-    <i class="fa fa-calendar ar-info-cal"></i>
+    <i class="fa fa-calendar ar-info-cal"></i>{{articleInfo.publish_time}}  
     <div class="ar-info-pv">
-      <i class="fa fa-eye"></i>1235
+      <i class="fa fa-eye"></i>{{articleInfo.page_view}}
     </div>
     <div class="ar-info-tags">
-      <span>sdfasdf</span>
-      <span>sdfasdf</span>
-      <span>sdfasdf</span>
-
-      <span>sdfasdf</span>
-
-      <span>sdfasdf</span>
+      <span v-for="tag in articleInfo.tags" :key="tag">{{tag}}</span>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  // components:{
-  //   'time-plate':timePlate
-  // },
   props: {
-    title: {
-      default: 'Implementations of grid layout system imptions of grid layout system'
-    },
-    subTitle: {
-      default: 'Implementations of grid layout system Implementations of grid layout system Implementations of grid layout system'
-    }
+    articleInfo:{required:true},
   }
 }
 </script>
@@ -52,6 +38,7 @@ export default {
 }
 
 .ar-info-pv{
+  margin-left:10px;
   margin-right:10px;
 }
 

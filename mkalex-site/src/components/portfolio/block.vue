@@ -1,68 +1,74 @@
 <template>
   <div class="portfolio-block">
-     <img src="../../assets/defaultPortfolioCover.png">
+     <img src="../../assets/defaultPortfolioCover.png"  v-if="!portfolioInfo.has_cover">
+     <img src="" alt="" v-if="portfolioInfo.has_cover">
      <div class="description-constainer">
-       <span class="title">The design of mkalex V1 mkalex</span>
-       <span class="subTitle">The design o测试文字1 es of mklex</span>
+       <span class="title">{{portfolioInfo.title}}</span>
+       <span class="subTitle">{{portfolioInfo.sub_title}}</span>
         <div>
           <span> 
-            <i class="fa fa-eye"></i>1235
+            <i class="fa fa-eye"></i>{{portfolioInfo.page_view}}
             </span>
-          
-          <i class="fa fa-calendar"></i></div>
+          <span>
+            {{portfolioInfo.publish_time}}
+          <i class="fa fa-calendar"></i>
+          </span>
+          </div>
      </div>
   </div>
 </template>
 
 <script>
 export default {
-  
-}
+  props: {
+    portfolioInfo: { require: true }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
-@import '~globalSass';
+@import "~globalSass";
 
-.portfolio-block{
-  width:300px;
+.portfolio-block {
+  width: 300px;
   height: 310px;
   display: inline-block;
-  border:1px solid #f3f3f3;
+  border: 1px solid #f3f3f3;
   background: #fff;
-  margin:5px;
-  font-family: 'futura';
+  margin: 5px;
+  font-family: "futura";
 }
 
-img{
-  width:300px;
+img {
+  width: 300px;
   height: 200px;
-  box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.05);
+  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.05);
   // 0px 2px 1px 0px rbga(0,0,0,0.1);
 }
 
-.description-constainer{
+.description-constainer {
   padding: 10px;
-  padding-top:0px;
-  >div{
+  padding-top: 0px;
+  > div {
     display: flex;
     justify-content: space-between;
   }
 }
 
-.title{
+.title {
   display: block;
-  width:100%;
-  height:40px;
-  font-size:18px;
+  width: 100%;
+  height: 40px;
+  font-size: 18px;
+  margin-top: 10px;
 }
 
-.subTitle{
+.subTitle {
   display: block;
-  width:100%;
-  height:40px;
+  width: 100%;
+  height: 30px;
 
-  font-size:14px;
-  color:#888;
+  font-size: 14px;
+  color: #888;
 }
-
 </style>

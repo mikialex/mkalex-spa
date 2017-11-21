@@ -7,7 +7,7 @@
         <h3>{{articleInfo.subTitle}}</h3>
       </div>
       <div class="stream-block-content">
-        <markdown-render :content="articleInfo.content"></markdown-render>
+        <markdown-render :content="content"></markdown-render>
         <!-- <div>
           <span>阅读全文</span>
         </div> -->
@@ -24,6 +24,17 @@ export default {
     articleInfo:{
       required:true
     },
+  },
+  data:function(){
+    return {
+      content:'loading'
+    }
+  },
+  mounted(){
+      this.$ajax.get(this,this.$ajax.apis.articleContent,{urlname:this.articleInfo.urlname})
+      .then(data=>{
+        this.content=data.content;
+      }).catch(this.$ajax.handleErr(this))
   },
   components: {
     'stream-block-label': label,

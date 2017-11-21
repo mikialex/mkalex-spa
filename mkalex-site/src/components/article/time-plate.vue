@@ -1,13 +1,13 @@
 <template>
   <div class="time-plate">
     <div class="time-plate-month">
-      January
+      {{month}}
     </div>
     <div class="time-plate-day">
-      16
+      {{day}}
     </div>
     <div class="time-plate-year">
-      2017
+      {{year}}
     </div>
   </div>
 </template>
@@ -19,22 +19,68 @@ export default {
       default:null
     }
   },
+  mounted(){
+    
+  },
   computed:{
     month(){
       if(this.date){
-        return 'dd'
+        let monthNum=parseInt(this.date.substring(5,7));
+        console.info('m',monthNum)
+        switch (monthNum) {
+          case 1:
+            return 'January'
+            break;
+          case 2:
+            return 'Feburary'
+            break;
+          case 3:
+            return 'March'
+            break;
+          case 4:
+            return 'April'
+            break;
+          case 5:
+            return 'May'
+            break;
+          case 6:
+            return 'June'
+            break;
+          case 7:
+            return 'July'
+            break;
+          case 8:
+            return 'August'
+            break;
+          case 9:
+            return 'September'
+            break;
+          case 10:
+            return 'October'
+            break;
+          case 11:
+            return 'November'
+            break;
+          case 12:
+            return 'December'
+            break;
+        
+          default:
+            break;
+        }
+        return '???????'
       }
         return '???????'
     },
     day(){
       if(this.date){
-        return 'dd'
+        return this.date.substring(8,10)
       }
         return '??'
     },
     year(){
       if(this.date){
-        return 'dd'
+        return this.date.substring(0,4)
       }
         return '????'
     }
@@ -63,7 +109,7 @@ export default {
 }
 
 .time-plate-month{
-  font-size: 23px;
+  font-size: 20px;
   font-weight:100;
   color:#555;
 }

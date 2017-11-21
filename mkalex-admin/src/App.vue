@@ -9,6 +9,10 @@
 <script>
 export default {
   name: 'app',
+  mounted(){
+    this.$store.commit('setClientToken',{token:localStorage.getItem('token')})
+    
+  },
   computed:{
     needBase(){
       if(this.$route.name === "login"){

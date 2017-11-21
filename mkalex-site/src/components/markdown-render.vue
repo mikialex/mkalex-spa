@@ -3,9 +3,6 @@
     <div v-html="parsedContent">
       
     </div>
-    <div>
-      {{content}}
-    </div>
   </section>
 </template>
 

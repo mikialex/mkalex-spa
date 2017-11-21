@@ -24,6 +24,22 @@
         <span>创建时间</span><span v-if="isCreateTimeChange">已修改</span>
         <input type="date" v-model="createTime">
         <hr>
+        <span>浏览数</span><span v-if="isCreateTimeChange">已修改</span>
+        <input type="number" v-model="pageView">
+        <hr>
+        <input type="checkbox" v-model="hasCover">有封面
+        <span v-if="ishasCoverChange">已修改</span>
+        <hr>
+        <input type="checkbox" v-model="isRecommended">推荐
+        <span v-if="isRecommendedChange">已修改</span>
+
+        <hr>
+        <select v-model="contentType">
+          <option disabled value="">请选择类型</option>
+          <option>article</option>
+          <option>portfolio</option>
+        </select>
+        <span v-if="isContentTypeChange">已修改</span>
 
          <!-- <span>更新时间</span>
         <input type="date"> -->
@@ -68,6 +84,10 @@ export default {
       urlname: "loading",
       content: "loading",
       createTime:"",
+      pageView:'loading',
+      hasCover:false,
+      isRecommended:false,
+      contentType:'article',
 
       tags:[],
 
@@ -77,6 +97,10 @@ export default {
       old_urlname: "",
       old_content: "",
       old_createTime:'',
+      old_pageView:'',
+      old_hasCover:false,
+      old_isRecommended:false,
+      old_ContentType:'article',
     };
   },
   computed: {
@@ -95,11 +119,25 @@ export default {
     isCreateTimeChange(){
       return this.createTime!==this.old_createTime
     },
+    isPageViewChange(){
+      return this.pageView!==this.old_pageView
+    },
+    ishasCoverChange(){
+      return this.hasCover!==this.old_hasCover
+    },
+    isRecommendedChange(){
+      return this.isRecommended!==this.old_isRecommended
+    },
+    isContentTypeChange(){
+      return this.contentType!==this.old_ContentType;
+    },
     canPost() {
       return this.urlname !== "";
     },
     canUpdate() {
-      if (this.isTitleChange || this.isSubTitleChange || this.isContentChange|| this.isCreateTimeChange) {
+      if (this.isTitleChange || this.isSubTitleChange || this.isContentTypeChange||
+      this.isPageViewChange||this.ishasCoverChange||this.isRecommendedChange||
+      this.isContentChange|| this.isCreateTimeChange) {
         return true;
       } else {
         return false;
@@ -118,10 +156,11 @@ export default {
         title: this.title,
         sub_title: this.subTitle,
         content: this.content,
-        visit: 100,
-        has_cover: false,
+        visit: this.pageView,
+        has_cover: this.hasCover,
         create_time: this.createTime,
-        is_recommended: false
+        is_recommended: this.isRecommended,
+        usefor:this.contentType,
       };
     },
 
@@ -138,11 +177,20 @@ export default {
             this.subTitle = data.sub_title;
             this.content = data.content;
             this.createTime = data.publish_time.substring(0,10);
+            this.pageView=data.page_view
+            this.hasCover=data.has_cover
+            this.isRecommended=data.is_recommended
+            this.contentType=data.usefor
+
             this.old_urlname = data.urlname;
             this.old_title = data.title;
             this.old_subTitle = data.sub_title;
             this.old_content = data.content;
             this.old_createTime= this.createTime
+            this.old_pageView=this.pageView;
+            this.old_hasCover= this.hasCover
+            this.old_isRecommended=this.isRecommended;
+            this.old_contentType= this.contentType
 
             this.tags=data.tags;
           });
@@ -205,10 +253,15 @@ export default {
       this.$router.push({ name: "home" });
     },
     dropChange() {
+      this.urlname=this.old_urlname
       this.title = this.old_title;
       this.subTitle = this.old_subTitle;
       this.content = this.old_content;
       this.createTime = this.old_createTime;
+      this.pageView=this.old_pageView
+      this.hasCover=this.old_hasCover
+      this.isRecommended=this.old_isRecommended
+      this.contentType=this.old_contentType
     }
   }
 };

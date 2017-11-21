@@ -24,35 +24,25 @@ export default {
     this.$ajax.get(this,this.$ajax.apis.articleList)
     .then(data=>{
       console.log('get article list :'+data);
-      this.$store.state.articles.articleList=data
+      this.$store.state.articles.articleList=data.filter(
+        item=>{
+          return item.usefor==='article'
+        }
+      );
     })
-    .catch(this.$ajax.handleErr(this))
     .then(
       ()=>{//get detail list
-
-
-        let listSmall=[];
-        for (let i = 0; i < 2; i++) {
+      this.$store.state.articles.detailList=[];
+        for (let i = 0; i < 3; i++) {
           if (this.$store.state.articles.articleList[i]) {
             let temp=this.$store.state.articles.articleList[i];
             temp.content='loading.....';
-            listSmall.push(temp)
+            this.$store.state.articles.detailList.push(temp)
           }
         }
-        listSmall.forEach(article => {
-          console.log(article.urlname)
-          this.$ajax.get(this,this.$ajax.apis.articleContent,{urlname:article.urlname})
-          .then(data=>{
-            console.info('get article detail :' , data);
-            article.content=data.content;
-            // this.$store.commit('updateContent',{urlname:article.urlname,content:data.content})
-          }).catch(this.$ajax.handleErr(this))
-        });
-      this.$store.state.articles.detailList=listSmall
-
-
       }
     )
+    .catch(this.$ajax.handleErr(this))
   },
 }
 </script>

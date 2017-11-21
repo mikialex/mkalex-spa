@@ -30,6 +30,9 @@ export default {
       return this.errorMessage!==''
     }
   },
+  mounted(){
+    this.$store.commit('clearToken')
+  },
   methods:{
     login(){
 

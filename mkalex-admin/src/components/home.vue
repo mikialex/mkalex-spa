@@ -15,6 +15,7 @@
           <h2>{{item.sub_title}}</h2>
           <span>created at: {{item.publish_time}}</span>
           <span>page view: {{item.page_view}}</span>
+          <span>usefor: {{item.usefor}}</span>
         </li>
         <router-link :to="{ name:'editor',params:{u_name:'default',type:'new'} }" tag="li" class="article-li add-article-li">
           <h4>ADD NEW</h4>
@@ -65,7 +66,6 @@ export default {
   methods:{
     logout(){
       this.$router.push({name:'login'})
-      this.$store.commit('setClientToken',{token:''})
     },
     loadTagList(){
       this.$ajax.get(this, this.$ajax.apis.tagList).then(data => {

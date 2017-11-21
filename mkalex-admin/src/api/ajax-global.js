@@ -102,7 +102,8 @@ export const apis = {
   articleTag:'articles/tag',
   articleDetial: 'articles/article',
   
-  tagList:'tags',
+  tagList: 'tags',
+  tag:'tags/tag',
   
   login:'login'
 }
