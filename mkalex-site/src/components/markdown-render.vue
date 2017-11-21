@@ -1,13 +1,14 @@
 <template>
   <section >
-    <div v-html="parsedContent">
+    <div v-html="parsedContent" class="md-section">
       
     </div>
   </section>
 </template>
 
 <script>
-import {markdown} from 'markdown';
+// import {markdown} from 'markdown';
+var marked = require('marked');
 export default {
   props:{
     content:{
@@ -15,7 +16,8 @@ export default {
     },
     renderType:{
       default:'normal'//
-    }
+    },
+    urlname:{required:true}
   },
   data(){
     return {
@@ -27,13 +29,34 @@ export default {
   computed:{
     parsedContent(){
       if(this.renderType==='normal'){
-        return markdown.toHTML(this.content)
+        let urlbase='/static/image/content/'+this.urlname+'/'
+        let p=this.content.replace(/{#base#}/g,urlbase)
+        return marked(p)
       }
     }
   }
 }
 </script>
 
-<style>
+<style lang="scss">
+@import '~globalSass';
+
+.md-section{
+  width:100%;
+
+  p{
+    color:#444;
+    line-height: 1.5;
+    text-align: justify;
+  }
+   img{
+    max-width: 100%;
+    margin:auto;
+    text-align: center;
+  }  
+
+}
+
+
   
 </style>

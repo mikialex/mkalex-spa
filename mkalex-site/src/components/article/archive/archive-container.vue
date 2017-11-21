@@ -4,6 +4,7 @@
     :key="article.urlname"
     :articleInfo="article"
     ></archive-article-block>
+    <h1  class="em-hint" v-if="articleList.length===0">作者似乎<br>从未写过东西</h1>
   </section>
 </template>
 
@@ -26,6 +27,11 @@ export default {
 
 section{
   width:100%;
+}
+
+.em-hint{
+  text-align: center;
+  font-size:64px;
 }
 </style>
 

@@ -1,7 +1,7 @@
 <template>
-  <div class="portfolio-block">
+  <div class="portfolio-block" @click="goto">
      <img src="../../assets/defaultPortfolioCover.png"  v-if="!portfolioInfo.has_cover">
-     <img src="" alt="" v-if="portfolioInfo.has_cover">
+     <img :src="imgsrc" alt="" v-if="portfolioInfo.has_cover">
      <div class="description-constainer">
        <span class="title">{{portfolioInfo.title}}</span>
        <span class="subTitle">{{portfolioInfo.sub_title}}</span>
@@ -22,6 +22,16 @@
 export default {
   props: {
     portfolioInfo: { require: true }
+  },
+  computed:{
+    imgsrc(){
+      return '/static/image/content/'+this.portfolioInfo.urlname+'/cover.png'
+    }
+  },
+  methods:{
+    goto(){
+      this.$router.push({name:'reader',params:{type:'portfolio',u_name:this.portfolioInfo.urlname}})
+    }
   }
 };
 </script>
@@ -37,6 +47,12 @@ export default {
   background: #fff;
   margin: 5px;
   font-family: "futura";
+  cursor: pointer;
+  &:hover{
+    box-shadow: 0px 10px 10px rgba(0,0,0,0.1)
+  }&:active{
+    box-shadow: 0px 0px 0px rgba(0,0,0,0.1)
+  }
 }
 
 img {

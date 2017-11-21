@@ -7,6 +7,9 @@
       </div>
       <ul class="article-ui">
         <h3>ARTICLE LIST</h3>
+        <router-link :to="{ name:'editor',params:{u_name:'default',type:'new'} }" tag="li" class="article-li add-article-li">
+          <h4>ADD NEW</h4>
+        </router-link>
         <li v-for="item in list" :key="item.urlname" class="article-li">
           <router-link :to="{ name:'editor',params:{u_name:item.urlname,type:'update'} }" tag="h1">
             {{item.title}}
@@ -17,9 +20,6 @@
           <span>page view: {{item.page_view}}</span>
           <span>usefor: {{item.usefor}}</span>
         </li>
-        <router-link :to="{ name:'editor',params:{u_name:'default',type:'new'} }" tag="li" class="article-li add-article-li">
-          <h4>ADD NEW</h4>
-        </router-link>
       </ul>
       <div class="tags">
         <h3>TAGS GROUP</h3>
@@ -135,6 +135,7 @@ export default {
   >.tags-container{
     border: 1px dotted rgba(0,0,0,0.1);
     padding:10px;
+    line-height: 40px;
     >span{
       background: rgba(0,0,0,0.1);
       border-radius:10px;

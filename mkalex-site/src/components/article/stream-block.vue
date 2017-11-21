@@ -1,13 +1,13 @@
 <template>
   <div class="stream-block">
-    <stream-block-label :articleInfo="articleInfo"></stream-block-label>
+    <stream-block-label :articleInfo="articleInfo" class="inv-7"></stream-block-label>
     <div class="stream-block-text">
       <div class="stream-block-title">
         <h2>{{articleInfo.title}}</h2>
         <h3>{{articleInfo.subTitle}}</h3>
       </div>
       <div class="stream-block-content">
-        <markdown-render :content="content"></markdown-render>
+        <markdown-render :content="content" :urlname="articleInfo.urlname"></markdown-render>
         <!-- <div>
           <span>阅读全文</span>
         </div> -->

@@ -5,5 +5,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+static/image/
+
 static/image/blog/
 static/image/portfolio/

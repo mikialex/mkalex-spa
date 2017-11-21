@@ -8,7 +8,7 @@
       <archive-info :articleInfo="articleInfo"></archive-info>
     </div>
     <img src="../../../assets/defaultBlogCover.png" class="inv-7" v-if="!articleInfo.has_cover">
-    <img src="" alt="" v-if="articleInfo.has_cover">
+    <img :src="imgsrc"  v-if="articleInfo.has_cover"  class="inv-7">
   </div>
 </template>
 
@@ -21,6 +21,11 @@ export default {
   },
   props: {
     articleInfo:{required:true},
+  },
+  computed:{
+    imgsrc(){
+      return '/static/image/content/'+this.articleInfo.urlname+'/cover.png'
+    }
   },
   methods:{
     gotoReader(){

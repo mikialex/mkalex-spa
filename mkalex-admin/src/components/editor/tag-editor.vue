@@ -94,6 +94,7 @@ export default {
   > .tags-editor-container {
     border: 1px dotted rgba(0, 0, 0, 0.1);
     padding: 10px;
+    line-height: 40px;
     > span {
       background: rgba(0, 0, 0, 0.1);
       border-radius: 10px;

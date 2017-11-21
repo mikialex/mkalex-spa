@@ -3,6 +3,8 @@
     <stream-article-block v-for="article in detailList" :key="article.urlname" 
     :articleInfo="article"
     ></stream-article-block>
+
+    <h1 class="em-hint" v-if="detailList.length===0">作者似乎<br>从未写过东西</h1>
   </section>
 </template>
 
@@ -34,5 +36,10 @@ export default {
 
 .stream-container {
   width: 100%;
+}
+
+.em-hint{
+  text-align: center;
+  font-size:64px;
 }
 </style>

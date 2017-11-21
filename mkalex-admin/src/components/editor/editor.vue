@@ -100,7 +100,7 @@ export default {
       old_pageView:'',
       old_hasCover:false,
       old_isRecommended:false,
-      old_ContentType:'article',
+      old_contentType:'article',
     };
   },
   computed: {
@@ -129,7 +129,7 @@ export default {
       return this.isRecommended!==this.old_isRecommended
     },
     isContentTypeChange(){
-      return this.contentType!==this.old_ContentType;
+      return this.contentType!==this.old_contentType;
     },
     canPost() {
       return this.urlname !== "";
