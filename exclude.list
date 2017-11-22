@@ -1,0 +1,4 @@
+mkalex-admin/node_modules
+mkalex-site/node_modules
+.DS_Store
+node_modules
