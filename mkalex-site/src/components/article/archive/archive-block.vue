@@ -24,7 +24,7 @@ export default {
   },
   computed:{
     imgsrc(){
-      return '/static/image/content/'+this.articleInfo.urlname+'/cover.png'
+      return process.env.STATIC_ROOT+'image/content/'+this.articleInfo.urlname+'/cover.png'
     }
   },
   methods:{

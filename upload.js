@@ -13,5 +13,5 @@ uploadProcess.stderr.on('data', function(data) {
 });
 
 uploadProcess.on('close', function(code) {
-  console.log('closing code: ' + code);
+  console.log('closing code: ' + code)                              
 });

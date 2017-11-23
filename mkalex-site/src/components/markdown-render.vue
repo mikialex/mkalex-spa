@@ -29,7 +29,7 @@ export default {
   computed:{
     parsedContent(){
       if(this.renderType==='normal'){
-        let urlbase='/static/image/content/'+this.urlname+'/'
+        let urlbase=process.env.STATIC_ROOT+'image/content/'+this.urlname+'/'
         let p=this.content.replace(/{#base#}/g,urlbase)
         return marked(p)
       }

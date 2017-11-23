@@ -50,6 +50,8 @@ export default {
     padding-left:5px;
     padding-right:5px;
     border-radius: 20px;
+    margin-left:5px;
+    color:#444;
   }
 }
 </style>

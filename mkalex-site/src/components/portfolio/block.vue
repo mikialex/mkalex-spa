@@ -25,7 +25,7 @@ export default {
   },
   computed:{
     imgsrc(){
-      return '/static/image/content/'+this.portfolioInfo.urlname+'/cover.png'
+      return process.env.STATIC_ROOT+'image/content/'+this.portfolioInfo.urlname+'/cover.png';
     }
   },
   methods:{

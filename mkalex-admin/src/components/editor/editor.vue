@@ -47,7 +47,7 @@
 
       <!-- <title-part :title="title" :subTitle="subTitle" ></title-part> -->
       <span v-if="isContentChange">内容已修改！</span>
-      <content-editor :content="content" @contentUpdate="contentUpdate"></content-editor>
+      <content-editor :content="content" :urlname="urlname" @contentUpdate="contentUpdate"></content-editor>
 
       <tag-editor :urlname="this.$route.params.u_name" v-if="!isNew"></tag-editor>
       

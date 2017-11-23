@@ -9,7 +9,8 @@
             :key="navinfo.name" :name="navinfo.name" 
             :isUnderconstruction="navinfo.isUnderconstruction"
             :love="navinfo.love"
-            :link="navinfo.link"></nav-block>
+            :link="navinfo.link"
+            :outerLink="navinfo.outerLink"></nav-block>
           </ul>
           <div>
             <div>
@@ -36,12 +37,13 @@ export default {
     downHeight: 100,
     upHeight: 70,
     navList: [
-      { name: 'HOME', link: 'home', isUnderconstruction: false, isNewWindow: false },
-      { name: 'ARTICLE', link: 'article', isUnderconstruction: false, isNewWindow: false },
-      { name: 'PORTFOLIO', link: 'portfolio', isUnderconstruction: false, isNewWindow: false },
-      { name: 'COLLECTION', link: 'collection', isUnderconstruction: true, isNewWindow: false },
+      { name: 'HOME', link: 'home', isUnderconstruction: false, isNewWindow: false ,outerLink:false},
+      { name: 'ARTICLE', link: 'article', isUnderconstruction: false, isNewWindow: false ,outerLink:false},
+      { name: 'PORTFOLIO', link: 'portfolio', isUnderconstruction: false, isNewWindow: false ,outerLink:false},
+      { name: 'OPENSOURCE', link: 'https://github.com/mikialex', isUnderconstruction: true, isNewWindow: false ,outerLink:true},
+      // { name: 'COLLECTION', link: 'collection', isUnderconstruction: true, isNewWindow: false ,outerLink:false},
       // { name: 'META', link: 'meta', isUnderconstruction: false, isNewWindow: false },
-      { name: ' ', link: 'caicai', isUnderconstruction: false, isNewWindow: false , love: true},
+      { name: ' ', link: 'caicai', isUnderconstruction: false, isNewWindow: false , love: true,outerLink:false},
     ]
     }
   },

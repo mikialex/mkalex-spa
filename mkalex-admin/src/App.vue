@@ -57,21 +57,21 @@ input , button{
 }
 
 ::-webkit-scrollbar {
-  width: 15px;
-  height: 15px;
+  width: 0px;
+  height: 0px;
 }
 
-::-webkit-scrollbar-track {
-  background-color: #afafaf;
-  box-shadow: inset 0px -1px 0px 3px rgba(0, 0, 0, 0.1);
-}
+// ::-webkit-scrollbar-track {
+//   background-color: #afafaf;
+//   box-shadow: inset 0px -1px 0px 3px rgba(0, 0, 0, 0.1);
+// }
 
-::-webkit-scrollbar-thumb {
-  background-color: #fff;
-  border-radius: 2px;
-  box-shadow: 0px 4px 1px 0px rgba(0, 0, 0, 0.1),
-  inset 0px 0px 0px 2px rgba(0, 0, 0, 0.1);
-}
+// ::-webkit-scrollbar-thumb {
+//   background-color: #fff;
+//   border-radius: 2px;
+//   box-shadow: 0px 4px 1px 0px rgba(0, 0, 0, 0.1),
+//   inset 0px 0px 0px 2px rgba(0, 0, 0, 0.1);
+// }
 
 
 .click-able{

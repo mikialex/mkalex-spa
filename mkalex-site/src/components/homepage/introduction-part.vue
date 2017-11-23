@@ -39,6 +39,9 @@
               <p>
                 I focus on Design, Interface technology, and Computer Science.
               </p>
+              <a class="cv" href="/static/cv.pdf" target="_blank">
+                Curriculum Vitae.
+              </a>
               
             </div>
           </div>
@@ -66,6 +69,14 @@ export default {
 //   position: relative;
 //   z-index:2;
 // }
+
+.cv{
+  text-decoration: underline;
+  color:#f00;
+  &:hover{
+
+  }
+}
 
 .tran-b{
   width: 0;

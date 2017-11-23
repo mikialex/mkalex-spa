@@ -1,11 +1,14 @@
 <template>
   <li>
-    <router-link :to="{ name:link }" 
+    
+    <router-link :to="{ name:link }" v-if="!outerLink"
     :class="{ underConstruction: isUnderconstruction }"
     :active-class="'activeLi'">
       {{name}}
       <i class="fa fa-heart" aria-hidden="true" v-if="love"></i>
       </router-link>
+
+      <a :href="link" target="_blank" v-if="outerLink">{{name}}</a>
 
   </li>
 </template>
@@ -30,6 +33,10 @@ export default {
     link:{
       type: String,
       default: '/',
+    },
+    outerLink:{
+      type: Boolean,
+      default: false,
     }
   }
 }

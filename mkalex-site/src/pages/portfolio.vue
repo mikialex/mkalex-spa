@@ -18,7 +18,7 @@ export default {
   mounted(){
     this.$ajax.get(this,this.$ajax.apis.articleList)
     .then(data=>{
-      console.log('get article list :'+data);
+      console.info('get article list :',data);
       this.$store.state.portfolioList=data.filter(
         item=>{
           return item.usefor==='portfolio'
