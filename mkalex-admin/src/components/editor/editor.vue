@@ -18,7 +18,7 @@
         <input type="text" class="title-editor" :class="{'form-changed':isTitleChange}" spellcheck="false" placeholder="请输入标题"  v-model="title">
         <span v-if="isTitleChange">标题已修改！</span>
         <input type="text" class="sub-title-editor" :class="{'form-changed':isSubTitleChange}"  spellcheck="false"  placeholder="请输入副标题"    v-model="subTitle">
-      <span v-if="isSubTitleChange">副标题已修改！</span>
+        <span v-if="isSubTitleChange">副标题已修改！</span>
       </div>
 
         <span>创建时间</span><span v-if="isCreateTimeChange">已修改</span>

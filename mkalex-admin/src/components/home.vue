@@ -5,22 +5,8 @@
         <i class="fa fa-check-circle-o click-able" aria-hidden="true" @click="logout"></i>
         <h1>HOME</h1>
       </div>
-      <ul class="article-ui">
-        <h3>ARTICLE LIST</h3>
-        <router-link :to="{ name:'editor',params:{u_name:'default',type:'new'} }" tag="li" class="article-li add-article-li">
-          <h4>ADD NEW</h4>
-        </router-link>
-        <li v-for="item in list" :key="item.urlname" class="article-li">
-          <router-link :to="{ name:'editor',params:{u_name:item.urlname,type:'update'} }" tag="h1">
-            {{item.title}}
-            <span>{{item.urlname}}</span>
-          </router-link>
-          <h2>{{item.sub_title}}</h2>
-          <span>created at: {{item.publish_time}}</span>
-          <span>page view: {{item.page_view}}</span>
-          <span>usefor: {{item.usefor}}</span>
-        </li>
-      </ul>
+      <content-list :list="list" :type="'article'"></content-list>
+      <content-list :list="list" :type="'portfolio'"></content-list>
       <div class="tags">
         <h3>TAGS GROUP</h3>
         <div class="tags-container">
@@ -35,8 +21,12 @@
 </template>
 
 <script>
+import list from './content-list.vue'
 export default {
   name: "home",
+  components:{
+    'content-list':list,
+  },
   data: function() {
     return {
       list: [],
@@ -146,46 +136,6 @@ export default {
         cursor: pointer;
       }
     }
-  }
-}
-
-.add-article-li{
-  cursor: pointer;
-  transition: 0.5s;
-  &:hover{
-    background: #efefef;
-  }
-  &:active{
-    transition:0s;
-    background: #eee;
-    box-shadow: inset 0px 5px 5px 0px rgba(0,0,0,0.1);
-  }
-}
-
-.article-li{
-  list-style: none;
-  padding: 10px;
-  border: 1px dotted rgba(0,0,0,0.1);
-  >h1{
-    margin:5px;
-    cursor: pointer;
-    transition: 0.1s;
-    &:hover{
-      color:#f45;
-      // border-bottom:1px solid #ddd;
-    }
-    >span{
-      color:#aaa;
-      font-size: 16px;
-    }
-  }
-  >h2{
-    margin:5px;
-  }
-  >h4{
-    text-align: center;
-    font-size: 25px;
-    color:#aaa;
   }
 }
 
