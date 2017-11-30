@@ -4,6 +4,20 @@ import qs from 'qs'
 
 axios.defaults.timeout = 5000;
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
+
+function getToken(env) {
+  let token=env.$store.state.token
+  if (token !== '') {
+    return token
+  } else {
+    token = localStorage.getItem('token');
+  }
+  if (token !== '') {
+    return token
+  } else {
+    // env.$router.push({name:'login'})
+  }
+}
   
 export function ajax(method, url, payload) {
   if (method === 'get' || method === 'post') {
@@ -20,11 +34,21 @@ export function ajax(method, url, payload) {
 export function get(env, url, payload) {
   env.$store.commit('add_GoingAjax')
   return axios.get(baseURL + url, {params: payload})
-  //return ajax('get', baseURL + url, payload)
-  // .catch(err => {
-  //   console.log(err)
-  //   throw err
-  // })
+  .then(data => {
+    env.$store.commit('minus_GoingAjax')
+    console.info('get original data',data)
+    return data.data
+  })
+}
+
+export function getAuth(env, url, payload) {
+  if (payload) {
+    payload.token = getToken(env);
+  } else {
+    payload = { token: getToken(env) };
+  }
+  env.$store.commit('add_GoingAjax')
+  return axios.get(baseURL + url, {params: payload})
   .then(data => {
     env.$store.commit('minus_GoingAjax')
     console.info('get original data',data)
@@ -35,11 +59,6 @@ export function get(env, url, payload) {
 export function patch(env, url, payload) {
   env.$store.commit('add_GoingAjax')
   return axios.patch(baseURL + url, {params: payload})
-  //return ajax('get', baseURL + url, payload)
-  // .catch(err => {
-  //   console.log(err)
-  //   throw err
-  // })
   .then(data => {
     env.$store.commit('minus_GoingAjax')
     console.info('get original data', data);
@@ -55,11 +74,6 @@ export function patch(env, url, payload) {
 export function del(env, url, payload) {
   env.$store.commit('add_GoingAjax')
   return axios.delete(baseURL + url, {params: payload})
-  //return ajax('get', baseURL + url, payload)
-  // .catch(err => {
-  //   console.log(err)
-  //   throw err
-  // })
   .then(data => {
     env.$store.commit('minus_GoingAjax')
     console.info('get original data', data)
@@ -98,9 +112,12 @@ export function handleErr(env) {
 export const apis = {
   articleList: 'articles',
   articleContent: 'articles/content',
+  articleListAdmin: 'articles/admin',
   articleTagList:'articles/tags',
   articleTag:'articles/tag',
   articleDetial: 'articles/article',
+  articleDetialAdmin: 'articles/article/admin',
+  
   
   tagList: 'tags',
   tag:'tags/tag',

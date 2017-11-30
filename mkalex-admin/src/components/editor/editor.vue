@@ -1,67 +1,64 @@
 <template>
-
-  <transition name="bounce" >
-    <div class="center-wrap" >
-
-      <div class="head-part">
-        <div class="head-left">
-          <router-link :to="{ name:'home'}"  tag="i"
-          class="fa fa-arrow-circle-left click-able" aria-hidden="true"></router-link>
-          <h1>EDITOR</h1>
-        </div>
-        <!-- <span>{{urlname}}</span> -->
-        <input type="text" spellcheck="false" v-model="urlname" placeholder="id required">
-
+  <div>
+    <div class="head-part">
+      <div class="head-left">
+        <router-link :to="{ name:'home'}"  tag="i"
+        class="fa fa-arrow-circle-left click-able" aria-hidden="true"></router-link>
+        <h1>EDITOR</h1>
       </div>
+      <!-- <span>{{urlname}}</span> -->
+      <input type="text" spellcheck="false" v-model="urlname" placeholder="id required">
 
-      <div class="title-part">
-        <input type="text" class="title-editor" :class="{'form-changed':isTitleChange}" spellcheck="false" placeholder="请输入标题"  v-model="title">
-        <span v-if="isTitleChange">标题已修改！</span>
-        <input type="text" class="sub-title-editor" :class="{'form-changed':isSubTitleChange}"  spellcheck="false"  placeholder="请输入副标题"    v-model="subTitle">
-        <span v-if="isSubTitleChange">副标题已修改！</span>
-      </div>
-
-        <span>创建时间</span><span v-if="isCreateTimeChange">已修改</span>
-        <input type="date" v-model="createTime">
-        <hr>
-        <span>浏览数</span><span v-if="isCreateTimeChange">已修改</span>
-        <input type="number" v-model="pageView">
-        <hr>
-        <input type="checkbox" v-model="hasCover">有封面
-        <span v-if="ishasCoverChange">已修改</span>
-        <hr>
-        <input type="checkbox" v-model="isRecommended">推荐
-        <span v-if="isRecommendedChange">已修改</span>
-
-        <hr>
-        <select v-model="contentType">
-          <option disabled value="">请选择类型</option>
-          <option>article</option>
-          <option>portfolio</option>
-        </select>
-        <span v-if="isContentTypeChange">已修改</span>
-
-         <!-- <span>更新时间</span>
-        <input type="date"> -->
-
-
-      <!-- <title-part :title="title" :subTitle="subTitle" ></title-part> -->
-      <span v-if="isContentChange">内容已修改！</span>
-      <content-editor :content="content" :urlname="urlname" @contentUpdate="contentUpdate"></content-editor>
-
-      <tag-editor :urlname="this.$route.params.u_name" v-if="!isNew"></tag-editor>
-      
-
-
-      <div class="operation-part" >
-        <button @click="dropChange" class="click-able" v-if="!isNew&&canUpdate" style="color:#f00">DROP CHANGE</button>
-        <button @click="updateData" class="click-able" v-if="!isNew&&canUpdate">UPDATE</button>
-        <button @click="deleteData" class="click-able" v-if="!isNew" style="color:#f00">DELETE</button>
-        <button @click="newData" class="click-able" v-if="isNew&&canPost" >POST</button>
-        <button @click="drop" class="click-able" v-if="isNew" style="color:#f00">DROP</button>
-      </div>
     </div>
-    </transition>
+
+    <div class="title-part">
+      <input type="text" class="title-editor" :class="{'form-changed':isTitleChange}" spellcheck="false" placeholder="请输入标题"  v-model="title">
+      <span v-if="isTitleChange">标题已修改！</span>
+      <input type="text" class="sub-title-editor" :class="{'form-changed':isSubTitleChange}"  spellcheck="false"  placeholder="请输入副标题"    v-model="subTitle">
+      <span v-if="isSubTitleChange">副标题已修改！</span>
+    </div>
+
+      <span>创建时间</span><span v-if="isCreateTimeChange">已修改</span>
+      <input type="date" v-model="createTime">
+      <hr>
+      <span>浏览数</span><span v-if="isCreateTimeChange">已修改</span>
+      <input type="number" v-model="pageView">
+      <hr>
+      <input type="checkbox" v-model="hasCover">有封面
+      <span v-if="ishasCoverChange">已修改</span>
+      <hr>
+      <input type="checkbox" v-model="isRecommended">推荐
+      <span v-if="isRecommendedChange">已修改</span>
+      <hr>
+      <input type="checkbox" v-model="isActive">公开
+      <span v-if="isActiveChange">已修改</span>
+
+      <hr>
+      <select v-model="contentType">
+        <option disabled value="">请选择类型</option>
+        <option>article</option>
+        <option>portfolio</option>
+      </select>
+      <span v-if="isContentTypeChange">已修改</span>
+
+        <!-- <span>更新时间</span>
+      <input type="date"> -->
+
+
+    <!-- <title-part :title="title" :subTitle="subTitle" ></title-part> -->
+    <span v-if="isContentChange">内容已修改！</span>
+    <content-editor :content="content" :urlname="urlname" @contentUpdate="contentUpdate"></content-editor>
+
+    <tag-editor :urlname="this.$route.params.u_name" v-if="!isNew"></tag-editor>
+    
+    <div class="operation-part" >
+      <button @click="dropChange" class="click-able" v-if="!isNew&&canUpdate" style="color:#f00">DROP CHANGE</button>
+      <button @click="updateData" class="click-able" v-if="!isNew&&canUpdate">UPDATE</button>
+      <button @click="deleteData" class="click-able" v-if="!isNew" style="color:#f00">DELETE</button>
+      <button @click="newData" class="click-able" v-if="isNew&&canPost" >POST</button>
+      <button @click="drop" class="click-able" v-if="isNew" style="color:#f00">DROP</button>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -88,6 +85,7 @@ export default {
       hasCover:false,
       isRecommended:false,
       contentType:'article',
+      isActive:false,
 
       tags:[],
 
@@ -101,6 +99,7 @@ export default {
       old_hasCover:false,
       old_isRecommended:false,
       old_contentType:'article',
+      old_isActive:false,
     };
   },
   computed: {
@@ -131,13 +130,16 @@ export default {
     isContentTypeChange(){
       return this.contentType!==this.old_contentType;
     },
+    isActiveChange(){
+      return this.isActive!==this.old_isActive;
+    },
     canPost() {
       return this.urlname !== "";
     },
     canUpdate() {
       if (this.isTitleChange || this.isSubTitleChange || this.isContentTypeChange||
       this.isPageViewChange||this.ishasCoverChange||this.isRecommendedChange||
-      this.isContentChange|| this.isCreateTimeChange) {
+      this.isContentChange|| this.isCreateTimeChange||this.isActiveChange) {
         return true;
       } else {
         return false;
@@ -161,13 +163,14 @@ export default {
         create_time: this.createTime,
         is_recommended: this.isRecommended,
         usefor:this.contentType,
+        is_active:this.isActive,
       };
     },
 
     load() {
       if (this.$route.params.type === "update") {
         this.$ajax
-          .get(this, this.$ajax.apis.articleDetial, {
+          .getAuth(this, this.$ajax.apis.articleDetialAdmin, {
             urlname: this.$route.params.u_name
           })
           .then(data => {
@@ -181,6 +184,7 @@ export default {
             this.hasCover=data.has_cover
             this.isRecommended=data.is_recommended
             this.contentType=data.usefor
+            this.isActive=data.is_active
 
             this.old_urlname = data.urlname;
             this.old_title = data.title;
@@ -191,6 +195,7 @@ export default {
             this.old_hasCover= this.hasCover
             this.old_isRecommended=this.isRecommended;
             this.old_contentType= this.contentType
+            this.old_isActive=this.isActive
 
             this.tags=data.tags;
           });
@@ -268,13 +273,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.center-wrap {
-  width: 80vw;
-  margin: auto;
-  background: #fefefe;
-  box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.01);
-  position: absolute;
-}
 
 .head-part {
   display: flex;

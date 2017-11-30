@@ -1,8 +1,12 @@
 <template>
   <div id="app">
-    <div :class="{'absolut-base':needBase}">
-      <router-view/>
+    <div class="center-wrap" v-if="!hideCenter">
+      <trans-fade>
+        <router-view> </router-view>
+      </trans-fade>
     </div>
+
+    <router-view name="blank"> </router-view>
   </div>
 </template>
 
@@ -11,15 +15,10 @@ export default {
   name: 'app',
   mounted(){
     this.$store.commit('setClientToken',{token:localStorage.getItem('token')})
-    
   },
   computed:{
-    needBase(){
-      if(this.$route.name === "login"){
-        return false
-      }else{
-        return true
-      }
+    hideCenter(){
+      return this.$route.name==='login'
     }
   }
 }
@@ -33,6 +32,15 @@ export default {
   /* text-align: center; */
   /* color: #2c3e50; */
   /* margin-top: 60px; */
+}
+
+
+.center-wrap {
+  width: 80vw;
+  margin: auto;
+  background: #fefefe;
+  padding:30px;
+  box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.01);
 }
 
 .absolut-base{

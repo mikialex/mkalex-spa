@@ -1,23 +1,30 @@
 <template>
-  <transition name="bounce">
-    <div class="center-wrap">
-      <div class="home-head">
-        <i class="fa fa-check-circle-o click-able" aria-hidden="true" @click="logout"></i>
-        <h1>HOME</h1>
-      </div>
-      <content-list :list="list" :type="'article'"></content-list>
-      <content-list :list="list" :type="'portfolio'"></content-list>
-      <div class="tags">
-        <h3>TAGS GROUP</h3>
-        <div class="tags-container">
-          <span v-for="tag in tagList" :key="tag.tag_name">{{tag.tag_name}}
-            <strong @click="deleteTag(tag.tag_name)">X</strong> 
-          </span>
-        </div>
-        <input type="text" v-model="newTagName"> <button v-if="canAddNew" @click="addNewtag">add</button>
-      </div>
+  <div >
+    <div class="home-head">
+      <h1>HOME</h1>
+      <span>
+        Hello miki !
+        <span class="log-out" @click="logout">退出登陆</span>
+      </span>
     </div>
-  </transition>
+
+    <nav class="content-nav">
+      <div @click="changeNav('article')" :class="{'current-tab':this.currentNav==='article'}">文章</div>
+      <div @click="changeNav('portfolio')" :class="{'current-tab':this.currentNav==='portfolio'}">作品集</div>
+      <div @click="changeNav('tag')" :class="{'current-tab':this.currentNav==='tag'}">标签</div>
+    </nav>
+    <content-list :list="list" :type="'article'" v-if="this.currentNav==='article'"></content-list>
+    <content-list :list="list" :type="'portfolio'"  v-if="this.currentNav==='portfolio'"></content-list>
+    <div class="tags" v-if="this.currentNav==='tag'">
+      <h3>TAGS GROUP</h3>
+      <div class="tags-container">
+        <span v-for="tag in tagList" :key="tag.tag_name">{{tag.tag_name}}
+          <i class="fa fa-trash-o" @click="deleteTag(tag.tag_name)"></i>
+        </span>
+      </div>
+      <input type="text" v-model="newTagName"> <button v-if="canAddNew" @click="addNewtag">add</button>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -29,13 +36,16 @@ export default {
   },
   data: function() {
     return {
+      currentNav:'article',
       list: [],
       tagList:[],
       newTagName:'',
     };
   },
   mounted() {
-    this.$ajax.get(this, this.$ajax.apis.articleList).then(data => {
+    console.log(this.$store.state.token) 
+    this.$ajax.getAuth(this, this.$ajax.apis.articleListAdmin,)
+    .then(data => {
       console.info("get article list :", data);
       this.list = data;
     });
@@ -62,6 +72,9 @@ export default {
         console.info("get tags list :", data);
         this.tagList = data;
       });
+    },
+    changeNav(newTab){
+      this.currentNav=newTab;
     },
     addNewtag(){
       this.$ajax
@@ -92,20 +105,41 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.log-out{
+  cursor: pointer;
+  &:hover{
+    font-weight: 900;
+  }
+}
+
+.current-tab{
+  background: #000;
+  color:#fff;
+}
+
+.content-nav{
+  display: flex;
+  >div{
+    cursor: pointer;
+    padding:10px;
+  }
+}
+
 .center-wrap {
   width: 80vw;
   margin: auto;
   background: #fefefe;
   box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.01);
-  position: absolute;
+  padding-right: 30px;
+  padding-left: 30px;
 }
 
 .home-head {
   display: flex;
-  // justify-content: space-between;
+  justify-content: space-between;
   align-items: center;
-  padding-right: 30px;
-  padding-left: 30px;
+  
   > i {
     font-size: 28px;
     width: 36px;
@@ -116,39 +150,28 @@ export default {
   }
 }
 
-.article-ui{
-  padding:30px;
-}
 
 .tags{
-  padding:30px;
   >.tags-container{
     border: 1px dotted rgba(0,0,0,0.1);
     padding:10px;
-    line-height: 40px;
+    line-height: 20px;
     >span{
-      background: rgba(0,0,0,0.1);
-      border-radius:10px;
+      background: #000;
+      color:#fff;
+      display: inline-block;
+      border-radius:3px;
       padding: 5px;
       margin:5px;
-      >strong{
-        color:#f45;
+      >i{
         cursor: pointer;
+        &:hover{
+          color:#f45;
+        }
       }
     }
   }
 }
 
-.bounce-enter-active {
-  transition: all 0.3s ease-in-out
-}
-.bounce-leave-active {
-  transition: all 0.3s ease-in-out
-}
-.bounce-enter, .bounce-leave-to
-/* .slide-fade-leave-active for below version 2.1.8 */ {
-  transform: scale(0.1);
-  opacity: 0;
-}
 
 </style>

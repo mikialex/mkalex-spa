@@ -9,6 +9,15 @@ Vue.use(Vuex)
 import store from './vuex'
 import * as vueAjax from './api/ajax-global'
 
+// import MKLayout from './layout/include'
+import MKTransition from '../../mkalex-site/src/transitions/include'
+// MKLayout.map(component => {
+//    Vue.component(component.name, component);
+// });
+MKTransition.map(component => {
+  Vue.component(component.name, component);
+});
+
 Vue.config.productionTip = false
 
 Vue.prototype.$ajax = vueAjax

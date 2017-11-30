@@ -5,7 +5,8 @@
     <router-link :to="{ name:'editor',params:{u_name:'default',type:'new'} }" tag="li" class="article-li add-article-li">
       <h4>ADD NEW</h4>
     </router-link>
-    <li v-for="item in subList" :key="item.urlname" class="article-li">
+    <li v-for="item in subList" :key="item.urlname" class="article-li" 
+    :class="{'draft':!item.is_active}">
       <router-link :to="{ name:'editor',params:{u_name:item.urlname,type:'update'} }" tag="h1">
         {{item.title}}
         <span>{{item.urlname}}</span>
@@ -33,6 +34,10 @@ export default {
 
 <style lang="scss" scoped>
 
+.article-ui{
+  padding:0px;
+}
+
 .add-article-li{
   cursor: pointer;
   transition: 0.5s;
@@ -51,14 +56,14 @@ export default {
   list-style: none;
   padding: 10px;
   border: 1px dotted rgba(0,0,0,0.1);
+  transition: 0.5s;
+  &:hover{
+    background: #efefef;
+  }
   >h1{
     margin:5px;
     cursor: pointer;
     transition: 0.1s;
-    &:hover{
-      color:#f45;
-      // border-bottom:1px solid #ddd;
-    }
     >span{
       color:#aaa;
       font-size: 16px;
@@ -72,6 +77,10 @@ export default {
     font-size: 25px;
     color:#aaa;
   }
+}
+
+.draft{
+  color:#888;
 }
 
 
