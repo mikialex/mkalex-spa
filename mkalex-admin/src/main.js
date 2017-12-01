@@ -7,9 +7,9 @@ import router from './router'
 
 Vue.use(Vuex)
 import store from './vuex'
-import * as vueAjax from './api/ajax-global'
+import * as vueAjax from '../../mkalex-site/src/api/ajax-global'
 
-// import MKLayout from './layout/include'
+// import MKLayout from '../../mkalex-site/src/layout/include'
 import MKTransition from '../../mkalex-site/src/transitions/include'
 // MKLayout.map(component => {
 //    Vue.component(component.name, component);

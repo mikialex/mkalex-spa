@@ -5,6 +5,12 @@ export const mutations = {
         article.content = payload.content;
       }
     });
+  },
+  articleListLoaded(state) {
+    state.isArticleListLoaded = true;
+  },
+  reloadArticleList(state) {
+    state.isArticleListLoaded = false;
   }
     
 };

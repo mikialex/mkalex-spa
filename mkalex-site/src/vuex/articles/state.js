@@ -1,4 +1,5 @@
 export const state = {
     articleList: [], 
-    detailList:[],
+    detailList: [],
+    isArticleListLoaded: false,
 };

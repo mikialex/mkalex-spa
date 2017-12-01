@@ -18,7 +18,7 @@ router.afterEach((function (routerTo,routerFrom) {
     // this.app.$store.commit('showErrorInfo', { info: '' });
     // this.app.$store.commit('setLastPath', { pathName: routerFrom.name });
     scroll(0,0);
-}).bind(router))
+}).bind(router)) 
 
 import MKLayout from './layout/include'
 import MKTransition from './transitions/include'

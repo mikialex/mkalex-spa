@@ -21,6 +21,7 @@ export default {
     'article-switcher':switcher,
   },
   mounted(){
+    this.$store.commit('reloadArticleList');
     this.$ajax.get(this,this.$ajax.apis.articleList)
     .then(data=>{
       console.log('get article list :'+data);
@@ -29,6 +30,7 @@ export default {
           return item.usefor==='article'
         }
       );
+      this.$store.commit('articleListLoaded');
     })
     .then(
       ()=>{//get detail list

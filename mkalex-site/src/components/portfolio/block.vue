@@ -48,8 +48,9 @@ export default {
   margin: 5px;
   font-family: "futura";
   cursor: pointer;
+  transition: 0.2s ease-in-out;
   &:hover{
-    box-shadow: 0px 10px 10px rgba(0,0,0,0.1)
+    box-shadow: 0px 10px 10px rgba(0,0,0,0.1);
   }&:active{
     box-shadow: 0px 0px 0px rgba(0,0,0,0.1)
   }

@@ -5,17 +5,15 @@
     <router-link :to="{ name:'editor',params:{u_name:'default',type:'new'} }" tag="li" class="article-li add-article-li">
       <h4>ADD NEW</h4>
     </router-link>
-    <li v-for="item in subList" :key="item.urlname" class="article-li" 
-    :class="{'draft':!item.is_active}">
-      <router-link :to="{ name:'editor',params:{u_name:item.urlname,type:'update'} }" tag="h1">
-        {{item.title}}
-        <span>{{item.urlname}}</span>
-      </router-link>
+    <router-link v-for="item in subList" :key="item.urlname" class="article-li" 
+    :class="{'draft':!item.is_active}"
+    :to="{ name:'editor',params:{u_name:item.urlname,type:'update'} }" tag="li">
+      <h1>{{item.title}}<span>{{item.urlname}}</span> </h1>
       <h2>{{item.sub_title}}</h2>
       <span>created at: {{item.publish_time}}</span>
       <span>page view: {{item.page_view}}</span>
       <span>usefor: {{item.usefor}}</span>
-    </li>
+    </router-link>
   </ul>
 </template>
 
@@ -57,6 +55,7 @@ export default {
   padding: 10px;
   border: 1px dotted rgba(0,0,0,0.1);
   transition: 0.5s;
+  cursor: pointer;
   &:hover{
     background: #efefef;
   }

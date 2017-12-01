@@ -16,6 +16,7 @@ export default {
     'portfolio-container':Container,
   },
   mounted(){
+    this.$store.commit('reloadArticleList');
     this.$ajax.get(this,this.$ajax.apis.articleList)
     .then(data=>{
       console.info('get article list :',data);
@@ -24,6 +25,7 @@ export default {
           return item.usefor==='portfolio'
         }
       );
+      this.$store.commit('articleListLoaded');
     })
   }
 }
