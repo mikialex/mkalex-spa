@@ -94,10 +94,12 @@ export default {
   > .tags-editor-container {
     border: 1px dotted rgba(0, 0, 0, 0.1);
     padding: 10px;
-    line-height: 40px;
+    line-height: 30px;
     > span {
-      background: rgba(0, 0, 0, 0.1);
-      border-radius: 10px;
+      display: inline-block;
+      background:#000;
+      color:#fff;
+      border-radius: 3px;
       padding: 5px;
       margin: 5px;
       cursor: pointer;
@@ -110,7 +112,7 @@ export default {
 }
 
 .has-this-tag {
-  background: #d94 !important;
+  background: #f54 !important;
   color: #fff;
 }
 </style>

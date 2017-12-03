@@ -24,13 +24,13 @@
       <span>浏览数</span><span v-if="isCreateTimeChange">已修改</span>
       <input type="number" v-model="pageView">
       <hr>
-      <input type="checkbox" v-model="hasCover">有封面
+      <mk-toggle :isActive.sync="hasCover"></mk-toggle>有封面
       <span v-if="ishasCoverChange">已修改</span>
       <hr>
-      <input type="checkbox" v-model="isRecommended">推荐
+      <mk-toggle :isActive.sync="isRecommended"></mk-toggle>推荐
       <span v-if="isRecommendedChange">已修改</span>
       <hr>
-      <input type="checkbox" v-model="isActive">公开
+      <mk-toggle :isActive.sync="isActive"></mk-toggle>公开
       <span v-if="isActiveChange">已修改</span>
 
       <hr>
@@ -40,6 +40,7 @@
         <option>portfolio</option>
       </select>
       <span v-if="isContentTypeChange">已修改</span>
+
 
         <!-- <span>更新时间</span>
       <input type="date"> -->
@@ -65,13 +66,15 @@
 import contentEditor from "./content.vue";
 import title from "./title.vue";
 import tagEditor from "./tag-editor.vue";
+import toggle from './toggle.vue';
 
 export default {
   name: "editor",
   components: {
     "content-editor": contentEditor,
     'tag-editor':tagEditor,
-    "title-part": title
+    "title-part": title,
+    'mk-toggle':toggle,
   },
   data: function() {
     return {
@@ -267,6 +270,7 @@ export default {
       this.hasCover=this.old_hasCover
       this.isRecommended=this.old_isRecommended
       this.contentType=this.old_contentType
+      this.isActive=this.old_isActive
     }
   }
 };

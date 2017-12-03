@@ -1,9 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-
-// import articles from './articles'
-// import auth from './modules/auth.js'
+import editor from './editor.js'
 
 Vue.use(Vuex);
 
@@ -27,12 +25,12 @@ export default new Vuex.Store({
       state.token = '';
       localStorage.clear()
     }
-  }
+  },
   // actions,
   //   getters,
-  // modules: {
-  //   articles,
-  // },
+  modules: {
+    editor,
+  },
   // strict: debug,
   // plugins: debug ? [createLogger()] : []
 })
