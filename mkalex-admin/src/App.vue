@@ -41,6 +41,10 @@ export default {
   background: #fefefe;
   padding:30px;
   box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.01);
+  @media(max-width: 500px) {
+    padding: 5px;
+    width:95%;
+  }
 }
 
 .absolut-base{

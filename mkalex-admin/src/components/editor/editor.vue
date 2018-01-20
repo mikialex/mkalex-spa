@@ -24,12 +24,23 @@
       <span>浏览数</span><span v-if="isCreateTimeChange">已修改</span>
       <input type="number" v-model="pageView">
       <hr>
-      <mk-toggle :isActive.sync="hasCover"></mk-toggle>有封面
-      <span v-if="ishasCoverChange">已修改</span>
-      <hr>
-      <mk-toggle :isActive.sync="isRecommended"></mk-toggle>推荐
-      <span v-if="isRecommendedChange">已修改</span>
-      <hr>
+
+      <toggle-row :isActive.sync="hasCover" :rowName="'封面图片'" :faClass="'fa-picture-o'"></toggle-row>
+
+      <toggle-row :isActive.sync="isRecommended" :rowName="'推荐内容'" :faClass="'fa-thumbs-o-up'"></toggle-row>
+
+       <!-- <div class="toggle-row">
+        <span>
+          <i class="fa fa-thumbs-o-up" ></i>
+          推荐内容
+        </span>
+        <span>
+          <i class="fa fa-undo" ></i>
+          <mk-toggle :isActive.sync="isRecommended"></mk-toggle>
+        </span>
+      </div> -->
+
+
       <mk-toggle :isActive.sync="isActive"></mk-toggle>公开
       <span v-if="isActiveChange">已修改</span>
 
@@ -66,7 +77,7 @@
 import contentEditor from "./content.vue";
 import title from "./title.vue";
 import tagEditor from "./tag-editor.vue";
-import toggle from './toggle.vue';
+import toggleRow from './toggle-row.vue';
 
 export default {
   name: "editor",
@@ -74,7 +85,7 @@ export default {
     "content-editor": contentEditor,
     'tag-editor':tagEditor,
     "title-part": title,
-    'mk-toggle':toggle,
+    'toggle-row':toggleRow,
   },
   data: function() {
     return {
@@ -278,12 +289,32 @@ export default {
 
 <style lang="scss" scoped>
 
+hr{
+  border:0.5px solid rgba(0,0,0,0.1)
+}
+
+.toggle-row{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height:50px;
+  padding-left:10px;
+  padding-right:10px;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  border-top: 1px solid rgba(0,0,0,0.1);
+  margin-top:-1px ;
+  >span{
+    font-size:18px;
+  }
+  // &:hover{
+  //   background: #f5f5f5;
+  // }
+}
+
 .head-part {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-right: 30px;
-  padding-left: 30px;
   .head-left {
     display: flex;
     align-items: center;
@@ -307,8 +338,6 @@ export default {
 }
 
 .title-part {
-  padding-left: 30px;
-  padding-right: 30px;
   > .title-editor {
     width: 100%;
     border: 1px solid rgba(0, 0, 0, 0.05);

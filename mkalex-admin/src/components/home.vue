@@ -13,17 +13,19 @@
       <div @click="changeNav('portfolio')" :class="{'current-tab':this.currentNav==='portfolio'}">作品集</div>
       <div @click="changeNav('tag')" :class="{'current-tab':this.currentNav==='tag'}">标签</div>
     </nav>
-    <content-list :list="list" :type="'article'" v-if="this.currentNav==='article'"></content-list>
-    <content-list :list="list" :type="'portfolio'"  v-if="this.currentNav==='portfolio'"></content-list>
-    <div class="tags" v-if="this.currentNav==='tag'">
-      <h3>TAGS GROUP</h3>
-      <div class="tags-container">
-        <span v-for="tag in tagList" :key="tag.tag_name">{{tag.tag_name}}
-          <i class="fa fa-trash-o" @click="deleteTag(tag.tag_name)"></i>
-        </span>
+    <trans-fade>
+      <content-list :list="list" :type="'article'" v-if="this.currentNav==='article'"></content-list>
+      <content-list :list="list" :type="'portfolio'"  v-if="this.currentNav==='portfolio'"></content-list>
+      <div class="tags" v-if="this.currentNav==='tag'">
+        <h3>TAGS GROUP</h3>
+        <div class="tags-container">
+          <span v-for="tag in tagList" :key="tag.tag_name">{{tag.tag_name}}
+            <i class="fa fa-trash-o" @click="deleteTag(tag.tag_name)"></i>
+          </span>
+        </div>
+        <input type="text" v-model="newTagName"> <button v-if="canAddNew" @click="addNewtag">add</button>
       </div>
-      <input type="text" v-model="newTagName"> <button v-if="canAddNew" @click="addNewtag">add</button>
-    </div>
+    </trans-fade>
   </div>
 </template>
 

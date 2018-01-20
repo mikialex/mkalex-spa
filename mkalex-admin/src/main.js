@@ -7,7 +7,7 @@ import router from './router'
 
 Vue.use(Vuex)
 import store from './vuex'
-import * as vueAjax from '../../mkalex-site/src/api/ajax-global'
+import * as vueAjax from './api/ajax-global'
 
 // import MKLayout from '../../mkalex-site/src/layout/include'
 import MKTransition from '../../mkalex-site/src/transitions/include'
@@ -17,6 +17,8 @@ import MKTransition from '../../mkalex-site/src/transitions/include'
 MKTransition.map(component => {
   Vue.component(component.name, component);
 });
+import toggle from './components/form/toggle.vue'
+Vue.component('mk-toggle', toggle);
 
 Vue.config.productionTip = false
 
