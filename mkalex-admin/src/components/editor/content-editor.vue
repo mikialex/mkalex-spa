@@ -1,9 +1,9 @@
 <template>
    <div class="content-editor" >
+     
       <div  class="content-toolbar">
         <div>
-          <i class="fa fa-arrow-circle-left" @click="toggleOpen"></i>
-          返回
+          <i class="fa fa-arrow-circle-left" @click="toggleOpen">返回</i>
         </div>
 
         <div class="editor-option">
@@ -33,10 +33,9 @@
             <i class="fa fa-eye-slash" ></i>
           </span>
         </div>
-        
-
-
       </div>
+
+
       <textarea id="md-content" spellcheck="false" v-model="inputValue" v-if="!isShowPreview"></textarea>
       <div id="md-preview" v-if="isShowPreview" v-html="parsedContent"> </div>
     </div>

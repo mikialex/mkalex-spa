@@ -45,21 +45,28 @@ export default {
 
 <style lang="scss" scoped>
 .title-part {
-  padding-left: 30px;
-  padding-right: 30px;
   > .title-editor {
     width: 100%;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    font-size: 30px;
+    border: 0px;
+    font-size: 36px;
+    font-weight: bold;
     padding: 10px;
+    margin-left:-10px;
+    &:focus{
+      border-bottom: solid 3px rgb(242, 60, 60);
+    }
   }
-  > .sub-title-editor {
+  >.sub-title-editor {
     width: 100%;
     padding: 10px;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    font-size: 20px;
-    margin-top: 10px;
+    border: 0px;
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: -10px;
     margin-bottom: 20px;
+    &:focus{
+      border-bottom: solid 3px rgb(242, 60, 60);
+    }
   }
 }
 </style>

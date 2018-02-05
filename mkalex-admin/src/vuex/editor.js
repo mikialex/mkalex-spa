@@ -1,11 +1,18 @@
 
 export default {
   state: {
-    hasUrlName: false,
     urlname: '',
     title: '',
+    subTitle: '',
+    urlname: '',
+    content: '',
+    createTime: '',
+    pageView: '',
+    hasCover: false,
+    isRecommended: false,
+    contentType: '',
+    isActive: false,
 
-    subTitle:'',
   },
   mutations: {
     

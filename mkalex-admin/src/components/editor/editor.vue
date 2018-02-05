@@ -1,49 +1,49 @@
 <template>
   <div>
-    <div class="head-part">
+    <!-- <div class="head-part">
       <div class="head-left">
         <router-link :to="{ name:'home'}"  tag="i"
         class="fa fa-arrow-circle-left click-able" aria-hidden="true"></router-link>
         <h1>EDITOR</h1>
       </div>
-      <!-- <span>{{urlname}}</span> -->
       <input type="text" spellcheck="false" v-model="urlname" placeholder="id required">
 
-    </div>
+    </div> -->
 
-    <div class="title-part">
+
+    <!-- <div class="title-part">
       <input type="text" class="title-editor" :class="{'form-changed':isTitleChange}" spellcheck="false" placeholder="请输入标题"  v-model="title">
       <span v-if="isTitleChange">标题已修改！</span>
       <input type="text" class="sub-title-editor" :class="{'form-changed':isSubTitleChange}"  spellcheck="false"  placeholder="请输入副标题"    v-model="subTitle">
       <span v-if="isSubTitleChange">副标题已修改！</span>
-    </div>
+    </div> -->
 
+    <title-part></title-part>
+
+    <nav class="">
+      <div @click="changeTab('content')" :class="{'activeTab':this.currentTab==='content'}">content</div>
+      <div @click="changeTab('info')" :class="{'activeTab':this.currentTab==='info'}">info</div>
+      <div @click="changeTab('settings')" :class="{'activeTab':this.currentTab==='settings'}">settings</div>
+    </nav>
+
+    <section v-if="currentTab==='content'">
+      <content-editor :content="content" :urlname="urlname" @contentUpdate="contentUpdate"></content-editor>
+    </section>
+
+    <section  v-if="currentTab==='info'">
       <span>创建时间</span><span v-if="isCreateTimeChange">已修改</span>
       <input type="date" v-model="createTime">
       <hr>
       <span>浏览数</span><span v-if="isCreateTimeChange">已修改</span>
       <input type="number" v-model="pageView">
-      <hr>
+      <hr>  
+      <tag-editor :urlname="this.$route.params.u_name" v-if="!isNew"></tag-editor>
+    </section>
 
-      <toggle-row :isActive.sync="hasCover" :rowName="'封面图片'" :faClass="'fa-picture-o'"></toggle-row>
-
-      <toggle-row :isActive.sync="isRecommended" :rowName="'推荐内容'" :faClass="'fa-thumbs-o-up'"></toggle-row>
-
-       <!-- <div class="toggle-row">
-        <span>
-          <i class="fa fa-thumbs-o-up" ></i>
-          推荐内容
-        </span>
-        <span>
-          <i class="fa fa-undo" ></i>
-          <mk-toggle :isActive.sync="isRecommended"></mk-toggle>
-        </span>
-      </div> -->
-
-
-      <mk-toggle :isActive.sync="isActive"></mk-toggle>公开
-      <span v-if="isActiveChange">已修改</span>
-
+    <section  v-if="currentTab==='settings'">
+      <toggle-row :isActive.sync="isActive" :rowName="'是否公开'" :faClass="'fa-eye'"></toggle-row>
+      <toggle-row :isActive.sync="hasCover" :rowName="'是否有定制封面图片'" :faClass="'fa-picture-o'"></toggle-row>
+      <toggle-row :isActive.sync="isRecommended" :rowName="'是否列为推荐内容'" :faClass="'fa-thumbs-o-up'"></toggle-row>
       <hr>
       <select v-model="contentType">
         <option disabled value="">请选择类型</option>
@@ -52,24 +52,18 @@
       </select>
       <span v-if="isContentTypeChange">已修改</span>
 
-
-        <!-- <span>更新时间</span>
-      <input type="date"> -->
-
-
-    <!-- <title-part :title="title" :subTitle="subTitle" ></title-part> -->
-    <span v-if="isContentChange">内容已修改！</span>
-    <content-editor :content="content" :urlname="urlname" @contentUpdate="contentUpdate"></content-editor>
-
-    <tag-editor :urlname="this.$route.params.u_name" v-if="!isNew"></tag-editor>
-    
-    <div class="operation-part" >
+       <div class="operation-part" >
       <button @click="dropChange" class="click-able" v-if="!isNew&&canUpdate" style="color:#f00">DROP CHANGE</button>
       <button @click="updateData" class="click-able" v-if="!isNew&&canUpdate">UPDATE</button>
       <button @click="deleteData" class="click-able" v-if="!isNew" style="color:#f00">DELETE</button>
       <button @click="newData" class="click-able" v-if="isNew&&canPost" >POST</button>
       <button @click="drop" class="click-able" v-if="isNew" style="color:#f00">DROP</button>
     </div>
+    </section>
+
+
+    
+
   </div>
 </template>
 
@@ -89,6 +83,7 @@ export default {
   },
   data: function() {
     return {
+      currentTab:'content',
       urlname: "loading",
       title: "loading",
       subTitle: "loading",
@@ -179,6 +174,9 @@ export default {
         usefor:this.contentType,
         is_active:this.isActive,
       };
+    },
+    changeTab(newTab){
+      this.currentTab=newTab;
     },
 
     load() {
@@ -288,6 +286,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+nav{
+  display: flex;
+  >div{
+    padding:10px;
+    cursor: pointer;
+  }
+  >.activeTab{
+    background: #000;
+    color:#fff;
+  }
+}
 
 hr{
   border:0.5px solid rgba(0,0,0,0.1)
