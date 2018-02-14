@@ -34,25 +34,20 @@ export default {
     this.$store.commit('clearToken')
   },
   methods:{
-    login(){
+    async login(){
+      try {
+        await this.$store.dispatch('login',
+         { username: this.username, 
+         password: this.password });
+        this.$router.push({ name: 'home' });
+      } catch (error) {
+        console.error(error);
+        this.errorMessage = error;
+        setTimeout(() => {
+          this.errorMessage = '';
+        }, 1000)
+      }
 
-      this.$store.commit('add_GoingAjax')
-      axios.post(baseURL + this.$ajax.apis.login, {username:this.username,password:this.password})
-          .then(d => {
-            let data=d.data;
-            this.$store.commit('minus_GoingAjax')
-             console.log(data);
-            if(data.result==='success'){
-              this.$store.commit('setClientToken',{token:data.token})
-              this.$router.push({name:'home'})
-            }else{
-              this.errorMessage=data.message;
-              setTimeout(()=>{
-              this.errorMessage='';
-              },1000)
-            }
-          })
-      .catch(this.$ajax.handleErr(this))
     }
   }
 }

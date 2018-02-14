@@ -1,23 +1,5 @@
 <template>
   <div>
-    <!-- <div class="head-part">
-      <div class="head-left">
-        <router-link :to="{ name:'home'}"  tag="i"
-        class="fa fa-arrow-circle-left click-able" aria-hidden="true"></router-link>
-        <h1>EDITOR</h1>
-      </div>
-      <input type="text" spellcheck="false" v-model="urlname" placeholder="id required">
-
-    </div> -->
-
-
-    <!-- <div class="title-part">
-      <input type="text" class="title-editor" :class="{'form-changed':isTitleChange}" spellcheck="false" placeholder="请输入标题"  v-model="title">
-      <span v-if="isTitleChange">标题已修改！</span>
-      <input type="text" class="sub-title-editor" :class="{'form-changed':isSubTitleChange}"  spellcheck="false"  placeholder="请输入副标题"    v-model="subTitle">
-      <span v-if="isSubTitleChange">副标题已修改！</span>
-    </div> -->
-
     <title-part></title-part>
 
     <nav class="">
@@ -81,70 +63,11 @@ export default {
     "title-part": title,
     'toggle-row':toggleRow,
   },
-  data: function() {
+  data() {
     return {
-      currentTab:'content',
-      urlname: "loading",
-      title: "loading",
-      subTitle: "loading",
-      urlname: "loading",
-      content: "loading",
-      createTime:"",
-      pageView:'loading',
-      hasCover:false,
-      isRecommended:false,
-      contentType:'article',
-      isActive:false,
-
-      tags:[],
-
-      old_urlname: "",
-      old_title: "",
-      old_subTitle: "",
-      old_urlname: "",
-      old_content: "",
-      old_createTime:'',
-      old_pageView:'',
-      old_hasCover:false,
-      old_isRecommended:false,
-      old_contentType:'article',
-      old_isActive:false,
     };
   },
   computed: {
-    isNew() {
-      return this.$route.params.type === "new";
-    },
-    isTitleChange() {
-      return this.old_title !== this.title;
-    },
-    isSubTitleChange() {
-      return this.old_subTitle !== this.subTitle;
-    },
-    isContentChange() {
-      return this.content !== this.old_content;
-    },
-    isCreateTimeChange(){
-      return this.createTime!==this.old_createTime
-    },
-    isPageViewChange(){
-      return this.pageView!==this.old_pageView
-    },
-    ishasCoverChange(){
-      return this.hasCover!==this.old_hasCover
-    },
-    isRecommendedChange(){
-      return this.isRecommended!==this.old_isRecommended
-    },
-    isContentTypeChange(){
-      return this.contentType!==this.old_contentType;
-    },
-    isActiveChange(){
-      return this.isActive!==this.old_isActive;
-    },
-    canPost() {
-      return this.urlname !== "";
-    },
     canUpdate() {
       if (this.isTitleChange || this.isSubTitleChange || this.isContentTypeChange||
       this.isPageViewChange||this.ishasCoverChange||this.isRecommendedChange||
@@ -186,29 +109,6 @@ export default {
             urlname: this.$route.params.u_name
           })
           .then(data => {
-            console.log(data);
-            this.urlname = data.urlname;
-            this.title = data.title;
-            this.subTitle = data.sub_title;
-            this.content = data.content;
-            this.createTime = data.publish_time.substring(0,10);
-            this.pageView=data.page_view
-            this.hasCover=data.has_cover
-            this.isRecommended=data.is_recommended
-            this.contentType=data.usefor
-            this.isActive=data.is_active
-
-            this.old_urlname = data.urlname;
-            this.old_title = data.title;
-            this.old_subTitle = data.sub_title;
-            this.old_content = data.content;
-            this.old_createTime= this.createTime
-            this.old_pageView=this.pageView;
-            this.old_hasCover= this.hasCover
-            this.old_isRecommended=this.isRecommended;
-            this.old_contentType= this.contentType
-            this.old_isActive=this.isActive
-
             this.tags=data.tags;
           });
       } else if (this.$route.params.type === "new") {
@@ -316,36 +216,8 @@ hr{
   >span{
     font-size:18px;
   }
-  // &:hover{
-  //   background: #f5f5f5;
-  // }
 }
 
-.head-part {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  .head-left {
-    display: flex;
-    align-items: center;
-    > i {
-      font-size: 36px;
-      width: 36px;
-      line-height: 36px;
-      text-align: center;
-      border-radius: 100%;
-    }
-    > h1 {
-      margin-left: 10px;
-    }
-  }
-  > input,
-  span {
-    font-size: 20px;
-    text-align: right;
-    border: 0px;
-  }
-}
 
 .title-part {
   > .title-editor {

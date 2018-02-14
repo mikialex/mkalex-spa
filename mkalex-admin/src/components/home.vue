@@ -14,8 +14,8 @@
       <div @click="changeNav('tag')" :class="{'current-tab':this.currentNav==='tag'}">标签</div>
     </nav>
     <trans-fade>
-      <content-list :list="list" :type="'article'" v-if="this.currentNav==='article'"></content-list>
-      <content-list :list="list" :type="'portfolio'"  v-if="this.currentNav==='portfolio'"></content-list>
+      <content-list :type="'article'" v-if="this.currentNav==='article'"></content-list>
+      <content-list :type="'portfolio'"  v-if="this.currentNav==='portfolio'"></content-list>
       <div class="tags" v-if="this.currentNav==='tag'">
         <h3>TAGS GROUP</h3>
         <div class="tags-container">
@@ -36,25 +36,20 @@ export default {
   components:{
     'content-list':list,
   },
-  data: function() {
+  data() {
     return {
       currentNav:'article',
-      list: [],
-      tagList:[],
       newTagName:'',
     };
   },
   mounted() {
-    console.log(this.$store.state.token) 
-    this.$ajax.getAuth(this, this.$ajax.apis.articleListAdmin,)
-    .then(data => {
-      console.info("get article list :", data);
-      this.list = data;
-    });
-
-    this.loadTagList();
+    this.$store.dispatch('getArticleList');
+    this.$store.dispatch('getTags');
   },
   computed:{
+    tagList() {
+      return this.$store.state.tagList;
+    },
     canAddNew(){
       let find=false;
       this.tagList.forEach(tag => {
@@ -68,12 +63,6 @@ export default {
   methods:{
     logout(){
       this.$router.push({name:'login'})
-    },
-    loadTagList(){
-      this.$ajax.get(this, this.$ajax.apis.tagList).then(data => {
-        console.info("get tags list :", data);
-        this.tagList = data;
-      });
     },
     changeNav(newTab){
       this.currentNav=newTab;

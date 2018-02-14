@@ -1,5 +1,7 @@
+import { get, getAuth, post, patch, del, apis } from '../api/ajax-global';
 
 export default {
+  namespaced: true,
   state: {
     urlname: '',
     title: '',
@@ -15,9 +17,18 @@ export default {
 
   },
   mutations: {
-    
+    reset(state) { // this.$store.commit('add_GoingAjax')
+      state.goingAjax++;
+    },
   },
   actions: {
+    async getEntity({ commit, dispatch, state, getters }, urlname) {
+      getAuth(this.$ajax.apis.articleDetialAdmin, {
+        urlname: urlname
+      })
+    },
+    async updateEntityInfo({ commit, dispatch, state, getters }, urlname) {
     
+    }
   }
 }

@@ -1,25 +1,16 @@
 import axios from 'axios'
 import { baseURL } from '@/api/config'
-// import qs from 'qs'
 
 axios.defaults.timeout = 5000;
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
 
-function getToken(env) {
-  let token=env.$store.state.token
-  if (token !== '') {
-    return token
-  } else {
-    token = localStorage.getItem('token');
-  }
-  if (token !== '') {
-    return token
-  } else {
-    // env.$router.push({name:'login'})
-  }
+
+function getToken() {
+  let token = localStorage.getItem('token');
+  return token;
 }
   
-export function ajax(method, url, payload) {
+export async function  ajax(method, url, payload) {
   if (method === 'get' || method === 'post') {
     return axios({
       method: method,
@@ -31,36 +22,28 @@ export function ajax(method, url, payload) {
   }
 }
 
-export function get(env, url, payload) {
-  env.$store.commit('add_GoingAjax')
+export async function get(url, payload) {
   return axios.get(baseURL + url, {params: payload})
   .then(data => {
-    env.$store.commit('minus_GoingAjax')
     console.info('get original data',data)
     return data.data
   })
 }
 
-export function getAuth(env, url, payload) {
+export async function getAuth(url, payload) {
   if (payload) {
-    payload.token = getToken(env);
+    payload.token = getToken();
   } else {
-    payload = { token: getToken(env) };
+    payload = { token: getToken() };
   }
-  env.$store.commit('add_GoingAjax')
-  return axios.get(baseURL + url, {params: payload})
-  .then(data => {
-    env.$store.commit('minus_GoingAjax')
-    console.info('get original data',data)
-    return data.data
-  })
+  const d = await axios.get(baseURL + url, { params: payload });
+  console.info('auth get ' + url, d)
+  return d.data;
 }
 
-export function patch(env, url, payload) {
-  env.$store.commit('add_GoingAjax')
+export async function patch(url, payload) {
   return axios.patch(baseURL + url, {params: payload})
   .then(data => {
-    env.$store.commit('minus_GoingAjax')
     console.info('get original data', data);
     if (data.data.result === 'success') {
       return data.data
@@ -71,11 +54,9 @@ export function patch(env, url, payload) {
   })
 }
 
-export function del(env, url, payload) {
-  env.$store.commit('add_GoingAjax')
+export async function del(url, payload) {
   return axios.delete(baseURL + url, {params: payload})
   .then(data => {
-    env.$store.commit('minus_GoingAjax')
     console.info('get original data', data)
     if (data.data.result === 'success') {
       return data.data
@@ -87,11 +68,9 @@ export function del(env, url, payload) {
 }
 
 
-export function post(env, url, payload) {
-  env.$store.commit('add_GoingAjax')
+export async function post(url, payload) {
   return axios.post(baseURL + url, payload)
     .then(data => {
-      env.$store.commit('minus_GoingAjax')
       if (data.data.result === 'success') {
         return data.data
       } else if(data.data.result === 'authfail') {
@@ -113,6 +92,7 @@ export const apis = {
   articleList: 'articles',
   articleContent: 'articles/content',
   articleListAdmin: 'articles/admin',
+
   articleTagList:'articles/tags',
   articleTag:'articles/tag',
   articleDetial: 'articles/article',

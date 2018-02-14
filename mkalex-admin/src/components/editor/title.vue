@@ -1,18 +1,31 @@
 <template>
   <div class="title-part">
-    <input type="text" class="title-editor" :class="{'form-changed':isTitleChange}" spellcheck="false" placeholder="请输入标题"  v-model="inputTitle">
-    <input type="text" class="sub-title-editor" spellcheck="false"  placeholder="请输入副标题"    v-model="inputSubTitle">
+    <input type="text" 
+        class="title-editor" 
+        :class="{'form-changed':isTitleChange}" 
+        spellcheck="false" 
+        placeholder="请输入标题"  
+        v-model="inputTitle">
+    <input type="text" 
+        class="sub-title-editor"
+        spellcheck="false"
+         placeholder="请输入副标题"   
+        v-model="inputSubTitle">
   </div>
 </template>
 
 <script>
 export default {
   name: 'content-editor',
-  data:function(){
+  data(){
     return {
       inputTitle:'',
       inputSubTitle:'',
     }
+  },
+  mounted(){
+    this.inputTitle = this.$store.editor.title;
+    this.inputSubTitle = this.$store.editor.subTitle;
   },
   props:{
     title:{required:true},

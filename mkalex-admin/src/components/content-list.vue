@@ -22,7 +22,7 @@ export default {
   props:['list','type'],
   computed:{
     subList(){
-      return this.list.filter((item)=>{
+      return this.$store.state.entityList.filter((item)=>{
         return item.usefor===this.type
       })
     }
