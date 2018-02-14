@@ -43,7 +43,7 @@ export default {
     };
   },
   mounted() {
-    this.$store.dispatch('getArticleList');
+    this.$store.dispatch('getEntityList');
     this.$store.dispatch('tag/getTags');
   },
   computed:{
@@ -68,27 +68,10 @@ export default {
       this.currentNav=newTab;
     },
     addNewtag(){
-      this.$ajax
-        .post(this, this.$ajax.apis.tag, {token:this.$store.state.token,tagName:this.newTagName})
-        .then(data => {
-          console.log(data);
-          if (data.result === "success") {
-            this.newTagName='';
-            this.loadTagList();
-          }
-        })
-        .catch(this.$ajax.handleErr(this));
+      this.$store.dispatch('tag/addNewTags', this.newTagName);
     },
     deleteTag(tagName){
-      this.$ajax
-        .del(this, this.$ajax.apis.tag, {token:this.$store.state.token,tagName:tagName})
-        .then(data => {
-          console.log(data);
-          if (data.result === "success") {
-            this.loadTagList()
-          }
-        })
-        .catch(this.$ajax.handleErr(this));
+      this.$store.dispatch('tag/deleteTags', tagName);
     }
 
   }

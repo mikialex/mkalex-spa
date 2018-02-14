@@ -2,14 +2,24 @@
   <ul class="article-ui">
     <h3 v-if="this.type==='article'">ARTICLE LIST</h3>
     <h3 v-if="this.type==='portfolio'">PORTFOLIO LIST</h3>
-    <router-link :to="{ name:'editor',params:{u_name:'default',type:'new'} }" tag="li" class="article-li add-article-li">
+    <li class="article-li add-article-li"
+      v-if="!isCreating"
+      @click="startCreateNew">
       <h4>ADD NEW</h4>
-    </router-link>
+    </li>
+    <li class="article-li" v-if="isCreating">
+        url of your new content: 
+        <input type="text" v-model="newUrlName">
+        <button @click="createNew" :disabled="!isNewUrlValid">create</button>
+        <button @click="dropNew">drop</button>
+    </li>
     <router-link v-for="item in subList" :key="item.urlname" class="article-li" 
     :class="{'draft':!item.is_active}"
-    :to="{ name:'editor',params:{u_name:item.urlname,type:'update'} }" tag="li">
-      <h1>{{item.title}}<span>{{item.urlname}}</span> </h1>
-      <h2>{{item.sub_title}}</h2>
+    :to="{ name:'editor',params:{u_name:item.urlname} }" tag="li">
+      <h1 v-if="item.title!==''">{{item.title}}<span>{{item.urlname}}</span> </h1>
+      <h2  v-if="item.sub_title!==''">{{item.sub_title}}</h2>
+      <h1 v-if="item.title===''">no title<span>{{item.urlname}}</span> </h1>
+      <h2 v-if="item.sub_title===''">no sub title</h2>
       <span>created at: {{item.publish_time}}</span>
       <span>page view: {{item.page_view}}</span>
       <span>usefor: {{item.usefor}}</span>
@@ -19,12 +29,34 @@
 
 <script>
 export default {
-  props:['list','type'],
+  props:['type'],
+  data(){
+    return{
+      isCreating: false,
+      newUrlName: ''
+    }
+  },
   computed:{
     subList(){
       return this.$store.state.entityList.filter((item)=>{
         return item.usefor===this.type
       })
+    },
+    isNewUrlValid(){
+      return this.newUrlName!=='';
+    }
+  },
+  methods:{
+    startCreateNew(){
+      this.isCreating = true;
+    },
+    dropNew(){
+      this.isCreating = false;
+    },
+    async createNew(){
+      const data = await this.$store.dispatch('createNewEmptyEntity',
+      {urlName: this.newUrlName, type: this.type});
+      this.$router.push({ name:'editor',params:{u_name:this.newUrlName} });
     }
   }
 }

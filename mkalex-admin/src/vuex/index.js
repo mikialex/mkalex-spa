@@ -39,11 +39,12 @@ export default new Vuex.Store({
   actions: {
     async login({ commit, dispatch, state, getters }, { username, password }) {
       try {
-        const data = await axios.post(baseURL + apis.login, { username, password })
+        const d = await axios.post(baseURL + apis.login, { username, password });
+        const data = d.data;
         if (data.result === 'success') {
-          commit('setClientToken', { token: data.token })
+          commit('setClientToken', { token:data.token })
         } else {
-          throw data.message;
+          throw d;
         }
       } catch (error) {
         throw error
@@ -54,10 +55,33 @@ export default new Vuex.Store({
 
     },
 
-    async getArticleList({ commit, dispatch, state, getters }) {
+    async getEntityList({ commit, dispatch, state, getters }) {
       const data = await getAuth(apis.articleListAdmin);
       commit('setEntityList', data);
     },
+
+    async createNewEmptyEntity({ commit, dispatch, state, getters }, { urlName, type }) {
+      const date = new Date().toLocaleDateString();
+      console.log(date);
+      const details = {
+        urlname: urlName,
+        title: '',
+        sub_title: '',
+        content: '',
+        visit: 1,
+        has_cover: false,
+        create_time:date,
+        is_recommended: false,
+        usefor: type,
+        is_active: false,
+      }
+      const data = await post(apis.articleDetial, details);
+      if (data.result === 'success') {
+        return data;
+      } else {
+        throw data;
+      }
+    }
 
 
   },

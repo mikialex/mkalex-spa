@@ -27,10 +27,6 @@ export default {
     this.inputTitle = this.$store.editor.title;
     this.inputSubTitle = this.$store.editor.subTitle;
   },
-  props:{
-    title:{required:true},
-    subTitle:{required:true},
-  },
   mounted(){
     this.inputTitle=this.title;
     this.inputSubTitle=this.subTitle;

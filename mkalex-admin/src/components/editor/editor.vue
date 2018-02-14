@@ -13,10 +13,10 @@
     </section>
 
     <section  v-if="currentTab==='info'">
-      <span>创建时间</span><span v-if="isCreateTimeChange">已修改</span>
+      <span>创建时间</span>
       <input type="date" v-model="createTime">
       <hr>
-      <span>浏览数</span><span v-if="isCreateTimeChange">已修改</span>
+      <span>浏览数</span>
       <input type="number" v-model="pageView">
       <hr>  
       <tag-editor :urlname="this.$route.params.u_name" v-if="!isNew"></tag-editor>
@@ -35,16 +35,11 @@
       <span v-if="isContentTypeChange">已修改</span>
 
        <div class="operation-part" >
-      <button @click="dropChange" class="click-able" v-if="!isNew&&canUpdate" style="color:#f00">DROP CHANGE</button>
-      <button @click="updateData" class="click-able" v-if="!isNew&&canUpdate">UPDATE</button>
-      <button @click="deleteData" class="click-able" v-if="!isNew" style="color:#f00">DELETE</button>
-      <button @click="newData" class="click-able" v-if="isNew&&canPost" >POST</button>
-      <button @click="drop" class="click-able" v-if="isNew" style="color:#f00">DROP</button>
+      <button @click="updateData" >UPDATE</button>
+      <button @click="deleteData" >DELETE</button>
+      <!-- <button @click="drop"  v-if="isNew" style="color:#f00">DROP</button> -->
     </div>
     </section>
-
-
-    
 
   </div>
 </template>
@@ -65,122 +60,51 @@ export default {
   },
   data() {
     return {
+      currentTab: 'content',
+
+      urlname:'',
+      title : '',
+      subTitle: '',
+      content: '',
+      createTime: '',
+      pageView: '',
+      hasCover: false,
+      isRecommended: false,
+      contentType: '',
+      isActive: false,
     };
   },
   computed: {
-    canUpdate() {
-      if (this.isTitleChange || this.isSubTitleChange || this.isContentTypeChange||
-      this.isPageViewChange||this.ishasCoverChange||this.isRecommendedChange||
-      this.isContentChange|| this.isCreateTimeChange||this.isActiveChange) {
-        return true;
-      } else {
-        return false;
-      }
-    }
+    // createTime:{
+    //   get(){
+    //     return this.$store.state.editor.createTime
+    //   },
+    //   set(value){
+    //     this.$store.commit('editor/setInfo',)
+    //   }
+    // }
   },
   mounted() {
-    this.load();
+    this.$store.dispatch('editor/getEntity',this.$route.params.u_name);
   },
   methods: {
-    gatherValue() {
-      return {
-        token: this.$store.state.token,
-        origin_url: this.$route.params.u_name,
-        urlname: this.urlname,
-        title: this.title,
-        sub_title: this.subTitle,
-        content: this.content,
-        visit: this.pageView,
-        has_cover: this.hasCover,
-        create_time: this.createTime,
-        is_recommended: this.isRecommended,
-        usefor:this.contentType,
-        is_active:this.isActive,
-      };
-    },
     changeTab(newTab){
       this.currentTab=newTab;
-    },
-
-    load() {
-      if (this.$route.params.type === "update") {
-        this.$ajax
-          .getAuth(this, this.$ajax.apis.articleDetialAdmin, {
-            urlname: this.$route.params.u_name
-          })
-          .then(data => {
-            this.tags=data.tags;
-          });
-      } else if (this.$route.params.type === "new") {
-        this.urlname = "";
-        this.title = "";
-        this.subTitle = "";
-        this.content = "";
-      }
-    },
-
-    updateData() {
-      this.$ajax
-        .patch(this, this.$ajax.apis.articleDetial, this.gatherValue())
-        .then(data => {
-          if (data.result === "success") {
-            this.load();
-          }
-        })
-        .catch(this.$ajax.handleErr(this));
-    },
-
+    },    
     contentUpdate(content) {
       this.content = content;
     },
 
-    deleteData() {
-      this.$ajax
-        .del(this, this.$ajax.apis.articleDetial, {
-          urlname: this.$route.params.u_name,
-          token: this.$store.state.token
-        })
-        .then(data => {
-          console.log(data);
-          if (data.result === "success") {
-            this.$router.push({ name: "home" });
-          }
-        })
-        .catch(this.$ajax.handleErr(this));
+    async updateData() {
+      await this.$store.dispatch('editor/updateEntityInfo');
     },
-
-    newData() {
-      let oldurl = this.urlname;
-      this.$ajax
-        .post(this, this.$ajax.apis.articleDetial, this.gatherValue())
-        .then(data => {
-          console.log(data);
-          if (data.result === "success") {
-            console.log("goto");
-            this.$router.push({
-              name: "editor",
-              params: { u_name: oldurl, type: "update" }
-            });
-             this.load();
-          }
-        })
-        .catch(this.$ajax.handleErr(this));
+    async deleteData() {
+      const data = await this.$store.dispatch('editor/getEntity',this.$route.params.u_name);
+      this.$router.push({ name: "home" });
     },
     drop() {
       this.$router.push({ name: "home" });
     },
-    dropChange() {
-      this.urlname=this.old_urlname
-      this.title = this.old_title;
-      this.subTitle = this.old_subTitle;
-      this.content = this.old_content;
-      this.createTime = this.old_createTime;
-      this.pageView=this.old_pageView
-      this.hasCover=this.old_hasCover
-      this.isRecommended=this.old_isRecommended
-      this.contentType=this.old_contentType
-      this.isActive=this.old_isActive
-    }
   }
 };
 </script>

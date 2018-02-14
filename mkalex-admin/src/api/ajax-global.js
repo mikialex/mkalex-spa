@@ -9,6 +9,16 @@ function getToken() {
   let token = localStorage.getItem('token');
   return token;
 }
+
+function addToken(p) {
+  let payload = p;
+  if (payload) {
+    payload.token = getToken();
+  } else {
+    payload = { token: getToken() };
+  }
+  return payload;
+}
   
 export async function  ajax(method, url, payload) {
   if (method === 'get' || method === 'post') {
@@ -31,12 +41,7 @@ export async function get(url, payload) {
 }
 
 export async function getAuth(url, payload) {
-  if (payload) {
-    payload.token = getToken();
-  } else {
-    payload = { token: getToken() };
-  }
-  const d = await axios.get(baseURL + url, { params: payload });
+  const d = await axios.get(baseURL + url, { params: addToken(payload) });
   console.info('auth get ' + url, d)
   return d.data;
 }
@@ -47,21 +52,21 @@ export async function patch(url, payload) {
     console.info('get original data', data);
     if (data.data.result === 'success') {
       return data.data
-    } else if(data.data.result === 'authfail') {
-      env.$router.push({name:'login'})
+    } else if (data.data.result === 'authfail') {
+      window.location = '/#/login'
       throw 'authfail'
     }
   })
 }
 
 export async function del(url, payload) {
-  return axios.delete(baseURL + url, {params: payload})
+  return axios.delete(baseURL + url, { params: addToken(payload)})
   .then(data => {
     console.info('get original data', data)
     if (data.data.result === 'success') {
       return data.data
-    } else if(data.data.result === 'authfail') {
-      env.$router.push({name:'login'})
+    } else if (data.data.result === 'authfail') {
+      window.location = '/#/login'
       throw 'authfail'
     }
   })
@@ -69,12 +74,12 @@ export async function del(url, payload) {
 
 
 export async function post(url, payload) {
-  return axios.post(baseURL + url, payload)
+  return axios.post(baseURL + url, addToken(payload))
     .then(data => {
       if (data.data.result === 'success') {
         return data.data
-      } else if(data.data.result === 'authfail') {
-        env.$router.push({name:'login'})
+      } else if (data.data.result === 'authfail') {
+        window.location = '/#/login'
         throw 'authfail'
       }
     })
