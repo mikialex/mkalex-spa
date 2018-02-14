@@ -44,11 +44,11 @@ export default {
   },
   mounted() {
     this.$store.dispatch('getArticleList');
-    this.$store.dispatch('getTags');
+    this.$store.dispatch('tag/getTags');
   },
   computed:{
     tagList() {
-      return this.$store.state.tagList;
+      return this.$store.state.tag.tagList;
     },
     canAddNew(){
       let find=false;

@@ -1,11 +1,14 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import axios from 'axios';
 
-import editor from './editor.js'
 Vue.use(Vuex);
 import { get, getAuth, post, patch, del, apis } from '../api/ajax-global';
-import axios from 'axios';
 import { baseURL } from '@/api/config'
+
+
+import editor from './editor'
+import tag from './tag'
 
 
 export default new Vuex.Store({
@@ -13,7 +16,6 @@ export default new Vuex.Store({
     goingAjax: 0, 
     token: '',
     entityList: [],
-    tagList:[],
   },
   mutations: {
     add_GoingAjax(state) { 
@@ -32,9 +34,6 @@ export default new Vuex.Store({
     },
     setEntityList(state, list) {
       state.entityList = list;
-    },
-    setTagList(state, list) {
-      state.tagList = list;
     },
   },
   actions: {
@@ -60,13 +59,9 @@ export default new Vuex.Store({
       commit('setEntityList', data);
     },
 
-    async getTags({ commit, dispatch, state, getters }) {
-      const data = await getAuth(apis.tagList);
-      commit('setTagList', data);
-    },
 
   },
   modules: {
-    editor,
+    editor, tag
   },
 })
