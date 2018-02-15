@@ -49,40 +49,58 @@ export default {
     setUrlName(state, urlName) {
       state.urlname = urlName;
     },
-    setTitle(state, { title, subTitle }) {
+    setTitle(state, title) {
       state.title = title;
+    },
+    setSubTitle(state, subTitle) {
       state.subTitle = subTitle;
     },
     setContent(state, content) {
       state.content = content;
     },
-    setInfo(state, { createTime, pageView, hasCover, isRecommended, contentType, isActive }) {
+    setCreateTime(state, createTime) {
       state.createTime = createTime;
+    },
+    setPageView(state, pageView) {
       state.pageView = pageView;
+    },
+    setHasCover(state, hasCover) {
       state.hasCover = hasCover;
+    },
+    setIsRecommended(state, isRecommended) {
       state.isRecommended = isRecommended;
+    },
+    setContentType(state, contentType) {
       state.contentType = contentType;
+    },
+    setIsActive(state, isActive) {
       state.isActive = isActive;
     },
   },
   actions: {
     async getEntity({ commit, dispatch, state, getters }, urlname) {
       commit('setUrlName', urlname);
-      const data = await getAuth(this.$ajax.apis.articleDetialAdmin, {
+      const data = await getAuth(apis.articleDetialAdmin, {
         urlname: urlname
       });
-      commit('setTitle', data);
-      commit('setContent', data);
-      commit('setInfo', data);
+      commit('setTitle', data.title);
+      commit('setSubTitle', data.sub_title);
+      commit('setContent', data.content);
+      commit('setCreateTime', data.publish_time);
+      commit('setPageView', data.page_view);
+      commit('setHasCover', data.has_cover);
+      commit('setIsRecommended', data.is_recommended);
+      commit('setContentType', data.usefor);
+      commit('setIsActive', data.is_active);
 
     },
     async updateEntityInfo({ commit, dispatch, state, getters }) {
-      const data = await patch(this.$ajax.apis.articleDetial, gatherValue(state));
+      const data = await patch(apis.articleDetial, gatherValue(state));
 
     },
 
     async deleteEntity({ commit, dispatch, state, getters }, urlname) {
-      const data = await del(this.$ajax.apis.articleDetial, {
+      const data = await del(apis.articleDetial, {
         urlname: urlname
       })
       if (data.result === "success") {

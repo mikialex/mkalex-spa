@@ -2,15 +2,14 @@
   <div class="title-part">
     <input type="text" 
         class="title-editor" 
-        :class="{'form-changed':isTitleChange}" 
         spellcheck="false" 
         placeholder="请输入标题"  
-        v-model="inputTitle">
+        v-model="title">
     <input type="text" 
         class="sub-title-editor"
         spellcheck="false"
          placeholder="请输入副标题"   
-        v-model="inputSubTitle">
+        v-model="subTitle">
   </div>
 </template>
 
@@ -19,35 +18,27 @@ export default {
   name: 'content-editor',
   data(){
     return {
-      inputTitle:'',
-      inputSubTitle:'',
     }
-  },
-  mounted(){
-    this.inputTitle = this.$store.editor.title;
-    this.inputSubTitle = this.$store.editor.subTitle;
-  },
-  mounted(){
-    this.inputTitle=this.title;
-    this.inputSubTitle=this.subTitle;
   },
   computed: {
-    isTitleChange(){
-      return this.inputTitle !== this.title;
-    }
-  },
-  watch:{
-    inputTitle(newValue){
-      this.$emit('newTitle', newValue);
+    title:{
+      get(){
+        return this.$store.state.editor.title;
+      },
+      set(val){
+        this.$store.commit('editor/setTitle', val);
+      }
     },
-    inputSubTitle(newValue){
-      this.$emit('newSubTitle', newValue);
+    subTitle:{
+      get(){
+        return this.$store.state.editor.subTitle;
+      },
+      set(val){
+        this.$store.commit('editor/setSubTitle', val);
+      }
     },
   },
   methods:{
-    // update(){
-    //   this.$emit('update:title', newValue)
-    // },
   }
 }
 </script>

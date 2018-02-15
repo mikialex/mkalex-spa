@@ -29,31 +29,38 @@
       </div>
    </div>
 
-   <textarea id="md-content" spellcheck="false" v-model="inputValue" v-if="!isShowPreview"></textarea>
+   <textarea id="md-content" spellcheck="false" v-model="content" v-if="!isShowPreview"></textarea>
       <div id="md-preview" v-if="isShowPreview" v-html="parsedContent"> </div>
   </div>
 </template>
 
 <script>
 var marked = require('marked');
-import ce from './content-editor.vue'
 export default {
   components:{
-    'content-editor':ce
   },
-  data:function(){
+  data(){
     return {
       isShowPreview: false
     }
   },
-  props:{
-    content:{required:true},
-    urlname:{required:true},
+  computed: {
+    parsedContent() {
+      let urlbase =
+        process.env.STATIC_ROOT + "image/content/" + this.$store.state.editor.urlname + "/";
+      let p = this.content.replace(/{#base#}/g, urlbase);
+      return marked(p);
+    },
+    content:{
+      get(){
+        return this.$store.state.editor.content;
+      },
+      set(value){
+        this.$store.commit('editor/setContent',value);
+      }
+    }
   },
   methods:{
-    updateData(value){
-      this.$emit('contentUpdate',value);
-    },
     togglePreview(){
       this.isShowPreview=!this.isShowPreview;
     }

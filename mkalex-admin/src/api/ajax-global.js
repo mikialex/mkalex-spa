@@ -47,7 +47,7 @@ export async function getAuth(url, payload) {
 }
 
 export async function patch(url, payload) {
-  return axios.patch(baseURL + url, {params: payload})
+  return await axios.patch(baseURL + url, {params: payload})
   .then(data => {
     console.info('get original data', data);
     if (data.data.result === 'success') {
@@ -60,9 +60,9 @@ export async function patch(url, payload) {
 }
 
 export async function del(url, payload) {
-  return axios.delete(baseURL + url, { params: addToken(payload)})
+  return await axios.delete(baseURL + url, { params: addToken(payload)})
   .then(data => {
-    console.info('get original data', data)
+    console.info('delete response data', data)
     if (data.data.result === 'success') {
       return data.data
     } else if (data.data.result === 'authfail') {
@@ -74,7 +74,7 @@ export async function del(url, payload) {
 
 
 export async function post(url, payload) {
-  return axios.post(baseURL + url, addToken(payload))
+  return await axios.post(baseURL + url, addToken(payload))
     .then(data => {
       if (data.data.result === 'success') {
         return data.data

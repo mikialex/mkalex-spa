@@ -1,15 +1,18 @@
 <template>
-  <div>
+  <div class="editor">
+    <opration-bar></opration-bar>
     <title-part></title-part>
-
     <nav class="">
-      <div @click="changeTab('content')" :class="{'activeTab':this.currentTab==='content'}">content</div>
-      <div @click="changeTab('info')" :class="{'activeTab':this.currentTab==='info'}">info</div>
-      <div @click="changeTab('settings')" :class="{'activeTab':this.currentTab==='settings'}">settings</div>
+      <div @click="changeTab('content')" :class="{'activeTab':this.currentTab==='content'}"><i class="fas fa-edit"></i>
+        content</div>
+      <div @click="changeTab('info')" :class="{'activeTab':this.currentTab==='info'}"><i class="fas fa-list-alt"></i>
+      info</div>
+      <div @click="changeTab('settings')" :class="{'activeTab':this.currentTab==='settings'}"><i class="fas fa-cogs"></i>
+      settings</div>
     </nav>
 
     <section v-if="currentTab==='content'">
-      <content-editor :content="content" :urlname="urlname" @contentUpdate="contentUpdate"></content-editor>
+      <content-editor ></content-editor>
     </section>
 
     <section  v-if="currentTab==='info'">
@@ -19,7 +22,7 @@
       <span>浏览数</span>
       <input type="number" v-model="pageView">
       <hr>  
-      <tag-editor :urlname="this.$route.params.u_name" v-if="!isNew"></tag-editor>
+      <tag-editor :urlname="this.$route.params.u_name" ></tag-editor>
     </section>
 
     <section  v-if="currentTab==='settings'">
@@ -32,11 +35,8 @@
         <option>article</option>
         <option>portfolio</option>
       </select>
-      <span v-if="isContentTypeChange">已修改</span>
 
        <div class="operation-part" >
-      <button @click="updateData" >UPDATE</button>
-      <button @click="deleteData" >DELETE</button>
       <!-- <button @click="drop"  v-if="isNew" style="color:#f00">DROP</button> -->
     </div>
     </section>
@@ -49,6 +49,7 @@ import contentEditor from "./content.vue";
 import title from "./title.vue";
 import tagEditor from "./tag-editor.vue";
 import toggleRow from './toggle-row.vue';
+import oprationBar from './opration-bar.vue';
 
 export default {
   name: "editor",
@@ -57,32 +58,63 @@ export default {
     'tag-editor':tagEditor,
     "title-part": title,
     'toggle-row':toggleRow,
+    'opration-bar':oprationBar
   },
   data() {
     return {
-      currentTab: 'content',
-
-      urlname:'',
-      title : '',
-      subTitle: '',
-      content: '',
-      createTime: '',
-      pageView: '',
-      hasCover: false,
-      isRecommended: false,
-      contentType: '',
-      isActive: false,
+      currentTab: 'content'
     };
   },
   computed: {
-    // createTime:{
-    //   get(){
-    //     return this.$store.state.editor.createTime
-    //   },
-    //   set(value){
-    //     this.$store.commit('editor/setInfo',)
-    //   }
-    // }
+    createTime:{
+      get(){
+        return this.$store.state.editor.createTime;
+      },
+      set(val){
+        this.$store.commit('editor/setCreateTime',val)
+      }
+    },
+    pageView:{
+      get(){
+        return this.$store.state.editor.pageView;
+      },
+      set(val){
+        this.$store.commit('editor/setPageView',val)
+      }
+    },
+
+    isActive:{
+      get(){
+        return this.$store.state.editor.isActive;
+      },
+      set(val){
+        this.$store.commit('editor/setIsActive',val)
+      }
+    },
+    hasCover:{
+      get(){
+        return this.$store.state.editor.hasCover;
+      },
+      set(val){
+        this.$store.commit('editor/setHasCover',val)
+      }
+    },
+    isRecommended:{
+      get(){
+        return this.$store.state.editor.isRecommended;
+      },
+      set(val){
+        this.$store.commit('editor/setIsRecommended',val)
+      }
+    },
+    contentType:{
+      get(){
+        return this.$store.state.editor.contentType;
+      },
+      set(val){
+        this.$store.commit('editor/setContentType',val)
+      }
+    }
   },
   mounted() {
     this.$store.dispatch('editor/getEntity',this.$route.params.u_name);
@@ -90,26 +122,15 @@ export default {
   methods: {
     changeTab(newTab){
       this.currentTab=newTab;
-    },    
-    contentUpdate(content) {
-      this.content = content;
-    },
-
-    async updateData() {
-      await this.$store.dispatch('editor/updateEntityInfo');
-    },
-    async deleteData() {
-      const data = await this.$store.dispatch('editor/getEntity',this.$route.params.u_name);
-      this.$router.push({ name: "home" });
-    },
-    drop() {
-      this.$router.push({ name: "home" });
-    },
+    }, 
   }
 };
 </script>
 
 <style lang="scss" scoped>
+.editor{
+  margin-top:30px;
+}
 
 nav{
   display: flex;
