@@ -1,4 +1,5 @@
 import { get, getAuth, post, patch, del, apis } from '../api/ajax-global';
+import { Message } from 'element-ui';
 
 function gatherValue(state) {
   return {
@@ -96,7 +97,7 @@ export default {
     },
     async updateEntityInfo({ commit, dispatch, state, getters }) {
       const data = await patch(apis.articleDetial, gatherValue(state));
-
+      Message.success('update success');
     },
 
     async deleteEntity({ commit, dispatch, state, getters }, urlname) {

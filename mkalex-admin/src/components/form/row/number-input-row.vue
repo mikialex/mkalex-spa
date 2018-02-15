@@ -4,14 +4,12 @@
     <i class="fa" :class="[faClass]"></i>
     {{rowName}}
   </span>
-  <el-select v-model="value" placeholder="请选择">
-    <el-option
-      v-for="item in options"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value">
-    </el-option>
-  </el-select>
+  <el-input-number 
+  class="size"
+  v-model="inner_value" 
+  :min="0" 
+  label="描述文字"
+  ></el-input-number>
 </div>
 </template>
 
@@ -19,9 +17,6 @@
 export default {
   props:{
     value:{
-      required:true,
-    },
-    options:{
       required:true,
     },
     rowName:{
@@ -36,12 +31,15 @@ export default {
       inner_value:''
     }
   },
+  mounted(){
+    this.inner_value=this.value;
+  },
   watch:{
     value:function(newStates){
       this.inner_value=newStates;
     },
     inner_value:function(newStates){
-      this.$emit('update:isActive', newStates);
+      this.$emit('update:value', newStates);
     }
   }
 }
@@ -59,9 +57,17 @@ export default {
   border-bottom: 1px solid rgba(0,0,0,0.1);
   border-top: 1px solid rgba(0,0,0,0.1);
   margin-top:-1px ;
+  transition: 200ms;
+  &:hover{
+    background: rgb(250, 250, 250);
+  }
   >span{
     font-size:16px;
   }
+}
+
+.size{
+  width:150px;
 }
 
 </style>

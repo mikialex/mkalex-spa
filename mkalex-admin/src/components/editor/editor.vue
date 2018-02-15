@@ -11,37 +11,28 @@
       settings</div>
     </nav>
 
-    <section v-if="currentTab==='content'">
-      <content-editor ></content-editor>
-    </section>
+    <trans-fade>
+      <section v-if="currentTab==='content'" class="tab-sec">
+        <content-editor ></content-editor>
+      </section>
+    </trans-fade>
 
-    <section  v-if="currentTab==='info'">
-      <span>创建时间</span>
-      <input type="date" v-model="createTime">
-      <hr>
-      <span>浏览数</span>
-      <input type="number" v-model="pageView">
-      <hr>  
-      <tag-editor :urlname="this.$route.params.u_name" ></tag-editor>
-    </section>
+   <trans-fade>
+      <section  v-if="currentTab==='info'" class="tab-sec">
+        <date-input-row :value.sync="createTime" :rowName="'创建时间'" :faClass="'fa-calendar-alt'"></date-input-row>
+        <number-input-row :value.sync="pageView" :rowName="'浏览数'" :faClass="'fa-calendar-alt'"></number-input-row>
+        <tag-editor :urlname="this.$route.params.u_name" ></tag-editor>
+      </section>
+    </trans-fade>
 
-    <section  v-if="currentTab==='settings'">
-      <toggle-row :isActive.sync="isActive" :rowName="'是否公开'" :faClass="'fa-eye'"></toggle-row>
-      <toggle-row :isActive.sync="hasCover" :rowName="'是否有定制封面图片'" :faClass="'fa-image'"></toggle-row>
-      <toggle-row :isActive.sync="isRecommended" :rowName="'是否列为推荐内容'" :faClass="'fa-thumbs-up'"></toggle-row>
-      <select-row :value.sync="contentType" :rowName="'内容分类'" :options="typeOptions" :faClass="'fa-thumbs-up'"></select-row>
-
-      <hr>
-      <select v-model="contentType">
-        <option disabled value="">请选择类型</option>
-        <option>article</option>
-        <option>portfolio</option>
-      </select>
-
-       <div class="operation-part" >
-      <!-- <button @click="drop"  v-if="isNew" style="color:#f00">DROP</button> -->
-    </div>
-    </section>
+    <trans-fade>
+      <section  v-if="currentTab==='settings'" class="tab-sec">
+        <toggle-row :isActive.sync="isActive" :rowName="'是否公开'" :faClass="'fa-eye'"></toggle-row>
+        <toggle-row :isActive.sync="hasCover" :rowName="'是否有定制封面图片'" :faClass="'fa-image'"></toggle-row>
+        <toggle-row :isActive.sync="isRecommended" :rowName="'是否列为推荐内容'" :faClass="'fa-thumbs-up'"></toggle-row>
+        <select-row :value.sync="contentType" :rowName="'内容分类'" :options="typeOptions" :faClass="'fa-archive'"></select-row>
+      </section>
+    </trans-fade>
 
   </div>
 </template>
@@ -50,8 +41,10 @@
 import contentEditor from "./content.vue";
 import title from "./title.vue";
 import tagEditor from "./tag-editor.vue";
-import toggleRow from './toggle-row.vue';
-import selectRow from './select-row.vue';
+import toggleRow from '../form/row/toggle-row.vue';
+import selectRow from '../form/row/select-row.vue';
+import dateRow from '../form/row/date-input-row.vue';
+import numberRow from '../form/row/number-input-row.vue';
 import oprationBar from './opration-bar.vue';
 
 export default {
@@ -62,6 +55,8 @@ export default {
     "title-part": title,
     'toggle-row':toggleRow,
     'select-row':selectRow,
+    'date-input-row':dateRow,
+    'number-input-row':numberRow,
     'opration-bar':oprationBar
   },
   data() {
@@ -155,8 +150,9 @@ nav{
   }
 }
 
-hr{
-  border:0.5px solid rgba(0,0,0,0.1)
+
+.tab-sec{
+  padding-top:20px;
 }
 
 .toggle-row{

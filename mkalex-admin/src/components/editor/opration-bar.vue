@@ -4,18 +4,23 @@
       <div class="delete-confirm">
         <i class="fas fa-exclamation-triangle"></i>确定要删除此内容?
         <div>
-          <button @click="deleteData">CONFIRM</button>
+          <button @click="deleteData" class="danger">CONFIRM</button>
           <button @click="cancel">CANCEL</button>
         </div>
       </div>
     </div>
     <div class="top-center">
-      <button @click="backToHome"><i class="fas fa-arrow-left"></i> 
-      BACK</button>
-      <div>
+      <div class="group">
+        <button @click="backToHome"><i class="fas fa-arrow-left"></i> 
+        BACK</button>
+        <span class="title">
+          TYPEWRITER
+        </span>
+      </div>
+      <div class="group">
         <button @click="updateData" ><i class="fas fa-sync"></i>
         UPDATE</button>
-        <button @click="showDeleteWarning" ><i class="fas fa-trash-alt"></i>
+        <button @click="showDeleteWarning" class="danger"><i class="fas fa-trash-alt"></i>
         DELETE</button>
       </div>
     </div>
@@ -62,6 +67,7 @@ export default {
   >.top-center{
     width: calc(80vw + 60px);
     margin: auto;
+    height:50px;
     @media(max-width: 500px) {
       padding: 5px;
       width:95%;
@@ -87,8 +93,22 @@ button{
   }
 }
 
-.danger{
+.group{
+  display: flex;
+  align-items: center;
+}
 
+.title{
+  color: rgb(48, 48, 48);
+  text-shadow: 0px 1px 0px rgb(90, 90, 90);
+  font-weight:900;
+  font-size: 40px;
+}
+
+.danger{
+  &:hover{
+    background: rgb(221, 42, 42);
+  }
 }
 
 .model-mask{

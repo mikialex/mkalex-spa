@@ -49,6 +49,10 @@ export default {
   border-bottom: 1px solid rgba(0,0,0,0.1);
   border-top: 1px solid rgba(0,0,0,0.1);
   margin-top:-1px ;
+  transition: 200ms;
+  &:hover{
+    background: rgb(250, 250, 250);
+  }
   >span{
     font-size:16px;
   }

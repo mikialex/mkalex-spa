@@ -5,14 +5,18 @@
         <router-view> </router-view>
       </trans-fade>
     </div>
-
+    <back-to-top></back-to-top>
     <router-view name="blank"> </router-view>
   </div>
 </template>
 
 <script>
+import toTop from './components/back-to-top.vue';
 export default {
   name: 'app',
+  components:{
+    'back-to-top':toTop
+  },
   mounted(){
     this.$store.commit('setClientToken',{token:localStorage.getItem('token')})
   },
