@@ -33,7 +33,7 @@ export default {
       await this.$store.dispatch('editor/updateEntityInfo');
     },
     async deleteData() {
-      const data = await this.$store.dispatch('editor/getEntity',this.$route.params.u_name);
+      const data = await this.$store.dispatch('editor/deleteEntity',this.$route.params.u_name);
       this.$router.push({ name: "home" });
     },
     showDeleteWarning(){

@@ -1,22 +1,27 @@
 <template>
-  <div class="toggle-row">
-    <span>
-      <i class="fa" :class="[faClass]"></i>
-      {{rowName}}
-    </span>
-    <mk-toggle :isActive.sync="active"></mk-toggle>
-  </div>
+<div class="select-row">
+  <span>
+    <i class="fa" :class="[faClass]"></i>
+    {{rowName}}
+  </span>
+  <el-select v-model="value" placeholder="请选择">
+    <el-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+</div>
 </template>
 
 <script>
 export default {
-  data:function(){
-    return {
-      active:false,
-    }
-  },
   props:{
-    isActive:{
+    value:{
+      required:true,
+    },
+    options:{
       required:true,
     },
     rowName:{
@@ -26,11 +31,16 @@ export default {
       default:'fa-picture-o'
     }
   },
+  data() {
+    return {
+      inner_value:''
+    }
+  },
   watch:{
-    isActive:function(newStates){
-      this.active=newStates;
+    value:function(newStates){
+      this.inner_value=newStates;
     },
-    active:function(newStates){
+    inner_value:function(newStates){
       this.$emit('update:isActive', newStates);
     }
   }
@@ -39,7 +49,7 @@ export default {
 
 <style lang="scss" scoped>
 
-.toggle-row{
+.select-row{
   display: flex;
   justify-content: space-between;
   align-items: center;

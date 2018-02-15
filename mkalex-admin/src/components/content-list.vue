@@ -2,17 +2,23 @@
   <ul class="article-ui">
     <h3 v-if="this.type==='article'">ARTICLE LIST</h3>
     <h3 v-if="this.type==='portfolio'">PORTFOLIO LIST</h3>
+
     <li class="article-li add-article-li"
       v-if="!isCreating"
       @click="startCreateNew">
       <h4>ADD NEW</h4>
     </li>
-    <li class="article-li" v-if="isCreating">
+
+    <li class="article-li iscreating" v-if="isCreating">
         url of your new content: 
-        <input type="text" v-model="newUrlName">
+        <el-tooltip class="item" effect="dark" content="not empty and unique" placement="top">
+          <input type="text"  spellcheck="false" 
+          v-model="newUrlName" placeholder="new urlname">
+        </el-tooltip>
         <button @click="createNew" :disabled="!isNewUrlValid">create</button>
         <button @click="dropNew">drop</button>
     </li>
+
     <router-link v-for="item in subList" :key="item.urlname" class="article-li" 
     :class="{'draft':!item.is_active}"
     :to="{ name:'editor',params:{u_name:item.urlname} }" tag="li">
@@ -43,7 +49,16 @@ export default {
       })
     },
     isNewUrlValid(){
-      return this.newUrlName!=='';
+      return this.newUrlName!==''&&this.isUnique;
+    },
+    isUnique(){
+      let found = false;
+      this.$store.state.entityList.forEach((item)=>{
+        if(item.urlname === this.newUrlName){
+          found = true;
+        }
+      })
+      return !found;
     }
   },
   methods:{
@@ -81,6 +96,34 @@ export default {
   }
 }
 
+.iscreating{
+  min-height:50px;
+  font-size: 18px;
+  input{
+    border: 0px;
+    font-size: 18px;
+    &:focus{
+      border-bottom:solid 2px rgb(53, 53, 53);
+    }
+  }
+ button{
+  border:0px;
+  border-radius: 3px;
+  height:40px;
+  margin:5px;
+  background: rgb(48, 48, 48);
+  color:#fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 200ms;
+  &:hover{
+    background: rgb(61, 61, 61);
+  }
+  &[disabled]{
+    opacity: 0.5;
+  }
+}
+}
 
 .article-li{
   list-style: none;

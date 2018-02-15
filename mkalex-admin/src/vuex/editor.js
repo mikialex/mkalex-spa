@@ -104,7 +104,7 @@ export default {
         urlname: urlname
       })
       if (data.result === "success") {
-        this.$router.push({ name: "home" });
+        return data;
       } else {
         throw data;
       }

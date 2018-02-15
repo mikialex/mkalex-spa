@@ -27,8 +27,10 @@
 
     <section  v-if="currentTab==='settings'">
       <toggle-row :isActive.sync="isActive" :rowName="'是否公开'" :faClass="'fa-eye'"></toggle-row>
-      <toggle-row :isActive.sync="hasCover" :rowName="'是否有定制封面图片'" :faClass="'fa-picture-o'"></toggle-row>
-      <toggle-row :isActive.sync="isRecommended" :rowName="'是否列为推荐内容'" :faClass="'fa-thumbs-o-up'"></toggle-row>
+      <toggle-row :isActive.sync="hasCover" :rowName="'是否有定制封面图片'" :faClass="'fa-image'"></toggle-row>
+      <toggle-row :isActive.sync="isRecommended" :rowName="'是否列为推荐内容'" :faClass="'fa-thumbs-up'"></toggle-row>
+      <select-row :value.sync="contentType" :rowName="'内容分类'" :options="typeOptions" :faClass="'fa-thumbs-up'"></select-row>
+
       <hr>
       <select v-model="contentType">
         <option disabled value="">请选择类型</option>
@@ -49,6 +51,7 @@ import contentEditor from "./content.vue";
 import title from "./title.vue";
 import tagEditor from "./tag-editor.vue";
 import toggleRow from './toggle-row.vue';
+import selectRow from './select-row.vue';
 import oprationBar from './opration-bar.vue';
 
 export default {
@@ -58,11 +61,19 @@ export default {
     'tag-editor':tagEditor,
     "title-part": title,
     'toggle-row':toggleRow,
+    'select-row':selectRow,
     'opration-bar':oprationBar
   },
   data() {
     return {
-      currentTab: 'content'
+      currentTab: 'content',
+      typeOptions:[{
+          value: 'article',
+          label: 'Article'
+        }, {
+          value: 'portfolio',
+          label: 'Portfolio'
+        }],
     };
   },
   computed: {

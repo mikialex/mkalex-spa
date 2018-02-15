@@ -47,7 +47,7 @@ export async function getAuth(url, payload) {
 }
 
 export async function patch(url, payload) {
-  return await axios.patch(baseURL + url, {params: payload})
+  return await axios.patch(baseURL + url, { params: addToken(payload)})
   .then(data => {
     console.info('get original data', data);
     if (data.data.result === 'success') {

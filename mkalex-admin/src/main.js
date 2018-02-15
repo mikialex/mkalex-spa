@@ -5,6 +5,9 @@ import Vuex from 'vuex'
 import App from './App'
 import router from './router'
 
+import ElementUI from 'element-ui'
+import './element-style/index.css'
+Vue.use(ElementUI)
 Vue.use(Vuex)
 import store from './vuex'
 import * as vueAjax from './api/ajax-global'
