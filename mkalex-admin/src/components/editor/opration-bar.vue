@@ -12,7 +12,7 @@
     <div class="top-center">
       <div class="group">
         <button @click="backToHome"><i class="fas fa-arrow-left"></i> 
-        BACK</button>
+        SAVE & BACK</button>
         <span class="title">
           TYPEWRITER
         </span>
@@ -22,6 +22,8 @@
         UPDATE</button>
         <button @click="showDeleteWarning" class="danger"><i class="fas fa-trash-alt"></i>
         DELETE</button>
+        <button @click="drop" class="danger"><i class="fas fa-trash"></i>
+        DROP</button>
       </div>
     </div>
   </div>
@@ -47,11 +49,27 @@ export default {
     cancel(){
       this.warningDelete=false;
     },
-    drop() {
-      this.$router.push({ name: "home" });
+    drop(){
+      this.$confirm('确定丢弃可能的修改？', '警告', {
+          confirmButtonText: '取消',
+          cancelButtonText: '丢弃',
+          type: 'warning',
+          closeOnPressEscape:false,
+          closeOnClickModal:false,
+          showClose:false
+        }).then(() => {
+        }).catch(() => {
+          this.$router.push({ name: "home" });
+        });
     },
     backToHome(){
-      this.$router.push({ name: "home" });
+      this.updateData().then(data=>{
+        this.$message({
+          type: 'success',
+          message: '同步成功!'
+        });
+        this.$router.push({ name: "home" });
+      })
     }
   }
 }

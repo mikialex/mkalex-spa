@@ -26,6 +26,9 @@ export default {
       default:'fa-picture-o'
     }
   },
+  mounted(){
+      this.active=this.isActive;
+  },
   watch:{
     isActive:function(newStates){
       this.active=newStates;

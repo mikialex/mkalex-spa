@@ -29,6 +29,7 @@
       <section  v-if="currentTab==='settings'" class="tab-sec">
         <toggle-row :isActive.sync="isActive" :rowName="'是否公开'" :faClass="'fa-eye'"></toggle-row>
         <toggle-row :isActive.sync="hasCover" :rowName="'是否有定制封面图片'" :faClass="'fa-image'"></toggle-row>
+        <cover-setting-row v-if="hasCover"></cover-setting-row>
         <toggle-row :isActive.sync="isRecommended" :rowName="'是否列为推荐内容'" :faClass="'fa-thumbs-up'"></toggle-row>
         <select-row :value.sync="contentType" :rowName="'内容分类'" :options="typeOptions" :faClass="'fa-archive'"></select-row>
       </section>
@@ -45,6 +46,7 @@ import toggleRow from '../form/row/toggle-row.vue';
 import selectRow from '../form/row/select-row.vue';
 import dateRow from '../form/row/date-input-row.vue';
 import numberRow from '../form/row/number-input-row.vue';
+import coverRow from '../form/row/cover-setting-row.vue';
 import oprationBar from './opration-bar.vue';
 
 export default {
@@ -57,6 +59,7 @@ export default {
     'select-row':selectRow,
     'date-input-row':dateRow,
     'number-input-row':numberRow,
+    'cover-setting-row':coverRow,
     'opration-bar':oprationBar
   },
   data() {
@@ -120,7 +123,15 @@ export default {
       set(val){
         this.$store.commit('editor/setContentType',val)
       }
-    }
+    },
+    // coverUrl:{
+    //   get(){
+    //     return this.$store.state.editor.contentType;
+    //   },
+    //   set(val){
+    //     this.$store.commit('editor/setContentType',val)
+    //   }
+    // }
   },
   mounted() {
     this.$store.dispatch('editor/getEntity',this.$route.params.u_name);
@@ -134,6 +145,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .editor{
   margin-top:30px;
 }

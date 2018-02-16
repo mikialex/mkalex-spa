@@ -9,6 +9,7 @@ function gatherValue(state) {
     content: state.content,
     visit: state.pageView,
     has_cover: state.hasCover,
+    cover_url: state.coverUrl,
     create_time: state.createTime,
     is_recommended: state.isRecommended,
     usefor: state.contentType,
@@ -29,6 +30,7 @@ export default {
     createTime: '',
     pageView: '',
     hasCover: false,
+    coverUrl:'',
     isRecommended: false,
     contentType: '',
     isActive: false,
@@ -42,7 +44,8 @@ export default {
       content= '';
       createTime= '';
       pageView= '';
-      hasCover= false;
+      hasCover = false;
+      coverUrl = '';
       isRecommended= false;
       contentType= '';
       isActive= false;
@@ -68,6 +71,9 @@ export default {
     setHasCover(state, hasCover) {
       state.hasCover = hasCover;
     },
+    setCoverUrl(state, url) {
+      state.coverUrl = url;
+    },
     setIsRecommended(state, isRecommended) {
       state.isRecommended = isRecommended;
     },
@@ -90,6 +96,7 @@ export default {
       commit('setCreateTime', data.publish_time);
       commit('setPageView', data.page_view);
       commit('setHasCover', data.has_cover);
+      commit('setCoverUrl', data.cover_url);
       commit('setIsRecommended', data.is_recommended);
       commit('setContentType', data.usefor);
       commit('setIsActive', data.is_active);
@@ -97,7 +104,13 @@ export default {
     },
     async updateEntityInfo({ commit, dispatch, state, getters }) {
       const data = await patch(apis.articleDetial, gatherValue(state));
-      Message.success('update success');
+      console.log(data);
+      if (data.result === "success") {
+        Message.success('update success');
+        return data;
+      } else {
+        throw data;
+      }
     },
 
     async deleteEntity({ commit, dispatch, state, getters }, urlname) {

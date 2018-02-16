@@ -1,18 +1,53 @@
 <template>
   <div class="content-container">
 
+    <div class="mask" @click="closeAlbum" v-if="showAlbum"></div>
+    <div class="album" :class="{'album-hide':!showAlbum}">
+      <album-part  :useforEditor="true" @selectImage="setImage"></album-part>
+    </div>
+
    <div class="content-editor" >
       <div  class="content-toolbar" :class="{'toolbar-fix':fixBar}">
 
-        <div class="editor-option">
-          <div>
+        <div class="editor-option" :class="{'not-active': !isTyping}">
+          <div @mousedown="insertAtCursor('**','**')">
             <i class="fa fa-bold" ></i>
           </div>
-          <div>
+          <div @mousedown="insertAtCursor('*','*')">
             <i class="fa fa-italic" ></i>
           </div>
-          <div>
-            <i class="fa fa-list" ></i>
+          <div @mousedown="insertAtCursor('\n```\n\n```','')">
+            <i class="fa fa-code" ></i>
+          </div>
+          <div @mousedown="insertAtCursor('[]()','')">
+            <i class="fa fa-link" ></i>
+          </div>
+          <div @mousedown="openAlbum">
+            <i class="fa fa-image" ></i>
+          </div>
+          <div @mousedown="insertAtCursor('\n+ \n+ \n+ ','')">
+            <i class="fa fa-list-ol" ></i>
+          </div>
+          <div @mousedown="insertAtCursor('\n1. \n2. \n3. ','')">
+            <i class="fa fa-list-ul" ></i>
+          </div>
+          <div @mousedown="insertAtCursor('---','')">
+            <i class="fa fa-minus" ></i>
+          </div>
+          <div @mousedown="insertAtCursor('\n# ','')">
+            <i class="fa fa-heading" ></i>1
+          </div>
+          <div @mousedown="insertAtCursor('\n## ','')">
+            <i class="fa fa-heading" ></i>2
+          </div>
+          <div @mousedown="insertAtCursor('\n### ','')">
+            <i class="fa fa-heading" ></i>3
+          </div>
+          <div @mousedown="insertAtCursor('\n#### ','')">
+            <i class="fa fa-heading" ></i>4
+          </div>
+          <div @mousedown="insertAtCursor('> ','')">
+            <i class="fa fa-indent" ></i>
           </div>
         </div>
 
@@ -34,6 +69,9 @@
    v-if="!isShowPreview"
    @keyup="autoHeight"
    @click="autoHeight"
+   @focus="focus"
+   @blur="blur"
+   :style="{'height':this.height+'px'}"
    ></textarea>
 
    <div id="md-preview" v-if="isShowPreview" v-html="parsedContent"></div>
@@ -43,13 +81,21 @@
 <script>
 var marked = require('marked');
 import 'highlight.js/styles/rainbow.css';
+import album from '../album/album.vue'
 export default {
   components:{
+    'album-part': album
   },
   data(){
     return {
       isShowPreview: false,
-      currentScroll: 0
+      currentScroll: 0,
+      isTyping: false,
+      height: 500,
+      showAlbum:false,
+
+      lastStart:0,
+      lastEnd:0,
     }
   },
   computed: {
@@ -60,7 +106,9 @@ export default {
         }
       });
       let urlbase =
-        process.env.STATIC_ROOT + "image/content/" + this.$store.state.editor.urlname + "/";
+        process.env.STATIC_ROOT + "image/" ;
+      
+        // process.env.STATIC_ROOT + "image/content/" + this.$store.state.editor.urlname + "/";
       let p = this.content.replace(/{#base#}/g, urlbase);
       return marked(p);
     },
@@ -79,20 +127,59 @@ export default {
   watch:{
     content(){
       let element = this.$el.querySelector('#md-content');
-      element.style.height = (element.scrollHeight)+"px";
+      this.height = element.scrollHeight;
+      this.lastStart= element.selectionStart;
+      this.lastEnd=element.selectionEnd;
     }
   },
   methods:{
     togglePreview(){
       this.isShowPreview=!this.isShowPreview;
     },
+    openAlbum(){
+      this.showAlbum=true;
+    },
+    closeAlbum(){
+      this.showAlbum=false;
+    },
+    setImage(img){
+      this.showAlbum=false;
+      let myField = this.$el.querySelector('#md-content');
+      myField.focus();
+      myField.selectionStart=this.lastStart;
+      myField.selectionEnd=this.lastEnd;
+      this.insertAtCursor('![]('+ '{#base#}'+ img +')','');
+    },
     autoHeight(e){
       let element=e.target;
-      element.style.height = (element.scrollHeight)+"px";
+      this.height = element.scrollHeight;
     },
     handleScroll() {
       this.currentScroll = window.pageYOffset;
     },
+    focus(){
+      this.isTyping=true;
+    },
+    blur(){
+      this.isTyping= false;
+    },
+    insertAtCursor(startStr,endStr) {
+      if(this.isTyping){
+        let myField = this.$el.querySelector('#md-content');
+        var startPos = myField.selectionStart;
+        var endPos = myField.selectionEnd;
+        this.content = this.content.substring(0, startPos)
+            + startStr
+            + this.content.substring(startPos, endPos)
+            + endStr
+            + this.content.substring(endPos, this.content.length);
+        setTimeout(() => {
+          myField.focus();
+          myField.selectionStart=startPos;
+          myField.selectionEnd=endPos;
+        }, 0);
+      }
+    }
 
   },
   mounted() {
@@ -107,6 +194,31 @@ export default {
 </script>
 
 <style lang="scss" scoped >
+
+.album{
+  width:90vw;
+  height:100vh;
+  position:fixed;
+  top:0px;
+  left:0px;
+  background: #fff;
+  box-shadow:10px 0px 20px rgba(0,0,0,0.2);
+  padding:20px;
+  box-sizing: border-box;
+  transition: 300ms ease-in-out;
+  z-index: 1000;
+}
+.mask{
+    width:100vw;
+    height:100vh;
+    position:fixed;
+    top:0px;
+    left:0px;
+  }
+.album-hide{
+  left:-90vw;
+  box-shadow:0px 0px 0px rgba(0,0,0,0.2);
+}
 
 .content-preview{
   font-size: 12px;
@@ -148,6 +260,10 @@ export default {
   //     color: #f66;
   //   }
   // }
+}
+
+.not-active{
+  color:#bbb;
 }
 
 .editor-option{
@@ -229,12 +345,12 @@ export default {
   background: #fff;
   overflow: scroll;
 
-  p {
+  /deep/ p {
     color: #444;
     line-height: 1.5;
     text-align: justify;
   }
-  img {
+  /deep/ img {
     max-width: 100%;
     margin: auto;
     text-align: center;

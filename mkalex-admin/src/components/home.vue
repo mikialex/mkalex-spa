@@ -12,6 +12,7 @@
       <div @click="changeNav('article')" :class="{'current-tab':this.currentNav==='article'}">文章</div>
       <div @click="changeNav('portfolio')" :class="{'current-tab':this.currentNav==='portfolio'}">作品集</div>
       <div @click="changeNav('tag')" :class="{'current-tab':this.currentNav==='tag'}">标签</div>
+      <div @click="changeNav('album')" :class="{'current-tab':this.currentNav==='album'}">相册</div>
     </nav>
     <trans-fade>
       <content-list :type="'article'" v-if="this.currentNav==='article'"></content-list>
@@ -20,21 +21,25 @@
         <h3>TAGS GROUP</h3>
         <div class="tags-container">
           <span v-for="tag in tagList" :key="tag.tag_name">{{tag.tag_name}}
-            <i class="fa fa-trash-o" @click="deleteTag(tag.tag_name)"></i>
+            <i class="fa fa-trash" @click="deleteTag(tag.tag_name)"></i>
           </span>
         </div>
         <input type="text" v-model="newTagName"> <button v-if="canAddNew" @click="addNewtag">add</button>
       </div>
+      <album-part v-if="this.currentNav==='album'"></album-part>
     </trans-fade>
+
   </div>
 </template>
 
 <script>
 import list from './content-list.vue'
+import album from './album/album.vue'
 export default {
   name: "home",
   components:{
     'content-list':list,
+    'album-part': album
   },
   data() {
     return {

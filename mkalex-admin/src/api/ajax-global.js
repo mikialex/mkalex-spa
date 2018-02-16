@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { baseURL } from '@/api/config'
 
-axios.defaults.timeout = 5000;
+axios.defaults.timeout = 15000;
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
 
 
@@ -20,70 +20,59 @@ function addToken(p) {
   return payload;
 }
   
-export async function  ajax(method, url, payload) {
-  if (method === 'get' || method === 'post') {
-    return axios({
+export async function ajax(method, url, options) {
+    return await axios({
       method: method,
       url: url,
-      data: payload,
+      ...options
     })
-  } else {
-    throw 'method:${method} do not support'
+}
+
+export async function get(url, params) {
+  const data = await ajax('get', baseURL + url, { params: params })
+  console.info('normal get ' + url, data)
+  return data.data;
+}
+
+export async function getAuth(url, params) {
+  const data = await ajax('get', baseURL + url, { params: addToken(params) })
+  console.info('auth get ' + url, data)
+  return data.data;
+}
+
+
+export async function post(url, payload, params, options) {
+  const data = await ajax('post', baseURL + url,
+    { params: addToken(params), data: payload, ...options });
+  console.info('post ' + url, data)
+  if (data.data.result === 'authfail') {
+    window.location = '/#/login'
+    throw 'authfail'
   }
+  return data.data;
 }
 
-export async function get(url, payload) {
-  return axios.get(baseURL + url, {params: payload})
-  .then(data => {
-    console.info('get original data',data)
-    return data.data
-  })
+export async function patch(url, payload, params, options) {
+  const data = await ajax('patch', baseURL + url,
+    { params: addToken(params), data: payload, ...options });
+  console.info('patch ' + url, data);
+  if (data.data.result === 'authfail') {
+    window.location = '/#/login'
+    throw 'authfail'
+  }
+  return data.data;
 }
 
-export async function getAuth(url, payload) {
-  const d = await axios.get(baseURL + url, { params: addToken(payload) });
-  console.info('auth get ' + url, d)
-  return d.data;
+export async function del(url, params) {
+  const data = await ajax('delete', baseURL + url, { params: addToken(params) })
+  console.info('delete ' + url, data)
+  if (data.data.result === 'authfail') {
+    window.location = '/#/login'
+    throw 'authfail'
+  }
+  return data.data;
 }
 
-export async function patch(url, payload) {
-  return await axios.patch(baseURL + url, { params: addToken(payload)})
-  .then(data => {
-    console.info('get original data', data);
-    if (data.data.result === 'success') {
-      return data.data
-    } else if (data.data.result === 'authfail') {
-      window.location = '/#/login'
-      throw 'authfail'
-    }
-  })
-}
-
-export async function del(url, payload) {
-  return await axios.delete(baseURL + url, { params: addToken(payload)})
-  .then(data => {
-    console.info('delete response data', data)
-    if (data.data.result === 'success') {
-      return data.data
-    } else if (data.data.result === 'authfail') {
-      window.location = '/#/login'
-      throw 'authfail'
-    }
-  })
-}
-
-
-export async function post(url, payload) {
-  return await axios.post(baseURL + url, addToken(payload))
-    .then(data => {
-      if (data.data.result === 'success') {
-        return data.data
-      } else if (data.data.result === 'authfail') {
-        window.location = '/#/login'
-        throw 'authfail'
-      }
-    })
-}
 
 
 export function handleErr(env) {
@@ -99,10 +88,12 @@ export const apis = {
   articleListAdmin: 'articles/admin',
 
   articleTagList:'articles/tags',
-  articleTag:'articles/tag',
+  articleTag: 'articles/tag',
   articleDetial: 'articles/article',
   articleDetialAdmin: 'articles/article/admin',
   
+  imageList:'images',
+  image:'images/image',
   
   tagList: 'tags',
   tag:'tags/tag',

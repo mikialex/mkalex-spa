@@ -9,6 +9,7 @@ import { baseURL } from '@/api/config'
 
 import editor from './editor'
 import tag from './tag'
+import image from './image'
 
 
 export default new Vuex.Store({
@@ -57,6 +58,7 @@ export default new Vuex.Store({
 
     async getEntityList({ commit, dispatch, state, getters }) {
       const data = await getAuth(apis.articleListAdmin);
+      console.log(data);
       commit('setEntityList', data);
     },
 
@@ -86,6 +88,6 @@ export default new Vuex.Store({
 
   },
   modules: {
-    editor, tag
+    editor, tag, image
   },
 })
