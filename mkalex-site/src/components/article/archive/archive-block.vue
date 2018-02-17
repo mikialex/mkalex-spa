@@ -24,7 +24,8 @@ export default {
   },
   computed:{
     imgsrc(){
-      return process.env.STATIC_ROOT+'image/content/'+this.articleInfo.urlname+'/cover.png'
+      return process.env.STATIC_ROOT + "image/" + this.articleInfo.cover_url ;
+      // return process.env.STATIC_ROOT+'image/content/'+this.articleInfo.urlname+'/cover.png'
     }
   },
   methods:{

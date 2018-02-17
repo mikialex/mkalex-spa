@@ -9,76 +9,34 @@
     </div>
 
     <nav class="content-nav">
-      <div @click="changeNav('article')" :class="{'current-tab':this.currentNav==='article'}">文章</div>
-      <div @click="changeNav('portfolio')" :class="{'current-tab':this.currentNav==='portfolio'}">作品集</div>
-      <div @click="changeNav('tag')" :class="{'current-tab':this.currentNav==='tag'}">标签</div>
-      <div @click="changeNav('album')" :class="{'current-tab':this.currentNav==='album'}">相册</div>
+      <router-link :to="{name:'article'}" :tag="'div'" :active-class="'current-tab'">文章</router-link>
+      <router-link :to="{name:'portfolio'}" :tag="'div'" :active-class="'current-tab'">作品集</router-link>
+      <router-link :to="{name:'tag'}" :tag="'div'" :active-class="'current-tab'">标签</router-link>
+      <router-link :to="{name:'album'}" :tag="'div'" :active-class="'current-tab'">相册</router-link>
     </nav>
+    
     <trans-fade>
-      <content-list :type="'article'" v-if="this.currentNav==='article'"></content-list>
-      <content-list :type="'portfolio'"  v-if="this.currentNav==='portfolio'"></content-list>
-      <div class="tags" v-if="this.currentNav==='tag'">
-        <h3>TAGS GROUP</h3>
-        <div class="tags-container">
-          <span v-for="tag in tagList" :key="tag.tag_name">{{tag.tag_name}}
-            <i class="fa fa-trash" @click="deleteTag(tag.tag_name)"></i>
-          </span>
-        </div>
-        <input type="text" v-model="newTagName"> <button v-if="canAddNew" @click="addNewtag">add</button>
-      </div>
-      <album-part v-if="this.currentNav==='album'"></album-part>
+      <router-view></router-view>
     </trans-fade>
 
   </div>
 </template>
 
 <script>
-import list from './content-list.vue'
-import album from './album/album.vue'
 export default {
   name: "home",
-  components:{
-    'content-list':list,
-    'album-part': album
-  },
   data() {
     return {
-      currentNav:'article',
-      newTagName:'',
     };
   },
   mounted() {
     this.$store.dispatch('getEntityList');
     this.$store.dispatch('tag/getTags');
   },
-  computed:{
-    tagList() {
-      return this.$store.state.tag.tagList;
-    },
-    canAddNew(){
-      let find=false;
-      this.tagList.forEach(tag => {
-        if(tag.tag_name===this.newTagName){
-          find=true;
-        }
-      });
-      return this.newTagName!==''&&!find;
-    }
-  },
   methods:{
     logout(){
       this.$router.push({name:'login'})
     },
-    changeNav(newTab){
-      this.currentNav=newTab;
-    },
-    addNewtag(){
-      this.$store.dispatch('tag/addNewTags', this.newTagName);
-    },
-    deleteTag(tagName){
-      this.$store.dispatch('tag/deleteTags', tagName);
-    }
-
   }
 };
 </script>
@@ -129,28 +87,6 @@ export default {
   }
 }
 
-
-.tags{
-  >.tags-container{
-    border: 1px dotted rgba(0,0,0,0.1);
-    padding:10px;
-    line-height: 20px;
-    >span{
-      background: #000;
-      color:#fff;
-      display: inline-block;
-      border-radius:3px;
-      padding: 5px;
-      margin:5px;
-      >i{
-        cursor: pointer;
-        &:hover{
-          color:#f45;
-        }
-      }
-    }
-  }
-}
 
 
 </style>
