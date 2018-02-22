@@ -8,6 +8,7 @@
 
 <script>
 // import {markdown} from 'markdown';
+import 'highlight.js/styles/rainbow.css';
 var marked = require('marked');
 export default {
   props:{
