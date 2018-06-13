@@ -92,8 +92,8 @@ export default {
 @import '~globalSass';
 
 .time-plate{
-  height:150px;
-  width:150px;
+  height:125px;
+  width:125px;
   border-radius:75px;
   background: #FFFFFF;
   border: 1px solid #E5E5E5;
@@ -109,14 +109,14 @@ export default {
 }
 
 .time-plate-month{
-  font-size: 20px;
-  font-weight:100;
+  font-size: 18px;
+  font-weight:200;
   color:#555;
 }
 
 .time-plate-day{
-  font-size: 72px;
-  line-height: rem(45px);
+  font-size: 60px;
+  line-height: rem(40px);
   font-weight:100;
   color:#555;
 }

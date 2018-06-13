@@ -1,6 +1,6 @@
 <template>
   <section>
-    <page-title :title="'Article'" :subTitle="'Think Different, Make Believe'"></page-title>
+    <page-title :title="'Article'" :subTitle="'What I said, maybe wrong'"></page-title>
     <article-switcher></article-switcher>
     <container-mid>
       <trans-fade>
@@ -12,11 +12,9 @@
 
 <script>
 import PageTitle from '@/components/title/title-main'
-import webglLogo from '@/components/homepage/webgl-logo'
 import switcher from '@/components/nav/article-switcher'
 export default {
   components: {
-    'webgl-logo': webglLogo,
     'page-title':PageTitle,
     'article-switcher':switcher,
   },

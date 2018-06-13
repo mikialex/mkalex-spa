@@ -116,15 +116,15 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background-color: #afafaf;
-  box-shadow: inset 0px -1px 0px 3px rgba(0, 0, 0, 0.1);
+  background-color: #f6f6f6;
+  box-shadow: inset 0px -0.5px 0px 3px rgba(0, 0, 0, 0.05);
 }
 
 ::-webkit-scrollbar-thumb {
   background-color: #fff;
   border-radius: 2px;
-  box-shadow: 0px 4px 1px 0px rgba(0, 0, 0, 0.1),
-  inset 0px 0px 0px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 0px 0px rgba(0, 0, 0, 0.05);
+  // inset 0px 0px 0px 2px rgba(0, 0, 0, 0.05);
 }
 
 

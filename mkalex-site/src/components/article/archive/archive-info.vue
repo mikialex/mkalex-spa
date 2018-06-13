@@ -2,7 +2,8 @@
   <div class="ar-info">
     <i class="fa fa-calendar ar-info-cal"></i>{{articleInfo.publish_time}}  
     <div class="ar-info-pv">
-      <i class="fa fa-eye"></i>{{articleInfo.page_view}}
+      <i class="fa fa-eye"></i>
+      {{articleInfo.page_view}}
     </div>
     <div class="ar-info-tags">
       <span v-for="tag in articleInfo.tags" :key="tag">{{tag}}</span>
@@ -22,15 +23,17 @@ export default {
 @import '~globalSass';
 
 .ar-info {
+  font-size: 13px;
   width: 100%;
-  height: 40px;
+  height: 30px;
   background: #eee;
   margin-top: 10px;
   display: flex;
   align-items: center;
   padding-left:10px;
-  padding-right:10px;
+  padding-right:3px;
   box-sizing: border-box;
+  border-radius: 3px;
 }
 
 .ar-info-cal{
@@ -47,11 +50,10 @@ export default {
   text-align: right;
   >span{
     background: #ddd;
-    padding-left:5px;
-    padding-right:5px;
-    border-radius: 20px;
+    padding: 3px;
+    border-radius: 5px;
     margin-left:5px;
-    color:#444;
+    color:#888;
   }
 }
 </style>

@@ -50,6 +50,8 @@ export default {
 
 .md-section{
   width:100%;
+  max-width:100%;
+  // width:500px;
 
   p{
     color:#444;
@@ -61,6 +63,19 @@ export default {
     margin:auto;
     text-align: center;
   }  
+
+  pre{
+    white-space: pre-wrap; 
+ word-wrap: break-word; 
+  }
+
+  a{
+    text-decoration: underline;
+    color:#000;
+    &:hover{
+      color:rgb(176, 35, 35);
+    }
+  }
 
 }
 
