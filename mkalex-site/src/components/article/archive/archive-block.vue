@@ -42,17 +42,18 @@ export default {
 @import "~globalSass";
 
 .archive-block {
-  width: 100%; // height:150px;
-  margin-bottom: 10px;
+  width: 100%; 
+  // height:100px;
+  margin-bottom: 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: #fcfcfc;
-  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.175);
   border-radius: 3px;
   > img {
-    min-width: 240px;
-    height: 130px;
+    min-width: 200px;
+    height: 100px;
     border-radius: 5px;
   }
 }
@@ -68,7 +69,6 @@ export default {
   flex-direction: column;
   justify-content: space-around;
   flex-grow: 1;
-  padding: 10px;
   > .enter-wrap {
     cursor: pointer;
     border: solid 1px #f5f5f5;

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Counter from '@/components/caicai-count.vue'
+import Counter from '@/components/caicai/caicai-count.vue'
 export default {
   components:{
     'caicai-counter':Counter,

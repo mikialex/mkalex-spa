@@ -6,7 +6,9 @@
     </container-mid>
     <container-mid>
       <div class="intro">
-        <img src="../assets/avatar-back.png" alt="">
+        <!-- <trans-splice> -->
+          <img src="../assets/avatar-back.png" alt="">
+        <!-- </trans-splice> -->
         <div class="intro-text">
         <div style="font-size:20px;">THIS IS THE SPACE FOR MKALEX</div>
         <p>here i write things about technology, design, and my life. and
@@ -98,6 +100,7 @@ export default {
   font-size:16px;
   width:100%;
   margin-top:20px;
+  padding:20px;
   a{
     text-decoration: underline;
     color:#000;
@@ -106,8 +109,8 @@ export default {
     }
   }
   ul{
-    padding:20px;
     text-align: justify;
+    padding: 0px;
     >li{
       display: inline-block;
       padding:10px;

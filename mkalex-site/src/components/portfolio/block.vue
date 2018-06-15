@@ -23,15 +23,18 @@ export default {
   props: {
     portfolioInfo: { require: true }
   },
-  computed:{
-    imgsrc(){
-      return process.env.STATIC_ROOT + "image/" + this.portfolioInfo.cover_url ;
+  computed: {
+    imgsrc() {
+      return process.env.STATIC_ROOT + "image/" + this.portfolioInfo.cover_url;
       // return process.env.STATIC_ROOT+'image/content/'+this.portfolioInfo.urlname+'/cover.png';
     }
   },
-  methods:{
-    goto(){
-      this.$router.push({name:'reader',params:{type:'portfolio',u_name:this.portfolioInfo.urlname}})
+  methods: {
+    goto() {
+      this.$router.push({
+        name: "reader",
+        params: { type: "portfolio", u_name: this.portfolioInfo.urlname }
+      });
     }
   }
 };
@@ -50,10 +53,11 @@ export default {
   font-family: "futura";
   cursor: pointer;
   transition: 0.2s ease-in-out;
-  &:hover{
-    box-shadow: 0px 10px 10px rgba(0,0,0,0.1);
-  }&:active{
-    box-shadow: 0px 0px 0px rgba(0,0,0,0.1)
+  &:hover {
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
+  }
+  &:active {
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.1);
   }
 }
 

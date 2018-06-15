@@ -1,7 +1,7 @@
 <template>
-  <section>
-    <img src="../../assets/logo.svg" class="nav-min-logo"></img>
-    <img src="../../assets/slogon.svg" class="nav-min-slogon"></img>
+  <section class="mobile-nav-head">
+    <img src="../../assets/logo.svg" class="nav-min-logo">
+    <img src="../../assets/slogon.svg" class="nav-min-slogon">
     <toggle-button></toggle-button>
   </section>
 </template>
@@ -22,7 +22,8 @@ export default {
 
 <style lang="scss" scoped>
 @import '~globalSass';
-section {
+
+.mobile-nav-head {
   display: none;
   width: 100%;
   border-bottom: solid 2px rgb(235, 235, 235);

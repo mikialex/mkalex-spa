@@ -1,9 +1,9 @@
 <template>
   <transition name="slide-fade">
-    <div class="scroll-to-top" v-if="!isShow" @click="toTop()"
+    <button class="scroll-to-top" v-if="!isShow" @click="toTop()"
     :style="{ bottom: toBottom + 'px' }">
       <i class="fa fa-arrow-up" aria-hidden="true"></i>
-    </div>
+    </button>
   </transition>
 </template>
 
@@ -11,81 +11,92 @@
 export default {
   data() {
     return {
-      currentScroll: 0,//window.pageYOffset
-      timer:null,
-    }
+      currentScroll: 0, //window.pageYOffset
+      timer: null,
+      allowMove: false
+    };
   },
   computed: {
     toBottom() {
-      let h=document.body.clientHeight-this.currentScroll-window.innerHeight
-      if ( h < this.botttomLimit){//should change
-        return this.botttomLimit-h
-      }else{
-       return 20 
+      let h =
+        document.body.clientHeight - this.currentScroll - window.innerHeight;
+      if (h < this.botttomLimit) {
+        //should change
+        return this.botttomLimit - h;
+      } else {
+        return 20;
       }
     },
-    isShow(){
-      return this.showHeight>this.currentScroll
-    },
+    isShow() {
+      return this.showHeight > this.currentScroll;
+    }
   },
-  methods:{
-    handleScroll(){  //so easy that needn't debounce
-      this.currentScroll=window.pageYOffset
+  methods: {
+    handleScroll() {
+      this.currentScroll = window.pageYOffset;
     },
-    toTop(){ //back to top
-      this.timer = setInterval(()=>{
-        let speed = Math.floor(-this.currentScroll / 6);
-        scroll(0,this.currentScroll + speed);
-        if(this.currentScroll === 0){
-          clearInterval(this.timer); 
-        }
-      },30)
+    handleWheel() {
+      this.allowMove = false;
+      this.currentScroll = window.pageYOffset;
     },
-
+    move() {
+      let speed = Math.floor(-this.currentScroll / 6);
+      scroll(0, this.currentScroll + speed);
+      if (this.currentScroll !== 0 && this.allowMove) {
+        window.requestAnimationFrame(this.move);
+      }
+    },
+    toTop() {
+      //back to top
+      if (!this.allowMove) {
+        this.allowMove = true;
+        window.requestAnimationFrame(this.move);
+      }
+    }
   },
   props: {
     showHeight: {
       type: Number,
       default: 100,
-      required: false,
+      required: false
     },
-    botttomLimit: { 
+    botttomLimit: {
       type: Number,
       default: 250,
-      required: false,
-    },
+      required: false
+    }
   },
-  mounted(){
-    window.addEventListener('resize',this.handleResize)
-    window.addEventListener('scroll',this.handleScroll)
-    let event = new Event('scroll');
-    window.dispatchEvent(event)
+  mounted() {
+    window.addEventListener("resize", this.handleResize);
+    window.addEventListener("mousewheel", this.handleWheel);
+    window.addEventListener("scroll", this.handleScroll);
+    let event = new Event("mousewheel");
+    window.dispatchEvent(event);
   },
-  destroyed(){
-    window.removeEventListener('resize', this.handleResize);
-    window.removeEventListener('scroll', this.handleScroll);
-  },
-}
+  destroyed() {
+    window.removeEventListener("resize", this.handleResize);
+    window.removeEventListener("mousewheel", this.handleWheel);
+    window.removeEventListener("scroll", this.handleScroll);
+  }
+};
 </script>
 
 <style lang="scss" scoped>
-@import '~globalSass';
+@import "~globalSass";
 
 ////transition
 .slide-fade-enter-active {
-  transition: all .3s ease;
+  transition: all 0.3s ease;
 }
 .slide-fade-leave-active {
-  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
 }
-.slide-fade-enter, .slide-fade-leave-active {
-  transform: translateX(10px);
+.slide-fade-enter,
+.slide-fade-leave-active {
   opacity: 0;
 }
-/////
 
-
-.hide-it{
+.hide-it {
   display: none;
 }
 
@@ -95,22 +106,19 @@ export default {
   position: fixed;
   right: 5vw;
   bottom: 10px;
-  border-radius: rem(25px);
-  background: #FFFFFF;
-  z-index:1000;
+  border-radius: 100%;
+  border: 0px;
+  background: #ffffff;
+  z-index: 1000;
+  box-shadow: 0 4px 2px 0 rgba(0, 0, 0, 0.27), 0 0 4px 0 rgba(0, 0, 0, 0.08);
+  outline: none;
   cursor: pointer;
-  box-shadow: 0 4px 2px 0 rgba(0, 0, 0, 0.27),
-  0 0 4px 0 rgba(0, 0, 0, 0.08);
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
   &:hover {
-    box-shadow: 0 6px 3px 0 rgba(0, 0, 0, 0.27),
-    0 0 4px 0 rgba(0, 0, 0, 0.08);
+    box-shadow: 0 6px 3px 0 rgba(0, 0, 0, 0.27), 0 0 4px 0 rgba(0, 0, 0, 0.08);
   }
   &:active {
-    box-shadow: 0 2px 0px 0 rgba(0, 0, 0, 0.27),
+    box-shadow: 0 2px 0px 0 rgba(0, 0, 0, 0.27);
   }
 }
 </style>

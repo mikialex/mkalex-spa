@@ -5,9 +5,9 @@
     <scroll-to-top></scroll-to-top>
 
     <page-with-sticky-footer v-if="!useClean">
-      <trans-fade>
+      <trans-splice>
         <router-view></router-view>
-      </trans-fade>
+      </trans-splice>
       <footer-dark slot="footer"></footer-dark>
     </page-with-sticky-footer>
   

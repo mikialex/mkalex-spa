@@ -14,7 +14,7 @@
           </ul>
           <div>
             <div>
-              <img src="../../assets/slogon.svg"></img>
+              <img src="../../assets/slogon.svg">
             </div>
           </div>
         </nav>
@@ -24,58 +24,87 @@
 </template>
 
 <script>
-import topNavBlock from './top-nav-block.vue'
-import mobileTop from './top-nav-mobile-top.vue'
+import topNavBlock from "./top-nav-block.vue";
+import mobileTop from "./top-nav-mobile-top.vue";
 export default {
   components: {
-    'nav-block': topNavBlock,
-    'mobile-top':mobileTop,
+    "nav-block": topNavBlock,
+    "mobile-top": mobileTop
   },
-  data(){
+  data() {
     return {
-    isTop: true,
-    downHeight: 100,
-    upHeight: 70,
-    navList: [
-      { name: 'HOME', link: 'home', isUnderconstruction: false, isNewWindow: false ,outerLink:false},
-      { name: 'ARTICLE', link: 'article', isUnderconstruction: false, isNewWindow: false ,outerLink:false},
-      { name: 'PORTFOLIO', link: 'portfolio', isUnderconstruction: false, isNewWindow: false ,outerLink:false},
-      { name: 'OPENSOURCE', link: 'https://github.com/mikialex', isUnderconstruction: true, isNewWindow: false ,outerLink:true},
-      // { name: 'COLLECTION', link: 'collection', isUnderconstruction: true, isNewWindow: false ,outerLink:false},
-      // { name: 'META', link: 'meta', isUnderconstruction: false, isNewWindow: false },
-      { name: ' ', link: 'caicai', isUnderconstruction: false, isNewWindow: false , love: true,outerLink:false},
-    ]
-    }
+      isTop: true,
+      downHeight: 100,
+      upHeight: 70,
+      navList: [
+        {
+          name: "HOME",
+          link: "home",
+          isUnderconstruction: false,
+          isNewWindow: false,
+          outerLink: false
+        },
+        {
+          name: "ARTICLE",
+          link: "article",
+          isUnderconstruction: false,
+          isNewWindow: false,
+          outerLink: false
+        },
+        {
+          name: "PORTFOLIO",
+          link: "portfolio",
+          isUnderconstruction: false,
+          isNewWindow: false,
+          outerLink: false
+        },
+        {
+          name: "OPENSOURCE",
+          link: "https://github.com/mikialex",
+          isUnderconstruction: true,
+          isNewWindow: false,
+          outerLink: true
+        },
+        {
+          name: " ",
+          link: "caicai",
+          isUnderconstruction: false,
+          isNewWindow: false,
+          love: true,
+          outerLink: false
+        }
+      ]
+    };
   },
   computed: {
-    mobilePanelHeight: function () {
+    mobilePanelHeight: function() {
       if (this.$store.state.topNavOpen) {
-        return 4 * this.navList.length
+        return 4 * this.navList.length;
       } else {
-        return 0
+        return 0;
       }
     }
   },
   methods: {
     handleScroll() {
       if (window.pageYOffset > this.downHeight) {
-        this.isTop = false
+        this.isTop = false;
       } else if (window.pageYOffset < this.upHeight) {
-        this.isTop = true
+        this.isTop = true;
       }
-    },
+    }
   },
   mounted() {
-    window.addEventListener('scroll', this.handleScroll);
+    window.addEventListener("scroll", this.handleScroll);
   },
   destroyed() {
-    window.removeEventListener('scroll', this.handleScroll);
+    window.removeEventListener("scroll", this.handleScroll);
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-@import '~globalSass';
+@import "~globalSass";
 
 .mk-nav-main {
   width: 100%;
@@ -92,13 +121,13 @@ export default {
     display: block;
     // height: rem(45px);
   }
-  >ul {
+  > ul {
     display: flex;
     align-items: center;
     padding-left: 0px;
     margin: 0px;
     transition: 0.5s cubic-bezier(0, 0, 0.1, 0.93);
-    font-family: 'futura';
+    font-family: "futura";
     @media (max-width: 700px) {
       position: relative;
       left: 0px;
@@ -111,13 +140,13 @@ export default {
       z-index: 999;
     }
   }
-  >div {
+  > div {
     display: flex;
     padding: 5px;
-    >div {
+    > div {
       margin-top: 5px;
       margin-bottom: 15px;
-      >img {
+      > img {
         margin: 0px;
         font-size: rem(32px);
         border-bottom: $line-border;
@@ -126,10 +155,10 @@ export default {
         text-align: right;
         width: 300px;
         @media (max-width: 900px) {
-          width:200px;
+          width: 200px;
           vertical-align: middle;
         }
-        @media (max-width:760px) {
+        @media (max-width: 760px) {
           display: none;
         }
       }
@@ -138,7 +167,7 @@ export default {
         display: block;
         float: right;
         margin-top: rem(56px);
-        content: ' ';
+        content: " ";
         @extend .mk-small-dot;
         @media (max-width: 700px) {
           display: none;
@@ -149,7 +178,7 @@ export default {
 }
 
 .floatTopNav {
-  background: rgba(255, 255, 255, .95);
-  box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.09)
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.09);
 }
 </style>
