@@ -6,7 +6,6 @@ import ArticleStream from '@/pages/article/stream'
 import ArticleArchive from '@/pages/article/archive'
 import Portifolio from '@/pages/portfolio'
 import Collection from '@/pages/collection'
-import Meta from '@/pages/meta'
 import Reader from '@/pages/reader'
 
 import Caicai from '@/pages/caicai'
@@ -65,10 +64,6 @@ export default new Router({
       path: '/collection',
       name: 'collection',
       component: Collection
-    }, {
-      path: '/meta',
-      name: 'meta',
-      component: Meta
     }, {
       path: '/caicai',
       name: 'caicai',

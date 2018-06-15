@@ -6,11 +6,17 @@ export const mutations = {
       }
     });
   },
+
   articleListLoaded(state) {
     state.isArticleListLoaded = true;
   },
+  
   reloadArticleList(state) {
     state.isArticleListLoaded = false;
+  },
+
+  switchPage(state, pageNumber) {
+    state.currentPage = pageNumber;
   }
     
 };
