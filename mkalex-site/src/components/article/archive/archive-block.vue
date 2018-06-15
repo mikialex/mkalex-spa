@@ -13,31 +13,33 @@
 </template>
 
 <script>
-import timePlate from '../time-plate'
-import archiveInfo from './archive-info'
+import timePlate from "../time-plate";
+import archiveInfo from "./archive-info";
 export default {
-  components:{
-    'archive-info':archiveInfo
+  components: {
+    "archive-info": archiveInfo
   },
   props: {
-    articleInfo:{required:true},
+    articleInfo: { required: true }
   },
-  computed:{
-    imgsrc(){
-      return process.env.STATIC_ROOT + "image/" + this.articleInfo.cover_url ;
-      // return process.env.STATIC_ROOT+'image/content/'+this.articleInfo.urlname+'/cover.png'
+  computed: {
+    imgsrc() {
+      return process.env.STATIC_ROOT + "image/" + this.articleInfo.cover_url;
     }
   },
-  methods:{
-    gotoReader(){
-      this.$router.push({name:'reader',params:{type:'article',u_name:this.articleInfo.urlname}})
-    },
+  methods: {
+    gotoReader() {
+      this.$router.push({
+        name: "reader",
+        params: { type: "article", u_name: this.articleInfo.urlname }
+      });
+    }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-@import '~globalSass';
+@import "~globalSass";
 
 .archive-block {
   width: 100%; // height:150px;
@@ -45,10 +47,10 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #FCFCFC;
+  background: #fcfcfc;
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1);
   border-radius: 3px;
-  >img {
+  > img {
     min-width: 240px;
     height: 130px;
     border-radius: 5px;
@@ -67,53 +69,51 @@ export default {
   justify-content: space-around;
   flex-grow: 1;
   padding: 10px;
-  >.enter-wrap{
+  > .enter-wrap {
     cursor: pointer;
-    border:solid 1px #f5f5f5;
+    border: solid 1px #f5f5f5;
     border-radius: 3px;
     transition: 0.5s ease-out;
-    &:hover{
-        transition: none;
-        border:1px solid #aaa;
-        box-shadow: 0px 10px 20px rgba(0,0,0,0.15);
-      >.main-t{
+    &:hover {
+      transition: none;
+      border: 1px solid #aaa;
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
+      > .main-t {
         background-image: linear-gradient(#fff 50%, #333 50%);
         color: #000;
-        text-shadow:textoutline(1px,#fff);
+        text-shadow: textoutline(1px, #fff);
         // -webkit-text-stroke: 2px black;
       }
-      >h3{
-        color:#000;
+      > h3 {
+        color: #000;
       }
     }
-    &:active{
-      box-shadow: 0px 10px 20px rgba(0,0,0,0);
+    &:active {
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0);
       background: #ddd;
     }
-  >.main-t {
-    transition: 0.5s ease-out;
-    margin: 5px;
-    margin-bottom: 0px;
+    > .main-t {
+      transition: 0.5s ease-out;
+      margin: 5px;
+      margin-bottom: 0px;
 
-    font-size: rem(20px);
-    font-weight: bolder;
+      font-size: rem(20px);
+      font-weight: bolder;
 
-    background-position: 0 0.8em;
-    background-repeat: repeat-x;
-    background-size: 2px 10px;
+      background-position: 0 0.8em;
+      background-repeat: repeat-x;
+      background-size: 2px 10px;
+    }
 
-  }
-
-  >h3 {
-    transition: 0.5s ease-out;
-    margin: 5px;
-    font-size: rem(14px);
-    font-weight:500;
-    color:#777;
-    background-position: 0 1.375rem;
-    background-size: 1px 1px;
-  }
+    > h3 {
+      transition: 0.5s ease-out;
+      margin: 5px;
+      font-size: rem(14px);
+      font-weight: 500;
+      color: #777;
+      background-position: 0 1.375rem;
+      background-size: 1px 1px;
+    }
   }
 }
-
 </style>

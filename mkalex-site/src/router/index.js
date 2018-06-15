@@ -27,7 +27,7 @@ export default new Router({
       path: '/404',
       name: '404',
       components: {
-        clean:ErrorPage404
+        clean: ErrorPage404
       }
     },
     {
@@ -48,12 +48,12 @@ export default new Router({
         {
           path: 'stream',
           component: ArticleStream,
-           name: 'articleStream',
+          name: 'articleStream',
         },
         {
           path: 'archive',
           component: ArticleArchive,
-          name:'articleArchive',
+          name: 'articleArchive',
         }
       ]
     },
@@ -61,27 +61,27 @@ export default new Router({
       path: '/portfolio',
       name: 'portfolio',
       component: Portifolio
-    },{
+    }, {
       path: '/collection',
       name: 'collection',
       component: Collection
-    },{
+    }, {
       path: '/meta',
       name: 'meta',
       component: Meta
-    },{
+    }, {
       path: '/caicai',
       name: 'caicai',
       components: {
-        clean:Caicai
+        clean: Caicai
       }
-    },{
+    }, {
       path: '/reader/:type/:u_name',
       name: 'reader',
       components: {
-        clean:Reader
+        clean: Reader
       }
     },
-    
+
   ],
 })

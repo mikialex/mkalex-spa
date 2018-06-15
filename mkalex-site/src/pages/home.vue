@@ -41,7 +41,7 @@
         </ul>
       </div>
     </container-mid>
-    <!-- <container-mid>
+    <container-mid>
       <div class="ad">
         <div>
           广告位招租
@@ -56,7 +56,7 @@
           广告位招租
         </div>
       </div>
-    </container-mid> -->
+    </container-mid>
   </section>
 </template>
 
@@ -89,12 +89,13 @@ export default {
     min-height:300px;
   }
   >.intro-text{
-    padding-left:20px;
+    padding:20px;
   }
 }
 
 .friends{
   font-family: futura;
+  font-size:16px;
   width:100%;
   margin-top:20px;
   a{
@@ -105,6 +106,8 @@ export default {
     }
   }
   ul{
+    padding:20px;
+    text-align: justify;
     >li{
       display: inline-block;
       padding:10px;

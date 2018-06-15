@@ -51,7 +51,7 @@ export default {
 .md-section{
   width:100%;
   max-width:100%;
-  // width:500px;
+  font-size: 16px;
 
   p{
     color:#444;
@@ -66,7 +66,9 @@ export default {
 
   pre{
     white-space: pre-wrap; 
- word-wrap: break-word; 
+    word-wrap: break-word; 
+    max-width: 80vw;
+    margin:0px;
   }
 
   a{

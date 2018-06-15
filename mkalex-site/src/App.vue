@@ -5,7 +5,6 @@
     <scroll-to-top></scroll-to-top>
 
     <page-with-sticky-footer v-if="!useClean">
-      <!--<div style="height:100px"></div>-->
       <trans-fade>
         <router-view></router-view>
       </trans-fade>
@@ -17,21 +16,25 @@
 </template>
 
 <script>
-import topNav from '@/components/nav/top-nav.vue'
-import footerDark from '@/components/footer/footer-dark.vue'
-import scrollToTop from '@/components/scroll-to-top.vue'
+import topNav from "@/components/nav/top-nav.vue";
+import footerDark from "@/components/footer/footer-dark.vue";
+import scrollToTop from "@/components/scroll-to-top.vue";
 export default {
-  name: 'app',
+  name: "app",
   computed: {
     useClean() {
-      return this.$route.name === "caicai"||this.$route.name === "404"||this.$route.name === "reader"
+      return (
+        this.$route.name === "caicai" ||
+        this.$route.name === "404" ||
+        this.$route.name === "reader"
+      );
     }
   },
   methods: {
-    changeSize:function(size){
-      document.querySelector('html').style.fontSize=size+'px';
+    changeSize: function(size) {
+      document.querySelector("#app").style.fontSize = size + "px";
     },
-    setRem: function(){
+    setRem: function() {
       let width = document.body.clientWidth;
       if (width <= 400) {
         this.changeSize(12);
@@ -41,38 +44,38 @@ export default {
       } else if (width <= 1280) {
         this.changeSize(16);
       } else if (width <= 1920) {
-        let ratio = (width - 0.5 * (width - 1280)) / 88
+        let ratio = (width - 0.5 * (width - 1280)) / 88;
         this.changeSize(ratio);
       } else {
         this.changeSize(18);
       }
-    },
+    }
   },
-  mounted(){
-    window.onresize =(function() {
-        this.setRem();
-    }).bind(this);
+  mounted() {
+    window.onresize = function() {
+      this.setRem();
+    }.bind(this);
     this.setRem();
   },
   components: {
-    'top-nav': topNav,
-    'footer-dark': footerDark,
-    'scroll-to-top':scrollToTop,
+    "top-nav": topNav,
+    "footer-dark": footerDark,
+    "scroll-to-top": scrollToTop
   }
-}
+};
 </script>
 
 <style lang="scss">
-@import 'assets/css/font-awesome.min.css' ;
+@import "assets/css/font-awesome.min.css";
+@import "./sass/font.scss";
+@import "./sass/scroll-bar.scss";
 
 html {
   font-family: "PingFang SC", "microsoft yahei", sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; 
+  -moz-osx-font-smoothing: grayscale;
   width: 100vw;
   overflow-x: hidden;
-  // color: #2c3e50;
-  // margin-top: 60px;
 }
 
 body {
@@ -80,52 +83,9 @@ body {
   background: #fafafa;
 }
 
-@font-face {
-  font-family: bigCaslon;
-  src: url('./assets/font/BigCaslon.ttf');
-  font-weight: normal;
-}
-@font-face {
-  font-family: JosefinSans;
-  src: url('./assets/font/Josefin_Sans/JosefinSans-SemiBold.ttf');
-  font-weight: semibold;
-}
-
-@font-face {
-  font-family: JosefinSans;
-  src: url('./assets/font/Josefin_Sans/JosefinSans-Bold.ttf');
-  font-weight: bold;
-}
-
-@font-face {
-  font-family: futura;
-  src: url('./assets/font/futura/futura-medium.ttf');
-  font-weight: bold;
-}
-
-
 ::selection {
-  color: #FFFFFF;
+  color: #ffffff;
   background-color: rgb(210, 63, 63);
   border-radius: 10px;
 }
-
-::-webkit-scrollbar {
-  width: 15px;
-  height: 15px;
-}
-
-::-webkit-scrollbar-track {
-  background-color: #f6f6f6;
-  box-shadow: inset 0px -0.5px 0px 3px rgba(0, 0, 0, 0.05);
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: #fff;
-  border-radius: 2px;
-  box-shadow: 0px 4px 0px 0px rgba(0, 0, 0, 0.05);
-  // inset 0px 0px 0px 2px rgba(0, 0, 0, 0.05);
-}
-
-
 </style>
