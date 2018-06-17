@@ -16,17 +16,15 @@
 
 <script>
 import block from "./archive-block";
-import pager from "../../pager.vue";
 export default {
   components: {
     "archive-article-block": block,
-    "mk-pager": pager
-  },
-  props: {
-    articleList: { required: true }
   },
   mounted() {},
   computed: {
+    articleList(){
+      return this.$store.getters.currentPageArticles;
+    },
     showNotWriteAnything() {
       return (
         this.articleList.length === 0 &&

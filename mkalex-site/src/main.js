@@ -29,6 +29,10 @@ MKTransition.map(component => {
   Vue.component(component.name, component);
 });
 
+import MKCommon from '../common/include';
+MKCommon.map(component => {
+  Vue.component(component.name, component);
+});
 
 Vue.config.productionTip = false
 

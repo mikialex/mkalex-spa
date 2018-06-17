@@ -1,5 +1,5 @@
 <template>
-  <archive-container :articleList="this.$store.getters.currentPageArticles"></archive-container>
+  <archive-container></archive-container>
 </template>
 
 <script>

@@ -17,63 +17,63 @@
 
 <script>
 export default {
+  name: "mk-pager",
   props: {
-    list: {required: true, default: []},
-    currentIndex: {required: true, default: 0},
-    eachPage:{required: true, default: 5},
+    list: { required: true, default: [] },
+    currentIndex: { required: true, default: 0 },
+    eachPage: { required: true, default: 5 }
   },
-  data(){
-    return {
+  data() {
+    return {};
+  },
+  computed: {
+    listCount() {
+      return Math.ceil(this.list.length / this.eachPage);
     }
   },
-  computed:{
-    listCount(){
-      return Math.ceil(this.list.length / this.eachPage);
-    },
-    
-  },
-  methods:{
-    jumpTo(n){
-      this.$emit('switchPage', n - 1);
+  methods: {
+    jumpTo(n) {
+      this.$emit("switchPage", n - 1);
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-.pager{
+.pager {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.switch{
-  font-family: 'futura';
+.switch {
+  font-family: "futura";
   font-size: 20px;
 }
 
-.page-group{
+.page-group {
   display: flex;
-  max-width:80%;
-  padding-left:15px;
-  padding-right:15px;
-  >.item{
+  max-width: 80%;
+  padding-left: 15px;
+  padding-right: 15px;
+  > .item {
     outline: none;
-    width:30px;
-    height:30px;
-    margin:5px;
-    border-radius:100%;
-    border:0px;
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    border-radius: 100%;
+    border: 0px;
     box-shadow: 0px 2px 2px #ddd;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'futura';
+    font-family: "futura";
     font-size: 14px;
+    cursor: pointer;
   }
-  >.is-current-page{
+  > .is-current-page {
     background: #000;
-    color:#fff;
+    color: #fff;
   }
 }
 </style>

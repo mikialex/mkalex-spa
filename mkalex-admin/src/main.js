@@ -20,6 +20,12 @@ import MKTransition from '../../mkalex-site/src/transitions/include'
 MKTransition.map(component => {
   Vue.component(component.name, component);
 });
+
+import MKCommon from '../../mkalex-site/common/include';
+MKCommon.map(component => {
+  Vue.component(component.name, component);
+});
+
 import toggle from './components/form/toggle.vue'
 Vue.component('mk-toggle', toggle);
 
