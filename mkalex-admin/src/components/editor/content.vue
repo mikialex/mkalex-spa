@@ -2,86 +2,54 @@
   <div class="content-container">
 
     <div class="mask" @click="closeAlbum" v-if="showAlbum"></div>
-    <div class="album" :class="{'album-hide':!showAlbum}">
+    <!-- <div class="album" :class="{'album-hide':!showAlbum}">
       <album-part  :useforEditor="true" @selectImage="setImage"></album-part>
+    </div> -->
+    <div v-if="!isActiveContent"  
+    @click="startEdit"
+    class="content-snap">
+      {{content}}
     </div>
 
+  <div class="edit-layer" v-show="isActiveContent">
    <div class="content-editor" >
-      <div  class="content-toolbar" :class="{'toolbar-fix':fixBar}">
-
-        <div class="editor-option" :class="{'not-active': !isTyping}">
-          <div @mousedown="insertAtCursor('**','**')">
-            <i class="fa fa-bold" ></i>
-          </div>
-          <div @mousedown="insertAtCursor('*','*')">
-            <i class="fa fa-italic" ></i>
-          </div>
-          <div @mousedown="insertAtCursor('\n```\n\n```','')">
-            <i class="fa fa-code" ></i>
-          </div>
-          <div @mousedown="insertAtCursor('[]()','')">
-            <i class="fa fa-link" ></i>
-          </div>
-          <div @mousedown="openAlbum">
-            <i class="fa fa-image" ></i>
-          </div>
-          <div @mousedown="insertAtCursor('\n+ \n+ \n+ ','')">
-            <i class="fa fa-list-ol" ></i>
-          </div>
-          <div @mousedown="insertAtCursor('\n1. \n2. \n3. ','')">
-            <i class="fa fa-list-ul" ></i>
-          </div>
-          <div @mousedown="insertAtCursor('---','')">
-            <i class="fa fa-minus" ></i>
-          </div>
-          <div @mousedown="insertAtCursor('\n# ','')">
-            <i class="fa fa-heading" ></i>1
-          </div>
-          <div @mousedown="insertAtCursor('\n## ','')">
-            <i class="fa fa-heading" ></i>2
-          </div>
-          <div @mousedown="insertAtCursor('\n### ','')">
-            <i class="fa fa-heading" ></i>3
-          </div>
-          <div @mousedown="insertAtCursor('\n#### ','')">
-            <i class="fa fa-heading" ></i>4
-          </div>
-          <div @mousedown="insertAtCursor('> ','')">
-            <i class="fa fa-indent" ></i>
-          </div>
-        </div>
-
+      <div  class="content-toolbar" >
+        <el-button @click="isActiveContent = false"> close </el-button>
         <div class="preview">
-          <span v-if="!isShowPreview" @click="togglePreview">
+          <el-button v-if="!isShowPreview" @click="togglePreview">
             <i class="fa fa-eye" ></i> preview
-            </span>
-          <span v-if="isShowPreview" @click="togglePreview">
+            </el-button>
+          <el-button v-if="isShowPreview" @click="togglePreview">
             <i class="fa fa-eye-slash" ></i> textvalue
-          </span>
+          </el-button>
         </div>
       </div>
    </div>
 
+  <div id="mirror-container">
+   <div id="mirror"
+   v-show="!isShowPreview">
+     <!-- edit content here -->
+   </div>
+  </div>
 
-   <textarea id="md-content" 
-   spellcheck="false" 
-   v-model="content" 
-   v-if="!isShowPreview"
-   @keyup="autoHeight"
-   @click="autoHeight"
-   @focus="focus"
-   @blur="blur"
-   :style="{'height':this.height+'px'}"
-   ></textarea>
 
    <div id="md-preview" v-if="isShowPreview" v-html="parsedContent"></div>
+  </div>
+
   </div>
 </template>
 
 <script>
-var marked = require('marked');
+const marked = require('marked');
 import 'highlight.js/styles/rainbow.css';
-import album from '../album/album.vue'
+import album from '../album/album.vue';
+import CodeMirror from 'codemirror/lib/codemirror'   // CodeMirror，必要
+import 'codemirror/lib/codemirror.css'    // css，必要
+import 'codemirror/mode/markdown/markdown'  // 语法高亮，自行替换为你需要的语言
+
+var mirrorEditor;
+
 export default {
   components:{
     'album-part': album
@@ -89,13 +57,9 @@ export default {
   data(){
     return {
       isShowPreview: false,
-      currentScroll: 0,
-      isTyping: false,
-      height: 500,
+      hasGetContent: false,
       showAlbum:false,
-
-      lastStart:0,
-      lastEnd:0,
+      isActiveContent: false
     }
   },
   computed: {
@@ -112,9 +76,6 @@ export default {
       let p = this.content.replace(/{#base#}/g, urlbase);
       return marked(p);
     },
-    fixBar(){
-      return this.currentScroll>200;
-    },
     content:{
       get(){
         return this.$store.state.editor.content;
@@ -125,70 +86,59 @@ export default {
     }
   },
   watch:{
-    content(){
-      let element = this.$el.querySelector('#md-content');
-      this.height = element.scrollHeight;
-      this.lastStart= element.selectionStart;
-      this.lastEnd=element.selectionEnd;
+    content(value){
+      if(!this.hasGetContent){
+        mirrorEditor.setValue(value);
+        this.hasGetContent = true;
+      }
     }
   },
   methods:{
     togglePreview(){
       this.isShowPreview=!this.isShowPreview;
     },
-    openAlbum(){
-      this.showAlbum=true;
+    startEdit(){
+      this.isActiveContent= true;
+      mirrorEditor.setSize('100%', window.innerHeight - 30);
     },
-    closeAlbum(){
-      this.showAlbum=false;
-    },
-    setImage(img){
-      this.showAlbum=false;
-      let myField = this.$el.querySelector('#md-content');
-      myField.focus();
-      myField.selectionStart=this.lastStart;
-      myField.selectionEnd=this.lastEnd;
-      this.insertAtCursor('![]('+ '{#base#}'+ img +')','');
-    },
-    autoHeight(e){
-      let element=e.target;
-      this.height = element.scrollHeight;
-    },
-    handleScroll() {
-      this.currentScroll = window.pageYOffset;
-    },
-    focus(){
-      this.isTyping=true;
-    },
-    blur(){
-      this.isTyping= false;
-    },
-    insertAtCursor(startStr,endStr) {
-      if(this.isTyping){
-        let myField = this.$el.querySelector('#md-content');
-        var startPos = myField.selectionStart;
-        var endPos = myField.selectionEnd;
-        this.content = this.content.substring(0, startPos)
-            + startStr
-            + this.content.substring(startPos, endPos)
-            + endStr
-            + this.content.substring(endPos, this.content.length);
-        setTimeout(() => {
-          myField.focus();
-          myField.selectionStart=startPos;
-          myField.selectionEnd=endPos;
-        }, 0);
-      }
-    }
+    // setImage(img){
+    //   this.showAlbum=false;
+    //   let myField = this.$el.querySelector('#md-content');
+    //   myField.focus();
+    //   myField.selectionStart=this.lastStart;
+    //   myField.selectionEnd=this.lastEnd;
+    //   this.insertAtCursor('![]('+ '{#base#}'+ img +')','');
+    // },
+    // insertAtCursor(startStr,endStr) {
+    //   if(this.isTyping){
+    //     let myField = this.$el.querySelector('#md-content');
+    //     var startPos = myField.selectionStart;
+    //     var endPos = myField.selectionEnd;
+    //     this.content = this.content.substring(0, startPos)
+    //         + startStr
+    //         + this.content.substring(startPos, endPos)
+    //         + endStr
+    //         + this.content.substring(endPos, this.content.length);
+    //     setTimeout(() => {
+    //       myField.focus();
+    //       myField.selectionStart=startPos;
+    //       myField.selectionEnd=endPos;
+    //     }, 0);
+    //   }
+    // }
 
   },
   mounted() {
-    window.addEventListener('scroll', this.handleScroll);
-    const event = new Event('scroll');
-    window.dispatchEvent(event);
-  },
-  destroyed() {
-    window.removeEventListener('scroll', this.handleScroll);
+    mirrorEditor = CodeMirror(this.$el.querySelector('#mirror'), {
+      value: this.content,
+      mode:  "markdown",
+      lineWrapping: true,
+      lineNumbers: false,
+      inputStyle: "contenteditable"
+    });
+    mirrorEditor.on('change', (instance, change)=>{
+      this.content = instance.getValue();
+    })
   },
 }
 </script>
@@ -234,16 +184,6 @@ export default {
   }
 }
 
-.toolbar-fix{
-  position:fixed;
-  top:50px;
-  left:0px;
-  width:100%;
-  box-sizing: border-box;
-  padding-left:20px;
-  padding-right:20px;
-  background: rgba(255, 255, 255, 0.95) !important;
-}
 .content-toolbar {
   border-top:1px solid rgba(0,0,0,0.1);
   padding-bottom:5px;
@@ -252,40 +192,10 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  // > * {
-  //   font-size: 20px;
-  //   cursor: pointer;
-  //   margin: 5px;
-  //   &:hover {
-  //     color: #f66;
-  //   }
-  // }
 }
 
 .not-active{
   color:#bbb;
-}
-
-.editor-option{
-  font-size: 14px;
-  display: flex;
-  >div{
-    cursor: pointer;
-    border:1px solid rgba(0,0,0,0.1);
-    border-radius:3px;
-    width:25px;
-    height:25px;
-    margin:2px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    &:hover{
-      background: #eee;
-    }
-    &:active{
-      background: #ddd;
-    }
-  }
 }
 
 .preview{
@@ -305,38 +215,6 @@ export default {
   flex-direction: column;
 }
 
-#md-content {
-  width: calc(80vw + 60px);
-  height:50px;
-  align-self: center;
-  @media(max-width: 500px) {
-    padding: 5px;
-    width:95%;
-  }
-  resize: none;
-  box-sizing: border-box;
-  background: #fffefa;
-
-  border: 0px;
-  border-top: solid 1px rgba(0, 0, 0, 0.1);
-  border-bottom: solid 1px rgba(0, 0, 0, 0.1);
-
-  outline: none;
-  min-height: 300px;
-  padding: 10px;
-
-  color: #333;
-  font-size: 14px;
-  line-height: 1.5;
-  word-spacing: 5px;
-  letter-spacing: 1px;
-  font-family: 'Inziu Iosevka SC';
-
-  @media(max-width: 500px) {
-    padding: 20px;
-  }
-}
-
 #md-preview {
   flex-grow: 1;
   box-sizing: border-box;
@@ -354,6 +232,32 @@ export default {
     max-width: 100%;
     margin: auto;
     text-align: center;
+  }
+}
+
+#mirror-container{
+  padding:10px;
+  height:calc(100vh - 30px);
+}
+
+.edit-layer{
+  position: fixed;
+  width:100vw;
+  height:100vh;
+  left:0px;
+  top:0px;
+  background: #fff;
+}
+
+.content-snap{
+  font-size: 12px;
+  color: #666;
+  cursor: pointer;
+  &:hover{
+    background: #eee;
+  }
+  &:active{
+    background: #ddd;
   }
 }
 </style>

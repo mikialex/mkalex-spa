@@ -44,26 +44,32 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .title-part {
   > .title-editor {
     width: 100%;
     border: 0px;
-    font-size: 36px;
+    font-size: 24px;
     font-weight: bold;
-    padding: 10px;
-    margin-left:-10px;
+    padding: 5px;
+    &:hover{
+      background: #eee;
+    }
     &:focus{
       border-bottom: solid 3px rgb(242, 60, 60);
     }
   }
   >.sub-title-editor {
     width: 100%;
-    padding: 10px;
+    padding: 2px;
+    padding-left:10px;
     border: 0px;
-    font-size: 24px;
+    font-size: 16px;
     font-weight: bold;
-    margin-left: -10px;
     margin-bottom: 20px;
+    &:hover{
+      background: #eee;
+    }
     &:focus{
       border-bottom: solid 3px rgb(242, 60, 60);
     }

@@ -1,6 +1,7 @@
 <template>
   <section >
-    <div v-html="parsedContent" class="md-section">
+    <div v-html="parsedContent" class="md-section" 
+    :style="{width:this.width}">
       
     </div>
   </section>
@@ -23,9 +24,15 @@ export default {
   data(){
     return {
       // parsedContent:'',
+      width:100,
     }
   },
   mounted(){
+    this.width = this.$el.clientWidth + 'px';
+    window.addEventListener('resize', ()=>{
+      console.log(this.$el.clientWidth);
+      this.width = this.$el.clientWidth + 'px';
+    })
   },
   computed:{
     parsedContent(){
@@ -65,10 +72,7 @@ export default {
   }  
 
   pre{
-    white-space: pre-wrap; 
-    word-wrap: break-word; 
-    max-width: 80vw;
-    margin:0px;
+    overflow-x: scroll;
   }
 
   a{

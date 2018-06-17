@@ -152,82 +152,32 @@ export default {
 
 nav{
   display: flex;
+  background:  rgb(248, 248, 248);
+  padding: 3px;
   >div{
-    padding:10px;
+    padding:5px 10px 5px 10px;
     cursor: pointer;
+    border-radius: 3px;
+    transition: 200ms;
+    &:hover{
+      background:#eee;
+    }
+    &:active{
+      background:#ddd;
+    }
   }
   >.activeTab{
-    background: #000;
-    color:#fff;
+    background:#fff;
+    box-shadow: 0px 2px 0px #eee;
+    // color:#fff;
   }
 }
 
 
 .tab-sec{
-  padding-top:20px;
-}
-
-.toggle-row{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height:50px;
-  padding-left:10px;
-  padding-right:10px;
-  border-bottom: 1px solid rgba(0,0,0,0.1);
-  border-top: 1px solid rgba(0,0,0,0.1);
-  margin-top:-1px ;
-  >span{
-    font-size:18px;
-  }
+  padding-top:10px;
 }
 
 
-.title-part {
-  > .title-editor {
-    width: 100%;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    font-size: 30px;
-    padding: 10px;
-  }
-  > .sub-title-editor {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    font-size: 20px;
-    margin-top: 10px;
-    margin-bottom: 20px;
-  }
-}
-
-.operation-part {
-  display: flex;
-  height: 60px;
-  padding-right: 30px;
-  padding-left: 30px;
-  align-items: center;
-  > button {
-    height: 40px;
-    margin: 5px;
-  }
-}
-
-.form-changed {
-  // background: rgba(255,150,100,0.1);
-  transition: 1s;
-  border-right: 10px solid #000 !important;
-}
-
-.bounce-enter-active {
-  transition: all 0.3s ease-in-out;
-}
-.bounce-leave-active {
-  transition: all 0.3s ease-in-out;
-}
-.bounce-enter,
-.bounce-leave-to {
-  transform: translateX(200px);
-  opacity: 0;
-}
 </style>
 
