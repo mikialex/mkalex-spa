@@ -99,11 +99,11 @@ export default {
 button{
   border:0px;
   border-radius: 3px;
-  height:40px;
+  height:30px;
   margin:5px;
   background: rgb(48, 48, 48);
   color:#fff;
-  font-size: 14px;
+  font-size: 12px;
   cursor: pointer;
   transition: 200ms;
   &:hover{
@@ -120,7 +120,8 @@ button{
   color: rgb(48, 48, 48);
   text-shadow: 0px 1px 0px rgb(90, 90, 90);
   font-weight:900;
-  font-size: 40px;
+  font-size: 20px;
+  align-self: flex-start;
 }
 
 .danger{

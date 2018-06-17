@@ -14,21 +14,20 @@
   <div class="edit-layer" v-show="isActiveContent">
    <div class="content-editor" >
       <div  class="content-toolbar" >
-        <el-button @click="isActiveContent = false"> close </el-button>
+        <el-button size="small" @click="isActiveContent = false"> close </el-button>
         <div class="preview">
-          <el-button v-if="!isShowPreview" @click="togglePreview">
+          <el-button size="small" v-if="!isShowPreview" @click="togglePreview">
             <i class="fa fa-eye" ></i> preview
             </el-button>
-          <el-button v-if="isShowPreview" @click="togglePreview">
+          <el-button size="small" v-if="isShowPreview" @click="togglePreview">
             <i class="fa fa-eye-slash" ></i> textvalue
           </el-button>
         </div>
       </div>
    </div>
 
-  <div id="mirror-container">
-   <div id="mirror"
-   v-show="!isShowPreview">
+  <div id="mirror-container"  v-show="!isShowPreview">
+   <div id="mirror">
      <!-- edit content here -->
    </div>
   </div>
@@ -46,6 +45,7 @@ import 'highlight.js/styles/rainbow.css';
 import album from '../album/album.vue';
 import CodeMirror from 'codemirror/lib/codemirror'   // CodeMirror，必要
 import 'codemirror/lib/codemirror.css'    // css，必要
+import 'codemirror/theme/base16-light.css'    // css，必要
 import 'codemirror/mode/markdown/markdown'  // 语法高亮，自行替换为你需要的语言
 
 var mirrorEditor;
@@ -88,7 +88,10 @@ export default {
   watch:{
     content(value){
       if(!this.hasGetContent){
+        console.log('set')
+        let oldC = mirrorEditor.getCursor();
         mirrorEditor.setValue(value);
+        mirrorEditor.setCursor(oldC);
         this.hasGetContent = true;
       }
     }
@@ -99,7 +102,8 @@ export default {
     },
     startEdit(){
       this.isActiveContent= true;
-      mirrorEditor.setSize('100%', window.innerHeight - 30);
+      mirrorEditor.setSize('100%', window.innerHeight - 60);
+      mirrorEditor.focus();
     },
     // setImage(img){
     //   this.showAlbum=false;
@@ -134,7 +138,8 @@ export default {
       mode:  "markdown",
       lineWrapping: true,
       lineNumbers: false,
-      inputStyle: "contenteditable"
+      inputStyle: "contenteditable",
+      theme: 'base16-light'
     });
     mirrorEditor.on('change', (instance, change)=>{
       this.content = instance.getValue();
@@ -186,8 +191,7 @@ export default {
 
 .content-toolbar {
   border-top:1px solid rgba(0,0,0,0.1);
-  padding-bottom:5px;
-  padding-top:5px;
+  padding: 5px 10px 5px 10px;
   background: #fff;
   display: flex;
   align-items: center;
@@ -196,18 +200,6 @@ export default {
 
 .not-active{
   color:#bbb;
-}
-
-.preview{
-  border:1px solid rgba(0,0,0,0.1);
-  border-radius:3px;
-  padding:3px;
-  &:hover{
-    background: #eee;
-  }
-  &:active{
-    background: #ddd;
-  }
 }
 
 .content-container{
@@ -219,6 +211,7 @@ export default {
   flex-grow: 1;
   box-sizing: border-box;
   width: 80vw;
+  height:calc(100vh - 60px);
   margin:auto;
   background: #fff;
   overflow: scroll;
