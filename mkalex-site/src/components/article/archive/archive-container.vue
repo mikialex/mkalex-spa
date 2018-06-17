@@ -4,34 +4,54 @@
     :key="article.urlname"
     :articleInfo="article"
     ></archive-article-block>
-    <h1  class="em-hint" v-if="articleList.length===0&&this.$store.state.articles.isArticleListLoaded">作者似乎<br>从未写过东西</h1>
+    <h1  class="em-hint" v-if="showNotWriteAnything">作者似乎<br>从未写过东西</h1>
+    <mk-pager
+    :list="this.$store.state.articles.articleList"
+    :currentIndex="this.$store.state.articles.currentPage"
+    :eachPage="this.$store.state.articles.eachPageNumber"
+    @switchPage="switchPage"
+    ></mk-pager>
   </section>
 </template>
 
 <script>
-import block from './archive-block'
+import block from "./archive-block";
+import pager from "../../pager.vue";
 export default {
-  components:{
-    'archive-article-block':block,
+  components: {
+    "archive-article-block": block,
+    "mk-pager": pager
   },
-  props:{
-    articleList:{required:true}
+  props: {
+    articleList: { required: true }
   },
-  mounted(){
+  mounted() {},
+  computed: {
+    showNotWriteAnything() {
+      return (
+        this.articleList.length === 0 &&
+        this.$store.state.articles.isArticleListLoaded
+      );
+    }
   },
-}
+  methods:{
+    switchPage(page){
+      this.$store.commit('switchPage', page);
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
-@import '~globalSass';
+@import "~globalSass";
 
-section{
-  width:100%;
+section {
+  width: 100%;
 }
 
-.em-hint{
+.em-hint {
   text-align: center;
-  font-size:64px;
+  font-size: 64px;
 }
 </style>
 

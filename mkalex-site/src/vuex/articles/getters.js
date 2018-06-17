@@ -1,7 +1,10 @@
 export const getters = {
 
   currentPageArticles: state => {
-    return state.articleList.slice(0, 10);
-  }
+    const current = state.currentPage;
+    const from = current * state.eachPageNumber;
+    const to = (current + 1) * state.eachPageNumber;
+    return state.articleList.slice(from, to);
+  },
 
 };
