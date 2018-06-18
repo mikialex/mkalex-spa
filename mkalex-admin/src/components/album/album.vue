@@ -46,7 +46,7 @@ export default {
       ratio:0,
 
       currentPage: 0,
-      eachPageNumber: 5,
+      eachPageNumber: 8,
     }
   },
   computed:{

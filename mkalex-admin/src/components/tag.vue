@@ -49,13 +49,22 @@ export default {
     padding:10px;
     line-height: 20px;
     >span{
+      cursor: default;
       background: #000;
       color:#fff;
       display: inline-block;
       border-radius:3px;
       padding: 5px;
       margin:5px;
+      &:hover{
+        >i{
+          width:18px;
+        }
+      }
       >i{
+        width:0px;
+        overflow: hidden;
+        transition: 150ms;
         cursor: pointer;
         &:hover{
           color:#f45;
