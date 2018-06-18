@@ -8,7 +8,7 @@
     </div>
     <div class="container">
       <div class="image-block"
-      v-for="image in this.$store.state.image.imageList" :key="image.id">
+      v-for="image in currentImageList" :key="image.id">
         <div class="image-container">
           <img @click="viewBig(image.storage_name)"
           :src="getUrl(image.storage_name)" alt="">
@@ -21,11 +21,14 @@
           <span class="id">{{image.id}}</span>
         </div>
       </div>
-      <!-- <el-pagination
-        small
-        layout="prev, pager, next"
-        :total="50">
-      </el-pagination> -->
+
+      <mk-pager
+      :list="imageList"
+      :currentIndex="currentPage"
+      :eachPage="eachPage"
+      @switchPage="switchPage"
+      ></mk-pager>
+
     </div>
     <div class="big-view" v-if="bigView" @click="closeBig">
       <img :src="BigUrl" alt="">
@@ -40,11 +43,28 @@ export default {
       bigView:false,
       BigUrl:'',
       isUploading: false,
-      ratio:0
+      ratio:0,
+
+      currentPage: 0,
+      eachPageNumber: 5,
+    }
+  },
+  computed:{
+    imageList(){
+      return this.$store.state.image.imageList;
+    },
+    currentImageList() {
+      const current = this.currentPage;
+      const from = current * this.eachPageNumber;
+      const to = (current + 1) * this.eachPageNumber;
+      return this.imageList.slice(from, to);
     }
   },
   props:['useforEditor','useforCover'],
   methods:{
+    switchPage(page){
+      this.currentPage = page;
+    },
     prepare(){
       this.$el.querySelector('input').click();
     },

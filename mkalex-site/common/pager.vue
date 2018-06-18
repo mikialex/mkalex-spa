@@ -52,10 +52,11 @@ export default {
 }
 
 .page-group {
-  display: flex;
-  max-width: 80%;
   padding-left: 15px;
   padding-right: 15px;
+  width:50%;
+  display: flex;
+  flex-wrap: wrap;
   > .item {
     outline: none;
     width: 30px;
