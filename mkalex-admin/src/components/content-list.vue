@@ -1,7 +1,14 @@
 <template>
   <ul class="article-ui">
-    <h3 v-if="this.type==='article'">ARTICLE LIST</h3>
-    <h3 v-if="this.type==='portfolio'">PORTFOLIO LIST</h3>
+    <div class="row">
+      <h3 v-if="this.type==='article'">ARTICLE LIST</h3>
+      <h3 v-if="this.type==='portfolio'">PORTFOLIO LIST</h3>
+
+      <div>
+        <el-button size="small"  v-if="!showDraftOnly" @click="showDraftOnly = true"> only show draft</el-button>
+        <el-button size="small" v-if="showDraftOnly" @click="showDraftOnly = false"> show all</el-button>
+      </div>
+    </div>
 
     <li class="article-li add-article-li"
       v-if="!isCreating"
@@ -39,14 +46,21 @@ export default {
   data(){
     return{
       isCreating: false,
-      newUrlName: ''
+      newUrlName: '',
+      showDraftOnly: false
     }
   },
   computed:{
     subList(){
-      return this.$store.state.entityList.filter((item)=>{
-        return item.usefor===this.type
-      })
+      let list =  this.$store.state.entityList.filter((item)=>{
+        return item.usefor===this.type;
+      });
+      if(this.showDraftOnly){
+        list = list.filter(item=>{
+            return item.is_active !== true;
+        })
+      }
+      return list;
     },
     isNewUrlValid(){
       return this.newUrlName!==''&&this.isUnique;
@@ -81,6 +95,11 @@ export default {
 
 .article-ui{
   padding:0px;
+  >.row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 
 .add-article-li{

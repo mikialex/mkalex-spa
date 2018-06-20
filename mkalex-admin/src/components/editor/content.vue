@@ -244,6 +244,7 @@ export default {
 
 .content-snap{
   font-size: 12px;
+  min-height: 100px;
   color: #666;
   cursor: pointer;
   &:hover{
