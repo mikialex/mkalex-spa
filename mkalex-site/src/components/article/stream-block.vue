@@ -4,7 +4,7 @@
     <div class="stream-block-text">
       <div class="stream-block-title">
         <h2>{{articleInfo.title}}</h2>
-        <h3>{{articleInfo.subTitle}}</h3>
+        <h3>{{articleInfo.sub_title}}</h3>
       </div>
       <div class="stream-block-content">
         <markdown-render :content="content" :urlname="articleInfo.urlname"></markdown-render>
@@ -34,6 +34,10 @@ export default {
       this.$ajax.get(this,this.$ajax.apis.articleContent,{urlname:this.articleInfo.urlname})
       .then(data=>{
         this.content=data.content;
+        // window.dispatchEvent(new Event('resize'));
+        setTimeout(()=>{
+          window.dispatchEvent(new Event('resize'));
+        }, 100);
       }).catch(this.$ajax.handleErr(this))
   },
   components: {

@@ -1,10 +1,10 @@
 <template>
   <div class="content-container">
 
-    <div class="mask" @click="closeAlbum" v-if="showAlbum"></div>
-    <!-- <div class="album" :class="{'album-hide':!showAlbum}">
-      <album-part  :useforEditor="true" @selectImage="setImage"></album-part>
-    </div> -->
+    <div class="mask" @click="showAlbum = false" v-if="showAlbum"></div>
+    <div class="album" :class="{'album-hide':!showAlbum}">
+      <album-part  :useforEditor="true"></album-part>
+    </div>
     <div v-if="!isActiveContent"  
     @click="startEdit"
     class="content-snap">
@@ -15,6 +15,7 @@
    <div class="content-editor" >
       <div  class="content-toolbar" >
         <el-button size="small" @click="isActiveContent = false"> close </el-button>
+        <el-button size="small"  @click="showAlbum = true" > album </el-button>
         <div class="preview">
           <el-button size="small" v-if="!isShowPreview" @click="togglePreview">
             <i class="fa fa-eye" ></i> preview
@@ -161,7 +162,7 @@ export default {
   padding:20px;
   box-sizing: border-box;
   transition: 300ms ease-in-out;
-  z-index: 1000;
+  z-index: 10000;
 }
 .mask{
     width:100vw;
@@ -169,6 +170,7 @@ export default {
     position:fixed;
     top:0px;
     left:0px;
+    z-index: 9999;
   }
 .album-hide{
   left:-90vw;

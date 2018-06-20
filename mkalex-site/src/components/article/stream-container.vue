@@ -14,6 +14,11 @@
 <script>
 import Block from './stream-block'
 export default {
+  mounted(){
+    // setTimeout(()=>{
+    //   window.dispatchEvent(new Event('resize'));
+    // }, 500);
+  },
   components: {
     'stream-article-block': Block,
   },

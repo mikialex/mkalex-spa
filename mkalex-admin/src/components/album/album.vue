@@ -20,6 +20,7 @@
           <span class="name">{{image.name}}</span>
           <span class="id">{{image.id}}</span>
         </div>
+        <span style="font-size:12px;">{{image.storage_name}}</span>
       </div>
 
       <mk-pager
