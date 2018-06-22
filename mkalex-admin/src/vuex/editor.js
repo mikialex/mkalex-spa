@@ -35,6 +35,7 @@ export default {
     contentType: '',
     isActive: false,
 
+    hasLoaded: false,
   },
   mutations: {
     reset(state) {
@@ -86,6 +87,7 @@ export default {
   },
   actions: {
     async getEntity({ commit, dispatch, state, getters }, urlname) {
+      state.hasLoaded = false;
       commit('setUrlName', urlname);
       const data = await getAuth(apis.articleDetialAdmin, {
         urlname: urlname
@@ -100,6 +102,8 @@ export default {
       commit('setIsRecommended', data.is_recommended);
       commit('setContentType', data.usefor);
       commit('setIsActive', data.is_active);
+
+      state.hasLoaded = true;
 
     },
     async updateEntityInfo({ commit, dispatch, state, getters }) {

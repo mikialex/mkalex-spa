@@ -140,6 +140,13 @@ export default {
     changeTab(newTab){
       this.currentTab=newTab;
     }, 
+  },
+  beforeRouteLeave: function(to, from, next){
+    // if(this.$store.state.editor.hasLoaded){
+    //   this.$store.dispatch('editor/updateEntityInfo');
+    // }
+    next(confirm('check before leave'));
+    // next(true);
   }
 };
 </script>

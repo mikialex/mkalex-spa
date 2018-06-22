@@ -35,7 +35,7 @@ export default {
       .then(data=>{
         this.content=data.content;
         // window.dispatchEvent(new Event('resize'));
-        setTimeout(()=>{
+        setTimeout(()=>{  // FIX
           window.dispatchEvent(new Event('resize'));
         }, 100);
       }).catch(this.$ajax.handleErr(this))
