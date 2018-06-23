@@ -17,6 +17,7 @@
         <div class="string op" @click="setImage(image.storage_name)" v-if="useforEditor"><i class="fas fa-copy"></i></div>
         <div class="string op" @click="setCoverImage(image.storage_name)" v-if="useforCover"><i class="fas fa-file-image"></i></div>
         <div class="info">
+          <input type="text" :value="image.storage_name">
           <span class="name">{{image.name}}</span>
           <span class="id">{{image.id}}</span>
         </div>
@@ -26,7 +27,7 @@
       <mk-pager
       :list="imageList"
       :currentIndex="currentPage"
-      :eachPage="eachPage"
+      :eachPage="eachPageNumber"
       @switchPage="switchPage"
       ></mk-pager>
 

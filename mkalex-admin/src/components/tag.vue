@@ -1,17 +1,16 @@
 <template>
   <div class="tags" >
     <h3>TAGS GROUP</h3>
-    <div class="tags-container">
-      <span v-for="tag in tagList" :key="tag.tag_name">{{tag.tag_name}}
-        <i class="fa fa-trash" @click="deleteTag(tag.tag_name)"></i>
-      </span>
-    </div>
-    <input type="text" v-model="newTagName"> <button v-if="canAddNew" @click="addNewtag">add</button>
+    <tag-editor ></tag-editor>
   </div>
 </template>
 
 <script>
+import tagEditor from "./editor/tag-editor.vue";
 export default {
+  components: {
+    'tag-editor':tagEditor,
+  },
   data() {
     return {
       newTagName:'',

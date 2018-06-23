@@ -21,7 +21,10 @@
       <section  v-if="currentTab==='info'" class="tab-sec">
         <date-input-row :value.sync="createTime" :rowName="'创建时间'" :faClass="'fa-calendar-alt'"></date-input-row>
         <number-input-row :value.sync="pageView" :rowName="'浏览数'" :faClass="'fa-calendar-alt'"></number-input-row>
-        <tag-editor :urlname="this.$route.params.u_name" ></tag-editor>
+        <div class="tag-wrap">
+          <h4><i class="fas fa-tags"></i>tags</h4>
+          <tag-editor :urlname="this.$route.params.u_name" ></tag-editor>
+        </div>
       </section>
     </trans-fade>
 
@@ -185,6 +188,14 @@ nav{
   padding-top:10px;
 }
 
+.tag-wrap{
+  h4 {
+    margin: 10px;
+    > i {
+      margin-right: 5px;
+    }
+  }
+}
 
 </style>
 

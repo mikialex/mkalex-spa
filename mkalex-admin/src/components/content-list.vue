@@ -30,7 +30,7 @@
     :class="{'draft':!item.is_active}"
     :to="{ name:'editor',params:{u_name:item.urlname} }" tag="li">
       <h1 v-if="item.title!==''">{{item.title}}<span>{{item.urlname}}</span> </h1>
-      <h2  v-if="item.sub_title!==''">{{item.sub_title}}</h2>
+      <h2 v-if="item.sub_title!==''">{{item.sub_title}}</h2>
       <h1 v-if="item.title===''">no title<span>{{item.urlname}}</span> </h1>
       <h2 v-if="item.sub_title===''">no sub title</h2>
       <span>created at: {{item.publish_time}}</span>
@@ -149,6 +149,7 @@ export default {
   padding: 10px;
   border: 1px dotted rgba(0,0,0,0.1);
   transition: 0.5s;
+  font-size: 12px;
   cursor: pointer;
   &:hover{
     background: #efefef;
@@ -157,9 +158,10 @@ export default {
     margin:5px;
     cursor: pointer;
     transition: 0.1s;
+    font-size: 24px;
     >span{
       color:#aaa;
-      font-size: 16px;
+      font-size: 12px;
     }
   }
   >h2{
