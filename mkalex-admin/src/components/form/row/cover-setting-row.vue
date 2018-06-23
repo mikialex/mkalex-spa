@@ -10,7 +10,7 @@
     </div>
     <div class="mask" @click="closeAlbum" v-if="showAlbum"></div>
     <div class="album" :class="{'album-hide':!showAlbum}">
-      <album-part :useforCover="true" @selectCoverImage="setImage"></album-part>
+      <album-part :useforCover="true" @selectCoverImage="setImage" :fixheight="true"></album-part>
     </div>
   </div>
 </template>

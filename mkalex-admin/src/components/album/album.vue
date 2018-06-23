@@ -2,27 +2,19 @@
   <div>
     <div class="upload-bar">
       <input type="file" class="file" style="display:none" @change="upload">
-      <el-button @click="prepare" :disabled="isUploading">UPLOAD</el-button>
+      <el-button @click="prepare" :disabled="isUploading" size="small">UPLOAD</el-button>
       <el-progress  class="upload-progress" v-if="isUploading"
       :text-inside="true" :stroke-width="18" :percentage="ratio"></el-progress>
     </div>
-    <div class="container">
-      <div class="image-block"
-      v-for="image in currentImageList" :key="image.id">
-        <div class="image-container">
-          <img @click="viewBig(image.storage_name)"
-          :src="getUrl(image.storage_name)" alt="">
-        </div >
-        <div class="delete op" @click="deleteImage(image.storage_name)"><i class="fas fa-times"></i></div>
-        <div class="string op" @click="setImage(image.storage_name)" v-if="useforEditor"><i class="fas fa-copy"></i></div>
-        <div class="string op" @click="setCoverImage(image.storage_name)" v-if="useforCover"><i class="fas fa-file-image"></i></div>
-        <div class="info">
-          <input type="text" :value="image.storage_name">
-          <span class="name">{{image.name}}</span>
-          <span class="id">{{image.id}}</span>
-        </div>
-        <span style="font-size:12px;">{{image.storage_name}}</span>
-      </div>
+    <div :class="{'scroll-container': fixheight}">
+      
+      <album-block
+        v-for="image in currentImageList" 
+        :image = "image"
+        :canSetCover ="useforCover"
+        :key="image.id"
+        @selectCoverImage="setCoverImage"
+      ></album-block>
 
       <mk-pager
       :list="imageList"
@@ -39,7 +31,11 @@
 </template>
 
 <script>
+import block from "./album-block";
 export default {
+  components:{
+    'album-block':block
+  },
   data(){
     return{
       bigView:false,
@@ -62,7 +58,7 @@ export default {
       return this.imageList.slice(from, to);
     }
   },
-  props:['useforEditor','useforCover'],
+  props:['useforCover', 'fixheight'],
   methods:{
     switchPage(page){
       this.currentPage = page;
@@ -85,22 +81,6 @@ export default {
     progress(e){
       this.ratio=Math.ceil(e.loaded/e.total);
     },
-    async deleteImage(name){
-      this.$confirm('删除图片会导致引用该图片的资源失效，是否删除？', '警告', {
-          confirmButtonText: '取消',
-          cancelButtonText: '删除',
-          type: 'warning',
-          closeOnPressEscape:false,
-          closeOnClickModal:false,
-          showClose:false
-        }).then(() => {
-        }).catch(() => {
-          this.$store.dispatch('image/deleteImage',name);
-        });
-    },
-    getUrl(url){
-      return process.env.STATIC_ROOT + 'image/'+ url.split('.')[0] + '_overview.jpg';
-    },
     viewBig(url){
       this.bigView=true;
       this.BigUrl=process.env.STATIC_ROOT + 'image/'+ url;
@@ -122,7 +102,7 @@ export default {
   },
   mounted(){
     this.$store.dispatch('image/getImageList');
-    if(this.useforEditor||this.useforCover){
+    if(this.useforCover){
       document.body.addEventListener('mousewheel',this.preventScroll);
     }
   },
@@ -137,77 +117,18 @@ export default {
 .upload-bar{
   display: flex;
   align-items: center;
+  padding:5px;
   >.upload-progress{
     width:200px;
     margin:15px;
   }
 }
 
-.container{
+.scroll-container{
   overflow-y:scroll;
   height: calc( 100vh - 50px);
 }
 
-.image-block{
-  width:200px;
-  margin:5px;
-  display: inline-block;
-  position: relative;
-  &:hover{
-    >.op{
-      opacity: 1;;
-    }
-  }
-  >.image-container{
-    border:1px solid #f7f7f7;
-    border-radius:3px;
-    width: 200px;
-    height: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    >img{
-      max-width: 200px;
-      max-height: 200px;
-    }
-  }
-  >.info{
-    font-size:12px;
-    padding:5px;
-    display:flex;
-    justify-content: center;
-
-    >.name{
-      margin-right:10px;
-
-    }
-    >.id{
-      color:#aaa;
-    }
-  }
-  >.delete{
-    top:5px;
-    right:5px;
-  }
-  >.string{
-    top:5px;
-    right:40px;
-  }
-  >.op{
-    opacity: 0;
-    transition:200ms;
-    position: absolute;;
-    width:30px;
-    height:30px;
-    background: rgba(0, 0, 0, 0.8);
-    border-radius:15px;
-    color:#fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-  }
-}
 
 .big-view{
   position:fixed;

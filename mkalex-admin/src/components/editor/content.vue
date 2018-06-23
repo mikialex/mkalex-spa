@@ -3,7 +3,7 @@
 
     <div class="mask" @click="showAlbum = false" v-if="showAlbum"></div>
     <div class="album" :class="{'album-hide':!showAlbum}">
-      <album-part  :useforEditor="true"></album-part>
+      <album-part :fixheight="true"></album-part>
     </div>
     <div v-if="!isActiveContent"  
     @click="startEdit"
