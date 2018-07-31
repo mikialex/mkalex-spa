@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import LoginPage from '@/components/login'
+import LoginPage from '@/components/login/login-page'
 import HomePage from '@/components/home'
 import EditorPage from '@/components/editor/editor'
 import articlePage from '@/components/article'
@@ -19,9 +19,10 @@ export default new Router({
     {
       path: '/login',
       name: 'login',
-      components: {
-        blank: LoginPage,
-      }
+      component: LoginPage,
+      // components: {
+      //   blank: LoginPage,
+      // }
     },
     {
       path: '/home',

@@ -1,12 +1,11 @@
 <template>
   <div id="app">
-    <div class="center-wrap" v-if="!hideCenter">
+    <div class="center-wrap">
       <trans-fade>
         <router-view> </router-view>
       </trans-fade>
     </div>
     <back-to-top></back-to-top>
-    <router-view name="blank"> </router-view>
   </div>
 </template>
 
@@ -21,7 +20,7 @@ export default {
     this.$store.commit('setClientToken',{token:localStorage.getItem('token')})
   },
   computed:{
-    hideCenter(){
+    isLogin(){
       return this.$route.name==='login'
     }
   }
