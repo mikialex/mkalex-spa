@@ -50,7 +50,7 @@ export default {
         this.errorMessage = error;
         setTimeout(() => {
           this.errorMessage = "";
-        }, 200);
+        }, 1000);
       }
     }
   }
@@ -103,18 +103,31 @@ input {
 }
 
 .error-swing {
-  animation-duration: 100ms;
+  animation-duration: 500ms;
   animation-name: err;
-  animation-iteration-count: infinite;
+  // animation-iteration-count: infinite;
+  transition: ease-in-out;
   position:relative;
-  animation-direction: alternate;
+  // animation-direction: alternate;
 }
 @keyframes err {
-  from {
+  0% {
+    left:0px;
+  }
+  10%{
     left:-5px;
   }
-  to {
+  25% {
     left:5px;
+  }
+  50%{
+    left:-2px;
+  }
+  75%{
+    left: 2px;
+  }
+  100% {
+    left:0px;
   }
 }
 
