@@ -18,6 +18,7 @@ import MKTransition from '../../mkalex-site/src/transitions/include'
 //    Vue.component(component.name, component);
 // });
 MKTransition.map(component => {
+  console.log(component.name);
   Vue.component(component.name, component);
 });
 

@@ -59,7 +59,16 @@ export default {
   display: flex;
   >div{
     cursor: pointer;
+    transition: 200ms;
     padding:10px;
+    &:hover{
+      box-shadow: inset 0px -5px 0px 0px #000;
+    }
+    &:active{
+      transition: 0ms;
+      background: #000;
+      color:#fff;
+    }
   }
 }
 

@@ -42,7 +42,7 @@ export default {
   width: 80vw;
   margin: auto;
   background: #fefefe;
-  padding:30px;
+  padding:15px;
   box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.01);
   @media(max-width: 500px) {
     padding: 5px;

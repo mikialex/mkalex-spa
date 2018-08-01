@@ -14,20 +14,28 @@
       >Create New</el-button>
     </div>
     <div class="tags-editor-container">
-      <span v-for="tag in onSearchViewTag" 
-      :class="{'has-this-tag': tag.has, 'can-toggle': useAsEntityTagViewer}" 
-      @click="toggleActiveTag(tag.name,tag.has)"
-      :key="tag.name">
-        {{tag.name}}
-        <i class="fa fa-trash" @click="deleteTag(tag.name)"></i>
-      </span>
+      <list-complete>
+        <tag
+          v-for="tag in onSearchViewTag"
+          :key="tag.name"
+          :hasTag="tag.has"
+          :name="tag.name"
+          :canToggle="useAsEntityTagViewer"
+          @toggleTag="toggleActiveTag(tag.name,tag.has)"
+          @deleteTag="deleteTag(tag.name)"
+        />
+      </list-complete>
       <h1 v-if="onSearchViewTag.length === 0">no tags found</h1>
     </div>
   </div>
 </template>
 
 <script>
+import tag from './tag-item';
 export default {
+  components:{
+    tag
+  },
   props: {
     urlname: { default: "" }
   },
@@ -135,38 +143,7 @@ export default {
     border: 1px dotted rgba(0, 0, 0, 0.1);
     padding: 10px;
     line-height: 30px;
-    > .can-toggle {
-      cursor: pointer;
-    }
-    > span {
-      cursor: default;
-      background: #000;
-      color: #fff;
-      display: inline-block;
-      border-radius: 3px;
-      padding: 5px;
-      margin: 5px;
-      &:hover {
-        > i {
-          width: 18px;
-        }
-      }
-      > i {
-        width: 0px;
-        overflow: hidden;
-        transition: 150ms;
-        cursor: pointer;
-        &:hover {
-          color: #f45;
-        }
-      }
-    }
   }
-}
-
-.has-this-tag {
-  background: #f54 !important;
-  color: #fff;
 }
 
 .serach-bar {
