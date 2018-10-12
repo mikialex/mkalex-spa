@@ -150,7 +150,7 @@ export default {
         margin: 0px;
         font-size: rem(32px);
         border-bottom: $line-border;
-        height: rem(60px);
+        height: rem(50px);
         line-height: rem(60px);
         text-align: right;
         width: 300px;
@@ -159,17 +159,6 @@ export default {
           vertical-align: middle;
         }
         @media (max-width: 760px) {
-          display: none;
-        }
-      }
-      &::after {
-        position: relative;
-        display: block;
-        float: right;
-        margin-top: rem(56px);
-        content: " ";
-        @extend .mk-small-dot;
-        @media (max-width: 700px) {
           display: none;
         }
       }
