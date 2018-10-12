@@ -59,13 +59,13 @@ export default {
           decription:[
             {
               work:`
-              State Grid xinjiang marketing big data frontend, design and implementation use
+              State Grid xinjiang marketing big data frontend, design and implementate use
               Angular and Echarts.
               `,
             },
             {
               work:`
-              Qpen, online math education platform for college student, design and implementation
+              Qpen, online math education platform for college student, design and implementate
                use Vue. Includes marketing material design;
               `,
             },
@@ -80,6 +80,7 @@ export default {
 <style lang="scss" scoped>
 .experience{
   margin-top:20px;
+  padding:10px;
 }
 
 .title{
