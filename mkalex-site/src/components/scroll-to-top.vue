@@ -18,14 +18,15 @@ export default {
   },
   computed: {
     toBottom() {
-      let h =
-        document.body.clientHeight - this.currentScroll - window.innerHeight;
-      if (h < this.botttomLimit) {
-        //should change
-        return this.botttomLimit - h;
-      } else {
-        return 20;
-      }
+      return 20;
+      // let h =
+      //   document.body.clientHeight - this.currentScroll - window.innerHeight;
+      // if (h < this.botttomLimit) {
+      //   //should change
+      //   return this.botttomLimit - h;
+      // } else {
+      //   return 20;
+      // }
     },
     isShow() {
       return this.showHeight > this.currentScroll;

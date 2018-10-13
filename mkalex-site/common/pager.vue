@@ -56,6 +56,7 @@ export default {
   padding-right: 15px;
   width:50%;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   > .item {
     outline: none;

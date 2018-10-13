@@ -5,6 +5,7 @@
       <section class="reader">
         <h1>{{info.title}}</h1>
         <h2>{{info.sub_title}}</h2>
+        <hr>
         <markdown-render :content="info.content" :urlname="this.$route.params.u_name"></markdown-render>
       </section>
     </block-flex>
@@ -48,6 +49,7 @@ export default {
 
 .reader{
   margin-top:100px;
+  border-top: 2px solid #fff;
   background: rgba(255,255,255,0.5);
   padding: 10px;
   @media (min-width: 500px) {
@@ -58,7 +60,7 @@ export default {
   >h1{
     font-size:30px;
     font-family: futura;
-    color: #444;
+    color: rgb(72, 117, 133);
     text-align: center;
     margin-top:20px;
     margin-bottom: 0px;
@@ -69,6 +71,9 @@ export default {
     color: #444;
     text-align: center;
     margin-bottom: 20px;
+  }
+  >hr{
+    border:1px solid #ddd;
   }
   >span{
     font-size:20px;

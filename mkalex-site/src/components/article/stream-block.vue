@@ -51,6 +51,7 @@ export default {
   width: 100%;
   min-height: 300px;
   background: #FCFCFC;
+  border-top: 2px solid #fff;
   box-shadow: 0 5px 2px 0 rgba(0, 0, 0, 0.10);
   margin-top: 20px;
   display: flex;

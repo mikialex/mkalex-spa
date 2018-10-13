@@ -43,6 +43,8 @@ export default {
   margin: auto;
   background: #ffffff;
   border: 1px solid #ededed;
+  border-top: 0px;
+  box-shadow: 0px 0px 3px rgba(0,0,0,0.05);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -53,13 +55,16 @@ export default {
 
 .down-group{
   margin-top: 20px;
+  color:#666;
+  font-family: futura;
 }
 
 .s-b-tag-label{
   display: block;
   margin:auto;
+  margin-bottom: 10px;
   text-align: center;
-  color:#888;
+  color:#aaa;
 }
 
 .s-b-tags{
@@ -68,12 +73,11 @@ export default {
   flex-direction: column;
   margin-bottom:30px;
   >div{
-    border:1px solid #eee;
-    border-radius: 20px;
     padding-left: 5px;
     padding-right: 5px;
-    font-size:14px;
+    font-size:12px;
     margin:2px;
+    text-align: center;
   }
 }
 
