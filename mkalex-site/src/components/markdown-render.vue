@@ -62,6 +62,11 @@ export default {
   color:#555;
   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 
+  h1, h2, h3, h4, h5, h6 {
+    color:#555;
+    font-weight: bold;
+  }
+
   p{
     color:#666;
     line-height: 1.5;

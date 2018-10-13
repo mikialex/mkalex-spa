@@ -3,9 +3,9 @@
      <img src="../../assets/defaultPortfolioCover.png"  v-if="!portfolioInfo.has_cover">
      <img :src="imgsrc" alt="" v-if="portfolioInfo.has_cover">
      <div class="description-constainer">
-       <span class="title">{{portfolioInfo.title}}</span>
-       <span class="subTitle">{{portfolioInfo.sub_title}}</span>
-        <div>
+        <span class="title">{{portfolioInfo.title}}</span>
+        <span class="subTitle">{{portfolioInfo.sub_title}}</span>
+        <div class="footer">
           <span> 
             <i class="fa fa-eye"></i>{{portfolioInfo.page_view}}
             </span>
@@ -48,13 +48,16 @@ export default {
   height: 310px;
   display: inline-block;
   border: 1px solid #f3f3f3;
+  border-radius: 3px;
+  overflow: hidden;
   background: #fff;
   margin: 5px;
   font-family: "futura";
   cursor: pointer;
-  transition: 0.2s ease-in-out;
+  transition: 200ms ease-in-out;
   &:hover {
     box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px);
   }
   &:active {
     box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.1);
@@ -90,7 +93,12 @@ img {
   width: 100%;
   height: 30px;
 
-  font-size: 14px;
+  font-size: 13px;
+  color: #888;
+}
+
+.footer{
+  font-size: 12px;
   color: #888;
 }
 </style>

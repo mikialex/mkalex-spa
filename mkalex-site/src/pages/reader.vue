@@ -3,7 +3,6 @@
   <container-mid>
     <block-flex :end="true">
       <section class="reader">
-        <span @click="back"><i class="fa fa-angle-left"></i>返回</span>
         <h1>{{info.title}}</h1>
         <h2>{{info.sub_title}}</h2>
         <markdown-render :content="info.content" :urlname="this.$route.params.u_name"></markdown-render>
@@ -51,11 +50,25 @@ export default {
   margin-top:100px;
   background: rgba(255,255,255,0.5);
   padding: 10px;
+  @media (min-width: 500px) {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
   >h1{
     font-size:30px;
+    font-family: futura;
+    color: #444;
+    text-align: center;
+    margin-top:20px;
+    margin-bottom: 0px;
   }
   >h2{
     font-size:20px;
+    font-family: futura;
+    color: #444;
+    text-align: center;
+    margin-bottom: 20px;
   }
   >span{
     font-size:20px;

@@ -63,6 +63,8 @@ export default {
 .stream-block-title {
   text-align: right;
   width:100%;
+  font-family: futura;
+  color: #444;
 }
 
 .stream-block-content{

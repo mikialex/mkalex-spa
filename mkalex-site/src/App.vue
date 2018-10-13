@@ -85,7 +85,7 @@ body {
 
 ::selection {
   color: #ffffff;
-  background-color: rgb(210, 63, 63);
+  background-color: rgb(65, 104, 128);
   border-radius: 10px;
 }
 </style>

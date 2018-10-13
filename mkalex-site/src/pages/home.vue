@@ -1,9 +1,5 @@
 <template>
   <section>
-    <container-mid>
-      <block-flex>
-      </block-flex>
-    </container-mid>
 
     <Intro/>
 
