@@ -59,9 +59,11 @@ export default {
   width:100%;
   max-width:100%;
   font-size: 16px;
+  color:#555;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 
   p{
-    color:#444;
+    color:#666;
     line-height: 1.5;
     text-align: justify;
   }
@@ -77,9 +79,9 @@ export default {
 
   a{
     text-decoration: underline;
-    color:#000;
+    color:rgb(22, 72, 67);
     &:hover{
-      color:rgb(176, 35, 35);
+      color:rgb(35, 160, 176);
     }
   }
 

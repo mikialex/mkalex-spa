@@ -19,7 +19,7 @@ export default {
 @import '~globalSass';
 
 .activePart{
-  background: #444444;
+  background: #9ea5a2;
   color:#fff;
   box-shadow: 0 2px 0 0 rgba(0,0,0,0.08);
 }
@@ -46,7 +46,7 @@ export default {
       }      
       &:active{
         transition:0ms;
-        background: #ff3445;
+        background: #2f4b4b;
         color:#fff;
         box-shadow: 0 2px 0 0 rgba(0,0,0,0.08);
         transition:0ms;

@@ -26,13 +26,17 @@
   </svg>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
+svg{
+  width: 100px;
+  height: 100px;
+}
+
 .main-logo-svg-mask {
   >polygon {
     transition: 3s cubic-bezier(0.74, 0.09, 0.87, 0.57);
     fill-opacity: 0;
     &:hover {
-      // fill:#fff;
       transition: 0s;
       fill-opacity: 1;
     }

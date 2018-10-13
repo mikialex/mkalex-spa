@@ -57,21 +57,23 @@
     }
   }
   >img{
-    width:200px;
-    height:200px;
-    min-width:200px;
-    min-height:200px;
+    width:220px;
+    height:220px;
+    min-width:220px;
+    min-height:220px;
     border-radius: 3px;
   }
   >p{
     display: flex;
     align-items: center;
-    width:200px;
-    height:200px;
-    min-width:200px;
-    min-height:200px;
-    width: 200px;
+    width:220px;
+    height:220px;
+    min-width:220px;
+    min-height:220px;
     margin:0px;
+    padding: 10px;
+    box-sizing: border-box;
+    // border: 1px solid #888;
   }
 }
 </style>

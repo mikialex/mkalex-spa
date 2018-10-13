@@ -8,9 +8,6 @@
       </div>
       <div class="stream-block-content">
         <markdown-render :content="content" :urlname="articleInfo.urlname"></markdown-render>
-        <!-- <div>
-          <span>阅读全文</span>
-        </div> -->
       </div>
     </div>
   </div>

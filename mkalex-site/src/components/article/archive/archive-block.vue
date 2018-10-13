@@ -75,7 +75,7 @@ export default {
     border-radius: 3px;
     transition: 0.5s ease-out;
     &:hover {
-      transition: none;
+      // transition: none;
       border: 1px solid #aaa;
       box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
       > .main-t {

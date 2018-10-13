@@ -18,6 +18,7 @@
       <span>603328632q</span>
       
       <ul>
+        <li>github @mikialex</li>
         <li>zhihu @mkalex</li>
         <li>weibo @mikialex</li>
         <li>zhanku @alexmiki</li>
@@ -31,6 +32,7 @@
 .col{
   width:50%;
   font-size: 14px;
+  font-family: futura;
 }
 
 .school{

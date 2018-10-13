@@ -2,13 +2,13 @@
   <section class="stream-block-label">
     <div class="stream-block-label-container">
       <time-plate :date="articleInfo.publish_time"></time-plate>
-      <div>
+      <div class="down-group">
         <span class="s-b-tag-label">TAGS</span>
         <div class="s-b-tags">
           <div v-for="tag in articleInfo.tags" :key="tag">{{tag}}</div>
           <div v-if="articleInfo.tags.length===0" style="color:#bbb">no tag</div>
         </div>
-        <div><i class="fa fa-eye"></i> {{articleInfo.page_view}}</div>
+        <div class="watch"><i class="fa fa-eye"></i> {{articleInfo.page_view}}</div>
       </div>
     </div>
   </section>
@@ -45,11 +45,14 @@ export default {
   border: 1px solid #ededed;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
   padding-top: 10px;
   padding-bottom: 10px;
   box-sizing: border-box;
+}
+
+.down-group{
+  margin-top: 20px;
 }
 
 .s-b-tag-label{
@@ -72,6 +75,11 @@ export default {
     font-size:14px;
     margin:2px;
   }
+}
+
+.watch{
+  font-size: 13px;
+  text-align: center;
 }
 
 

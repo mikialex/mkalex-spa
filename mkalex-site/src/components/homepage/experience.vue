@@ -81,6 +81,7 @@ export default {
 .experience{
   margin-top:20px;
   padding:10px;
+  font-family: futura;
 }
 
 .title{

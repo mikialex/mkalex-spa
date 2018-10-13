@@ -1,5 +1,6 @@
 <template>
-  <div class="time-plate">
+  <div class="time-plate"
+  :style="{background: color}">
     <div class="time-plate-month">
       {{month}}
     </div>
@@ -13,10 +14,16 @@
 </template>
 
 <script>
+import {getRandomLightColor, getRandomDarkColor} from '../../util/color';
 export default {
   props:{
     date:{
       default:null
+    }
+  },
+  data(){
+    return {
+      color: getRandomLightColor()
     }
   },
   mounted(){
@@ -95,13 +102,17 @@ export default {
   height:125px;
   width:125px;
   border-radius:75px;
-  background: #FFFFFF;
-  border: 1px solid #E5E5E5;
-  box-shadow: 0 3px 4px 0 rgba(0,0,0,0.07);
+  color:#fff;
+  border: 5px solid #fff;
+  box-shadow: 0 3px 4px 0 rgba(0,0,0,0.07),
+  inset 0px 1px 0px 0px rgba(0,0,0,0.2),
+  0px 1px 0px 0px rgba(0,0,0,0.2);
+  text-shadow: 0px 1px 0px rgba(0,0,0,0.5);
   display: flex;
   justify-content: space-around;
   flex-direction: column;
   align-items:center;
+  font-family:'Gill Sans', 'futura', sans-serif;
   >div{
     text-align: center;
     // width:20px;
@@ -111,20 +122,17 @@ export default {
 .time-plate-month{
   font-size: 18px;
   font-weight:200;
-  color:#555;
 }
 
 .time-plate-day{
   font-size: 60px;
   line-height: rem(40px);
   font-weight:100;
-  color:#555;
 }
 
 .time-plate-year{
   font-size: 23px;
   font-weight:300;
-  color:#555;
 }
 </style>
 

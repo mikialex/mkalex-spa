@@ -48,7 +48,7 @@ export default {
   width: 100%;
   height: 225px;
   font-size: rem(18px);
-  background-color: #000;
+  background-color: rgb(26, 34, 46);
   font-weight: 300;
   color: #848484;
   margin-top: rem(100px);

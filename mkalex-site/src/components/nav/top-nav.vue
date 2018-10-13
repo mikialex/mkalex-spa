@@ -13,9 +13,7 @@
             :outerLink="navinfo.outerLink"></nav-block>
           </ul>
           <div>
-            <div>
-              <img src="../../assets/slogon.svg">
-            </div>
+            <img src="../../assets/slogon.svg">
           </div>
         </nav>
       </container-mid>
@@ -38,28 +36,28 @@ export default {
       upHeight: 70,
       navList: [
         {
-          name: "HOME",
+          name: "Home",
           link: "home",
           isUnderconstruction: false,
           isNewWindow: false,
           outerLink: false
         },
         {
-          name: "ARTICLE",
+          name: "Article",
           link: "article",
           isUnderconstruction: false,
           isNewWindow: false,
           outerLink: false
         },
         {
-          name: "PORTFOLIO",
+          name: "Portfolio",
           link: "portfolio",
           isUnderconstruction: false,
           isNewWindow: false,
           outerLink: false
         },
         {
-          name: "OPENSOURCE",
+          name: "Project",
           link: "https://github.com/mikialex",
           isUnderconstruction: true,
           isNewWindow: false,
@@ -119,7 +117,6 @@ export default {
     padding: 0px;
     margin: 0px;
     display: block;
-    // height: rem(45px);
   }
   > ul {
     display: flex;
@@ -143,24 +140,16 @@ export default {
   > div {
     display: flex;
     padding: 5px;
-    > div {
-      margin-top: 5px;
-      margin-bottom: 15px;
-      > img {
-        margin: 0px;
-        font-size: rem(32px);
-        border-bottom: $line-border;
-        height: rem(50px);
-        line-height: rem(60px);
-        text-align: right;
-        width: 300px;
-        @media (max-width: 900px) {
-          width: 200px;
-          vertical-align: middle;
-        }
-        @media (max-width: 760px) {
-          display: none;
-        }
+    > img {
+      margin: 0px;
+      font-size: rem(32px);
+      border-bottom: $line-border;
+      height: rem(25px);
+      text-align: right;
+      padding-bottom: 10px;
+      width: 200px;
+      @media (max-width: 760px) {
+        display: none;
       }
     }
   }
