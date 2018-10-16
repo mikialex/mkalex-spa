@@ -1,5 +1,6 @@
 <template>
   <section>
+    <ArticleFilter/>
     <archive-article-block v-for="article in articleList"
     :key="article.urlname"
     :articleInfo="article"
@@ -16,9 +17,10 @@
 
 <script>
 import block from "./archive-block";
+import ArticleFilter from './archive-filter';
 export default {
   components: {
-    "archive-article-block": block,
+    "archive-article-block": block,ArticleFilter
   },
   mounted() {},
   computed: {
