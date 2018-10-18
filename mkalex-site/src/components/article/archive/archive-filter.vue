@@ -48,14 +48,13 @@ export default {
 
 
 <style lang="scss" scoped>
+@import "~globalSass";
 .filter{
+  @include ui-card;
   height: 40px;
   background: #fdfdfd;
-  border-top:2px solid #fff;
-  border-bottom:2px solid #eee;
   margin-top:-5px;
   margin-bottom: 10px;
-  border-radius: 3px;
   display: flex;
   align-items: center;
 }

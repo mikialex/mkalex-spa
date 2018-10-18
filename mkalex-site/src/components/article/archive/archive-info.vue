@@ -28,7 +28,7 @@ export default {
   font-size: 12px;
   width: 100%;
   height: 30px;
-  background: #eee;
+  background: #fbfbfb;
   margin-top: 10px;
   display: flex;
   align-items: center;
@@ -41,6 +41,7 @@ export default {
 
 .ar-left-info{
   display: flex;
+  color: #888;
 }
 
 .ar-info-cal{
@@ -65,7 +66,6 @@ export default {
   }
 
   >span{
-    background: #ddd;
     padding: 3px;
     border-radius: 5px;
     margin-left:5px;

@@ -106,7 +106,7 @@ export default {
 
 .mk-nav-main {
   width: 100%;
-  height: rem(60px);
+  height: 60px;
   width: 100%;
   transition: 0.8s ease-in-out;
   display: flex;

@@ -51,19 +51,9 @@ $desktop-min-width:1000px;
     }
 }
 
-.mk-small-dot {
-  width: rem(7px);
-  height: rem(7px);
-  border-radius: 20px;
-  background-color: $line;
-}
-
-.mk-small-dot-tail {
-  &::after {
-    position: relative;
-    display: block;
-    float: right;
-    content: ' ';
-    @extend .mk-small-dot;
-  }
+@mixin ui-card {
+  border-top:2px solid #fff;
+  box-shadow: 0 2px 0 0 rgba(0,0,0,0.08), 0 2px 0 0 #fff;
+  background: #fdfdfd;
+  border-radius: 3px;
 }

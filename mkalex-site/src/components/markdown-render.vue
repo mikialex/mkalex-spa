@@ -70,7 +70,6 @@ export default {
   p{
     color:#666;
     line-height: 1.5;
-    text-align: justify;
   }
    img{
     max-width: 100%;

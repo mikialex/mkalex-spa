@@ -7,7 +7,8 @@
         <span class="subTitle">{{portfolioInfo.sub_title}}</span>
         <div class="footer">
           <span> 
-            <i class="fa fa-eye"></i>{{portfolioInfo.page_view}}
+            <i class="fa fa-eye"></i>
+            {{portfolioInfo.page_view}}
             </span>
           <span>
             {{portfolioInfo.publish_time}}

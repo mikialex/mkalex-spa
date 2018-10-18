@@ -24,11 +24,11 @@ export default {
   box-shadow: 0 2px 0 0 rgba(0,0,0,0.08);
 }
   nav{
+    @include ui-card;
+    overflow: hidden;
     width:100%;
     height:24px;
     display: flex;
-    background: #FFFFFF;
-    box-shadow: 0 2px 0 0 rgba(0,0,0,0.1);
     margin-top:20px;
     margin-bottom: 10px;
     >div{

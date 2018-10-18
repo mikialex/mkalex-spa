@@ -11,7 +11,9 @@
       <footer-dark slot="footer"></footer-dark>
     </page-with-sticky-footer>
   
-    <router-view name="clean"></router-view>
+    <trans-splice>
+      <router-view name="clean"></router-view>
+    </trans-splice>
   </div>
 </template>
 

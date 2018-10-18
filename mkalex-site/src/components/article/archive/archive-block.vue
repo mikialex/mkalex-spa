@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import timePlate from "../time-plate";
 import archiveInfo from "./archive-info";
 export default {
   components: {
@@ -42,19 +41,21 @@ export default {
 @import "~globalSass";
 
 .archive-block {
+  @include ui-card;
   width: 100%; 
-  // height:100px;
+  height:180px;
   margin-bottom: 15px;
+  box-sizing: border-box;
+  padding: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #fcfcfc;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.175);
-  border-radius: 3px;
+  font-family: futura;
   > img {
-    min-width: 200px;
-    height: 100px;
+    min-width: 300px;
+    height: 160px;
     border-radius: 5px;
+    margin-left: 20px;
   }
 }
 
@@ -66,17 +67,16 @@ export default {
 .title-section {
   height: 100%;
   display: flex;
+  height: 160px;
   flex-direction: column;
   justify-content: space-around;
   flex-grow: 1;
   > .enter-wrap {
+    height: 100px;
     cursor: pointer;
-    border: solid 1px #f5f5f5;
     border-radius: 3px;
     transition: 0.5s ease-out;
     &:hover {
-      // transition: none;
-      border: 1px solid #aaa;
       box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
       > .main-t {
         background-image: linear-gradient(#fff 50%, #333 50%);
@@ -97,8 +97,8 @@ export default {
       margin: 5px;
       margin-bottom: 0px;
 
-      font-size: rem(20px);
-      font-weight: bolder;
+      font-size: 24px;
+      font-weight: light;
 
       background-position: 0 0.8em;
       background-repeat: repeat-x;
