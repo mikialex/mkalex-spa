@@ -1,7 +1,8 @@
 <template>
   <section>
     <ArticleFilter/>
-    <archive-article-block v-for="article in articleList"
+    <archive-article-block 
+    v-for="article in articleList"
     :key="article.urlname"
     :articleInfo="article"
     ></archive-article-block>

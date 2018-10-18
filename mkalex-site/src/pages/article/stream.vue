@@ -27,13 +27,14 @@ export default {
   width:100%;
   text-align: center;
   color:#bbb;
-  font-size:18px;
+  font-size:14px;
   margin-top:50px;
   transition: 1s;
+  border-radius: 50px;
   cursor: pointer;
   padding:5px;
   &:hover{
-    color:#000;
+    color:#444;
     background: #eee;
   }
   &:active{

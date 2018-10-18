@@ -1,9 +1,10 @@
 <template>
   <div>
-    <div style="position:fixed;width:100%;z-index:999">
+    <div class="nav-root">
       <container-mid>
         <nav class="mk-nav-main" :class="{ floatTopNav: !isTop }">
           <mobile-top></mobile-top>
+          <div class="musk" @click="close" v-if="this.$store.state.topNavOpen"></div>
           <ul :style="{ height: mobilePanelHeight + 'rem' }">
             <nav-block v-for="navinfo in navList" 
             :key="navinfo.name" :name="navinfo.name" 
@@ -90,6 +91,9 @@ export default {
       } else if (window.pageYOffset < this.upHeight) {
         this.isTop = true;
       }
+    },
+    close(){
+      this.$store.commit('toggleTopNav');
     }
   },
   mounted() {
@@ -104,11 +108,25 @@ export default {
 <style lang="scss" scoped>
 @import "~globalSass";
 
+.nav-root{
+  position:fixed;
+  width:100%;
+  z-index:999;
+}
+
+.musk{
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.1);
+  position: absolute;
+}
+
 .mk-nav-main {
   width: 100%;
   height: 60px;
   width: 100%;
   transition: 0.8s ease-in-out;
+  border-radius: 3px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -141,12 +159,12 @@ export default {
     display: flex;
     padding: 5px;
     > img {
-      margin: 0px;
+      margin-right: 5px;
       font-size: rem(32px);
       border-bottom: $line-border;
       height: rem(25px);
       text-align: right;
-      padding-bottom: 10px;
+      padding-bottom: 5px;
       width: 200px;
       @media (max-width: 760px) {
         display: none;

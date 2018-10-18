@@ -114,8 +114,11 @@ export default {
   box-shadow: 0 4px 2px 0 rgba(0, 0, 0, 0.27), 0 0 4px 0 rgba(0, 0, 0, 0.08);
   outline: none;
   cursor: pointer;
+  transition: 200ms;
+  transition-property: transform;
 
   &:hover {
+    transform: scale(1.05);
     box-shadow: 0 6px 3px 0 rgba(0, 0, 0, 0.27), 0 0 4px 0 rgba(0, 0, 0, 0.08);
   }
   &:active {

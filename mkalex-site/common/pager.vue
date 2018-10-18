@@ -72,6 +72,16 @@ export default {
     font-family: "futura";
     font-size: 14px;
     cursor: pointer;
+    transition: 200ms;
+    &:hover{
+      transform: scale(1.2);
+    }
+    &:active{
+      transition: 50ms;
+      transform: scale(0.9);
+      color:#fff;
+      background: #000;
+    }
   }
   > .is-current-page {
     background: #000;

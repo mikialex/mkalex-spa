@@ -42,6 +42,7 @@ export default {
 
 .archive-block {
   @include ui-card;
+  transition: all 1s;
   width: 100%; 
   height:180px;
   margin-bottom: 15px;
