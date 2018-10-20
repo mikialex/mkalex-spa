@@ -12,7 +12,7 @@
         <transition name="upshow">
           <p v-if="show2" class="size"
           >Here i write things about technology, design, and my life. this site
-            is also as my personal portfolio, my project archive. 
+            is also as my personal portfolio, my project archive, my memory. 
             any content should shared, distributed
             with my explicit permission.
           </p>
@@ -23,8 +23,8 @@
 
         <transition name="upshow">
           <p v-if="show3" class="size">
-            I am interested in GUI system, 
-            computer graphics, CAD, simulation, visulization, procedural aesthetics. 
+            I am interested in all the creative fields related to
+            state of art technique and brilliant insight.
             With the background of art and design.
             I believe the greatest thing came from fusion of art and technology.
           </p>

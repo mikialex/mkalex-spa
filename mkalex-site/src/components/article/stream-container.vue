@@ -4,31 +4,19 @@
     :articleInfo="article"
     ></stream-article-block>
 
+    <div v-if="!isLoaded" class="loading">
+      <loading-dot></loading-dot>
+    </div>
 
-    <h1 class="em-hint" v-if="!isLoaded">加载中...</h1>
-
-    <h1 class="em-hint" v-if="detailList.length===0&&isLoaded">作者似乎<br>从未写过东西</h1>
+    <h1 class="em-hint" v-if="detailList.length===0&&isLoaded">作者似乎<br>nothing here</h1>
   </section>
 </template>
 
 <script>
 import Block from './stream-block'
 export default {
-  mounted(){
-    // setTimeout(()=>{
-    //   window.dispatchEvent(new Event('resize'));
-    // }, 500);
-  },
   components: {
     'stream-article-block': Block,
-  },
-  props:{
-    // detailList:{required:true}
-  },
-  data() {
-    return {
-      // detailList:[]
-    }
   },
   computed:{
     detailList(){
@@ -44,6 +32,13 @@ export default {
 
 <style lang="scss" scoped>
 @import '~globalSass';
+
+.loading{
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .stream-container {
   width: 100%;
