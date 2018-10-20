@@ -1,7 +1,9 @@
 <template>
   <div class="portfolio-block" @click="goto">
-     <img src="../../assets/defaultPortfolioCover.png"  v-if="!portfolioInfo.has_cover">
-     <img :src="imgsrc" alt="" v-if="portfolioInfo.has_cover">
+     <img  class="image" 
+     src="../../assets/defaultPortfolioCover.png"  
+     v-if="!portfolioInfo.has_cover">
+     <smart-image class="image" :src="imgsrc" v-if="portfolioInfo.has_cover"></smart-image>
      <div class="description-constainer">
         <span class="title">{{portfolioInfo.title}}</span>
         <span class="subTitle">{{portfolioInfo.sub_title}}</span>
@@ -65,7 +67,7 @@ export default {
   }
 }
 
-img {
+.image {
   width: 300px;
   height: 200px;
   box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.05);
