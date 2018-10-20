@@ -36,7 +36,6 @@
         <h2 v-if="item.sub_title===''">no sub title</h2>
         <span>created at: {{item.publish_time}}</span>
         <span>page view: {{item.page_view}}</span>
-        <span>usefor: {{item.usefor}}</span>
       </router-link>
     </list-complete>
   </ul>
@@ -148,7 +147,7 @@ export default {
 
 .article-li{
   list-style: none;
-  padding: 10px;
+  padding: 3px;
   border: 1px dotted rgba(0,0,0,0.1);
   transition: 0.5s;
   font-size: 12px;
@@ -160,7 +159,7 @@ export default {
     margin:5px;
     cursor: pointer;
     transition: 0.1s;
-    font-size: 24px;
+    font-size: 18px;
     >span{
       color:#aaa;
       font-size: 12px;
@@ -168,6 +167,7 @@ export default {
   }
   >h2{
     margin:5px;
+    font-size: 14px;
   }
   >h4{
     text-align: center;

@@ -1,7 +1,7 @@
 <template>
   <div class ="login-left">
-    <h1>hi mikialex... </h1><br>
-    <h2>weclome back to home</h2>
+    <h1>writing, thinking, living</h1><br>
+    <h2>welcome back to home</h2>
   </div>
 </template>
 

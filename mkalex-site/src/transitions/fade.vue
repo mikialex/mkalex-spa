@@ -14,7 +14,7 @@ export default {
 // @import '~globalSass';
 
 
-.fade-enter-active,  {
+.fade-enter-active, {
   transition: all .5s
 }
 .fade-enter, .fade-leave-active {

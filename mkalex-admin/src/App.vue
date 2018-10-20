@@ -6,6 +6,14 @@
       </trans-fade>
     </div>
     <back-to-top></back-to-top>
+    <div class="background-footer">
+      <div class="grident-mask"></div>
+      <img src="static/background.jpg" alt="">
+    </div>
+
+    <div class="blank-footer">
+
+    </div>
   </div>
 </template>
 
@@ -37,11 +45,33 @@ export default {
   /* margin-top: 60px; */
 }
 
+.background-footer{
+  width: 100vw;
+  position: fixed;
+  bottom: -10px;
+  z-index: -1;
+  opacity: 0.8;
+  >.grident-mask{
+    width: 100vw;
+    height: 200px;
+    background: linear-gradient(#eee, rgba(#eee, 0));
+    position: absolute;
+  }
+  >img{
+  width: 100vw;
+  }
+}
+
+.blank-footer{
+  height: 300px;
+}
+
 
 .center-wrap {
   width: 80vw;
   margin: auto;
-  background: #fefefe;
+  margin-top: 20px;
+  background:rgba(255,255,255,0.8);
   padding:15px;
   box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.01);
   @media(max-width: 500px) {
@@ -66,28 +96,25 @@ input , button{
 }
 
 ::selection {
-  color: #FFFFFF;
-  background-color: rgb(210, 63, 63);
-  border-radius: 10px;
+  color: #ffffff;
+  background-color: rgb(65, 104, 128);
 }
-
 ::-webkit-scrollbar {
-  width: 0px;
-  height: 0px;
+  width: 5px;
+  height: 5px;
 }
 
-// ::-webkit-scrollbar-track {
-//   background-color: #afafaf;
-//   box-shadow: inset 0px -1px 0px 3px rgba(0, 0, 0, 0.1);
-// }
+::-webkit-scrollbar-track {
+  background-color: #f6f6f6;
+  box-shadow: inset 0px -0.5px 0px 3px rgba(0, 0, 0, 0.05);
+}
 
-// ::-webkit-scrollbar-thumb {
-//   background-color: #fff;
-//   border-radius: 2px;
-//   box-shadow: 0px 4px 1px 0px rgba(0, 0, 0, 0.1),
-//   inset 0px 0px 0px 2px rgba(0, 0, 0, 0.1);
-// }
-
+::-webkit-scrollbar-thumb {
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0px 4px 0px 0px rgba(0, 0, 0, 0.05);
+  // inset 0px 0px 0px 2px rgba(0, 0, 0, 0.05);
+}
 
 .click-able{
     border:1px solid rgba(0,0,0,0.1);

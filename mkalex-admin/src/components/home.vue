@@ -1,20 +1,16 @@
 <template>
   <div >
-    <div class="home-head">
-      <h1>HOME</h1>
-      <span>
-        Hello miki !
-        <span class="log-out" @click="logout">退出登陆</span>
-      </span>
+    <div class="nav-all">
+      <nav class="content-nav">
+        <router-link :to="{name:'article'}" :tag="'div'" :active-class="'current-tab'">文章</router-link>
+        <router-link :to="{name:'portfolio'}" :tag="'div'" :active-class="'current-tab'">作品集</router-link>
+        <router-link :to="{name:'tag'}" :tag="'div'" :active-class="'current-tab'">标签</router-link>
+        <router-link :to="{name:'album'}" :tag="'div'" :active-class="'current-tab'">相册</router-link>
+      </nav>
+
+      <userPanel/>
     </div>
 
-    <nav class="content-nav">
-      <router-link :to="{name:'article'}" :tag="'div'" :active-class="'current-tab'">文章</router-link>
-      <router-link :to="{name:'portfolio'}" :tag="'div'" :active-class="'current-tab'">作品集</router-link>
-      <router-link :to="{name:'tag'}" :tag="'div'" :active-class="'current-tab'">标签</router-link>
-      <router-link :to="{name:'album'}" :tag="'div'" :active-class="'current-tab'">相册</router-link>
-    </nav>
-    
     <trans-fade>
       <router-view></router-view>
     </trans-fade>
@@ -23,7 +19,9 @@
 </template>
 
 <script>
+import userPanel from './user.vue';
 export default {
+  components:{userPanel},
   name: "home",
   data() {
     return {
@@ -33,26 +31,19 @@ export default {
     this.$store.dispatch('getEntityList');
     this.$store.dispatch('tag/getTags');
   },
-  methods:{
-    logout(){
-      this.$router.push({name:'login'})
-    },
-  }
 };
 </script>
 
 <style lang="scss" scoped>
 
-.log-out{
-  cursor: pointer;
-  &:hover{
-    font-weight: 900;
-  }
-}
-
 .current-tab{
   background: #000;
   color:#fff;
+}
+
+.nav-all{
+  display: flex;
+  justify-content: space-between;
 }
 
 .content-nav{
@@ -61,6 +52,7 @@ export default {
     cursor: pointer;
     transition: 200ms;
     padding:10px;
+    height: 25px;
     &:hover{
       box-shadow: inset 0px -5px 0px 0px #000;
     }

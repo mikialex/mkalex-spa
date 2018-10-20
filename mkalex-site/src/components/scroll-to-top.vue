@@ -1,10 +1,12 @@
 <template>
-  <transition name="slide-fade">
-    <button class="scroll-to-top" v-if="!isShow" @click="toTop()"
-    :style="{ bottom: toBottom + 'px' }">
+  <trans-fade>
+    <button 
+    class="scroll-to-top" 
+    v-if="!isShow" 
+    @click="toTop()">
       <i class="fa fa-arrow-up" aria-hidden="true"></i>
     </button>
-  </transition>
+  </trans-fade>
 </template>
 
 <script>
@@ -17,17 +19,6 @@ export default {
     };
   },
   computed: {
-    toBottom() {
-      return 20;
-      // let h =
-      //   document.body.clientHeight - this.currentScroll - window.innerHeight;
-      // if (h < this.botttomLimit) {
-      //   //should change
-      //   return this.botttomLimit - h;
-      // } else {
-      //   return 20;
-      // }
-    },
     isShow() {
       return this.showHeight > this.currentScroll;
     }

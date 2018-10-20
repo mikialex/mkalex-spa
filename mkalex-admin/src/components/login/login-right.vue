@@ -36,8 +36,10 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  img{
+  > img{
     width:100%;
+    z-index: -1;
+    opacity: 0.8;
   }
 }
 </style>
