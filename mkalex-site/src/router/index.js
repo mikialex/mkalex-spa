@@ -9,7 +9,6 @@ import Collection from '@/pages/collection'
 import Reader from '@/pages/reader'
 
 import Caicai from '@/pages/caicai'
-import Copyright from '@/pages/copyright'
 
 import ErrorPage404 from '@/pages/404'
 

@@ -11,9 +11,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// @import '~globalSass';
-
-
 .fade-enter-active, {
   transition: all .5s
 }

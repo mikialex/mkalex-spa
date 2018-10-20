@@ -15,6 +15,7 @@
 
 <script>
 import {getRandomLightColor, getRandomDarkColor} from '../../util/color';
+import {getMonthString} from '../../util/date';
 export default {
   props:{
     date:{
@@ -26,58 +27,12 @@ export default {
       color: getRandomLightColor()
     }
   },
-  mounted(){
-    
-  },
   computed:{
     month(){
       if(this.date){
-        let monthNum=parseInt(this.date.substring(5,7));
-        console.info('m',monthNum)
-        switch (monthNum) {
-          case 1:
-            return 'January'
-            break;
-          case 2:
-            return 'Feburary'
-            break;
-          case 3:
-            return 'March'
-            break;
-          case 4:
-            return 'April'
-            break;
-          case 5:
-            return 'May'
-            break;
-          case 6:
-            return 'June'
-            break;
-          case 7:
-            return 'July'
-            break;
-          case 8:
-            return 'August'
-            break;
-          case 9:
-            return 'September'
-            break;
-          case 10:
-            return 'October'
-            break;
-          case 11:
-            return 'November'
-            break;
-          case 12:
-            return 'December'
-            break;
-        
-          default:
-            break;
-        }
-        return '???????'
+        return getMonthString(this.date);
       }
-        return '???????'
+      return '???????';
     },
     day(){
       if(this.date){
@@ -115,7 +70,6 @@ export default {
   font-family:'Gill Sans', 'futura', sans-serif;
   >div{
     text-align: center;
-    // width:20px;
   }
 }
 

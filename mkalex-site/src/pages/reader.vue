@@ -33,11 +33,6 @@ export default {
       hasLoaded: false
     }
   },
-  methods:{
-    back(){
-      window.history.go(-1)
-    }
-  },
   mounted(){
     
     this.$ajax.get(this,this.$ajax.apis.articleDetial,{urlname:this.$route.params.u_name})

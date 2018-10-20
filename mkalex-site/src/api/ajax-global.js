@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { baseURL } from '@/api/config'
-// import qs from 'qs'
 
 axios.defaults.timeout = 5000;
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
@@ -12,10 +11,10 @@ function getToken(env) {
   } else {
     token = localStorage.getItem('token');
   }
-  if (token !== '') {
+  if (token !== '' && token) {
     return token
   } else {
-    // env.$router.push({name:'login'})
+    throw 'token miss';
   }
 }
   
@@ -27,7 +26,7 @@ export function ajax(method, url, payload) {
       data: payload,
     })
   } else {
-    throw 'method:${method} do not support'
+    throw `method:${method} do not support`;
   }
 }
 
@@ -42,11 +41,10 @@ export function get(env, url, payload) {
 }
 
 export function getAuth(env, url, payload) {
-  if (payload) {
-    payload.token = getToken(env);
-  } else {
-    payload = { token: getToken(env) };
-  }
+
+  const token = getToken(env);
+  payload = {...payload, token}
+
   env.$store.commit('add_GoingAjax')
   return axios.get(baseURL + url, {params: payload})
   .then(data => {
@@ -110,9 +108,17 @@ export function handleErr(env) {
 }
 
 export const apis = {
+
+  // get all public entity list
   articleList: 'articles',
+
+  // get the entity content
   articleContent: 'articles/content',
+
+  // get all entity list
   articleListAdmin: 'articles/admin',
+
+  // get entitys tags list
   articleTagList:'articles/tags',
   articleTag:'articles/tag',
   articleDetial: 'articles/article',

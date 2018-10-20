@@ -21,7 +21,6 @@
 <script>
 import topNav from "@/components/nav/top-nav.vue";
 import footerDark from "@/components/footer/footer-dark.vue";
-import scrollToTop from "@/components/scroll-to-top.vue";
 import backGround from './effect/background.vue';
 export default {
   name: "app",
@@ -64,7 +63,6 @@ export default {
   components: {
     "top-nav": topNav,
     "footer-dark": footerDark,
-    "scroll-to-top": scrollToTop,
     backGround
   }
 };

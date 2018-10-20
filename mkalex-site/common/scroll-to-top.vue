@@ -11,6 +11,7 @@
 
 <script>
 export default {
+  name:"scroll-to-top",
   data() {
     return {
       currentScroll: 0, //window.pageYOffset
@@ -74,7 +75,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~globalSass";
 
 ////transition
 .slide-fade-enter-active {
@@ -93,8 +93,8 @@ export default {
 }
 
 .scroll-to-top {
-  width: rem(50px);
-  height: rem(50px);
+  width: 50px;
+  height: 50px;
   position: fixed;
   right: 5vw;
   bottom: 10px;
