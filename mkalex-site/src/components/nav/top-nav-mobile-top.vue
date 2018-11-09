@@ -7,21 +7,21 @@
 </template>
 
 <script>
-import toggleButton from './top-nav-toggle-button.vue'
+import toggleButton from "./top-nav-toggle-button.vue";
 export default {
   components: {
-    'toggle-button': toggleButton,
+    "toggle-button": toggleButton
   },
   methods: {
     toggleTopNav() {
-      this.$store.commit('toggleTopNav')
+      this.$store.commit("toggleTopNav");
     }
-  },
-}
+  }
+};
 </script>
 
 <style lang="scss" scoped>
-@import '~globalSass';
+@import "~globalSass";
 
 .mobile-nav-head {
   display: none;
@@ -34,11 +34,11 @@ export default {
     align-items: center;
     height: rem(55px);
   }
-  >.nav-min-logo {
+  > .nav-min-logo {
     width: 30px;
     margin-left: rem(5px);
   }
-  >.nav-min-slogon {
+  > .nav-min-slogon {
     width: 150px;
   }
 }

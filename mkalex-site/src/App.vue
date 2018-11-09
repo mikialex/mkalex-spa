@@ -21,7 +21,7 @@
 <script>
 import topNav from "@/components/nav/top-nav.vue";
 import footerDark from "@/components/footer/footer-dark.vue";
-import backGround from './effect/background.vue';
+import backGround from "./effect/background.vue";
 export default {
   name: "app",
   computed: {

@@ -22,94 +22,91 @@
 </template>
 
 <script>
-import markdown from '@/components/markdown-render'
+import markdown from "@/components/markdown-render";
 export default {
-  components:{
-    'markdown-render':markdown
+  components: {
+    "markdown-render": markdown
   },
-  data:function(){
-    return{
-      info:{},
+  data: function() {
+    return {
+      info: {},
       hasLoaded: false
-    }
+    };
   },
-  mounted(){
-    
-    this.$ajax.get(this,this.$ajax.apis.articleDetial,{urlname:this.$route.params.u_name})
-    .then(data=>{
-      console.log('get article detail :', data);
-      this.info=data;
-      this.hasLoaded = true;
-    })
-    .catch(this.$ajax.handleErr(this))
+  mounted() {
+    this.$ajax
+      .get(this, this.$ajax.apis.articleDetial, {
+        urlname: this.$route.params.u_name
+      })
+      .then(data => {
+        this.info = data;
+        this.hasLoaded = true;
+      })
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-
-.reader-back{
+.reader-back {
   background: #eee;
   width: 100vw;
   min-height: 100vh;
 }
 
-.reader{
-  margin-top:100px;
-  margin-bottom:100px;
+.reader {
+  margin-top: 100px;
+  margin-bottom: 100px;
   border-top: 2px solid #fff;
   border-bottom: 2px solid #ddd;
-  background: rgba(255,255,255,0.5);
+  background: rgba(255, 255, 255, 0.5);
   padding: 10px;
   @media (min-width: 500px) {
     padding-left: 5%;
     padding-right: 5%;
   }
 
-  >h1{
-    font-size:30px;
+  > h1 {
+    font-size: 30px;
     font-family: futura;
     color: rgb(72, 117, 133);
     text-align: center;
-    margin-top:20px;
+    margin-top: 20px;
     margin-bottom: 0px;
   }
-  >h2{
-    font-size:20px;
+  > h2 {
+    font-size: 20px;
     font-family: futura;
     color: #444;
     text-align: center;
     margin-bottom: 20px;
   }
-  >span{
-    font-size:20px;
+  > span {
+    font-size: 20px;
     cursor: pointer;
-    &:hover{
-      color:red;
-
+    &:hover {
+      color: red;
     }
   }
 }
 
-.placeholder{
+.placeholder {
   height: 300px;
 }
 
-.slash-hr{
-  border:1px solid #ddd;
+.slash-hr {
+  border: 1px solid #ddd;
   border-bottom: 1px solid #fff;
 }
 
-.footer{
+.footer {
   height: 50px;
-  .signature{
+  .signature {
     float: right;
     font-size: 14px;
     color: #666;
     font-family: futura;
   }
 }
-
 </style>
 
 

@@ -1,11 +1,11 @@
 <template>
   <section>
     <ArticleFilter/>
-    <archive-article-block 
+    <ArchiveBlock
     v-for="article in articleList"
     :key="article.urlname"
     :articleInfo="article"
-    ></archive-article-block>
+    ></ArchiveBlock>
     <h1  class="em-hint" v-if="showNotWriteAnything">作者似乎<br>从未写过东西</h1>
     <mk-pager
     :list="this.$store.state.articles.articleList"
@@ -17,15 +17,16 @@
 </template>
 
 <script>
-import block from "./archive-block";
-import ArticleFilter from './archive-filter';
+import ArchiveBlock from "./archive-block";
+import ArticleFilter from "./archive-filter";
 export default {
   components: {
-    "archive-article-block": block,ArticleFilter
+    ArchiveBlock,
+    ArticleFilter
   },
   mounted() {},
   computed: {
-    articleList(){
+    articleList() {
       return this.$store.getters.currentPageArticles;
     },
     showNotWriteAnything() {
@@ -35,9 +36,9 @@ export default {
       );
     }
   },
-  methods:{
-    switchPage(page){
-      this.$store.commit('switchPage', page);
+  methods: {
+    switchPage(page) {
+      this.$store.commit("switchPage", page);
     }
   }
 };

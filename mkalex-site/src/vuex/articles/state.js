@@ -6,4 +6,5 @@ export const state = {
 
     detailList: [],
     isArticleListLoaded: false,
+    
 };

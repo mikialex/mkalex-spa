@@ -4,8 +4,8 @@
 
 <script>
 export default {
-  name: 'loading-dot'
-}
+  name: "loading-dot"
+};
 </script>
 
 

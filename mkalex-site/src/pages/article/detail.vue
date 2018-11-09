@@ -5,9 +5,3 @@
     </block-flex>
   </container-mid>
 </template>
-
-<script>
-export default {
-  
-}
-</script>

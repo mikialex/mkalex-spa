@@ -100,7 +100,7 @@ export default {
   color: #888;
 }
 
-.footer{
+.footer {
   font-size: 12px;
   color: #888;
 }

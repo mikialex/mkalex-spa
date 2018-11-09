@@ -21,20 +21,22 @@
 </template>
 
 <script>
-import {randomIntergerBetween, getRandomDarkColor} from '../../util/color';
+import { randomIntergerBetween, getRandomDarkColor } from "../../util/color";
 
 export default {
-  data(){
+  data() {
     return {
       color: getRandomDarkColor(),
-      isHover:false
-    }
+      isHover: false
+    };
   },
-  computed:{
-    isActive(){
-      return this.$route.matched.find(mat=>{
-        return mat.name===this.link;
-      })!==undefined;
+  computed: {
+    isActive() {
+      return (
+        this.$route.matched.find(mat => {
+          return mat.name === this.link;
+        }) !== undefined
+      );
     }
   },
   props: {

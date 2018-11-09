@@ -29,18 +29,17 @@
 </template>
 
 <style lang="scss" scoped>
-.col{
-  width:50%;
+.col {
+  width: 50%;
   font-size: 14px;
   font-family: futura;
 }
 
-.school{
+.school {
   font-size: 14px;
 }
-.majoy{
+.majoy {
   font-size: 13px;
 }
-
 </style>
 

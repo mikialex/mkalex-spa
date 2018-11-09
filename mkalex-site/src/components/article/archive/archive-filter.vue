@@ -5,55 +5,56 @@
 </template>
 
 <script>
-import UISelect from './select';
+import UISelect from "./select";
 export default {
-  components:{UISelect},
-  data(){
+  components: { UISelect },
+  data() {
     return {
-       options: [{
-          value: 'orderbyTime',
-          label: 'Ordered By Time'
-        }, {
-          value: 'orderbyTimeReverse',
-          label: 'Ordered By Time Reverse'
-        },{
-          value: 'orderbyViewTime',
-          label: 'Ordered By view time'
+      options: [
+        {
+          value: "orderbyTime",
+          label: "Ordered By Time"
         },
-        ],
-        value: 'orderbyTime'
-    }
+        {
+          value: "orderbyTimeReverse",
+          label: "Ordered By Time Reverse"
+        },
+        {
+          value: "orderbyViewTime",
+          label: "Ordered By view time"
+        }
+      ],
+      value: "orderbyTime"
+    };
   },
-  watch:{
-    value(newVal){
+  watch: {
+    value(newVal) {
       switch (newVal) {
-        case 'orderbyTimeReverse':
-        this.$store.commit('sortByTimeRevese');
+        case "orderbyTimeReverse":
+          this.$store.commit("sortByTimeRevese");
           break;
-        case 'orderbyTime':
-        this.$store.commit('sortByTime');
+        case "orderbyTime":
+          this.$store.commit("sortByTime");
           break;
-        case 'orderbyViewTime':
-        this.$store.commit('sortByViewTime');
+        case "orderbyViewTime":
+          this.$store.commit("sortByViewTime");
           break;
-      
+
         default:
           break;
       }
     }
   }
-}
+};
 </script>
-
-
 
 <style lang="scss" scoped>
 @import "~globalSass";
-.filter{
+.filter {
   @include ui-card;
   height: 40px;
   background: #fdfdfd;
-  margin-top:-5px;
+  margin-top: -5px;
   margin-bottom: 10px;
   display: flex;
   align-items: center;

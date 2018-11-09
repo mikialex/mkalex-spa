@@ -1,20 +1,19 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import {mutations} from './mutations.js'
-import {state} from './state.js'
-import {getters} from './getters.js'
+import { mutations } from './mutations.js'
+import { state } from './state.js'
+import { getters } from './getters.js'
 
 import articles from './articles'
-// import auth from './modules/auth.js'
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-    state,
-    mutations,
+  state,
+  mutations,
   // actions,
-    getters,
+  getters,
   modules: {
     articles,
   },

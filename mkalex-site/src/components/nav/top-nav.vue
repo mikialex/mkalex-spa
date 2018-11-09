@@ -64,14 +64,14 @@ export default {
           isNewWindow: false,
           outerLink: true
         },
-        {
-          name: " ",
-          link: "caicai",
-          isUnderconstruction: false,
-          isNewWindow: false,
-          love: true,
-          outerLink: false
-        }
+        // {
+        //   name: " ",
+        //   link: "caicai",
+        //   isUnderconstruction: false,
+        //   isNewWindow: false,
+        //   love: true,
+        //   outerLink: false
+        // }
       ]
     };
   },

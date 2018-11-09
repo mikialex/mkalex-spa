@@ -31,11 +31,10 @@ export default {
       this.$ajax.get(this,this.$ajax.apis.articleContent,{urlname:this.articleInfo.urlname})
       .then(data=>{
         this.content=data.content;
-        // window.dispatchEvent(new Event('resize'));
         setTimeout(()=>{  // FIX
           window.dispatchEvent(new Event('resize'));
         }, 100);
-      }).catch(this.$ajax.handleErr(this))
+      })
   },
   components: {
     'stream-block-label': label,

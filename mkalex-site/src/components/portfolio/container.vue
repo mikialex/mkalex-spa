@@ -13,38 +13,37 @@
 </template>
 
 <script>
-import block from './block'
+import block from "./block";
 export default {
-  components:{
-    'portfolio-cover':block,
+  components: {
+    "portfolio-cover": block
   },
-  props:['portfolioList'],
-  computed:{
-    isLoaded(){
-      return this.$store.state.articles.isArticleListLoaded
+  props: ["portfolioList"],
+  computed: {
+    isLoaded() {
+      return this.$store.state.articles.isArticleListLoaded;
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-@import '~globalSass';
+@import "~globalSass";
 
-section{
+section {
   // background: #;
   padding-top: 20px;
 }
 
-.loading{
+.loading {
   height: 200px;
   display: flex;
   align-items: center;
 }
 
-.em-hint{
+.em-hint {
   text-align: center;
-  font-size:64px;
+  font-size: 64px;
 }
-
 </style>
 

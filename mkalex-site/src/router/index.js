@@ -5,7 +5,6 @@ import Article from '@/pages/article/article'
 import ArticleStream from '@/pages/article/stream'
 import ArticleArchive from '@/pages/article/archive'
 import Portifolio from '@/pages/portfolio'
-import Collection from '@/pages/collection'
 import Reader from '@/pages/reader'
 
 import Caicai from '@/pages/caicai'
@@ -59,10 +58,6 @@ export default new Router({
       path: '/portfolio',
       name: 'portfolio',
       component: Portifolio
-    }, {
-      path: '/collection',
-      name: 'collection',
-      component: Collection
     }, {
       path: '/caicai',
       name: 'caicai',

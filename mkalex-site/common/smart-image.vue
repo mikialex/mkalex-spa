@@ -7,24 +7,24 @@
 
 <script>
 export default {
-  name:"smart-image",
-  props:['src'],
-  data(){
+  name: "smart-image",
+  props: ["src"],
+  data() {
     return {
       hasLoaded: false
-    }
+    };
   },
-  methods:{
-    load(){
+  methods: {
+    load() {
       this.hasLoaded = true;
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-.smart-image{
-  >img{
+.smart-image {
+  > img {
     width: 100%;
     height: 100%;
     transition: 500ms;

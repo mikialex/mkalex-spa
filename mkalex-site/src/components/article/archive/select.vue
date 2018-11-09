@@ -18,78 +18,77 @@
 </template>
 
 <script>
-
 export default {
-  props:{
-    options:{
-      required:true
+  props: {
+    options: {
+      required: true
     },
-    value:{
-      required:true
-    },
+    value: {
+      required: true
+    }
   },
   model: {
-    prop: 'value',
-    event: 'update'
+    prop: "value",
+    event: "update"
   },
-  methods:{
-    open(){
+  methods: {
+    open() {
       this.isActive = true;
     },
-    close(){
+    close() {
       this.isActive = false;
     },
-    switchTo(value){
-      this.$emit('update', value);
+    switchTo(value) {
+      this.$emit("update", value);
       this.close();
     }
   },
-  computed:{
-    currentSelect(){
+  computed: {
+    currentSelect() {
       for (const option of this.options) {
-        if(option.value===this.value){
+        if (option.value === this.value) {
           return option;
         }
       }
     }
   },
-  data(){
+  data() {
     return {
-      isActive:false
-    }
+      isActive: false
+    };
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-.mk-select{
+.mk-select {
   color: #666;
   font-family: futura;
   font-size: 14px;
-  position: relative;;
+  position: relative;
 }
 
-.select-panel{
+.select-panel {
   width: 200px;
   max-height: 200px;
-  position:absolute;
+  position: absolute;
   background: #fff;
-  box-shadow: 0px 5px 5px rgba(0,0,0,0.2);
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
   border-radius: 3px;
 }
 
-.select-item{
+.select-item {
   width: 200px;
   height: 30px;
   line-height: 30px;
   text-align: center;
   cursor: pointer;
-  &:hover{
+  &:hover {
     background: #eee;
   }
 }
 
-.select-box{
+.select-box {
   width: 200px;
   height: 30px;
   border: 1px solid rgb(186, 186, 186);
@@ -98,17 +97,17 @@ export default {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  &:hover{
+  &:hover {
     background: #eee;
   }
 }
 
-.mask{
+.mask {
   width: 100vw;
   height: 100vh;
-  position:fixed;
-  top:0px;
-  left:0px;
+  position: fixed;
+  top: 0px;
+  left: 0px;
 }
 </style>
 

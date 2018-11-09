@@ -11,25 +11,25 @@
 </template>
 
 <script>
-import Counter from '@/components/caicai/caicai-count.vue'
+import Counter from "@/components/caicai/caicai-count.vue";
 export default {
-  components:{
-    'caicai-counter':Counter,
+  components: {
+    "caicai-counter": Counter
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-section{
-  width:100vw;
-  height:100vh;
+section {
+  width: 100vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.lyric{
+.lyric {
   font-family: futura;
   text-align: center;
   font-size: 12px;

@@ -16,6 +16,6 @@ const months = [
 
 // from xxxx-09-xx to September
 export function getMonthString(date) {
-  const monthNum=parseInt(date.substring(5,7)) - 1;
+  const monthNum = parseInt(date.substring(5, 7)) - 1;
   return months[monthNum]
 }

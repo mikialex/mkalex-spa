@@ -39,7 +39,7 @@ Vue.config.productionTip = false
 Vue.prototype.$ajax = vueAjax
 
 /* eslint-disable no-new */
-new Vue({
+export default new Vue({
   el: '#app',
   router,
   store,

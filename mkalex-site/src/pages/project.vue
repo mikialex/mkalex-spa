@@ -8,15 +8,14 @@
 
 <script>
 export default {
-  data(){
+  data() {
     return {
-      projects:[
+      projects: [
         {
-          name: 'ShadowGraph',
-          
+          name: "ShadowGraph"
         }
       ]
-    }
+    };
   }
-}
+};
 </script>

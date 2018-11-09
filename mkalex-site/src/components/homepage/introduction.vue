@@ -46,83 +46,84 @@
 </template>
 
 <script>
-async function wait(time){
-  return new Promise((resolve)=>{
-    setTimeout(()=>{
+async function wait(time) {
+  return new Promise(resolve => {
+    setTimeout(() => {
       resolve();
     }, time);
-  })
+  });
 }
 
 export default {
-  data(){
+  data() {
     return {
       show1: false,
       show2: false,
       show3: false,
-      show4: false,
-    }
+      show4: false
+    };
   },
-  async mounted(){
-    this.show1=true;
+  async mounted() {
+    this.show1 = true;
     await wait(100);
-    this.show2=true;
+    this.show2 = true;
     await wait(100);
-    this.show3=true;
+    this.show3 = true;
     await wait(100);
-    this.show4=true;
+    this.show4 = true;
   }
-}
+};
 </script>
 
 
 <style lang="scss" scoped>
-.upshow-enter-active,  {
+.upshow-enter-active {
   transition: all 0.4s ease-out;
 }
-.upshow-enter, .upshow-leave-active {
+.upshow-enter,
+.upshow-leave-active {
   opacity: 0;
   transform: translateY(30px);
 }
 
-.intro{
-  margin-top:100px;
+.intro {
+  margin-top: 100px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width:100%;  
-  @media(max-width:1000px){
+  width: 100%;
+  @media (max-width: 1000px) {
     flex-direction: column;
-    >img{
+    > img {
       align-self: center;
     }
   }
 }
 
-.sep{
+.sep {
   font-family: futura;
   line-height: 1.5;
-  width:100%;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-around;
   font-size: 14px;
   color: #333;
-  @media(max-width:500px){
+  @media (max-width: 500px) {
     flex-direction: column;
-    img{
+    img {
       align-self: center;
     }
   }
-  img{
+  img {
     border-radius: 3px;
-    margin-bottom:30px;
+    margin-bottom: 30px;
   }
-  p{
+  p {
     display: flex;
     align-items: center;
-    margin:0px;
-    margin-bottom:30px;
+    margin: 0px;
+    margin-bottom: 30px;
     padding: 10px;
     box-sizing: border-box;
     border: 1px solid #eee;
@@ -130,11 +131,11 @@ export default {
   }
 }
 
-.size{
-    width:220px;
-    height:220px;
-    min-width:220px;
-    min-height:220px;
+.size {
+  width: 220px;
+  height: 220px;
+  min-width: 220px;
+  min-height: 220px;
 }
 </style>
 

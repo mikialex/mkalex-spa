@@ -13,27 +13,26 @@
 </template>
 
 <script>
-import Block from './stream-block'
+import Block from "./stream-block";
 export default {
   components: {
-    'stream-article-block': Block,
+    "stream-article-block": Block
   },
-  computed:{
-    detailList(){
-      console.log('update')
+  computed: {
+    detailList() {
       return this.$store.state.articles.detailList;
     },
-    isLoaded(){
-      return this.$store.state.articles.isArticleListLoaded
+    isLoaded() {
+      return this.$store.state.articles.isArticleListLoaded;
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-@import '~globalSass';
+@import "~globalSass";
 
-.loading{
+.loading {
   height: 200px;
   display: flex;
   justify-content: center;
@@ -44,8 +43,8 @@ export default {
   width: 100%;
 }
 
-.em-hint{
+.em-hint {
   text-align: center;
-  font-size:64px;
+  font-size: 64px;
 }
 </style>

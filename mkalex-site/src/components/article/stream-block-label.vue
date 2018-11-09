@@ -20,8 +20,8 @@ export default {
   components: {
     "time-plate": timePlate
   },
-  props:{
-    articleInfo:{required:true}
+  props: {
+    articleInfo: { required: true }
   }
 };
 </script>
@@ -30,7 +30,7 @@ export default {
 <style lang="scss" scoped>
 @import "~globalSass";
 
-.stream-block-label{
+.stream-block-label {
   min-width: 120px;
   width: 120px;
   min-height: 300px;
@@ -44,7 +44,7 @@ export default {
   background: #ffffff;
   border: 1px solid #ededed;
   border-top: 0px;
-  box-shadow: 0px 0px 3px rgba(0,0,0,0.05);
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -53,38 +53,36 @@ export default {
   box-sizing: border-box;
 }
 
-.down-group{
+.down-group {
   margin-top: 20px;
-  color:#666;
+  color: #666;
   font-family: futura;
 }
 
-.s-b-tag-label{
+.s-b-tag-label {
   display: block;
-  margin:auto;
+  margin: auto;
   margin-bottom: 10px;
   text-align: center;
-  color:#aaa;
+  color: #aaa;
 }
 
-.s-b-tags{
+.s-b-tags {
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin-bottom:30px;
-  >div{
+  margin-bottom: 30px;
+  > div {
     padding-left: 5px;
     padding-right: 5px;
-    font-size:12px;
-    margin:2px;
+    font-size: 12px;
+    margin: 2px;
     text-align: center;
   }
 }
 
-.watch{
+.watch {
   font-size: 13px;
   text-align: center;
 }
-
-
 </style>

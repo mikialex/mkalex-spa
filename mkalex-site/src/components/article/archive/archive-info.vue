@@ -16,13 +16,13 @@
 <script>
 export default {
   props: {
-    articleInfo:{required:true},
+    articleInfo: { required: true }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-@import '~globalSass';
+@import "~globalSass";
 
 .ar-info {
   font-size: 12px;
@@ -33,30 +33,30 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-left:10px;
-  padding-right:3px;
+  padding-left: 10px;
+  padding-right: 3px;
   box-sizing: border-box;
   border-radius: 3px;
 }
 
-.ar-left-info{
+.ar-left-info {
   display: flex;
   color: #888;
 }
 
-.ar-info-cal{
-  padding-right:10px;
+.ar-info-cal {
+  padding-right: 10px;
 }
 
-.ar-info-pv{
-  margin-left:10px;
-  margin-right:10px;
+.ar-info-pv {
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
-.ar-info-tags{
+.ar-info-tags {
   flex-grow: 1;
   text-align: right;
-  max-width:200px;
+  max-width: 200px;
   overflow: scroll;
   white-space: nowrap;
 
@@ -65,11 +65,11 @@ export default {
     height: 0px;
   }
 
-  >span{
+  > span {
     padding: 3px;
     border-radius: 5px;
-    margin-left:5px;
-    color:#888;
+    margin-left: 5px;
+    color: #888;
   }
 }
 </style>

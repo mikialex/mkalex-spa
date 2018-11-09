@@ -36,7 +36,7 @@ export const mutations = {
   articleListLoaded(state) {
     state.isArticleListLoaded = true;
   },
-  
+
   reloadArticleList(state) {
     state.isArticleListLoaded = false;
   },
@@ -44,5 +44,5 @@ export const mutations = {
   switchPage(state, pageNumber) {
     state.currentPage = pageNumber;
   }
-    
+
 };

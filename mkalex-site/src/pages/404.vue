@@ -7,14 +7,8 @@
 </div>
 </template>
 
-<script>
-export default {
-
-}
-</script>
-
 <style lang="scss">
-@import '~globalSass';
+@import "~globalSass";
 .mk-404 {
   width: 100%;
   font-family: futura;
@@ -37,6 +31,5 @@ export default {
     font-weight: 300;
     font-size: rem(16px);
   }
-
 }
 </style>

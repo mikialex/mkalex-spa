@@ -7,8 +7,13 @@
       </div>
       <archive-info :articleInfo="articleInfo"></archive-info>
     </div>
-    <img src="../../../assets/defaultBlogCover.png" class="inv-7 image" v-if="!articleInfo.has_cover">
-    <smart-image :src="imgsrc"  v-if="articleInfo.has_cover"  class="inv-7 image"></smart-image>
+    <img src="../../../assets/defaultBlogCover.png" 
+    class="inv-7 image" 
+    v-if="!articleInfo.has_cover">
+    <smart-image 
+    :src="imgsrc" 
+     v-if="articleInfo.has_cover"  
+     class="inv-7 image"></smart-image>
   </div>
 </template>
 
@@ -43,8 +48,8 @@ export default {
 .archive-block {
   @include ui-card;
   transition: all 1s;
-  width: 100%; 
-  height:180px;
+  width: 100%;
+  height: 180px;
   margin-bottom: 15px;
   box-sizing: border-box;
   padding: 10px;
