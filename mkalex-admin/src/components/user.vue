@@ -1,7 +1,7 @@
 <template>
   <div class="user">
     <img class="avatar"
-    @click = "open"
+     @click="active=true"
     src="../assets/avatar.png" alt="">
 
     <div v-if="active" class="panel">
@@ -13,6 +13,8 @@
         修改密码
       </div>
     </div>
+
+    <div class="mask" v-if="active" @click="active = false"></div>
   </div>
 </template>
 
@@ -48,6 +50,14 @@ export default {
   &:hover{
     box-shadow: inset 0px 2px 0px 5px rgba(0,0,0,0.5);
   }
+}
+
+.mask{
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top:0px;
+  left:0px;
 }
 
 .panel{

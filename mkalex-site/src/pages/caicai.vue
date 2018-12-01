@@ -2,10 +2,8 @@
   <section>
     <caicai-counter></caicai-counter>
     <div class="lyric">
-      <p>I've been hiding all my hopes and dreams away</p>
-      <p>Just in case I ever need them again someday</p>
-      <p>I've been setting aside time</p>
-      <p>To clear a little space  <br>in the corner of my mind </p>
+      <p>这么多的日子里</p>
+      <p>你都是心事</p>
     </div>
   </section>
 </template>
