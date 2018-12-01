@@ -1,8 +1,12 @@
 <template>
   <div class="editor">
-    <opration-bar></opration-bar>
+    <button class="updator" @click="updateAll">
+      Update
+    </button>
     <title-part></title-part>
     <nav class="">
+      <div @click="backToHome" ><i class="fas fa-arrow-left"></i>
+        back</div>
       <div @click="changeTab('content')" :class="{'activeTab':this.currentTab==='content'}"><i class="fas fa-edit"></i>
         content</div>
       <div @click="changeTab('info')" :class="{'activeTab':this.currentTab==='info'}"><i class="fas fa-list-alt"></i>
@@ -12,7 +16,7 @@
     </nav>
 
     <trans-fade>
-      <section v-if="currentTab==='content'" class="tab-sec">
+      <section v-show="currentTab==='content'" class="tab-sec">
         <content-editor ></content-editor>
       </section>
     </trans-fade>
@@ -35,6 +39,11 @@
         <cover-setting-row v-if="hasCover"></cover-setting-row>
         <toggle-row :isActive.sync="isRecommended" :rowName="'是否列为推荐内容'" :faClass="'fa-thumbs-up'"></toggle-row>
         <select-row :value.sync="contentType" :rowName="'内容分类'" :options="typeOptions" :faClass="'fa-archive'"></select-row>
+        <div>
+          <h1>DANGER ZONE</h1>
+        <el-button size="small" type="danger" @click="deleteIt"> 删除此内容 </el-button>
+
+        </div>
       </section>
     </trans-fade>
 
@@ -50,7 +59,6 @@ import selectRow from '../form/row/select-row.vue';
 import dateRow from '../form/row/date-input-row.vue';
 import numberRow from '../form/row/number-input-row.vue';
 import coverRow from '../form/row/cover-setting-row.vue';
-import oprationBar from './opration-bar.vue';
 
 export default {
   name: "editor",
@@ -63,7 +71,6 @@ export default {
     'date-input-row':dateRow,
     'number-input-row':numberRow,
     'cover-setting-row':coverRow,
-    'opration-bar':oprationBar
   },
   data() {
     return {
@@ -143,6 +150,33 @@ export default {
     changeTab(newTab){
       this.currentTab=newTab;
     }, 
+    async deleteIt() {
+      try {
+        result = await this.$confirm('是否确认删除？', '警告', {
+          confirmButtonText: '取消',
+          cancelButtonText: '删除',
+          type: 'warning',
+          closeOnPressEscape:false,
+          closeOnClickModal:false,
+          showClose:false
+        })
+        const data = await this.$store.dispatch('editor/deleteEntity',this.$route.params.u_name);
+        this.$router.push({ name: "home" });
+      } catch (error) {
+      }
+    },
+    async updateAll(){
+      await this.$store.dispatch('editor/updateEntityInfo');
+    },
+    backToHome(){
+      this.updateAll().then(data=>{
+        this.$message({
+          type: 'success',
+          message: '同步成功!'
+        });
+        this.$router.push({ name: "home" });
+      })
+    }
   },
   beforeRouteLeave: function(to, from, next){
     // if(this.$store.state.editor.hasLoaded){
@@ -157,7 +191,17 @@ export default {
 <style lang="scss" scoped>
 
 .editor{
-  margin-top:30px;
+  position: relative;
+}
+
+.updator{
+  width: 100px;
+  height: 100px;
+  border-radius: 100px;
+  background: #fff;
+  position: absolute;
+  top:0px;
+  right: 0px;
 }
 
 nav{

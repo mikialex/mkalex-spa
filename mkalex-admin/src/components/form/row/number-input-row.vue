@@ -6,6 +6,7 @@
   </span>
   <el-input-number 
   class="size"
+  size="small"
   v-model="inner_value" 
   :min="0" 
   label="描述文字"
@@ -51,7 +52,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height:50px;
+  height:40px;
   padding-left:10px;
   padding-right:10px;
   border-bottom: 1px solid rgba(0,0,0,0.1);
@@ -62,7 +63,7 @@ export default {
     background: rgb(250, 250, 250);
   }
   >span{
-    font-size:16px;
+    font-size:14px;
   }
 }
 

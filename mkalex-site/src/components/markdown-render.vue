@@ -55,7 +55,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import "~globalSass";
 
 .md-section {
   width: 100%;

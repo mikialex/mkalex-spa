@@ -65,6 +65,7 @@ export default {
   >.info{
     margin-left:5px;
     margin-top:5px;
+    font-size:14px;
   }
 }
 
