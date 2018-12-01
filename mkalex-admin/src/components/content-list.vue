@@ -18,8 +18,12 @@
 
     <addNew v-if="showAddNew"/>
 
-    <listItem v-if="showList" v-for="item in subList" :key="item.urlname" :item="item"/>
-    <blockItem v-if="!showList" v-for="item in subList" :key="item.urlname" :item="item" />
+    <list-complete>
+      <listItem v-if="showList" v-for="item in subList" :key="item.urlname" :item="item"/>
+    </list-complete>
+    <list-complete>
+      <blockItem v-if="!showList" v-for="item in subList" :key="item.urlname" :item="item" />
+    </list-complete>
   </ul>
 </template>
 

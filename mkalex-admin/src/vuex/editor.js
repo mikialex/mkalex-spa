@@ -20,6 +20,7 @@ function gatherValue(state) {
 export default {
   namespaced: true,
   state: {
+    needUpdate: false,
     urlname: '',
 
     title: '',
@@ -38,18 +39,22 @@ export default {
     hasLoaded: false,
   },
   mutations: {
+    setNeedUpdate(state) {
+      state.needUpdate = true;
+    },
     reset(state) {
-      urlname = '';
-      title = '';
-      subTitle= '';
-      content= '';
-      createTime= '';
-      pageView= '';
-      hasCover = false;
-      coverUrl = '';
-      isRecommended= false;
-      contentType= '';
-      isActive= false;
+      state.needUpdate = false;
+      state.urlname = '';
+      state.title = '';
+      state.subTitle= '';
+      state.content= '';
+      state.createTime= '';
+      state.pageView= '';
+      state.hasCover = false;
+      state.coverUrl = '';
+      state.isRecommended= false;
+      state.contentType= '';
+      state.isActive= false;
     },
     setUrlName(state, urlName) {
       state.urlname = urlName;

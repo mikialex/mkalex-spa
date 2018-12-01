@@ -134,36 +134,27 @@ export default {
         this.$store.commit('editor/setContentType',val)
       }
     },
-    // coverUrl:{
-    //   get(){
-    //     return this.$store.state.editor.contentType;
-    //   },
-    //   set(val){
-    //     this.$store.commit('editor/setContentType',val)
-    //   }
-    // }
   },
   mounted() {
     this.$store.dispatch('editor/getEntity',this.$route.params.u_name);
+    this.$store.commit('editor/reset');
   },
   methods: {
     changeTab(newTab){
       this.currentTab=newTab;
     }, 
-    async deleteIt() {
-      try {
-        result = await this.$confirm('是否确认删除？', '警告', {
-          confirmButtonText: '取消',
-          cancelButtonText: '删除',
-          type: 'warning',
-          closeOnPressEscape:false,
-          closeOnClickModal:false,
-          showClose:false
-        })
-        const data = await this.$store.dispatch('editor/deleteEntity',this.$route.params.u_name);
+    deleteIt() {
+      this.$confirm('是否确认删除？', '警告', {
+        confirmButtonText: '取消',
+        cancelButtonText: '删除',
+        type: 'warning',
+        closeOnPressEscape:false,
+        closeOnClickModal:false,
+        showClose:false
+      }).catch(()=>{
+        this.$store.dispatch('editor/deleteEntity',this.$route.params.u_name);
         this.$router.push({ name: "home" });
-      } catch (error) {
-      }
+      })
     },
     async updateAll(){
       await this.$store.dispatch('editor/updateEntityInfo');
@@ -174,7 +165,7 @@ export default {
           type: 'success',
           message: '同步成功!'
         });
-        this.$router.push({ name: "home" });
+        this.$router.back();
       })
     }
   },
@@ -182,8 +173,8 @@ export default {
     // if(this.$store.state.editor.hasLoaded){
     //   this.$store.dispatch('editor/updateEntityInfo');
     // }
-    next(confirm('check before leave'));
-    // next(true);
+    // next(confirm('check before leave'));
+    next(true);
   }
 };
 </script>
