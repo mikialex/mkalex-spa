@@ -1,19 +1,24 @@
 <template>
   <div class="content-container">
-    <div class="mask" @click="showAlbum = false" v-if="showAlbum"></div>
+    <div class="mask" @click="showAlbum = false; showHint = false" v-if="showAlbum | showHint"></div>
 
-    <div class="album" :class="{'album-hide':!showAlbum}">
-      <album-part :fixheight="true"></album-part>
+    <div class="draw-panel" :class="{'draw-panel-hide':!showAlbum}">
+      <album-part :fixheight="true" v-if="showAlbum"></album-part>
+    </div>
+
+    <div class="draw-panel" :class="{'draw-panel-hide':!showHint}">
+      <mdRenderer :content="hintContent" :urlname="''" v-if="showHint"/>
     </div>
 
     <div class="content-toolbar">
       <el-button size="small" @click="showAlbum = true">album</el-button>
       <div class="preview">
+        <el-button size="small" @click="showHint = true">hint</el-button>
         <el-button size="small" v-if="!isShowPreview" @click="togglePreview">
           <i class="fa fa-eye"></i> preview
         </el-button>
         <el-button size="small" v-if="isShowPreview" @click="togglePreview">
-          <i class="fa fa-eye-slash"></i> edit
+          <i class="fa fa-edit"></i> edit
         </el-button>
       </div>
     </div>
@@ -34,6 +39,7 @@ import album from "../album/album.vue";
 
 import mirrorCom from "./code-mirror";
 import mdRenderer from "../../../../mkalex-site/src/components/markdown-render";
+import * as hint from "./hint-content.txt";
 
 export default {
   components: {
@@ -45,6 +51,8 @@ export default {
     return {
       isShowPreview: true,
       showAlbum: false,
+      showHint: false,
+      hintContent: hint,
       isActiveContent: false
     };
   },
@@ -86,7 +94,7 @@ export default {
 </script>
 
 <style lang="scss" scoped >
-.album {
+.draw-panel {
   width: 90vw;
   height: 100vh;
   position: fixed;
@@ -98,6 +106,8 @@ export default {
   box-sizing: border-box;
   transition: 300ms ease-in-out;
   z-index: 10000;
+  overflow-y: scroll;
+  overscroll-behavior: contain;
 }
 .mask {
   width: 100vw;
@@ -107,7 +117,7 @@ export default {
   left: 0px;
   z-index: 9999;
 }
-.album-hide {
+.draw-panel-hide {
   left: -90vw;
   box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2);
 }

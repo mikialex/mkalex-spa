@@ -64,15 +64,6 @@ export default {
   }
 }
 
-.center-wrap {
-  width: 80vw;
-  margin: auto;
-  background: #fefefe;
-  box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.01);
-  padding-right: 30px;
-  padding-left: 30px;
-}
-
 .home-head {
   display: flex;
   justify-content: space-between;

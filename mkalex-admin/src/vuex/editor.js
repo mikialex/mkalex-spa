@@ -42,6 +42,9 @@ export default {
     setNeedUpdate(state) {
       state.needUpdate = true;
     },
+    resetNeedUpdate(state) {
+      state.needUpdate = false;
+    },
     reset(state) {
       state.needUpdate = false;
       state.urlname = '';
@@ -60,33 +63,43 @@ export default {
       state.urlname = urlName;
     },
     setTitle(state, title) {
+      state.needUpdate = true;
       state.title = title;
     },
     setSubTitle(state, subTitle) {
+      state.needUpdate = true;
       state.subTitle = subTitle;
     },
     setContent(state, content) {
+      state.needUpdate = true;
       state.content = content;
     },
     setCreateTime(state, createTime) {
+      state.needUpdate = true;
       state.createTime = createTime;
     },
     setPageView(state, pageView) {
+      state.needUpdate = true;
       state.pageView = pageView;
     },
     setHasCover(state, hasCover) {
+      state.needUpdate = true;
       state.hasCover = hasCover;
     },
     setCoverUrl(state, url) {
+      state.needUpdate = true;
       state.coverUrl = url;
     },
     setIsRecommended(state, isRecommended) {
+      state.needUpdate = true;
       state.isRecommended = isRecommended;
     },
     setContentType(state, contentType) {
+      state.needUpdate = true;
       state.contentType = contentType;
     },
     setIsActive(state, isActive) {
+      state.needUpdate = true;
       state.isActive = isActive;
     },
   },

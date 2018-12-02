@@ -2,7 +2,7 @@
   <div class="block" >
     <router-link class="paper" :to="{ name:'editor',params:{u_name:item.urlname} }" tag="div">
       <div class="cover-pic"  v-if="item.has_cover">
-        <img :src="imgsrc" alt="">
+        <img :src="imgsrc" alt="" draggable="false">
       </div>
 
       <div  v-if="!item.has_cover">

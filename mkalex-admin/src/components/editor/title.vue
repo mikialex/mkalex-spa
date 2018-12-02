@@ -46,17 +46,19 @@ export default {
 <style lang="scss" scoped>
 
 .title-part {
+  padding-right: 14px;
   > .title-editor {
     width: 100%;
     border: 0px;
     font-size: 24px;
     font-weight: bold;
     padding: 5px;
+    transition: 100ms;
     &:hover{
       background: #eee;
     }
     &:focus{
-      border-bottom: solid 3px rgb(242, 60, 60);
+      background: #ddd;
     }
   }
   >.sub-title-editor {
@@ -67,11 +69,12 @@ export default {
     font-size: 16px;
     font-weight: bold;
     margin-bottom: 20px;
+    transition: 100ms;
     &:hover{
       background: #eee;
     }
     &:focus{
-      border-bottom: solid 3px rgb(242, 60, 60);
+      background: #ddd;
     }
   }
 }

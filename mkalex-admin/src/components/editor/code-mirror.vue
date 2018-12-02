@@ -32,9 +32,9 @@ export default {
   },
   watch: {
     content(value){
+      mirrorEditor.setValue(value);
       if(!this.hasGetContent){
         let oldC = mirrorEditor.getCursor();
-        mirrorEditor.setValue(value);
         mirrorEditor.setCursor(oldC);
         this.hasGetContent = true;
       }
