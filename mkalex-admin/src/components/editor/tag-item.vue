@@ -3,7 +3,7 @@
   :class="{'has-this-tag': hasTag, 'can-toggle': canToggle}" 
   @click="toggleActiveTag()">
     {{name}}
-    <i class="fa fa-trash" @click="deleteTag()"></i>
+    <i class="fa fa-trash delete" @click="deleteTag()"></i>
   </span>
 </template>
 
@@ -33,26 +33,40 @@ export default {
 
 <style lang="scss" scoped>
 .tag {
+  transition: 100ms;
+  position: relative;
   cursor: default;
-  background: #000;
+  background: rgb(117, 172, 100);
   color: #fff;
   display: inline-block;
   border-radius: 3px;
   padding: 5px;
   margin: 5px;
   &:hover {
-    > i {
-      width: 18px;
+    > .delete {
+      opacity: 1;
     }
   }
-  > i {
-    width: 0px;
-    overflow: hidden;
-    transition: 150ms;
-    cursor: pointer;
-    &:hover {
-      color: #f45;
-    }
+}
+
+.delete{
+  opacity: 0;
+  overflow: hidden;
+  transition: 150ms;
+  position: absolute;
+  top:-15px;
+  right:-15px;
+  cursor: pointer;
+  background: rgb(216, 71, 71);
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+  font-size: 14px;
+  text-align: center;
+  line-height: 30px;
+  z-index: 1;
+  &:hover {
+  background: rgb(145, 21, 21);
   }
 }
 

@@ -72,7 +72,9 @@ import dateRow from "../form/row/date-input-row.vue";
 import numberRow from "../form/row/number-input-row.vue";
 import coverRow from "../form/row/cover-setting-row.vue";
 import updator from "./updator";
+import { Message } from "element-ui";
 
+var loopCheckTimer;
 export default {
   name: "editor",
   components: {
@@ -153,17 +155,60 @@ export default {
     },
     needUpdate() {
       return this.$store.state.editor.needUpdate;
+    },
+    uname(){
+      return this.$route.params.u_name;
     }
   },
   mounted() {
     this.$store.commit("editor/reset");
     this.$store
-      .dispatch("editor/getEntity", this.$route.params.u_name)
+      .dispatch("editor/getEntity", this.uname)
       .then(data => {
         this.$store.commit("editor/resetNeedUpdate");
+        this.checkBackUp();
       });
   },
+  beforeDestroy() {
+    this.endLoopBackUp();
+  },
   methods: {
+    checkBackUp() {
+      const str = localStorage.getItem("backUp" + this.uname);
+      const hasBack = str !== null;
+      if (hasBack) {
+        this.$confirm("发现有上次未提交的修改，是否使用", "警告", {
+          confirmButtonText: "使用",
+          cancelButtonText: "放弃",
+          type: "warning",
+          closeOnPressEscape: false,
+          closeOnClickModal: false,
+          showClose: false
+        })
+          .then(() => {
+            this.$store.commit("editor/resetBackUp", this.uname);
+            this.startLoopBackUp();
+          })
+          .catch(() => {
+            this.$store.commit("editor/clearBackUp", this.uname);
+            this.startLoopBackUp();
+          })
+      } else {
+        this.startLoopBackUp();
+      }
+    },
+    startLoopBackUp() {
+      loopCheckTimer = setInterval(this.loopBackUp, 10000);
+    },
+    endLoopBackUp() {
+      clearInterval(loopCheckTimer);
+    },
+    loopBackUp() {
+      if (this.needUpdate) {
+        this.$store.commit("editor/backUpUnUpdated", this.uname);
+        Message.success("backup success");
+      }
+    },
     changeTab(newTab) {
       this.currentTab = newTab;
       if (!this.needUpdate) {
@@ -181,7 +226,7 @@ export default {
         closeOnClickModal: false,
         showClose: false
       }).catch(() => {
-        this.$store.dispatch("editor/deleteEntity", this.$route.params.u_name);
+        this.$store.dispatch("editor/deleteEntity", this.uname);
         this.$router.push({ name: "home" });
       });
     },
@@ -200,6 +245,7 @@ export default {
           closeOnClickModal: false,
           showClose: false
         }).catch(() => {
+          this.$store.commit("editor/clearBackUp", this.uname);
           this.$router.back();
         });
       } else {

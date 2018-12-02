@@ -39,6 +39,23 @@ export default {
     hasLoaded: false,
   },
   mutations: {
+    backUpUnUpdated(state, uname) {
+      const timeStamp = new Date().getTime();
+      const key = 'backUp' + uname;
+      const backContent =  JSON.stringify({ timeStamp, content: JSON.stringify(state) });
+      localStorage.setItem(key, backContent);
+    },
+    resetBackUp(state, uname) {
+      const str = localStorage.getItem('backUp' + uname);
+      const backUpstate = JSON.parse(JSON.parse(str).content);
+      for (const item in backUpstate) {
+        state[item] = backUpstate[item];
+      }
+    },
+    clearBackUp(state, uname) {
+      const key = 'backUp' + uname;
+      localStorage.removeItem(key);
+    },
     setNeedUpdate(state) {
       state.needUpdate = true;
     },
@@ -129,6 +146,7 @@ export default {
       console.log(data);
       if (data.result === "success") {
         Message.success('update success');
+        commit('clearBackUp');
         return data;
       } else {
         throw data;
