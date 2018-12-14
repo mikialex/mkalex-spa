@@ -16,6 +16,17 @@
       </div>
     </div>
 
+    <!-- <div>
+      <tagItem 
+      v-for="tag in this.$store.state.tag.tagList"
+      :key="tag.tag_name"
+      :name="tag.tag_name"
+      size="small"
+      :canDelete="false"
+      :canToggle="true"
+      />
+    </div> -->
+
     <addNew v-if="showAddNew"/>
 
     <list-complete>
@@ -31,9 +42,10 @@
 import listItem from './list-content-item';
 import blockItem from './block-content-item';
 import addNew from './add-new-article';
+import tagItem from './editor/tag-item.vue'
 export default {
   components:{
-    listItem, addNew, blockItem
+    listItem, addNew, blockItem, tagItem
   },
   props:['type'],
   data(){
@@ -42,6 +54,9 @@ export default {
       showAddNew: false,
       showList: false,
     }
+  },
+  mounted(){
+    this.$store.dispatch("tag/getTags");
   },
   computed:{
     subList(){

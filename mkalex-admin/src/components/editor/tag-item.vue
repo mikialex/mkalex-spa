@@ -1,9 +1,15 @@
 <template>
   <span class="tag"
-  :class="{'has-this-tag': hasTag, 'can-toggle': canToggle}" 
+  :class="{
+    'has-this-tag': hasTag,
+    'can-toggle': canToggle,
+    'big-tag': !useSmall,
+    'small-tag': useSmall,
+  }" 
   @click="toggleActiveTag()">
     {{name}}
-    <i class="fa fa-trash delete" @click="deleteTag()"></i>
+    <i class="fa fa-trash delete" v-if="canDelete"
+    @click="deleteTag()"></i>
   </span>
 </template>
 
@@ -16,8 +22,19 @@ export default {
     canToggle: {
       default: false
     },
+    canDelete:{
+      default: true
+    },
     name: {
       required: true
+    },
+    size: {
+      default: 'big'
+    }
+  },
+  computed:{
+    useSmall(){
+      return this.size === 'small';
     }
   },
   methods: {
@@ -40,13 +57,23 @@ export default {
   color: #fff;
   display: inline-block;
   border-radius: 3px;
-  padding: 5px;
-  margin: 5px;
   &:hover {
     > .delete {
       opacity: 1;
     }
   }
+}
+
+.big-tag{
+  padding: 5px;
+  margin: 5px;
+}
+
+.small-tag{
+  padding: 4px;
+  margin: 2px;
+  font-size: 12px;
+  line-height: 16px;
 }
 
 .delete{
